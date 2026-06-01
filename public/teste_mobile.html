@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Mobile Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f1f5f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .teste-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .mobile-indicator {
+            background: #10b981;
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .desktop-indicator {
+            background: #3b82f6;
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .info-item {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .btn {
+            background: #3b82f6;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 5px;
+        }
+        
+        .btn:hover {
+            background: #2563eb;
+        }
+        
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📱 Teste de Responsividade - Dashboard</h1>
+        
+        <div id="status-indicator" class="desktop-indicator">
+            🖥️ MODO DESKTOP ATIVO
+        </div>
+        
+        <div class="teste-card">
+            <h2>🎯 Como Testar Responsividade</h2>
+            <ol>
+                <li><strong>F12</strong> → Abrir DevTools</li>
+                <li><strong>Ctrl+Shift+M</strong> → Toggle device toolbar</li>
+                <li><strong>Redimensione</strong> para menos de 768px</li>
+                <li><strong>Teste</strong> o dashboard real</li>
+            </ol>
+        </div>
+        
+        <div class="teste-card">
+            <h2>📊 Informações do Sistema</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>Largura Atual:</strong><br>
+                    <span id="width">-</span>px
+                </div>
+                <div class="info-item">
+                    <strong>Altura:</strong><br>
+                    <span id="height">-</span>px
+                </div>
+                <div class="info-item">
+                    <strong>Status:</strong><br>
+                    <span id="status">-</span>
+                </div>
+                <div class="info-item">
+                    <strong>User Agent:</strong><br>
+                    <small id="useragent">-</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="teste-card">
+            <h2>🔗 Links de Teste</h2>
+            <a href="dashboard_corrigido.php" class="btn" target="_blank">
+                🏠 Dashboard Principal
+            </a>
+            <a href="teste_responsivo.html" class="btn" target="_blank">
+                📱 Teste Responsivo
+            </a>
+            <button class="btn" onclick="testarMobile()">
+                🧪 Testar Mobile
+            </button>
+        </div>
+        
+        <div class="teste-card">
+            <h2>📋 Checklist Responsividade</h2>
+            <ul>
+                <li>✅ Meta viewport configurada</li>
+                <li>✅ Media queries implementadas</li>
+                <li>✅ JavaScript mobile funcional</li>
+                <li>✅ Sidebar responsiva</li>
+                <li>✅ Botão hambúrguer</li>
+                <li>✅ Grids adaptativos</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        function atualizarInfo() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            const status = width <= 768 ? 'MOBILE' : 'DESKTOP';
+            const userAgent = navigator.userAgent;
+            
+            document.getElementById('width').textContent = width;
+            document.getElementById('height').textContent = height;
+            document.getElementById('status').textContent = status;
+            document.getElementById('useragent').textContent = userAgent.substring(0, 50) + '...';
+            
+            const indicator = document.getElementById('status-indicator');
+            if (width <= 768) {
+                indicator.className = 'mobile-indicator';
+                indicator.innerHTML = '📱 MODO MOBILE ATIVO';
+            } else {
+                indicator.className = 'desktop-indicator';
+                indicator.innerHTML = '🖥️ MODO DESKTOP ATIVO';
+            }
+        }
+        
+        function testarMobile() {
+            // Simular redimensionamento para mobile
+            const iframe = document.createElement('iframe');
+            iframe.src = 'dashboard_corrigido.php';
+            iframe.style.width = '375px';
+            iframe.style.height = '667px';
+            iframe.style.border = '2px solid #333';
+            iframe.style.borderRadius = '8px';
+            
+            const container = document.createElement('div');
+            container.style.position = 'fixed';
+            container.style.top = '50%';
+            container.style.left = '50%';
+            container.style.transform = 'translate(-50%, -50%)';
+            container.style.zIndex = '9999';
+            container.style.background = 'white';
+            container.style.padding = '20px';
+            container.style.borderRadius = '8px';
+            container.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3)';
+            
+            const closeBtn = document.createElement('button');
+            closeBtn.textContent = '❌ Fechar';
+            closeBtn.style.cssText = 'position: absolute; top: 10px; right: 10px; background: #ef4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;';
+            closeBtn.onclick = () => document.body.removeChild(container);
+            
+            container.appendChild(closeBtn);
+            container.appendChild(iframe);
+            document.body.appendChild(container);
+        }
+        
+        window.addEventListener('load', atualizarInfo);
+        window.addEventListener('resize', atualizarInfo);
+        
+        // Atualizar a cada segundo para garantir
+        setInterval(atualizarInfo, 1000);
+    </script>
+</body>
+</html>

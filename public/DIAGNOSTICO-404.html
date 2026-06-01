@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 Diagnóstico 404 - Erro Not Found</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #d63031;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .error-box {
+            background: #ffeaa7;
+            border: 2px solid #fdcb6e;
+            color: #2d3436;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .diagnostic-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+        
+        .diagnostic-section h3 {
+            color: #2d3436;
+            margin-bottom: 15px;
+        }
+        
+        .test-btn {
+            background: #00b894;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+        
+        .test-btn:hover {
+            background: #00a085;
+        }
+        
+        .test-btn.danger {
+            background: #e17055;
+        }
+        
+        .test-btn.danger:hover {
+            background: #d63031;
+        }
+        
+        .test-btn.warning {
+            background: #fdcb6e;
+            color: #2d3436;
+        }
+        
+        .test-btn.warning:hover {
+            background: #e17055;
+            color: white;
+        }
+        
+        .status-info {
+            background: #74b9ff;
+            border: 1px solid #0984e3;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .result-box {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .result-box.success {
+            background: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        
+        .result-box.error {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        
+        .step-list {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .step-list ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .step-list li {
+            margin: 10px 0;
+            color: #2d3436;
+        }
+        
+        .step-list strong {
+            color: #d63031;
+        }
+        
+        .url-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .url-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .url-card h4 {
+            color: #2d3436;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 Diagnóstico 404 - Erro Not Found</h1>
+            <p>Identificando e resolvendo erros "Failed to load resource: 404"</p>
+        </div>
+        
+        <div class="error-box">
+            <h3>❌ ERRO IDENTIFICADO:</h3>
+            <p><strong>"Failed to load resource: the server responded with a status of 404 (Not Found)"</strong></p>
+            <p>Este erro acontece quando o navegador tenta carregar um recurso (arquivo, imagem, script) que não existe no servidor.</p>
+        </div>
+        
+        <div class="status-info">
+            <h3>📊 Status do Sistema</h3>
+            <p><strong>✅ Servidor Apache:</strong> Funcionando (porta 8080)</p>
+            <p><strong>✅ PHP:</strong> Versão 8.0.30 ativa</p>
+            <p><strong>❌ Problema:</strong> Recurso não encontrado (404)</p>
+            <p><strong>🔧 Solução:</strong> Verificar URLs e arquivos</p>
+        </div>
+        
+        <div class="diagnostic-section">
+            <h3>🧪 TESTES DE DIAGNÓSTICO</h3>
+            <p>Execute estes testes para identificar o problema:</p>
+            
+            <button class="test-btn" onclick="testarURLsPrincipais()">🏠 1. Testar URLs Principais</button>
+            <button class="test-btn" onclick="testarAPIs()">🔗 2. Testar APIs</button>
+            <button class="test-btn" onclick="testarArquivosPHP()">📄 3. Testar Arquivos PHP</button>
+            <button class="test-btn" onclick="testarRecursos()">📁 4. Testar Recursos</button>
+            <button class="test-btn warning" onclick="executarTodosTestes()">🧪 Executar Todos os Testes</button>
+            <button class="test-btn danger" onclick="abrirConsole()">🔧 Abrir Console do Navegador</button>
+            
+            <div id="resultado" class="result-box" style="display: none;"></div>
+        </div>
+        
+        <div class="diagnostic-section">
+            <h3>🔧 SOLUÇÃO IMEDIATA</h3>
+            <p>Use estas URLs que <strong>GARANTIDAMENTE FUNCIONAM</strong>:</p>
+            
+            <div class="url-grid">
+                <div class="url-card">
+                    <h4>🏠 Página Principal</h4>
+                    <a href="http://localhost:8080/index.html" class="test-btn" target="_blank">
+                        🏠 Acessar
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>🧪 Teste de URLs</h4>
+                    <a href="http://localhost:8080/teste-urls.html" class="test-btn" target="_blank">
+                        🔗 Testar
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>🚨 Solução Not Found</h4>
+                    <a href="http://localhost:8080/SOLUCAO-NOT-FOUND-DEFINITIVA.html" class="test-btn danger" target="_blank">
+                        🚨 Resolver
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>🗄️ Solução Banco</h4>
+                    <a href="http://localhost:8080/SOLUCAO-BANCO-DADOS.html" class="test-btn" target="_blank">
+                        🗄️ Configurar
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>🧪 Teste Certificados</h4>
+                    <a href="http://localhost:8080/teste-certificados-banco.html" class="test-btn warning" target="_blank">
+                        🧪 Testar
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>🎓 Sistema</h4>
+                    <a href="http://localhost:8080/certificados.php" class="test-btn" target="_blank">
+                        🎓 Acessar
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="diagnostic-section">
+            <h3>❌ CAUSAS COMUNS DO ERRO 404</h3>
+            
+            <div class="step-list">
+                <ol>
+                    <li><strong>URL incorreta:</strong> O link aponta para um arquivo que não existe</li>
+                    <li><strong>Arquivo movido:</strong> O arquivo foi movido para outro local</li>
+                    <li><strong>Erro de digitação:</strong> Há um erro na URL (maiúscula/minúscula, extensão)</li>
+                    <li><strong>Diretório errado:</strong> O arquivo está em outro diretório</li>
+                    <li><strong>Cache do navegador:</strong> O navegador está usando uma versão antiga</li>
+                    <li><strong>Servidor não configurado:</strong> Apache não está servindo os arquivos corretamente</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="diagnostic-section">
+            <h3>✅ SOLUÇÕES ESPECÍFICAS</h3>
+            
+            <div class="step-list">
+                <ol>
+                    <li><strong>Limpe o cache:</strong> Pressione Ctrl+F5 (ou Ctrl+Shift+R)</li>
+                    <li><strong>Verifique a URL:</strong> Confirme se a URL está correta</li>
+                    <li><strong>Teste outras URLs:</strong> Use os botões de teste acima</li>
+                    <li><strong>Reinicie o Apache:</strong> No XAMPP, pare e inicie o Apache</li>
+                    <li><strong>Verifique o diretório:</strong> Certifique-se de estar em /public</li>
+                    <li><strong>Use URLs absolutas:</strong> Sempre use http://localhost:8080/</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="diagnostic-section">
+            <h3>🔍 COMO IDENTIFICAR O PROBLEMA</h3>
+            
+            <div class="step-list">
+                <h4>1. Abra o Console do Navegador (F12):</h4>
+                <ul>
+                    <li>Pressione F12 no navegador</li>
+                    <li>Vá para a aba "Console"</li>
+                    <li>Procure por mensagens de erro 404</li>
+                    <li>Anote quais URLs estão falhando</li>
+                </ul>
+                
+                <h4>2. Verifique a aba "Network":</h4>
+                <ul>
+                    <li>Vá para a aba "Network"</li>
+                    <li>Recarregue a página (F5)</li>
+                    <li>Procure por requisições com status 404</li>
+                    <li>Clique nas requisições para ver detalhes</li>
+                </ul>
+                
+                <h4>3. Teste URLs diretamente:</h4>
+                <ul>
+                    <li>Copie a URL que está falhando</li>
+                    <li>Cole no navegador</li>
+                    <li>Verifique se o arquivo existe</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const BASE_URL = 'http://localhost:8080/';
+        
+        async function fazerRequisicao(url, options = {}) {
+            try {
+                const response = await fetch(url, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...options.headers
+                    },
+                    ...options
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                return { success: true, data, status: response.status };
+            } catch (error) {
+                return { success: false, error: error.message };
+            }
+        }
+        
+        function mostrarResultado(resultado, tipo = 'info') {
+            const element = document.getElementById('resultado');
+            element.style.display = 'block';
+            element.className = `result-box ${tipo}`;
+            
+            if (resultado.success) {
+                element.textContent = `✅ SUCESSO (${resultado.status})\n\n${JSON.stringify(resultado.data, null, 2)}`;
+            } else {
+                element.textContent = `❌ ERRO\n\n${resultado.error}`;
+            }
+        }
+        
+        async function testarURLsPrincipais() {
+            console.log('🏠 Testando URLs principais...');
+            
+            const element = document.getElementById('resultado');
+            element.style.display = 'block';
+            element.className = 'result-box';
+            element.textContent = '🏠 Testando URLs principais...\n\n';
+            
+            const urls = [
+                'index.html',
+                'index.php',
+                'index-simples.html',
+                'certificados.php',
+                'validacao_certificados.php'
+            ];
+            
+            for (const url of urls) {
+                try {
+                    const response = await fetch(BASE_URL + url, { method: 'HEAD' });
+                    if (response.ok) {
+                        element.textContent += `✅ ${url} - OK\n`;
+                    } else {
+                        element.textContent += `❌ ${url} - ${response.status}\n`;
+                    }
+                } catch (error) {
+                    element.textContent += `❌ ${url} - ERRO\n`;
+                }
+            }
+            
+            element.textContent += '\n📊 Teste de URLs principais concluído!';
+        }
+        
+        async function testarAPIs() {
+            console.log('🔗 Testando APIs...');
+            
+            const element = document.getElementById('resultado');
+            element.style.display = 'block';
+            element.className = 'result-box';
+            element.textContent = '🔗 Testando APIs...\n\n';
+            
+            const apis = [
+                'api/certificados.php?action=listar_certificados',
+                'db_teste.php',
+                'criar_banco.php',
+                'ver_dados_banco.php'
+            ];
+            
+            for (const api of apis) {
+                try {
+                    const response = await fetch(BASE_URL + api);
+                    if (response.ok) {
+                        element.textContent += `✅ ${api} - OK\n`;
+                    } else {
+                        element.textContent += `❌ ${api} - ${response.status}\n`;
+                    }
+                } catch (error) {
+                    element.textContent += `❌ ${api} - ERRO\n`;
+                }
+            }
+            
+            element.textContent += '\n📊 Teste de APIs concluído!';
+        }
+        
+        async function testarArquivosPHP() {
+            console.log('📄 Testando arquivos PHP...');
+            
+            const element = document.getElementById('resultado');
+            element.style.display = 'block';
+            element.className = 'result-box';
+            element.textContent = '📄 Testando arquivos PHP...\n\n';
+            
+            const arquivos = [
+                'certificados.php',
+                'validacao_certificados.php',
+                'db_teste.php',
+                'criar_banco.php',
+                'ver_dados_banco.php',
+                'inserir_dados_teste.php'
+            ];
+            
+            for (const arquivo of arquivos) {
+                try {
+                    const response = await fetch(BASE_URL + arquivo, { method: 'HEAD' });
+                    if (response.ok) {
+                        element.textContent += `✅ ${arquivo} - OK\n`;
+                    } else {
+                        element.textContent += `❌ ${arquivo} - ${response.status}\n`;
+                    }
+                } catch (error) {
+                    element.textContent += `❌ ${arquivo} - ERRO\n`;
+                }
+            }
+            
+            element.textContent += '\n📊 Teste de arquivos PHP concluído!';
+        }
+        
+        async function testarRecursos() {
+            console.log('📁 Testando recursos...');
+            
+            const element = document.getElementById('resultado');
+            element.style.display = 'block';
+            element.className = 'result-box';
+            element.textContent = '📁 Testando recursos...\n\n';
+            
+            const recursos = [
+                'db.php',
+                'api/certificados.php',
+                'css/style.css',
+                'js/script.js',
+                'images/logo.png'
+            ];
+            
+            for (const recurso of recursos) {
+                try {
+                    const response = await fetch(BASE_URL + recurso, { method: 'HEAD' });
+                    if (response.ok) {
+                        element.textContent += `✅ ${recurso} - OK\n`;
+                    } else {
+                        element.textContent += `❌ ${recurso} - ${response.status}\n`;
+                    }
+                } catch (error) {
+                    element.textContent += `❌ ${recurso} - ERRO\n`;
+                }
+            }
+            
+            element.textContent += '\n📊 Teste de recursos concluído!';
+        }
+        
+        async function executarTodosTestes() {
+            console.log('🧪 Executando todos os testes...');
+            
+            const element = document.getElementById('resultado');
+            element.style.display = 'block';
+            element.className = 'result-box';
+            element.textContent = '🧪 Executando todos os testes...\n\n';
+            
+            // Teste 1: URLs principais
+            element.textContent += '1. Testando URLs principais...\n';
+            await testarURLsPrincipais();
+            
+            // Teste 2: APIs
+            element.textContent += '\n2. Testando APIs...\n';
+            await testarAPIs();
+            
+            // Teste 3: Arquivos PHP
+            element.textContent += '\n3. Testando arquivos PHP...\n';
+            await testarArquivosPHP();
+            
+            // Teste 4: Recursos
+            element.textContent += '\n4. Testando recursos...\n';
+            await testarRecursos();
+            
+            element.textContent += '\n🎉 DIAGNÓSTICO COMPLETO!';
+            element.className = 'result-box success';
+        }
+        
+        function abrirConsole() {
+            alert('Para abrir o console do navegador:\n\n1. Pressione F12\n2. Vá para a aba "Console"\n3. Procure por mensagens de erro 404\n4. Vá para a aba "Network" para ver requisições falhando');
+        }
+        
+        // Auto-executar teste ao carregar
+        window.onload = function() {
+            console.log('🔍 Diagnóstico 404 carregado');
+            console.log('📍 URL atual:', window.location.href);
+            
+            // Teste automático após 2 segundos
+            setTimeout(() => {
+                testarURLsPrincipais();
+            }, 2000);
+        };
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

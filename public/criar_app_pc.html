@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - App Desktop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .app-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .app-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border-radius: 25px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: white;
+        }
+        
+        h1 {
+            color: #1e293b;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        p {
+            color: #64748b;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            background: #3b82f6;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #10b981;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #059669;
+        }
+        
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+        
+        .instructions {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+            text-align: left;
+        }
+        
+        .instructions h3 {
+            color: #1e293b;
+            margin-bottom: 15px;
+        }
+        
+        .instructions ol {
+            color: #64748b;
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .download-section {
+            background: #f0f9ff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border: 2px dashed #3b82f6;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="app-icon">💻</div>
+        <h1>EduConnect Desktop</h1>
+        <p>Baixe e instale o app no seu PC</p>
+        
+        <div class="download-section">
+            <h3>📥 Opções de Download:</h3>
+            
+            <a href="http://localhost:8080/Sistema%20De%20Agendamento/public/" class="btn" target="_blank">
+                🚀 Abrir no Navegador
+            </a>
+            
+            <a href="http://localhost:8080/Sistema%20De%20Agendamento/public/dashboard_final.php" class="btn btn-secondary" target="_blank">
+                📊 Dashboard Completo
+            </a>
+            
+            <button onclick="criarAppDesktop()" class="btn btn-danger">
+                💾 Criar App Desktop
+            </button>
+        </div>
+        
+        <div class="instructions">
+            <h3>🖥️ Como Criar App Desktop:</h3>
+            <ol>
+                <li>Clique em "Criar App Desktop"</li>
+                <li>O sistema vai gerar um arquivo executável</li>
+                <li>Baixe e execute o arquivo</li>
+                <li>O app será instalado no seu PC</li>
+                <li>Pronto! Agora é um programa de verdade!</li>
+            </ol>
+        </div>
+        
+        <div class="instructions">
+            <h3>⚡ Alternativas Rápidas:</h3>
+            <ol>
+                <li><strong>Atalho na Área de Trabalho:</strong> Use o arquivo .bat que criamos</li>
+                <li><strong>Fixar no Navegador:</strong> Crie um atalho no navegador</li>
+                <li><strong>PWA:</strong> Instale como app web</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        function criarAppDesktop() {
+            // Simular criação de app desktop
+            alert('🔄 Gerando app desktop...\n\nIsso pode demorar alguns segundos.');
+            
+            setTimeout(() => {
+                // Criar arquivo executável simulado
+                const link = document.createElement('a');
+                link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(`
+@echo off
+title EduConnect Desktop App
+echo Iniciando EduConnect...
+start "" "http://localhost:8080/Sistema%%20De%%20Agendamento/public/"
+pause
+                `);
+                link.download = 'EduConnect_Desktop.bat';
+                link.click();
+                
+                alert('✅ App desktop criado!\n\nArquivo: EduConnect_Desktop.bat\n\nExecute o arquivo para abrir o app!');
+            }, 2000);
+        }
+        
+        // Detectar se é Windows
+        if (navigator.platform.indexOf('Win') !== -1) {
+            document.querySelector('.btn-danger').textContent = '💾 Criar App Windows (.exe)';
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar conta — EduConnect Tech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/auth.css?v=1">
+    <style>
+        /* Cadastro específico */
+        .tipo-usuario {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+        .tipo-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: 14px;
+            background: #f8fafc;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-family: 'Inter', sans-serif;
+            text-align: left;
+        }
+        .tipo-btn:hover { border-color: var(--primary); background: rgba(37, 99, 235, 0.04); }
+        .tipo-btn.active {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.08);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.10);
+        }
+        .tipo-btn .icon-box {
+            width: 36px; height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: #fff;
+            display: grid; place-items: center;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+        .tipo-btn[data-tipo="professor"] .icon-box {
+            background: linear-gradient(135deg, #d97706, #f59e0b);
+        }
+        .tipo-btn .label-row strong {
+            display: block;
+            font-size: 0.92rem;
+            font-weight: 800;
+            color: var(--text);
+        }
+        .tipo-btn .label-row span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        body.dark .tipo-btn { background: #1e293b; border-color: #334155; }
+        body.dark .tipo-btn:hover { background: rgba(37, 99, 235, 0.10); }
+        body.dark .tipo-btn.active { background: rgba(37, 99, 235, 0.15); }
+        body.dark .tipo-btn .label-row strong { color: #f1f5f9; }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+
+        .professor-fields {
+            display: none;
+            margin-top: 4px;
+            padding-top: 18px;
+            border-top: 1px dashed var(--border);
+        }
+        .professor-fields.active { display: block; }
+        body.dark .professor-fields { border-top-color: #334155; }
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .materias-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+        .materia-checkbox {
+            position: relative;
+        }
+        .materia-checkbox input { position: absolute; opacity: 0; pointer-events: none; }
+        .materia-checkbox label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 12px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text);
+            background: #f8fafc;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin: 0;
+            letter-spacing: 0;
+        }
+        .materia-checkbox label:hover { border-color: var(--primary); background: rgba(37, 99, 235, 0.04); }
+        .materia-checkbox input:checked + label {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.10);
+            color: var(--primary);
+        }
+        body.dark .materia-checkbox label { background: #1e293b; border-color: #334155; color: #e2e8f0; }
+        body.dark .materia-checkbox input:checked + label { background: rgba(37, 99, 235, 0.15); color: var(--accent); }
+
+        textarea.form-textarea {
+            min-height: 100px;
+            resize: vertical;
+            padding: 14px 16px;
+        }
+        .form-group.no-icon input,
+        .form-group.no-icon select,
+        .form-group.no-icon textarea {
+            padding-left: 16px;
+        }
+
+        /* Strength meter */
+        .pass-strength {
+            display: flex;
+            gap: 4px;
+            margin-top: 6px;
+        }
+        .pass-strength span {
+            flex: 1;
+            height: 4px;
+            border-radius: 2px;
+            background: var(--border);
+            transition: background 0.3s;
+        }
+        .pass-strength.weak span:nth-child(1) { background: #ef4444; }
+        .pass-strength.medium span:nth-child(1),
+        .pass-strength.medium span:nth-child(2) { background: #f59e0b; }
+        .pass-strength.strong span { background: #10b981; }
+        .pass-hint {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-shell">
+        <aside class="auth-brand">
+            <span class="dot-grid" aria-hidden="true"></span>
+            <div class="brand-top">
+                <a href="login.php" class="brand-logo" style="text-decoration: none; color: inherit;">
+                    <span class="brand-logo-icon">
+                        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <defs>
+                                <linearGradient id="ecLogoGradC" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0" stop-color="#ffffff"/>
+                                    <stop offset="1" stop-color="#93c5fd"/>
+                                </linearGradient>
+                            </defs>
+                            <path d="M16 4 L28 10 L16 16 L4 10 Z" fill="url(#ecLogoGradC)"/>
+                            <path d="M8 13 L8 19 C8 22 12 24 16 24 C20 24 24 22 24 19 L24 13" stroke="url(#ecLogoGradC)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            <circle cx="28" cy="11" r="1.4" fill="#ffffff"/>
+                            <path d="M28 12 L28 17" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                    <div class="brand-logo-text">
+                        EduConnect
+                        <small>Tech Platform</small>
+                    </div>
+                </a>
+            </div>
+            <div class="brand-mid">
+                <h2 class="brand-headline">Comece sua jornada com a <span>EduConnect</span>.</h2>
+                <p class="brand-sub">Crie sua conta gratuita em menos de 1 minuto e tenha acesso ao sistema completo de gestão educacional.</p>
+                <div class="brand-features">
+                    <div class="brand-feature">
+                        <div class="brand-feature-icon"><i class="fas fa-user-plus"></i></div>
+                        <div class="brand-feature-text">
+                            <strong>Cadastro rápido</strong>
+                            <span>Aluno ou professor, comece em segundos.</span>
+                        </div>
+                    </div>
+                    <div class="brand-feature">
+                        <div class="brand-feature-icon"><i class="fas fa-gift"></i></div>
+                        <div class="brand-feature-text">
+                            <strong>100% gratuito</strong>
+                            <span>Plataforma de demonstração sem custos.</span>
+                        </div>
+                    </div>
+                    <div class="brand-feature">
+                        <div class="brand-feature-icon"><i class="fas fa-rocket"></i></div>
+                        <div class="brand-feature-text">
+                            <strong>Pronto pra começar</strong>
+                            <span>Marque aulas e gerencie tudo após o login.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="brand-bottom">
+                <div class="meta">
+                    <span class="dot-online"></span>
+                    <span>Sistema online · v3.0</span>
+                </div>
+                <span>&copy; 2026 EduConnect Tech</span>
+            </div>
+        </aside>
+
+        <main class="auth-form-wrap">
+            <div class="login-container">
+                <div class="login-header">
+                    <div class="login-logo">
+                        <span class="form-logo-mark">
+                            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <defs>
+                                    <linearGradient id="ecLogoGradC2" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0" stop-color="#1e3a8a"/>
+                                        <stop offset="1" stop-color="#2563eb"/>
+                                    </linearGradient>
+                                </defs>
+                                <path d="M16 4 L28 10 L16 16 L4 10 Z" fill="url(#ecLogoGradC2)"/>
+                                <path d="M8 13 L8 19 C8 22 12 24 16 24 C20 24 24 22 24 19 L24 13" stroke="url(#ecLogoGradC2)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                <circle cx="28" cy="11" r="1.4" fill="#1e3a8a"/>
+                                <path d="M28 12 L28 17" stroke="#1e3a8a" stroke-width="1.6" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <h1>EduConnect</h1>
+                    </div>
+                    <p>Criar nova conta</p>
+                </div>
+                <button type="button" class="theme-toggle" id="themeToggle" aria-label="Alternar modo escuro">
+                    <i class="fas fa-moon"></i>
+                </button>
+
+                <div class="auth-welcome">
+                    <h2>Bem-vindo à EduConnect</h2>
+                    <p>Preencha os dados abaixo para criar sua conta gratuita.</p>
+                </div>
+
+                <div class="login-form">
+                    <div id="resultado"></div>
+
+                    <form id="cadastro-form" novalidate>
+                        <div class="section-label">Tipo de conta</div>
+                        <div class="tipo-usuario">
+                            <button type="button" class="tipo-btn active" data-tipo="aluno" onclick="selecionarTipo('aluno', this)">
+                                <span class="icon-box"><i class="fas fa-user-graduate"></i></span>
+                                <span class="label-row">
+                                    <strong>Sou aluno</strong>
+                                    <span>Buscar aulas e cursos</span>
+                                </span>
+                            </button>
+                            <button type="button" class="tipo-btn" data-tipo="professor" onclick="selecionarTipo('professor', this)">
+                                <span class="icon-box"><i class="fas fa-chalkboard-teacher"></i></span>
+                                <span class="label-row">
+                                    <strong>Sou professor</strong>
+                                    <span>Oferecer aulas</span>
+                                </span>
+                            </button>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nome">Nome completo</label>
+                            <div class="input-wrap">
+                                <i class="fas fa-user input-icon"></i>
+                                <input type="text" id="nome" required placeholder="Como prefere ser chamado(a)" autocomplete="name">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <div class="input-wrap">
+                                <i class="fas fa-envelope input-icon"></i>
+                                <input type="email" id="email" required placeholder="seu@email.com" autocomplete="email">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="senha">Senha</label>
+                                <div class="input-wrap">
+                                    <i class="fas fa-lock input-icon"></i>
+                                    <input type="password" id="senha" required placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+                                    <button type="button" class="toggle-pass" aria-label="Mostrar senha"><i class="fas fa-eye"></i></button>
+                                </div>
+                                <div class="pass-strength" id="passStrength"><span></span><span></span><span></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmar_senha">Confirmar senha</label>
+                                <div class="input-wrap">
+                                    <i class="fas fa-shield-halved input-icon"></i>
+                                    <input type="password" id="confirmar_senha" required placeholder="Repita a senha" autocomplete="new-password">
+                                    <button type="button" class="toggle-pass" aria-label="Mostrar senha"><i class="fas fa-eye"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefone">WhatsApp / Telefone</label>
+                            <div class="input-wrap">
+                                <i class="fas fa-phone input-icon"></i>
+                                <input type="tel" id="telefone" required placeholder="(11) 99999-9999" autocomplete="tel">
+                            </div>
+                        </div>
+
+                        <!-- Campos específicos para Professor -->
+                        <div class="professor-fields" id="professor-fields">
+                            <div class="section-label">Informações de professor</div>
+
+                            <div class="form-group">
+                                <label for="formacao">Formação / Especialização</label>
+                                <div class="input-wrap">
+                                    <i class="fas fa-graduation-cap input-icon"></i>
+                                    <input type="text" id="formacao" placeholder="Ex: Licenciatura em Matemática">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group no-icon">
+                                    <label for="experiencia">Experiência</label>
+                                    <select id="experiencia">
+                                        <option value="">Selecione</option>
+                                        <option value="1-2">1-2 anos</option>
+                                        <option value="3-5">3-5 anos</option>
+                                        <option value="6-10">6-10 anos</option>
+                                        <option value="10+">Mais de 10 anos</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="valor_hora">Valor por hora (R$)</label>
+                                    <div class="input-wrap">
+                                        <i class="fas fa-dollar-sign input-icon"></i>
+                                        <input type="number" id="valor_hora" placeholder="50" min="20" max="200">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group no-icon">
+                                <label>Matérias que ensina</label>
+                                <div class="materias-grid">
+                                    <div class="materia-checkbox">
+                                        <input type="checkbox" name="materias[]" value="matematica" id="mat_matematica">
+                                        <label for="mat_matematica"><i class="fas fa-square-root-variable"></i> Matemática</label>
+                                    </div>
+                                    <div class="materia-checkbox">
+                                        <input type="checkbox" name="materias[]" value="portugues" id="mat_portugues">
+                                        <label for="mat_portugues"><i class="fas fa-book"></i> Português</label>
+                                    </div>
+                                    <div class="materia-checkbox">
+                                        <input type="checkbox" name="materias[]" value="ingles" id="mat_ingles">
+                                        <label for="mat_ingles"><i class="fas fa-language"></i> Inglês</label>
+                                    </div>
+                                    <div class="materia-checkbox">
+                                        <input type="checkbox" name="materias[]" value="fisica" id="mat_fisica">
+                                        <label for="mat_fisica"><i class="fas fa-atom"></i> Física</label>
+                                    </div>
+                                    <div class="materia-checkbox">
+                                        <input type="checkbox" name="materias[]" value="quimica" id="mat_quimica">
+                                        <label for="mat_quimica"><i class="fas fa-flask"></i> Química</label>
+                                    </div>
+                                    <div class="materia-checkbox">
+                                        <input type="checkbox" name="materias[]" value="biologia" id="mat_biologia">
+                                        <label for="mat_biologia"><i class="fas fa-dna"></i> Biologia</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group no-icon">
+                                <label for="descricao">Apresentação</label>
+                                <textarea id="descricao" class="form-textarea" rows="4" placeholder="Conte sobre você, sua metodologia e experiência..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-options">
+                            <label><input type="checkbox" id="termos" required> Aceito os termos de uso</label>
+                        </div>
+
+                        <button type="submit" class="btn-login" id="btnCadastro">
+                            <span class="btn-spinner"></span>
+                            <span class="btn-label">Criar minha conta</span>
+                            <i class="fas fa-arrow-right btn-label" style="font-size: 0.8rem;"></i>
+                        </button>
+                    </form>
+
+                    <div class="login-links">
+                        Já tem conta?
+                        <a href="login.php">Fazer login</a>
+                        ·
+                        <a href="login.php">Voltar</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="assets/js/auth.js?v=1"></script>
+    <script>
+        let tipoUsuario = 'aluno';
+
+        // Pré-selecionar via URL ?tipo=professor
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('tipo') === 'professor') {
+            const profBtn = document.querySelector('.tipo-btn[data-tipo="professor"]');
+            if (profBtn) selecionarTipo('professor', profBtn);
+        }
+
+        function selecionarTipo(tipo, btn) {
+            tipoUsuario = tipo;
+            document.querySelectorAll('.tipo-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+
+            const professorFields = document.getElementById('professor-fields');
+            const required = tipo === 'professor';
+            professorFields.classList.toggle('active', required);
+            document.getElementById('formacao').required = required;
+            document.getElementById('experiencia').required = required;
+            document.getElementById('valor_hora').required = required;
+        }
+
+        // Força da senha
+        const senhaInput = document.getElementById('senha');
+        const strength = document.getElementById('passStrength');
+        senhaInput.addEventListener('input', () => {
+            const v = senhaInput.value;
+            strength.classList.remove('weak', 'medium', 'strong');
+            if (!v) return;
+            const score = (v.length >= 6 ? 1 : 0) + (/[A-Z]/.test(v) ? 1 : 0) + (/[0-9]/.test(v) ? 1 : 0) + (/[^A-Za-z0-9]/.test(v) ? 1 : 0);
+            if (score <= 1) strength.classList.add('weak');
+            else if (score <= 2) strength.classList.add('medium');
+            else strength.classList.add('strong');
+        });
+
+        function showAlert(msg, type) {
+            const cls = type === 'success' ? 'alert-success' : 'alert-error';
+            const icon = type === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation';
+            document.getElementById('resultado').innerHTML =
+                `<div class="alert ${cls}" role="alert"><i class="fas ${icon}"></i><span>${msg}</span></div>`;
+        }
+
+        document.getElementById('cadastro-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const senha = document.getElementById('senha').value;
+            const confirmarSenha = document.getElementById('confirmar_senha').value;
+            const btn = document.getElementById('btnCadastro');
+
+            if (senha !== confirmarSenha) { showAlert('As senhas não coincidem.', 'error'); return; }
+            if (senha.length < 6) { showAlert('A senha deve ter pelo menos 6 caracteres.', 'error'); return; }
+
+            let materiasSelecionadas = [];
+            if (tipoUsuario === 'professor') {
+                const cbs = document.querySelectorAll('input[name="materias[]"]:checked');
+                materiasSelecionadas = Array.from(cbs).map(cb => cb.value);
+                if (materiasSelecionadas.length === 0) {
+                    showAlert('Selecione pelo menos uma matéria que você ensina.', 'error');
+                    return;
+                }
+            }
+
+            const dados = {
+                tipo_usuario: tipoUsuario,
+                nome: document.getElementById('nome').value,
+                email: document.getElementById('email').value,
+                senha: senha,
+                telefone: document.getElementById('telefone').value,
+                formacao: document.getElementById('formacao').value || null,
+                experiencia: document.getElementById('experiencia').value || null,
+                valor_hora: document.getElementById('valor_hora').value || null,
+                descricao: document.getElementById('descricao').value || null,
+                materias: materiasSelecionadas
+            };
+
+            btn.classList.add('loading');
+            btn.disabled = true;
+
+            try {
+                const response = await fetch('usuarios_api.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ acao: 'cadastrar', dados: dados })
+                });
+                const result = await response.json();
+                if (result.sucesso) {
+                    showAlert('Cadastro realizado! Redirecionando para o login...', 'success');
+                    setTimeout(() => { window.location.href = 'login.php?cadastro=sucesso'; }, 1800);
+                } else {
+                    showAlert(result.mensagem || 'Erro ao realizar cadastro.', 'error');
+                    btn.classList.remove('loading'); btn.disabled = false;
+                }
+            } catch (error) {
+                showAlert('Erro de conexão. Tente novamente.', 'error');
+                btn.classList.remove('loading'); btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

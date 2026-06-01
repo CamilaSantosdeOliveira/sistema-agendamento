@@ -1,0 +1,1988 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Plataforma Educacional</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        /* Reset bÃ¡sico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+        
+        /* Screen management */
+        .screen {
+            display: none;
+        }
+        
+        .screen.active {
+            display: block;
+        }
+        
+        /* Login Screen */
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+        }
+        
+        .login-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            width: 100%;
+            max-width: 420px;
+            animation: fadeInUp 0.6s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .login-header h1 {
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+        
+        .login-header p {
+            color: #64748b;
+        }
+        
+        /* Form styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        /* Button styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #e5e7eb;
+            color: #6b7280;
+        }
+        
+        .btn-outline:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+        
+        .btn-full {
+            width: 100%;
+        }
+        
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+        
+        /* Quick login */
+        .quick-login {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .quick-login p {
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+        
+        .quick-login-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        /* Error message */
+        .error-message {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            border: 1px solid #fecaca;
+        }
+        
+        /* Desktop Layout */
+        .desktop-layout {
+            display: grid;
+            grid-template-rows: auto 1fr;
+            min-height: 100vh;
+        }
+        
+        .desktop-header {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .header-left h1 {
+            font-size: 1.5rem;
+            color: #1e293b;
+        }
+        
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            border: 2px solid #e5e7eb;
+            transition: all 0.2s ease;
+        }
+
+        .search-bar:focus-within {
+            border-color: #3b82f6;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .search-bar input {
+            border: none;
+            background: none;
+            outline: none;
+            padding: 0.25rem 0.5rem;
+            width: 300px;
+            font-size: 0.95rem;
+        }
+
+        .search-bar button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.25rem;
+            color: #6b7280;
+            transition: color 0.2s ease;
+        }
+
+        .search-bar button:hover {
+            color: #3b82f6;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .btn-icon {
+            padding: 0.5rem;
+            background: none;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-icon:hover {
+            background: #f8fafc;
+        }
+        
+        /* Main content area */
+        .desktop-main {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: calc(100vh - 80px);
+        }
+        
+        .sidebar {
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            padding: 2rem 0;
+        }
+        
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            padding: 0 1rem;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1.5rem;
+            color: #6b7280;
+            text-decoration: none;
+            border-radius: 0;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            font-weight: 500;
+            margin: 0;
+            border-left: 3px solid transparent;
+        }
+        
+        .nav-item:hover {
+            background: #f3f4f6;
+            color: #374151;
+        }
+        
+        .nav-item.active {
+            background: #eff6ff;
+            color: #1d4ed8;
+            border-left-color: #1d4ed8;
+            font-weight: 600;
+        }
+        
+        .content-area {
+            padding: 2rem;
+            background: #f8fafc;
+            overflow-y: auto;
+        }
+        
+        /* User profile dropdown */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: background 0.2s;
+            position: relative;
+        }
+        
+        .user-profile:hover {
+            background: #f8fafc;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .user-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            min-width: 200px;
+            z-index: 1000;
+            overflow: hidden;
+        }
+        
+        .user-dropdown a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #374151;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        
+        .user-dropdown a:hover {
+            background: #f8fafc;
+        }
+        
+        /* Dashboard */
+        .dashboard {
+            max-width: 1200px;
+        }
+        
+        .dashboard-header {
+            margin-bottom: 2rem;
+        }
+        
+        .dashboard-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+        
+        .dashboard-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .metric-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid #e5e7eb;
+        }
+        
+        .metric-card h3 {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1e293b;
+        }
+
+        /* Charts Section */
+        .charts-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid #e5e7eb;
+        }
+
+        .chart-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .chart-canvas {
+            width: 100% !important;
+            max-height: 300px !important;
+        }
+
+        .progress-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .progress-item:last-child {
+            border-bottom: none;
+        }
+
+        .progress-bar {
+            width: 60px;
+            height: 6px;
+            background: #f3f4f6;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        /* Chat Styles */
+        .chat-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 1.5rem;
+            height: 500px;
+        }
+
+        .chat-sidebar {
+            background: white;
+            border-radius: 0.75rem;
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            padding: 1rem;
+            background: #f8fafc;
+            border-bottom: 1px solid #e5e7eb;
+            font-weight: 600;
+        }
+
+        .chat-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .chat-item {
+            padding: 1rem;
+            border-bottom: 1px solid #f3f4f6;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .chat-item:hover {
+            background: #f8fafc;
+        }
+
+        .chat-item.active {
+            background: #eff6ff;
+            border-left: 3px solid #3b82f6;
+        }
+
+        .chat-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .chat-preview {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .chat-main {
+            background: white;
+            border-radius: 0.75rem;
+            border: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background: #f9fafb;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .message.own {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            background: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .message.own .message-avatar {
+            background: #667eea;
+        }
+
+        .message-content {
+            background: white;
+            padding: 0.75rem 1rem;
+            border-radius: 1rem;
+            max-width: 70%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .message.own .message-content {
+            background: #667eea;
+            color: white;
+        }
+
+        .chat-input {
+            padding: 1rem;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            outline: none;
+        }
+
+        .chat-input button {
+            padding: 0.75rem 1.5rem;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+        }
+
+        /* Calendar Styles */
+        .calendar-container {
+            background: white;
+            border-radius: 0.75rem;
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+        }
+
+        .calendar-header {
+            padding: 1rem;
+            background: #f8fafc;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .calendar-nav button {
+            padding: 0.5rem;
+            background: none;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.25rem;
+            cursor: pointer;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background: #e5e7eb;
+        }
+
+        .calendar-day {
+            background: white;
+            padding: 0.75rem;
+            min-height: 80px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .calendar-day:hover {
+            background: #f8fafc;
+        }
+
+        .calendar-day.today {
+            background: #eff6ff;
+            color: #1d4ed8;
+            font-weight: 600;
+        }
+
+        .calendar-day.other-month {
+            background: #f9fafb;
+            color: #9ca3af;
+        }
+
+        .calendar-event {
+            background: #667eea;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Notifications Styles */
+        .notification-item {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            transition: all 0.2s;
+        }
+
+        .notification-item:hover {
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .notification-item.unread {
+            border-left: 4px solid #3b82f6;
+            background: #f8fafc;
+        }
+
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .notification-time {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .notification-content {
+            color: #4b5563;
+            line-height: 1.5;
+        }
+
+        .notification-actions {
+            margin-top: 0.75rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .notification-actions button {
+            padding: 0.5rem 1rem;
+            border: 1px solid #e5e7eb;
+            background: white;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .notification-actions button.primary {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+
+        /* Settings Styles */
+        .settings-section {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .settings-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-info h4 {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.25rem;
+        }
+
+        .setting-info p {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .setting-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            background: #e5e7eb;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .toggle-switch.active {
+            background: #3b82f6;
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.2s;
+        }
+
+        .toggle-switch.active::after {
+            transform: translateX(20px);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .desktop-layout {
+                display: none !important;
+            }
+            
+            .search-bar input {
+                width: 200px;
+            }
+            
+            .header-right {
+                gap: 0.5rem;
+            }
+            
+            .quick-login-buttons {
+                flex-direction: column;
+            }
+        }
+        
+        /* Tema escuro */
+        [data-theme="dark"] {
+            background: #0f172a;
+            color: #f1f5f9;
+        }
+        
+        [data-theme="dark"] .desktop-header,
+        [data-theme="dark"] .sidebar {
+            background: #1e293b;
+            border-color: #334155;
+        }
+        
+        [data-theme="dark"] .content-area {
+            background: #0f172a;
+        }
+        
+        [data-theme="dark"] .login-card,
+        [data-theme="dark"] .metric-card {
+            background: #1e293b;
+            color: #f1f5f9;
+        }
+        
+        [data-theme="dark"] .form-group input {
+            background: #334155;
+            border-color: #475569;
+            color: #f1f5f9;
+        }
+        
+        [data-theme="dark"] .nav-item {
+            color: #94a3b8;
+        }
+        
+        [data-theme="dark"] .nav-item:hover {
+            background: #334155;
+            color: #f1f5f9;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="screen active">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-header">
+                    <div class="logo">Ž“</div>
+                    <h1>EduConnect</h1>
+                    <p>Acesse sua plataforma educacional</p>
+                </div>
+                
+                <form id="loginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="username">UsuÃ¡rio</label>
+                        <input type="text" id="username" name="username" required autocomplete="username">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" name="password" required autocomplete="current-password">
+                    </div>
+                    
+                    <div id="errorMessage" class="error-message" style="display: none;"></div>
+                    
+                    <button type="submit" class="btn btn-primary btn-full">Entrar</button>
+                </form>
+                
+                <div class="quick-login">
+                    <p>Acesso rÃ¡pido:</p>
+                    <div class="quick-login-buttons">
+                        <button onclick="quickLogin('admin', 'admin123')" class="btn btn-outline btn-small">Admin</button>
+                        <button onclick="quickLogin('prof', 'prof123')" class="btn btn-outline btn-small">Professor</button>
+                        <button onclick="quickLogin('aluno', 'aluno123')" class="btn btn-outline btn-small">Aluno</button>
+                        <button onclick="quickLogin('teste', '123')" class="btn btn-outline btn-small">Teste</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Layout -->
+    <div id="desktopLayout" class="desktop-layout" style="display: none;">
+        <!-- Header -->
+        <header class="desktop-header">
+            <div class="header-left">
+                <div class="logo">Ž“</div>
+                <h1>EduConnect</h1>
+            </div>
+            
+            <div class="header-center">
+                <div class="search-bar">
+                    <input type="text" placeholder="Pesquisar...">
+                    <button class="search-btn">”</button>
+                </div>
+            </div>
+            
+            <div class="header-right">
+                <button id="themeToggle" class="btn btn-icon" onclick="toggleTheme()">Œ™</button>
+                
+                <div class="user-profile" onclick="toggleUserMenu()">
+                    <div id="userAvatar" class="user-avatar">U</div>
+                    <div class="user-info">
+                        <span id="userNameDisplay" class="user-name">UsuÃ¡rio</span>
+                        <span class="user-role">FunÃ§Ã£o</span>
+                    </div>
+                    <div class="dropdown-arrow">â–¼</div>
+                    
+                    <div id="userDropdown" class="user-dropdown" style="display: none;">
+                        <a href="#" onclick="logout()">šª Sair</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="desktop-main">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <a href="#" class="nav-item active" onclick="showDashboard()" data-screen="dashboard">
+                        <span class="nav-icon">🏠</span>
+                        <span class="nav-text">Dashboard</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showCalendar()" data-screen="calendar">
+                        <span class="nav-icon">“…</span>
+                        <span class="nav-text">CalendÃ¡rio</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showChat()" data-screen="chat">
+                        <span class="nav-icon">’¬</span>
+                        <span class="nav-text">Mensagens</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showNotifications()" data-screen="notifications">
+                        <span class="nav-icon">””</span>
+                        <span class="nav-text">Notificações</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showAnalytics()" data-screen="analytics">
+                        <span class="nav-icon">📊</span>
+                        <span class="nav-text">Relatórios</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showSettings()" data-screen="settings">
+                        <span class="nav-icon">âš™ï¸</span>
+                        <span class="nav-text">Configurações</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Content Area -->
+            <main id="contentArea" class="content-area">
+                <div class="dashboard">
+                    <div class="dashboard-header">
+                        <h1>Bem-vindo ao EduConnect!</h1>
+                        <p>Aqui estÃ¡ um resumo das suas atividades</p>
+                    </div>
+                    
+                    <div class="dashboard-metrics">
+                        <div class="metric-card">
+                            <h3>Aulas Assistidas</h3>
+                            <div class="metric-value">24</div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <h3>MÃ©dia Geral</h3>
+                            <div class="metric-value">8.7</div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <h3>Horas de Estudo</h3>
+                            <div class="metric-value">156h</div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <h3>PrÃ³ximas Aulas</h3>
+                            <div class="metric-value">3</div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // VariÃ¡veis globais
+        let currentUser = null;
+        
+        // UsuÃ¡rios de demonstraÃ§Ã£o
+        const DEMO_USERS = {
+            'admin': { password: 'admin123', name: 'Administrador', role: 'admin' },
+            'prof': { password: 'prof123', name: 'Professor', role: 'professor' },
+            'aluno': { password: 'aluno123', name: 'Estudante', role: 'student' },
+            'teste': { password: '123', name: 'UsuÃ¡rio Teste', role: 'test' }
+        };
+        
+        // InicializaÃ§Ã£o quando DOM estiver pronto
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Ž“ Inicializando EduConnect...');
+            
+            // Verificar usuÃ¡rio salvo INSTANTANEAMENTE
+            const savedUser = localStorage.getItem('educonnect-user');
+            if (savedUser) {
+                try {
+                    currentUser = JSON.parse(savedUser);
+                    showMainApp();
+                } catch (e) {
+                    showLoginScreen();
+                }
+            } else {
+                showLoginScreen();
+            }
+            
+            // Configurar formulÃ¡rio
+            setupLoginForm();
+            
+            // Carregar tema
+            loadTheme();
+            
+            console.log('âœ… EduConnect carregado instantaneamente!');
+        });
+        
+        function showLoginScreen() {
+            document.getElementById('loginScreen').style.display = 'block';
+            document.getElementById('desktopLayout').style.display = 'none';
+        }
+        
+        function showMainApp() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('desktopLayout').style.display = 'grid';
+            updateUserInfo();
+            showDashboard();
+        }
+        
+        function setupLoginForm() {
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const username = document.getElementById('username').value;
+                    const password = document.getElementById('password').value;
+                    login(username, password);
+                });
+            }
+        }
+        
+        function login(username, password) {
+            if (DEMO_USERS[username] && DEMO_USERS[username].password === password) {
+                currentUser = {
+                    username: username,
+                    name: DEMO_USERS[username].name,
+                    role: DEMO_USERS[username].role
+                };
+                
+                localStorage.setItem('educonnect-user', JSON.stringify(currentUser));
+                showNotification('âœ… Login realizado com sucesso!', 'success');
+                
+                setTimeout(() => {
+                    showMainApp();
+                }, 200);
+            } else {
+                const errorDiv = document.getElementById('errorMessage');
+                if (errorDiv) {
+                    errorDiv.textContent = 'âŒ UsuÃ¡rio ou senha incorretos';
+                    errorDiv.style.display = 'block';
+                }
+                showNotification('âŒ Credenciais invÃ¡lidas!', 'error');
+            }
+        }
+        
+        function quickLogin(username, password) {
+            document.getElementById('username').value = username;
+            document.getElementById('password').value = password;
+            setTimeout(() => login(username, password), 100);
+        }
+        
+        function updateUserInfo() {
+            if (!currentUser) return;
+            
+            const userNameDisplay = document.getElementById('userNameDisplay');
+            const userAvatar = document.getElementById('userAvatar');
+            
+            const userName = currentUser.name;
+            const userInitial = userName.charAt(0).toUpperCase();
+            
+            if (userNameDisplay) userNameDisplay.textContent = userName;
+            if (userAvatar) userAvatar.textContent = userInitial;
+        }
+        
+        function showDashboard() {
+            updateActiveNav('dashboard');
+            const contentArea = document.getElementById('contentArea');
+            contentArea.innerHTML = `
+                <div class="dashboard">
+                    <div class="dashboard-header">
+                        <h1>🏠 Dashboard</h1>
+                        <p>Bem-vindo, ${currentUser ? currentUser.name : 'Usuário'}!</p>
+                    </div>
+                    
+                    <div class="dashboard-metrics">
+                        <div class="metric-card">
+                            <h3>Aulas Assistidas</h3>
+                            <div class="metric-value">24</div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <h3>MÃ©dia Geral</h3>
+                            <div class="metric-value">8.7</div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <h3>Horas de Estudo</h3>
+                            <div class="metric-value">156h</div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <h3>PrÃ³ximas Aulas</h3>
+                            <div class="metric-value">3</div>
+                        </div>
+                    </div>
+
+                    <div class="charts-section">
+                        <div class="chart-container">
+                            <div class="chart-title">“Š Progresso Mensal</div>
+                            <canvas id="progressChart" class="chart-canvas"></canvas>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <div class="chart-title">“ˆ DistribuiÃ§Ã£o por MatÃ©ria</div>
+                            <canvas id="subjectsChart" class="chart-canvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Criar grÃ¡ficos apÃ³s o DOM ser atualizado
+            setTimeout(() => {
+                createProgressChart();
+                createSubjectsChart();
+            }, 100);
+        }
+        
+        function showCalendar() {
+            updateActiveNav('calendar');
+            const contentArea = document.getElementById('contentArea');
+            contentArea.innerHTML = `
+                <div class="dashboard">
+                    <div class="dashboard-header">
+                        <h1>“… CalendÃ¡rio</h1>
+                        <p>Gerencie suas aulas e compromissos</p>
+                    </div>
+                    
+                    <div class="calendar-container">
+                        <div class="calendar-header">
+                            <h3>Agosto 2025</h3>
+                            <div class="calendar-nav">
+                                <button onclick="previousMonth()">â€¹</button>
+                                <button onclick="nextMonth()">â€º</button>
+                            </div>
+                        </div>
+                        <div class="calendar-grid">
+                            <div class="calendar-day" style="background: #f9fafb; color: #9ca3af;">Dom</div>
+                            <div class="calendar-day" style="background: #f9fafb; color: #9ca3af;">Seg</div>
+                            <div class="calendar-day" style="background: #f9fafb; color: #9ca3af;">Ter</div>
+                            <div class="calendar-day" style="background: #f9fafb; color: #9ca3af;">Qua</div>
+                            <div class="calendar-day" style="background: #f9fafb; color: #9ca3af;">Qui</div>
+                            <div class="calendar-day" style="background: #f9fafb; color: #9ca3af;">Sex</div>
+                            <div class="calendar-day" style="background: #f9fafb; color: #9ca3af;">SÃ¡b</div>
+                            
+                            <div class="calendar-day other-month">29</div>
+                            <div class="calendar-day other-month">30</div>
+                            <div class="calendar-day other-month">31</div>
+                            <div class="calendar-day">1
+                                <div class="calendar-event">MatemÃ¡tica 08:00</div>
+                            </div>
+                            <div class="calendar-day">2
+                                <div class="calendar-event">FÃ­sica 10:00</div>
+                            </div>
+                            <div class="calendar-day">3</div>
+                            <div class="calendar-day">4</div>
+                            
+                            <div class="calendar-day">5
+                                <div class="calendar-event">HistÃ³ria 14:00</div>
+                            </div>
+                            <div class="calendar-day today">6
+                                <div class="calendar-event">QuÃ­mica 09:00</div>
+                                <div class="calendar-event">InglÃªs 15:00</div>
+                            </div>
+                            <div class="calendar-day">7
+                                <div class="calendar-event">MatemÃ¡tica 08:00</div>
+                            </div>
+                            <div class="calendar-day">8
+                                <div class="calendar-event">FÃ­sica 10:00</div>
+                                <div class="calendar-event">Prova QuÃ­mica</div>
+                            </div>
+                            <div class="calendar-day">9</div>
+                            <div class="calendar-day">10</div>
+                            <div class="calendar-day">11</div>
+                            
+                            <div class="calendar-day">12
+                                <div class="calendar-event">HistÃ³ria 14:00</div>
+                            </div>
+                            <div class="calendar-day">13
+                                <div class="calendar-event">MatemÃ¡tica 08:00</div>
+                            </div>
+                            <div class="calendar-day">14
+                                <div class="calendar-event">FÃ­sica 10:00</div>
+                            </div>
+                            <div class="calendar-day">15
+                                <div class="calendar-event">ReuniÃ£o Pais</div>
+                            </div>
+                            <div class="calendar-day">16</div>
+                            <div class="calendar-day">17</div>
+                            <div class="calendar-day">18</div>
+                            
+                            <div class="calendar-day">19
+                                <div class="calendar-event">HistÃ³ria 14:00</div>
+                            </div>
+                            <div class="calendar-day">20
+                                <div class="calendar-event">MatemÃ¡tica 08:00</div>
+                            </div>
+                            <div class="calendar-day">21
+                                <div class="calendar-event">Entrega Projeto</div>
+                            </div>
+                            <div class="calendar-day">22
+                                <div class="calendar-event">FÃ­sica 10:00</div>
+                            </div>
+                            <div class="calendar-day">23</div>
+                            <div class="calendar-day">24</div>
+                            <div class="calendar-day">25</div>
+                            
+                            <div class="calendar-day">26
+                                <div class="calendar-event">HistÃ³ria 14:00</div>
+                            </div>
+                            <div class="calendar-day">27
+                                <div class="calendar-event">MatemÃ¡tica 08:00</div>
+                            </div>
+                            <div class="calendar-day">28
+                                <div class="calendar-event">FÃ­sica 10:00</div>
+                            </div>
+                            <div class="calendar-day">29</div>
+                            <div class="calendar-day">30</div>
+                            <div class="calendar-day">31</div>
+                            <div class="calendar-day other-month">1</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function showChat() {
+            updateActiveNav('chat');
+            const contentArea = document.getElementById('contentArea');
+            contentArea.innerHTML = `
+                <div class="dashboard">
+                    <div class="dashboard-header">
+                        <h1>’¬ Chat</h1>
+                        <p>Converse com professores e colegas</p>
+                    </div>
+                    
+                    <div class="chat-layout">
+                        <div class="chat-sidebar">
+                            <div class="chat-header">
+                                Conversas Recentes
+                            </div>
+                            <div class="chat-list">
+                                <div class="chat-item active">
+                                    <div class="chat-name">Prof. Maria Silva</div>
+                                    <div class="chat-preview">Sobre o projeto de matemÃ¡tica...</div>
+                                </div>
+                                <div class="chat-item">
+                                    <div class="chat-name">Turma 3ÂºA</div>
+                                    <div class="chat-preview">JoÃ£o: Quando serÃ¡ a prova?</div>
+                                </div>
+                                <div class="chat-item">
+                                    <div class="chat-name">Prof. Carlos Santos</div>
+                                    <div class="chat-preview">Material de fÃ­sica disponÃ­vel</div>
+                                </div>
+                                <div class="chat-item">
+                                    <div class="chat-name">Ana Paula</div>
+                                    <div class="chat-preview">Vamos estudar juntas?</div>
+                                </div>
+                                <div class="chat-item">
+                                    <div class="chat-name">Grupo de Estudos</div>
+                                    <div class="chat-preview">ReuniÃ£o hoje Ã s 16h</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-main">
+                            <div class="chat-header">
+                                <strong>Prof. Maria Silva</strong> - Online
+                            </div>
+                            <div class="chat-messages">
+                                <div class="message">
+                                    <div class="message-avatar">MS</div>
+                                    <div class="message-content">
+                                        OlÃ¡! Como estÃ¡ o andamento do projeto de matemÃ¡tica?
+                                    </div>
+                                </div>
+                                <div class="message own">
+                                    <div class="message-avatar">EU</div>
+                                    <div class="message-content">
+                                        Oi professora! Estou na segunda etapa, jÃ¡ terminei os cÃ¡lculos.
+                                    </div>
+                                </div>
+                                <div class="message">
+                                    <div class="message-avatar">MS</div>
+                                    <div class="message-content">
+                                        Excelente! Lembre-se de incluir as referÃªncias bibliogrÃ¡ficas.
+                                    </div>
+                                </div>
+                                <div class="message own">
+                                    <div class="message-avatar">EU</div>
+                                    <div class="message-content">
+                                        Com certeza! Posso entregar atÃ© sexta-feira?
+                                    </div>
+                                </div>
+                                <div class="message">
+                                    <div class="message-avatar">MS</div>
+                                    <div class="message-content">
+                                        Perfeito! Estou ansiosa para ver o resultado. ˜Š
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chat-input">
+                                <input type="text" placeholder="Digite sua mensagem..." onkeypress="handleChatInput(event)">
+                                <button onclick="sendMessage()">Enviar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function showNotifications() {
+            updateActiveNav('notifications');
+            const contentArea = document.getElementById('contentArea');
+            contentArea.innerHTML = `
+                <div class="dashboard">
+                    <div class="dashboard-header">
+                        <h1>”” Notificações</h1>
+                        <p>Acompanhe suas Notificações e avisos importantes</p>
+                    </div>
+                    
+                    <div class="notifications-container">
+                        <div class="notification-item unread">
+                            <div class="notification-header">
+                                <div class="notification-title">“š Nova Tarefa de MatemÃ¡tica</div>
+                                <div class="notification-time">hÃ¡ 2 horas</div>
+                            </div>
+                            <div class="notification-content">
+                                Prof. Maria Silva adicionou uma nova lista de exercÃ­cios sobre equaÃ§Ãµes do 2Âº grau. 
+                                Prazo de entrega: 15 de agosto.
+                            </div>
+                            <div class="notification-actions">
+                                <button class="primary">Ver Tarefa</button>
+                                <button onclick="markAsRead(this)">Marcar como Lida</button>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-item unread">
+                            <div class="notification-header">
+                                <div class="notification-title">âš—ï¸ Prova de QuÃ­mica Agendada</div>
+                                <div class="notification-time">hÃ¡ 4 horas</div>
+                            </div>
+                            <div class="notification-content">
+                                Prof. Carlos Santos agendou uma prova para o dia 22 de agosto sobre 
+                                reaÃ§Ãµes orgÃ¢nicas. Estudem os capÃ­tulos 8 e 9 do livro.
+                            </div>
+                            <div class="notification-actions">
+                                <button class="primary">Ver Detalhes</button>
+                                <button onclick="markAsRead(this)">Marcar como Lida</button>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-item unread">
+                            <div class="notification-header">
+                                <div class="notification-title">“… ReuniÃ£o de Pais Marcada</div>
+                                <div class="notification-time">ontem</div>
+                            </div>
+                            <div class="notification-content">
+                                A coordenaÃ§Ã£o marcou reuniÃ£o de pais para o dia 28 de agosto Ã s 19:00. 
+                                Favor confirmar presenÃ§a atÃ© o dia 25.
+                            </div>
+                            <div class="notification-actions">
+                                <button class="primary">Confirmar PresenÃ§a</button>
+                                <button onclick="markAsRead(this)">Marcar como Lida</button>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-item">
+                            <div class="notification-header">
+                                <div class="notification-title">âœ… Nota LanÃ§ada - HistÃ³ria</div>
+                                <div class="notification-time">2 dias atrÃ¡s</div>
+                            </div>
+                            <div class="notification-content">
+                                Sua nota da prova de HistÃ³ria foi lanÃ§ada: 8.5. 
+                                ParabÃ©ns pelo excelente desempenho!
+                            </div>
+                        </div>
+                        
+                        <div class="notification-item">
+                            <div class="notification-header">
+                                <div class="notification-title">“– Material de FÃ­sica DisponÃ­vel</div>
+                                <div class="notification-time">3 dias atrÃ¡s</div>
+                            </div>
+                            <div class="notification-content">
+                                Prof. JoÃ£o Oliveira disponibilizou o material complementar sobre 
+                                mecÃ¢nica quÃ¢ntica na biblioteca virtual.
+                            </div>
+                        </div>
+                        
+                        <div class="notification-item">
+                            <div class="notification-header">
+                                <div class="notification-title">Ž¯ Meta de Estudo Atingida</div>
+                                <div class="notification-time">1 semana atrÃ¡s</div>
+                            </div>
+                            <div class="notification-content">
+                                ParabÃ©ns! VocÃª completou sua meta de 15 horas de estudo desta semana. 
+                                Continue assim!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function showAnalytics() {
+            updateActiveNav('analytics');
+            const contentArea = document.getElementById('contentArea');
+            contentArea.innerHTML = `
+                <div class="dashboard">
+                    <div class="dashboard-header">
+                        <h1>📊 Relatórios</h1>
+                        <p>Analise seu desempenho e progresso</p>
+                    </div>
+                    
+                    <div class="dashboard-metrics">
+                        <div class="metric-card">
+                            <h3>Progresso Geral</h3>
+                            <div class="metric-value">87%</div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <h3>Melhor MatÃ©ria</h3>
+                            <div class="metric-value">MatemÃ¡tica</div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <h3>Tempo de Estudo</h3>
+                            <div class="metric-value">4h/dia</div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <h3>Rank na Turma</h3>
+                            <div class="metric-value">3Âº</div>
+                        </div>
+                    </div>
+
+                    <div class="charts-section">
+                        <div class="chart-container">
+                            <div class="chart-title">“ˆ Desempenho por Semana</div>
+                            <canvas id="performanceChart" class="chart-canvas"></canvas>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <div class="chart-title">Ž¯ Metas de Estudo</div>
+                            <div id="studyGoals"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Criar grÃ¡ficos apÃ³s o DOM ser atualizado
+            setTimeout(() => {
+                createPerformanceChart();
+                createStudyGoals();
+            }, 100);
+        }
+        
+        function showSettings() {
+            updateActiveNav('settings');
+            const contentArea = document.getElementById('contentArea');
+            contentArea.innerHTML = `
+                <div class="dashboard">
+                    <div class="dashboard-header">
+                        <h1>âš™ï¸ Configurações</h1>
+                        <p>Personalize sua experiÃªncia no EduConnect</p>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <div class="settings-title">‘¤ Perfil do UsuÃ¡rio</div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Nome Completo</h4>
+                                <p>Como vocÃª aparece para outros usuÃ¡rios</p>
+                            </div>
+                            <div class="setting-control">
+                                <input type="text" value="JoÃ£o da Silva" style="padding: 0.5rem; border: 1px solid #e5e7eb; border-radius: 0.25rem;">
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Email</h4>
+                                <p>Para Notificações e recuperaÃ§Ã£o de senha</p>
+                            </div>
+                            <div class="setting-control">
+                                <input type="email" value="joao.silva@escola.com" style="padding: 0.5rem; border: 1px solid #e5e7eb; border-radius: 0.25rem;">
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Foto do Perfil</h4>
+                                <p>Altere sua foto de perfil</p>
+                            </div>
+                            <div class="setting-control">
+                                <button style="padding: 0.5rem 1rem; background: #3b82f6; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">Alterar Foto</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <div class="settings-title">”” Notificações</div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Notificações por Email</h4>
+                                <p>Receba avisos importantes por email</p>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch active" onclick="toggleSetting(this)"></div>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Notificações Push</h4>
+                                <p>Alertas instantÃ¢neos no navegador</p>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch active" onclick="toggleSetting(this)"></div>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Sons de NotificaÃ§Ã£o</h4>
+                                <p>Reproduzir som ao receber Notificações</p>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch" onclick="toggleSetting(this)"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <div class="settings-title">Ž¨ AparÃªncia</div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Tema da Interface</h4>
+                                <p>Escolha entre tema claro ou escuro</p>
+                            </div>
+                            <div class="setting-control">
+                                <select style="padding: 0.5rem; border: 1px solid #e5e7eb; border-radius: 0.25rem;">
+                                    <option value="light" selected>Claro</option>
+                                    <option value="dark">Escuro</option>
+                                    <option value="auto">AutomÃ¡tico</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Tamanho da Fonte</h4>
+                                <p>Ajuste o tamanho do texto</p>
+                            </div>
+                            <div class="setting-control">
+                                <select style="padding: 0.5rem; border: 1px solid #e5e7eb; border-radius: 0.25rem;">
+                                    <option value="small">Pequeno</option>
+                                    <option value="medium" selected>MÃ©dio</option>
+                                    <option value="large">Grande</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <div class="settings-title">”’ Privacidade & SeguranÃ§a</div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>AutenticaÃ§Ã£o em Duas Etapas</h4>
+                                <p>Adicione uma camada extra de seguranÃ§a</p>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch" onclick="toggleSetting(this)"></div>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Visibilidade do Perfil</h4>
+                                <p>Quem pode ver suas informaÃ§Ãµes</p>
+                            </div>
+                            <div class="setting-control">
+                                <select style="padding: 0.5rem; border: 1px solid #e5e7eb; border-radius: 0.25rem;">
+                                    <option value="everyone">Todos</option>
+                                    <option value="school" selected>Apenas da Escola</option>
+                                    <option value="teachers">Apenas Professores</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Alterar Senha</h4>
+                                <p>Atualize sua senha regularmente</p>
+                            </div>
+                            <div class="setting-control">
+                                <button style="padding: 0.5rem 1rem; background: #f59e0b; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">Alterar Senha</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <div class="settings-title">’¾ Dados & Backup</div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Backup AutomÃ¡tico</h4>
+                                <p>Salvar dados automaticamente na nuvem</p>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch active" onclick="toggleSetting(this)"></div>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Exportar Dados</h4>
+                                <p>Baixe uma cÃ³pia dos seus dados</p>
+                            </div>
+                            <div class="setting-control">
+                                <button style="padding: 0.5rem 1rem; background: #10b981; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">Exportar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function updateActiveNav(activeScreen) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-screen') === activeScreen) {
+                    item.classList.add('active');
+                }
+            });
+        }
+        
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('educonnect-theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeButton(savedTheme);
+        }
+        
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('educonnect-theme', newTheme);
+            updateThemeButton(newTheme);
+            showNotification(`Ž¨ Tema alterado para: ${newTheme === 'dark' ? 'Escuro' : 'Claro'}`, 'info');
+        }
+        
+        function updateThemeButton(theme) {
+            const themeToggle = document.getElementById('themeToggle');
+            const icon = theme === 'dark' ? 'â˜€ï¸' : 'Œ™';
+            
+            if (themeToggle) themeToggle.textContent = icon;
+            
+            // Atualizar display do tema nas Configurações
+            const currentThemeElement = document.getElementById('currentTheme');
+            if (currentThemeElement) {
+                currentThemeElement.textContent = theme === 'dark' ? 'Escuro' : 'Claro';
+            }
+        }
+        
+        function toggleUserMenu() {
+            const dropdown = document.getElementById('userDropdown');
+            if (dropdown) {
+                dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+            }
+        }
+        
+        function logout() {
+            if (confirm('Tem certeza que deseja sair?')) {
+                localStorage.removeItem('educonnect-user');
+                currentUser = null;
+                showNotification('‘‹ Logout realizado com sucesso!', 'info');
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
+            }
+        }
+        
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 9999;
+                max-width: 300px;
+                font-weight: 500;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Adicionar animaÃ§Ã£o CSS se nÃ£o existir
+            if (!document.getElementById('notificationStyles')) {
+                const style = document.createElement('style');
+                style.id = 'notificationStyles';
+                style.textContent = `
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOut {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+        
+        // FunÃ§Ãµes para criar grÃ¡ficos
+        function createProgressChart() {
+            const ctx = document.getElementById('progressChart');
+            if (!ctx) return;
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                    datasets: [{
+                        label: 'Progresso (%)',
+                        data: [65, 70, 75, 82, 85, 87],
+                        borderColor: 'rgb(102, 126, 234)',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+        }
+
+        function createSubjectsChart() {
+            const ctx = document.getElementById('subjectsChart');
+            if (!ctx) return;
+            
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['MatemÃ¡tica', 'PortuguÃªs', 'CiÃªncias', 'HistÃ³ria'],
+                    datasets: [{
+                        data: [30, 25, 25, 20],
+                        backgroundColor: [
+                            'rgb(102, 126, 234)',
+                            'rgb(118, 75, 162)',
+                            'rgb(52, 152, 219)',
+                            'rgb(155, 89, 182)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        function createPerformanceChart() {
+            const ctx = document.getElementById('performanceChart');
+            if (!ctx) return;
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4'],
+                    datasets: [{
+                        label: 'MÃ©dia',
+                        data: [8.2, 8.5, 8.7, 9.0],
+                        backgroundColor: 'rgba(102, 126, 234, 0.8)',
+                        borderColor: 'rgb(102, 126, 234)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 10
+                        }
+                    }
+                }
+            });
+        }
+
+        function createStudyGoals() {
+            const container = document.getElementById('studyGoals');
+            if (!container) return;
+            
+            const goals = [
+                { name: 'MatemÃ¡tica', progress: 85 },
+                { name: 'PortuguÃªs', progress: 75 },
+                { name: 'CiÃªncias', progress: 90 },
+                { name: 'HistÃ³ria', progress: 70 }
+            ];
+            
+            container.innerHTML = goals.map(goal => `
+                <div class="progress-item">
+                    <span>${goal.name}</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${goal.progress}%"></div>
+                    </div>
+                    <span>${goal.progress}%</span>
+                </div>
+            `).join('');
+        }
+        
+        // FunÃ§Ãµes para Chat
+        function handleChatInput(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+        
+        function sendMessage() {
+            const input = document.querySelector('.chat-input input');
+            const message = input.value.trim();
+            
+            if (message) {
+                const messagesContainer = document.querySelector('.chat-messages');
+                const newMessage = document.createElement('div');
+                newMessage.className = 'message own';
+                newMessage.innerHTML = `
+                    <div class="message-avatar">EU</div>
+                    <div class="message-content">${message}</div>
+                `;
+                messagesContainer.appendChild(newMessage);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                input.value = '';
+                
+                // Simular resposta apÃ³s 2 segundos
+                setTimeout(() => {
+                    const response = document.createElement('div');
+                    response.className = 'message';
+                    response.innerHTML = `
+                        <div class="message-avatar">MS</div>
+                        <div class="message-content">Obrigada pela mensagem! Vou analisar e te respondo em breve.</div>
+                    `;
+                    messagesContainer.appendChild(response);
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                }, 2000);
+            }
+        }
+        
+        // FunÃ§Ãµes para CalendÃ¡rio
+        function previousMonth() {
+            alert('NavegaÃ§Ã£o para mÃªs anterior - funcionalidade em desenvolvimento');
+        }
+        
+        function nextMonth() {
+            alert('NavegaÃ§Ã£o para prÃ³ximo mÃªs - funcionalidade em desenvolvimento');
+        }
+        
+        // FunÃ§Ãµes para Notificações
+        function markAsRead(button) {
+            const notification = button.closest('.notification-item');
+            notification.classList.remove('unread');
+            button.textContent = 'Lida âœ“';
+            button.disabled = true;
+            button.style.opacity = '0.6';
+        }
+        
+        // FunÃ§Ãµes para Configurações
+        function toggleSetting(toggle) {
+            toggle.classList.toggle('active');
+            
+            // Simular salvamento
+            setTimeout(() => {
+                const tooltip = document.createElement('div');
+                tooltip.textContent = 'ConfiguraÃ§Ã£o salva!';
+                tooltip.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #10b981;
+                    color: white;
+                    padding: 1rem;
+                    border-radius: 0.5rem;
+                    z-index: 1000;
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                `;
+                document.body.appendChild(tooltip);
+                
+                setTimeout(() => {
+                    tooltip.remove();
+                }, 2000);
+            }, 100);
+        }
+        
+        // Event listeners globais
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('userDropdown');
+            const userProfile = document.querySelector('.user-profile');
+            
+            if (dropdown && userProfile && !userProfile.contains(event.target)) {
+                dropdown.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,846 @@
+/* ========== CORREÇÕES GLOBAIS DE MODO ESCURO (ABRANGÊNCIA TOTAL) ========== */
+.dark-mode, 
+.dark-mode body {
+    background: #0f172a !important;
+    color: #f8fafc !important;
+}
+
+.dark-mode .container,
+.dark-mode .main-content,
+.dark-mode .content-card,
+.dark-mode .stat-card,
+.dark-mode .agendamento-card,
+.dark-mode .card,
+.dark-mode .header,
+.dark-mode #agendamentos-container,
+.dark-mode .agendamentos-grid {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
+}
+
+/* Forçar visibilidade de textos em qualquer container escuro */
+.dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4,
+.dark-mode .stat-value, .dark-mode .stat-number,
+.dark-mode .detail-value, .dark-mode .agendamento-title,
+.dark-mode .agendamento-header h4,
+.dark-mode .stat-card *,
+.dark-mode .agendamento-card * {
+    color: #ffffff !important;
+}
+
+.dark-mode .detail-label,
+.dark-mode .stat-label,
+.dark-mode .stat-title,
+.dark-mode p,
+.dark-mode .text-muted {
+    color: #cbd5e1 !important;
+}
+
+/* Correção específica para agendamentos.php que tem estilos inline */
+.dark-mode .agendamento-card {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4) !important;
+}
+
+.dark-mode .agendamento-header {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+
+/* Estilização Global de Scrollbars para Dark Mode */
+body.dark-mode ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+body.dark-mode ::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 10px;
+}
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}
+
+/* Esconder scrollbar da sidebar e seus containers internos especificamente */
+.sidebar::-webkit-scrollbar,
+.sidebar-nav::-webkit-scrollbar,
+.sidebar-menu::-webkit-scrollbar {
+    width: 0px !important;
+    height: 0px !important;
+    background: transparent !important;
+}
+.sidebar,
+.sidebar-nav,
+.sidebar-menu {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+.sidebar {
+    border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+body.dark-mode .stat-card,
+body.dark-mode .content-card,
+body.dark-mode .chart-card,
+body.dark-mode .mini-stat-card,
+body.dark-mode .header,
+body.dark-mode .page-header,
+body.dark-mode .section-header,
+body.dark-mode .evolution-chart-container,
+body.dark-mode .quick-action-card,
+body.dark-mode .empty-dashboard-insight,
+body.dark-mode .chart-header,
+body.dark-mode .chart-kpis,
+body.dark-mode .chart-kpi,
+body.dark-mode .agendamento-card,
+body.dark-mode .card,
+body.dark-mode .acoes-rapidas .card {
+    background: rgba(15, 23, 42, 0.95) !important;
+    background-image: none !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+    color: #f8fafc !important;
+}
+
+/* Forçar textos claros dentro de cards no Dark Mode */
+body.dark-mode .stat-title,
+body.dark-mode .stat-value,
+body.dark-mode .stat-change,
+body.dark-mode .quick-action-content h3,
+body.dark-mode .quick-action-content p,
+body.dark-mode .agendamento-info,
+body.dark-mode .agendamento-info span,
+body.dark-mode .agendamento-info strong,
+body.dark-mode .agendamento-data,
+body.dark-mode .agendamento-horario,
+body.dark-mode .agendamento-header h4,
+body.dark-mode .card-title,
+body.dark-mode .card-subtitle,
+body.dark-mode .chart-title {
+    color: #f8fafc !important;
+}
+
+body.dark-mode .stat-change.positive {
+    color: #10b981 !important;
+}
+
+body.dark-mode .stat-change.negative {
+    color: #ef4444 !important;
+}
+
+/* Ajustes finos de legibilidade (APENAS Dashboard do Administrador) */
+body.admin-dashboard.dark-mode .stat-change.positive {
+    /* Verde mais claro para legibilidade no fundo escuro */
+    color: #34d399 !important;
+    font-weight: 600 !important;
+}
+
+body.admin-dashboard.dark-mode .stat-title,
+body.admin-dashboard.dark-mode .card-subtitle,
+body.admin-dashboard.dark-mode .chart-subtitle,
+body.admin-dashboard.dark-mode .breadcrumb,
+body.admin-dashboard.dark-mode .breadcrumb * {
+    color: #cbd5e1 !important;
+}
+
+body.admin-dashboard.dark-mode .stat-change {
+    /* Alguns cards usam .stat-change para texto pequeno de apoio */
+    font-size: 0.875rem !important;
+    letter-spacing: 0.01em;
+}
+
+body.admin-dashboard.dark-mode .stat-change-icon,
+body.admin-dashboard.dark-mode .stat-change i {
+    opacity: 0.95;
+}
+
+body.dark-mode .header h1,
+body.dark-mode .page-header h1,
+body.dark-mode .stat-card .value,
+body.dark-mode .mini-stat-value,
+body.dark-mode .quick-action-title,
+body.dark-mode .empty-dashboard-insight strong,
+body.dark-mode .chart-title,
+body.dark-mode h2,
+body.dark-mode h3 {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: #f8fafc !important;
+    color: #f8fafc !important;
+}
+
+body.dark-mode .stat-card h3,
+body.dark-mode .mini-stat-label,
+body.dark-mode .quick-action-desc,
+body.dark-mode .empty-dashboard-insight span,
+body.dark-mode p {
+    color: #cbd5e1 !important;
+}
+
+body.dark-mode .professor-course-card,
+body.dark-mode div[style*="background: var(--light-secondary)"] {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+    color: #f8fafc !important;
+}
+
+/* Correção para textos com cores inline fixas e ícones */
+body.dark-mode div[style*="color: #334155"] {
+    color: #f8fafc !important;
+}
+
+body.dark-mode div[style*="color: var(--secondary-color)"] {
+    color: #cbd5e1 !important;
+}
+
+body.dark-mode .course-chip {
+    color: #e2e8f0 !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark-mode .course-chip i {
+    color: #93c5fd !important;
+}
+
+body.dark-mode .course-title-cell,
+body.dark-mode .course-field-label {
+    color: #e2e8f0 !important;
+}
+
+body.dark-mode .course-meta-line span,
+body.dark-mode .course-students-mini span,
+body.dark-mode .course-meta-line i {
+    color: #cbd5e1 !important;
+}
+
+/* Correção para os badges de status, categorias e tipos */
+body.dark-mode .status-badge.status-active,
+body.dark-mode .status-badge.status-ativo,
+body.dark-mode .status-badge.status-confirmado,
+body.dark-mode .status-badge.status-concluido,
+body.dark-mode .status-badge.status-concluida {
+    background: rgba(16, 185, 129, 0.2) !important;
+    color: #34d399 !important;
+    box-shadow: none !important;
+}
+
+body.dark-mode .status-badge.status-pending,
+body.dark-mode .status-badge.status-agendado {
+    background: rgba(245, 158, 11, 0.2) !important;
+    color: #fbbf24 !important;
+    box-shadow: none !important;
+}
+
+body.dark-mode .status-badge.status-cancelado,
+body.dark-mode .status-badge.status-cancelada,
+body.dark-mode .status-badge.status-inativo {
+    background: rgba(239, 68, 68, 0.2) !important;
+    color: #f87171 !important;
+    box-shadow: none !important;
+}
+
+body.dark-mode .categoria-badge {
+    background: rgba(124, 58, 237, 0.2) !important;
+    color: #c084fc !important;
+}
+
+body.dark-mode .tipo-badge.tipo-professor {
+    background: rgba(37, 99, 235, 0.2) !important;
+    color: #93c5fd !important;
+}
+
+body.dark-mode .tipo-badge.tipo-aluno {
+    background: rgba(245, 158, 11, 0.2) !important;
+    color: #fde047 !important;
+}
+
+body.dark-mode .tipo-badge.tipo-admin {
+    background: rgba(124, 58, 237, 0.2) !important;
+    color: #c084fc !important;
+}
+
+body.dark-mode .sidebar {
+    background: linear-gradient(180deg, #020617 0%, #0f172a 48%, #0f172a 100%) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+body.dark-mode .table thead th {
+    background: #0f172a !important;
+    color: #cbd5e1 !important;
+    border-bottom: 1px solid #334155 !important;
+}
+
+body.dark-mode .table tbody tr td,
+body.dark-mode table tbody tr td,
+body.dark-mode .table tbody tr,
+body.dark-mode table tbody tr {
+    background: transparent !important;
+    color: #e2e8f0 !important;
+    border-bottom: 1px solid #334155 !important;
+}
+
+body.dark-mode .table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Modal and Form Elements override */
+body.dark-mode .modal-content,
+body.dark-mode .form-control {
+    background: #1e293b !important;
+    color: #f8fafc !important;
+    border-color: #334155 !important;
+}
+
+body.dark-mode .form-label {
+    color: #cbd5e1 !important;
+}
+
+/* Fix background and text color for settings forms */
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+    background: #1e293b !important;
+    color: #f8fafc !important;
+    border-color: #334155 !important;
+}
+
+/* Labels de formulário e textos gerais */
+body.dark-mode label,
+body.dark-mode .form-group label,
+body.dark-mode .form-group > label,
+body.dark-mode .setting-label,
+body.dark-mode .settings-label,
+body.dark-mode .content-card label,
+body.dark-mode .settings-card label,
+body.dark-mode .setting-card label {
+    color: #e2e8f0 !important;
+    -webkit-text-fill-color: #e2e8f0 !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+}
+
+/* Textos com cor inline fixada via style= */
+body.dark-mode *[style*="color: #334155"],
+body.dark-mode *[style*="color:#334155"],
+body.dark-mode *[style*="color: #475569"],
+body.dark-mode *[style*="color:#475569"],
+body.dark-mode *[style*="color: #64748b"],
+body.dark-mode *[style*="color:#64748b"],
+body.dark-mode *[style*="color: var(--secondary-color)"],
+body.dark-mode *[style*="color: var(--dark-color)"],
+body.dark-mode *[style*="color: #0f172a"] {
+    color: #e2e8f0 !important;
+}
+
+/* Placeholder de inputs */
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #64748b !important;
+}
+
+/* Textos de span e small inline */
+body.dark-mode span,
+body.dark-mode small,
+body.dark-mode li,
+body.dark-mode td,
+body.dark-mode th {
+    color: inherit;
+}
+
+/* Garantir que todo texto dentro de cards seja legível */
+body.dark-mode .content-card *,
+body.dark-mode .stat-card *,
+body.dark-mode .mini-stat-card *,
+body.dark-mode .setting-card *,
+body.dark-mode .settings-card * {
+    color: inherit;
+}
+
+/* Textos que ficam escuros por padrão */
+body.dark-mode .content-card p,
+body.dark-mode .content-card span,
+body.dark-mode .content-card label,
+body.dark-mode .content-card small,
+body.dark-mode .evolution-chart-container p,
+body.dark-mode .evolution-chart-container span,
+body.dark-mode .chart-subtitle,
+body.dark-mode .chart-kpi-label,
+body.dark-mode .agendamento-observacoes,
+body.dark-mode .quick-action-content p {
+    color: #cbd5e1 !important;
+}
+
+body.dark-mode .chart-kpi-value,
+body.dark-mode .stat-value {
+    color: #f8fafc !important;
+}
+
+/* Prevenção de Flash (FOUC) */
+html.dark-mode-init body {
+    visibility: hidden;
+}
+
+html.dark-mode-init body.dark-mode {
+    visibility: visible;
+    background: #0f172a !important;
+}
+
+/* Dashboard Aluno - Estilos Específicos e Legibilidade */
+body.dark-mode .course-card,
+body.dark-mode .class-card,
+body.dark-mode .certificate-card,
+body.dark-mode .lesson-card,
+body.dark-mode .profile-card,
+body.dark-mode .content-card,
+body.dark-mode .stat-card,
+body.dark-mode .course-header,
+body.dark-mode .course-details,
+body.dark-mode .course-progress,
+body.dark-mode .course-actions {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+    color: #f8fafc !important;
+    box-shadow: none !important;
+}
+
+body.dark-mode .course-card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark-mode .course-header {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark-mode .course-title,
+body.dark-mode .class-title,
+body.dark-mode .certificate-title,
+body.dark-mode .stat-card .value,
+body.dark-mode h1, 
+body.dark-mode h2, 
+body.dark-mode h3 {
+    color: #f8fafc !important;
+    -webkit-text-fill-color: #f8fafc !important;
+}
+
+body.dark-mode .course-category,
+body.dark-mode .class-course,
+body.dark-mode .certificate-category,
+body.dark-mode .detail-item span,
+body.dark-mode .stat-card .label,
+body.dark-mode .text-muted,
+body.dark-mode .course-description,
+body.dark-mode p {
+    color: #cbd5e1 !important;
+}
+
+body.dark-mode .course-price {
+    color: #10b981 !important;
+    font-weight: 800 !important;
+}
+
+body.dark-mode .detail-item i,
+body.dark-mode .course-details i,
+body.dark-mode .class-details i,
+body.dark-mode .certificate-details i {
+    color: #10b981 !important; /* Verde Aluno */
+}
+
+/* Progress Bars */
+body.dark-mode .progress-bar {
+    background: #0f172a !important;
+}
+
+body.dark-mode .progress-fill {
+    background: linear-gradient(90deg, #10b981, #34d399) !important;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+}
+
+body.dark-mode .progress-text {
+    color: #cbd5e1 !important;
+    font-weight: 600 !important;
+}
+
+body.dark-mode .sidebar-link {
+    color: rgba(255, 255, 255, 0.75) !important;
+    font-weight: 500 !important;
+}
+
+body.dark-mode .sidebar-link:hover {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark-mode .sidebar-link.active {
+    color: #ffffff !important;
+    background: rgba(37, 99, 235, 0.25) !important; /* Azul mais vibrante para o ativo */
+    border-left: 4px solid #3b82f6 !important;
+    font-weight: 700 !important;
+    box-shadow: inset 4px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Tabelas e Listas */
+body.dark-mode .table thead th,
+body.dark-mode table th {
+    background: #0f172a !important;
+    color: #f8fafc !important;
+    border-color: #334155 !important;
+}
+
+body.dark-mode .table td,
+body.dark-mode table td {
+    color: #e2e8f0 !important;
+    border-color: #334155 !important;
+}
+
+/* Formulários e Inputs */
+body.dark-mode .form-input,
+body.dark-mode .search-input,
+body.dark-mode .filter-select,
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+    background: #0f172a !important;
+    color: #f8fafc !important;
+    border-color: #475569 !important;
+}
+
+body.dark-mode .form-label,
+body.dark-mode label {
+    color: #f8fafc !important;
+    font-weight: 500;
+}
+
+/* Botões - Cores e Estados */
+body.dark-mode .btn-secondary,
+body.dark-mode .btn-disabled,
+body.dark-mode .btn-primary:disabled {
+    background: #334155 !important;
+    color: #cbd5e1 !important;
+    border: 1px solid #475569 !important;
+}
+
+body.dark-mode .btn-secondary:hover {
+    background: #475569 !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .btn-disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    color: #94a3b8 !important;
+}
+
+body.dark-mode .btn-primary {
+    background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%) !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.dark-mode .search-input::placeholder,
+body.dark-mode .form-input::placeholder,
+body.dark-mode input::placeholder {
+    color: #94a3b8 !important; /* Mais claro para legibilidade sobre fundo escuro */
+    opacity: 0.8;
+}
+
+/* Status Badges Legibilidade - Estética Refinada */
+body.dark-mode .status-completed,
+body.dark-mode .status-active,
+body.dark-mode .badge-enrolled,
+body.dark-mode .course-status.status-active,
+body.dark-mode .course-badge.badge-enrolled {
+    background: rgba(16, 185, 129, 0.1) !important;
+    color: #10b981 !important;
+    font-weight: 700 !important;
+    border: 1px solid rgba(16, 185, 129, 0.3) !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    border-radius: 8px !important;
+}
+
+body.dark-mode .status-completed i,
+body.dark-mode .status-active i,
+body.dark-mode .badge-enrolled i,
+body.dark-mode .course-status.status-active i {
+    color: #10b981 !important;
+}
+
+body.dark-mode .status-upcoming,
+body.dark-mode .status-progress,
+body.dark-mode .badge-available,
+body.dark-mode .course-badge.badge-available {
+    background: rgba(37, 99, 235, 0.15) !important;
+    color: #60a5fa !important;
+    font-weight: 700 !important;
+    border: 1px solid rgba(96, 165, 250, 0.3) !important;
+}
+
+body.dark-mode .course-category i {
+    color: #64748b !important;
+}
+
+body.dark-mode .course-category {
+    color: #64748b !important;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600 !important;
+}
+
+/* ========== CORREÇÕES ESPECÍFICAS DE LEGIBILIDADE (NUCLEAR FIX) ========== */
+body.dark-mode .stat-number,
+body.dark-mode .stat-value,
+body.dark-mode .stat-label,
+body.dark-mode .stat-title,
+body.dark-mode .stat-change,
+body.dark-mode .stat-card * {
+    color: #ffffff !important;
+}
+
+body.dark-mode .stat-number {
+    font-weight: 800 !important;
+    font-size: 2.5rem !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.4) !important;
+}
+
+/* Seção de Agendamentos e Cartões */
+body.dark-mode .agendamentos-section,
+body.dark-mode .agendamentos-container,
+body.dark-mode .agendamentos-grid,
+body.dark-mode .agendamento-card,
+body.dark-mode .card,
+body.dark-mode .content-card,
+body.dark-mode .container > h2,
+body.dark-mode h2[style*="color: var(--dark-color)"] {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .agendamento-card * {
+    color: #f8fafc !important;
+}
+
+body.dark-mode .detail-label,
+body.dark-mode .detail-item .label,
+body.dark-mode .agendamento-info strong,
+body.dark-mode .agendamento-label {
+    color: #cbd5e1 !important;
+    font-weight: 700 !important;
+}
+
+body.dark-mode .detail-value,
+body.dark-mode .agendamento-info span,
+body.dark-mode .agendamento-title,
+body.dark-mode .agendamento-header h4 {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+body.dark-mode .header h1,
+body.dark-mode .header p,
+body.dark-mode .page-title h1,
+body.dark-mode .page-subtitle {
+    color: #ffffff !important;
+}
+
+body.dark-mode .breadcrumb-link,
+body.dark-mode .back-btn {
+    color: #60a5fa !important;
+}
+
+/* Voltar no header: pill compacto no canto, texto branco */
+body.dark-mode .header .back-btn,
+body.dark-mode .header .btn-back {
+    position: absolute !important;
+    width: auto !important;
+    max-width: max-content !important;
+    display: inline-flex !important;
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.24) !important;
+}
+
+body.dark-mode .agendamento-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+}
+
+/* Forçar fundo escuro no container principal de agendamentos.php se necessário */
+body.dark-mode .container {
+    background: transparent !important;
+}
+
+/* Correção para o título "Próximos Agendamentos" que tem cor inline */
+body.dark-mode h2 {
+    color: #ffffff !important;
+}
+
+/* =========================================================
+   MODERN THEME TOGGLE (PILL STYLE)
+========================================================= */
+/* ========== POSICIONAMENTO DO BOTÃO DARK MODE ========== */
+#darkModeToggle {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    z-index: 100;
+}
+
+/* Responsivo para móvel */
+@media (max-width: 768px) {
+    #darkModeToggle {
+        top: 20px;
+        right: 20px;
+    }
+}
+
+/* Quando o botão está dentro de header-actions (dashboards), flui normalmente */
+.header-actions #darkModeToggle {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+}
+
+/* Layout flex para header-actions */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* ========== ESTILO REFINADO DO TOGGLE DARK/LIGHT MODE ========== */
+.theme-toggle-pill-active {
+    width: 90px !important;
+    height: 44px !important;
+    border-radius: 999px !important;
+    padding: 0 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-around !important;
+    position: relative;
+    overflow: hidden;
+    
+    /* Propriedades essenciais do botão */
+    color: white;
+    cursor: pointer;
+    margin: 0;
+    outline: none;
+    
+    /* Background sofisticado com gradiente sutil */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.1) 100%) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
+    backdrop-filter: blur(10px) !important;
+    
+    /* Sombras modernas */
+    box-shadow: 
+        inset 0 1px 3px rgba(255, 255, 255, 0.3),
+        inset 0 -1px 3px rgba(0, 0, 0, 0.2),
+        0 4px 12px rgba(0, 0, 0, 0.15);
+    
+    /* Transição suave para todo o container */
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Efeito hover sofisticado */
+.theme-toggle-pill-active:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.15) 100%) !important;
+    border-color: rgba(255, 255, 255, 0.35) !important;
+    box-shadow: 
+        inset 0 1px 3px rgba(255, 255, 255, 0.4),
+        inset 0 -1px 3px rgba(0, 0, 0, 0.2),
+        0 6px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Efeito ativo ao clicar */
+.theme-toggle-pill-active:active {
+    transform: translateY(1px);
+    box-shadow: 
+        inset 0 1px 3px rgba(255, 255, 255, 0.3),
+        inset 0 -1px 3px rgba(0, 0, 0, 0.2),
+        0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle-pill-active .theme-slider {
+    position: absolute;
+    top: 4px;
+    left: 6px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    
+    /* Gradiente sofisticado para o slider */
+    background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+    
+    /* Sombra aprimorada */
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.25),
+        0 0px 20px rgba(245, 158, 11, 0.3);
+    
+    /* Transição suave com easing sofisticado */
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 0;
+}
+
+/* Slider em Modo Escuro */
+html.dark-mode .theme-toggle-pill-active .theme-slider,
+body.dark-mode .theme-toggle-pill-active .theme-slider {
+    left: calc(100% - 42px);
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.4),
+        0 0px 20px rgba(56, 189, 248, 0.4);
+}
+
+.theme-toggle-pill-active i {
+    position: relative;
+    z-index: 1;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Transição suave para os ícones */
+    transition: color 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    
+    /* Espaçamento horizontal entre ícones */
+    margin: 0 4px;
+}
+
+/* Efeito de rotação sutil ao mudar tema */
+.theme-toggle-pill-active:active i {
+    transform: scale(1.1) rotate(180deg);
+}
+
+/* ===== CORES DO MODO CLARO ===== */
+.theme-toggle-pill-active .fa-sun {
+    color: #f59e0b; /* Amarelo acessível */
+    text-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+}
+
+.theme-toggle-pill-active .fa-moon {
+    color: rgba(255, 255, 255, 0.5); /* Lua sutilmente visível */
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
+}
+
+/* ===== CORES DO MODO ESCURO ===== */
+html.dark-mode .theme-toggle-pill-active .fa-sun,
+body.dark-mode .theme-toggle-pill-active .fa-sun {
+    color: rgba(255, 255, 255, 0.35); /* Sol apagado no escuro */
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.1);
+}
+
+html.dark-mode .theme-toggle-pill-active .fa-moon,
+body.dark-mode .theme-toggle-pill-active .fa-moon {
+    color: #38bdf8; /* Azul cyan neon */
+    text-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+}

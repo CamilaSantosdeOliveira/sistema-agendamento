@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 SOLUÇÃO - MySQL Shutdown Unexpectedly</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .content {
+            padding: 30px;
+        }
+        .erro {
+            background: #ffe6e6;
+            border-left: 4px solid #ff4757;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .sucesso {
+            background: #e6ffe6;
+            border-left: 4px solid #2ed573;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .info {
+            background: #e6f3ff;
+            border-left: 4px solid #3742fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .aviso {
+            background: #fff3cd;
+            border-left: 4px solid #ffa502;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .solucao {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .solucao h3 {
+            color: #495057;
+            margin-top: 0;
+        }
+        pre {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin: 10px 5px;
+            transition: transform 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        .btn-danger {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #2ed573, #1e90ff);
+        }
+        .steps {
+            counter-reset: step-counter;
+        }
+        .step {
+            counter-increment: step-counter;
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .step::before {
+            content: counter(step-counter);
+            background: #007bff;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        .causas {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .causas h3 {
+            color: #d63031;
+            margin-top: 0;
+        }
+        .causas ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .causas li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔧 SOLUÇÃO DEFINITIVA</h1>
+            <h2>MySQL Shutdown Unexpectedly</h2>
+            <p>Guia completo para resolver o problema mais comum do XAMPP</p>
+        </div>
+        
+        <div class="content">
+            <div class="erro">
+                <h3>❌ PROBLEMA IDENTIFICADO</h3>
+                <p><strong>Erro:</strong> "MySQL shutdown unexpectedly"</p>
+                <p><strong>Duração:</strong> 00:00:38</p>
+                <p><strong>Causa:</strong> Arquivos de log corrompidos ou configuração inadequada</p>
+            </div>
+
+            <div class="causas">
+                <h3>🔍 CAUSAS MAIS COMUNS</h3>
+                <ul>
+                    <li><strong>Arquivos de log corrompidos:</strong> ib_logfile0, ib_logfile1, ibdata1</li>
+                    <li><strong>Configuração inadequada:</strong> my.ini com parâmetros incorretos</li>
+                    <li><strong>Porta ocupada:</strong> Outro processo usando a porta 3306</li>
+                    <li><strong>Permissões:</strong> Falta de privilégios de administrador</li>
+                    <li><strong>Conflito de versões:</strong> Múltiplas instalações MySQL</li>
+                    <li><strong>Recursos insuficientes:</strong> Memória ou espaço em disco</li>
+                </ul>
+            </div>
+
+            <h2>🚀 SOLUÇÃO AUTOMÁTICA</h2>
+            
+            <div class="solucao">
+                <h3>📋 OPÇÃO 1: Script Batch (Mais Rápido)</h3>
+                <p>Execute o arquivo <code>corrigir_mysql_shutdown.bat</code> como administrador:</p>
+                <ol>
+                    <li>Clique com botão direito no arquivo</li>
+                    <li>Selecione "Executar como administrador"</li>
+                    <li>Aguarde a correção automática</li>
+                </ol>
+                <a href="corrigir_mysql_shutdown.bat" class="btn btn-success">⚡ Executar Correção Automática</a>
+            </div>
+
+            <div class="solucao">
+                <h3>🌐 OPÇÃO 2: Script PHP (Mais Detalhado)</h3>
+                <p>Acesse o script PHP para correção detalhada:</p>
+                <a href="corrigir_mysql_shutdown.php" class="btn">🔧 Correção PHP Detalhada</a>
+            </div>
+
+            <h2>📝 SOLUÇÃO MANUAL PASSO A PASSO</h2>
+
+            <div class="steps">
+                <div class="step">
+                    <h3>Encerrar Processos MySQL</h3>
+                    <p>Abra o CMD como administrador e execute:</p>
+                    <pre>taskkill /F /IM mysqld.exe
+taskkill /F /IM mysql.exe
+taskkill /F /IM mysqld-nt.exe</pre>
+                </div>
+
+                <div class="step">
+                    <h3>Verificar Porta 3306</h3>
+                    <p>Verifique se a porta está livre:</p>
+                    <pre>netstat -an | findstr :3306</pre>
+                    <p>Se aparecer algo, aguarde ou encerre o processo que está usando a porta.</p>
+                </div>
+
+                <div class="step">
+                    <h3>Fazer Backup do my.ini</h3>
+                    <p>Copie o arquivo de configuração:</p>
+                    <pre>copy "C:\xampp\mysql\bin\my.ini" "C:\xampp\mysql\bin\my.ini.backup"</pre>
+                </div>
+
+                <div class="step">
+                    <h3>Remover Arquivos de Log Corrompidos</h3>
+                    <p>Delete os arquivos problemáticos:</p>
+                    <pre>del "C:\xampp\mysql\data\ib_logfile0"
+del "C:\xampp\mysql\data\ib_logfile1"
+del "C:\xampp\mysql\data\ibdata1"
+del "C:\xampp\mysql\data\mysql-bin.index"</pre>
+                </div>
+
+                <div class="step">
+                    <h3>Corrigir Arquivo my.ini</h3>
+                    <p>Abra <code>C:\xampp\mysql\bin\my.ini</code> e adicione na seção <code>[mysqld]</code>:</p>
+                    <pre>innodb_force_recovery=1
+max_allowed_packet=16M
+skip-grant-tables
+innodb_buffer_pool_size=16M
+innodb_log_file_size=5M
+innodb_log_buffer_size=8M</pre>
+                </div>
+
+                <div class="step">
+                    <h3>Iniciar MySQL</h3>
+                    <p>Abra o XAMPP Control Panel como administrador e clique em "Start" ao lado do MySQL.</p>
+                </div>
+            </div>
+
+            <h2>🔧 CONFIGURAÇÃO DE EMERGÊNCIA</h2>
+            
+            <div class="aviso">
+                <h3>⚠️ Se nada funcionar, use esta configuração completa:</h3>
+                <p>Substitua todo o conteúdo do arquivo <code>my.ini</code> por:</p>
+                <pre>[mysqld]
+# Configuração de emergência para MySQL shutdown unexpectedly
+innodb_force_recovery=1
+max_allowed_packet=16M
+skip-grant-tables
+skip-networking
+skip-name-resolve
+innodb_buffer_pool_size=16M
+innodb_log_file_size=5M
+innodb_log_buffer_size=8M
+innodb_flush_log_at_trx_commit=2
+innodb_lock_wait_timeout=50
+port=3306
+socket=mysql
+key_buffer_size=16M
+max_connections=100
+table_open_cache=64
+thread_cache_size=8
+query_cache_size=16M
+tmp_table_size=16M
+max_heap_table_size=16M
+
+[mysql]
+default-character-set=utf8
+
+[client]
+default-character-set=utf8
+port=3306
+socket=mysql</pre>
+            </div>
+
+            <h2>✅ VERIFICAÇÃO</h2>
+            
+            <div class="info">
+                <h3>Como verificar se funcionou:</h3>
+                <ol>
+                    <li>Abra o XAMPP Control Panel</li>
+                    <li>Verifique se o MySQL está com luz verde</li>
+                    <li>Teste o phpMyAdmin: <a href="http://localhost/phpmyadmin" target="_blank">http://localhost/phpmyadmin</a></li>
+                    <li>Verifique a porta: <code>netstat -an | findstr :3306</code></li>
+                </ol>
+            </div>
+
+            <h2>🛠️ FERRAMENTAS ADICIONAIS</h2>
+            
+            <div class="info">
+                <a href="verificar_mysql.php" class="btn">🔍 Verificar MySQL</a>
+                <a href="corrigir_mysql_rapido.php" class="btn">⚡ Correção Rápida</a>
+                <a href="SOLUCAO-MYSQL-XAMPP.html" class="btn">📖 Guia Completo</a>
+                <a href="http://localhost:8080/Sistema%20De%20Agendamento/public/" class="btn btn-success">🏠 Sistema Principal</a>
+            </div>
+
+            <h2>📞 SUPORTE</h2>
+            
+            <div class="info">
+                <h3>Se ainda não funcionar:</h3>
+                <ul>
+                    <li>Verifique se o XAMPP está instalado corretamente</li>
+                    <li>Execute como administrador</li>
+                    <li>Desative antivírus temporariamente</li>
+                    <li>Verifique espaço em disco (mínimo 1GB livre)</li>
+                    <li>Reinstale o XAMPP se necessário</li>
+                </ul>
+            </div>
+
+            <div class="sucesso">
+                <h3>🎉 SUCESSO!</h3>
+                <p>Após aplicar estas correções, o MySQL deve funcionar normalmente. Se ainda houver problemas, consulte os logs do XAMPP para mais detalhes.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

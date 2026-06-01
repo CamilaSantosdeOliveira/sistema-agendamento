@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Sistema de Avaliação</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary-color: #64748b;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --info-color: #06b6d4;
+            --light-color: #f8fafc;
+            --dark-color: #1e293b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--warning-color) 0%, #d97706 100%);
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 30px;
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            border-left: 4px solid var(--warning-color);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--warning-color);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, var(--info-color) 0%, var(--primary-color) 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .section-header h3 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-header i {
+            font-size: 1.5rem;
+        }
+
+        .section-content {
+            padding: 25px;
+        }
+
+        .btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-success {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .btn-warning {
+            background: var(--warning-color);
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #d97706;
+        }
+
+        .btn-danger {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--secondary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--light-color);
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+        }
+
+        .assessment-item {
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 15px;
+            background: var(--light-color);
+            transition: var(--transition);
+        }
+
+        .assessment-item:hover {
+            box-shadow: var(--shadow-sm);
+            border-color: var(--primary-color);
+        }
+
+        .assessment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .assessment-title {
+            font-weight: 600;
+            color: var(--dark-color);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .assessment-meta {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        .assessment-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .assessment-stats {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .stat-label-small {
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .question-builder {
+            background: var(--light-color);
+            border: 2px dashed var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .question-item {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .question-type {
+            background: var(--info-color);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .options-list {
+            margin-top: 10px;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .option-input {
+            width: 20px;
+            height: 20px;
+        }
+
+        .option-text {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background: white;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 3% auto;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--secondary-color);
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .tab.active {
+            border-bottom-color: var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .submission-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .submission-item {
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-bottom: 10px;
+            background: white;
+        }
+
+        .submission-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .student-name {
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .submission-date {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        .grade-input {
+            width: 80px;
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .assessment-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="dashboard.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Voltar ao Dashboard
+        </a>
+
+        <div class="header">
+            <h1>📝 Sistema de Avaliação</h1>
+            <p>Gerencie questionários, quizzes, provas e correções automáticas</p>
+        </div>
+
+        <!-- Estatísticas -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">45</div>
+                <div class="stat-label">Avaliações Ativas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1,234</div>
+                <div class="stat-label">Submissões</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">87.5%</div>
+                <div class="stat-label">Taxa de Aprovação</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">156</div>
+                <div class="stat-label">Questões Criadas</div>
+            </div>
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <div class="main-content">
+            <!-- Criar Avaliações -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-plus-circle"></i> Criar Nova Avaliação</h3>
+                    <button class="btn btn-success" onclick="showCreateModal()">
+                        <i class="fas fa-plus"></i> Nova
+                    </button>
+                </div>
+                <div class="section-content">
+                    <div class="form-group">
+                        <label for="assessmentType">Tipo de Avaliação</label>
+                        <select class="form-control" id="assessmentType">
+                            <option value="quiz">Quiz</option>
+                            <option value="exam">Prova</option>
+                            <option value="assignment">Trabalho</option>
+                            <option value="project">Projeto</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="assessmentTitle">Título da Avaliação</label>
+                        <input type="text" class="form-control" id="assessmentTitle" placeholder="Ex: Quiz JavaScript Básico">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="assessmentCourse">Curso</label>
+                        <select class="form-control" id="assessmentCourse">
+                            <option value="">Selecione o curso...</option>
+                            <option value="javascript">JavaScript Avançado</option>
+                            <option value="python">Python para Data Science</option>
+                            <option value="react">React & Node.js</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="assessmentDuration">Duração (minutos)</label>
+                            <input type="number" class="form-control" id="assessmentDuration" min="1" placeholder="30">
+                        </div>
+                        <div class="form-group">
+                            <label for="assessmentPoints">Pontuação Total</label>
+                            <input type="number" class="form-control" id="assessmentPoints" min="1" placeholder="100">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="assessmentInstructions">Instruções</label>
+                        <textarea class="form-control" id="assessmentInstructions" rows="3" placeholder="Instruções para os alunos..."></textarea>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="createAssessment()">
+                        <i class="fas fa-save"></i>
+                        Criar Avaliação
+                    </button>
+                </div>
+            </div>
+
+            <!-- Avaliações Existentes -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-list-alt"></i> Avaliações Existentes</h3>
+                    <button class="btn btn-outline" onclick="refreshAssessments()">
+                        <i class="fas fa-sync"></i>
+                    </button>
+                </div>
+                <div class="section-content">
+                    <div class="assessment-item">
+                        <div class="assessment-header">
+                            <div>
+                                <div class="assessment-title">Quiz JavaScript Básico</div>
+                                <div class="assessment-meta">JavaScript Avançado • 30 min • 100 pontos</div>
+                            </div>
+                            <div class="assessment-actions">
+                                <button class="btn btn-outline btn-sm" onclick="editAssessment('quiz1')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-warning btn-sm" onclick="viewSubmissions('quiz1')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteAssessment('quiz1')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p>Quiz sobre conceitos básicos de JavaScript incluindo variáveis, tipos de dados e estruturas de controle.</p>
+                        <div class="assessment-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">15</div>
+                                <div class="stat-label-small">Questões</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">67</div>
+                                <div class="stat-label-small">Tentativas</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">78.5%</div>
+                                <div class="stat-label-small">Média</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="assessment-item">
+                        <div class="assessment-header">
+                            <div>
+                                <div class="assessment-title">Prova Python Intermediário</div>
+                                <div class="assessment-meta">Python para Data Science • 60 min • 150 pontos</div>
+                            </div>
+                            <div class="assessment-actions">
+                                <button class="btn btn-outline btn-sm" onclick="editAssessment('exam1')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-warning btn-sm" onclick="viewSubmissions('exam1')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteAssessment('exam1')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p>Avaliação sobre conceitos intermediários de Python, incluindo funções, classes e manipulação de dados.</p>
+                        <div class="assessment-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">25</div>
+                                <div class="stat-label-small">Questões</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">34</div>
+                                <div class="stat-label-small">Tentativas</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">82.3%</div>
+                                <div class="stat-label-small">Média</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Construtor de Questões -->
+        <div class="content-section">
+            <div class="section-header">
+                <h3><i class="fas fa-question-circle"></i> Construtor de Questões</h3>
+                <button class="btn btn-success" onclick="addQuestion()">
+                    <i class="fas fa-plus"></i> Nova Questão
+                </button>
+            </div>
+            <div class="section-content">
+                <div class="form-group">
+                    <label for="questionType">Tipo de Questão</label>
+                    <select class="form-control" id="questionType">
+                        <option value="multiple-choice">Múltipla Escolha</option>
+                        <option value="true-false">Verdadeiro/Falso</option>
+                        <option value="short-answer">Resposta Curta</option>
+                        <option value="essay">Dissertativa</option>
+                        <option value="matching">Correspondência</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="questionText">Texto da Questão</label>
+                    <textarea class="form-control" id="questionText" rows="3" placeholder="Digite a pergunta..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="questionPoints">Pontos</label>
+                    <input type="number" class="form-control" id="questionPoints" min="1" placeholder="10">
+                </div>
+
+                <div id="questionBuilder" class="question-builder" style="display: none;">
+                    <h4>Opções de Resposta</h4>
+                    <div id="optionsList">
+                        <div class="option-item">
+                            <input type="radio" class="option-input" name="correct" value="0">
+                            <input type="text" class="option-text" placeholder="Opção 1">
+                            <button class="btn btn-danger btn-sm" onclick="removeOption(this)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" class="option-input" name="correct" value="1">
+                            <input type="text" class="option-text" placeholder="Opção 2">
+                            <button class="btn btn-danger btn-sm" onclick="removeOption(this)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline" onclick="addOption()">
+                        <i class="fas fa-plus"></i> Adicionar Opção
+                    </button>
+                </div>
+
+                <button class="btn btn-primary" onclick="saveQuestion()">
+                    <i class="fas fa-save"></i>
+                    Salvar Questão
+                </button>
+            </div>
+        </div>
+
+        <!-- Submissões e Correções -->
+        <div class="content-section">
+            <div class="section-header">
+                <h3><i class="fas fa-check-circle"></i> Submissões e Correções</h3>
+                <button class="btn btn-outline" onclick="refreshSubmissions()">
+                    <i class="fas fa-sync"></i>
+                </button>
+            </div>
+            <div class="section-content">
+                <div class="tabs">
+                    <div class="tab active" onclick="switchTab('pending')">Pendentes</div>
+                    <div class="tab" onclick="switchTab('graded')">Corrigidas</div>
+                    <div class="tab" onclick="switchTab('all')">Todas</div>
+                </div>
+
+                <div id="pending" class="tab-content active">
+                    <div class="submission-list">
+                        <div class="submission-item">
+                            <div class="submission-header">
+                                <div>
+                                    <div class="student-name">Maria Silva</div>
+                                    <div class="submission-date">Enviado em: 15/12/2024 14:30</div>
+                                </div>
+                                <div class="assessment-actions">
+                                    <button class="btn btn-warning btn-sm" onclick="gradeSubmission('sub1')">
+                                        <i class="fas fa-check"></i> Corrigir
+                                    </button>
+                                </div>
+                            </div>
+                            <p><strong>Avaliação:</strong> Quiz JavaScript Básico</p>
+                            <p><strong>Respostas:</strong> 12/15 corretas</p>
+                        </div>
+
+                        <div class="submission-item">
+                            <div class="submission-header">
+                                <div>
+                                    <div class="student-name">João Santos</div>
+                                    <div class="submission-date">Enviado em: 15/12/2024 13:45</div>
+                                </div>
+                                <div class="assessment-actions">
+                                    <button class="btn btn-warning btn-sm" onclick="gradeSubmission('sub2')">
+                                        <i class="fas fa-check"></i> Corrigir
+                                    </button>
+                                </div>
+                            </div>
+                            <p><strong>Avaliação:</strong> Prova Python Intermediário</p>
+                            <p><strong>Respostas:</strong> 18/25 corretas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="graded" class="tab-content">
+                    <div class="submission-list">
+                        <div class="submission-item">
+                            <div class="submission-header">
+                                <div>
+                                    <div class="student-name">Ana Costa</div>
+                                    <div class="submission-date">Corrigido em: 14/12/2024 16:20</div>
+                                </div>
+                                <div class="assessment-actions">
+                                    <button class="btn btn-outline btn-sm" onclick="editGrade('sub3')">
+                                        <i class="fas fa-edit"></i> Editar
+                                    </button>
+                                </div>
+                            </div>
+                            <p><strong>Avaliação:</strong> Quiz JavaScript Básico</p>
+                            <p><strong>Nota:</strong> <span style="color: var(--success-color); font-weight: 600;">85/100</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="all" class="tab-content">
+                    <p>Visualize todas as submissões aqui...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Criação de Avaliação -->
+    <div id="createModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Criar Nova Avaliação</h3>
+                <button class="close" onclick="closeModal('createModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="createAssessmentForm">
+                    <div class="form-group">
+                        <label>Título da Avaliação</label>
+                        <input type="text" class="form-control" placeholder="Digite o título...">
+                    </div>
+                    <div class="form-group">
+                        <label>Descrição</label>
+                        <textarea class="form-control" rows="3" placeholder="Descreva a avaliação..."></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Duração (minutos)</label>
+                            <input type="number" class="form-control" min="1">
+                        </div>
+                        <div class="form-group">
+                            <label>Pontuação Total</label>
+                            <input type="number" class="form-control" min="1">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Criar Avaliação</button>
+                        <button type="button" class="btn btn-outline" onclick="closeModal('createModal')">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Correção -->
+    <div id="gradeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Corrigir Submissão</h3>
+                <button class="close" onclick="closeModal('gradeModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Nota Final</label>
+                    <input type="number" class="grade-input" min="0" max="100" placeholder="0-100">
+                </div>
+                <div class="form-group">
+                    <label>Comentários</label>
+                    <textarea class="form-control" rows="3" placeholder="Comentários sobre a avaliação..."></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success" onclick="saveGrade()">Salvar Nota</button>
+                    <button class="btn btn-outline" onclick="closeModal('gradeModal')">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentTab = 'pending';
+        let currentSubmission = null;
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeAssessmentSystem();
+        });
+
+        function initializeAssessmentSystem() {
+            // Configurar eventos
+            document.getElementById('questionType').addEventListener('change', function(e) {
+                toggleQuestionBuilder(e.target.value);
+            });
+
+            // Formulário de criação
+            document.getElementById('createAssessmentForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                createAssessmentFromModal();
+            });
+        }
+
+        function showCreateModal() {
+            document.getElementById('createModal').style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function createAssessment() {
+            const type = document.getElementById('assessmentType').value;
+            const title = document.getElementById('assessmentTitle').value;
+            const course = document.getElementById('assessmentCourse').value;
+            const duration = document.getElementById('assessmentDuration').value;
+            const points = document.getElementById('assessmentPoints').value;
+            const instructions = document.getElementById('assessmentInstructions').value;
+
+            if (!title || !course) {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+                return;
+            }
+
+            // Simulação de criação
+            const newAssessment = {
+                id: Date.now(),
+                type: type,
+                title: title,
+                course: course,
+                duration: duration,
+                points: points,
+                instructions: instructions
+            };
+
+            console.log('Nova avaliação:', newAssessment);
+            alert('Avaliação criada com sucesso!');
+            
+            // Limpar formulário
+            document.getElementById('createAssessmentForm').reset();
+        }
+
+        function createAssessmentFromModal() {
+            // Implementar criação via modal
+            alert('Avaliação criada via modal!');
+            closeModal('createModal');
+        }
+
+        function editAssessment(assessmentId) {
+            console.log(`Editando avaliação: ${assessmentId}`);
+            alert('Funcionalidade de edição será implementada.');
+        }
+
+        function deleteAssessment(assessmentId) {
+            if (confirm('Tem certeza que deseja excluir esta avaliação?')) {
+                console.log(`Excluindo avaliação: ${assessmentId}`);
+                alert('Avaliação excluída com sucesso!');
+            }
+        }
+
+        function viewSubmissions(assessmentId) {
+            console.log(`Visualizando submissões: ${assessmentId}`);
+            alert('Funcionalidade de visualização será implementada.');
+        }
+
+        function refreshAssessments() {
+            console.log('Atualizando lista de avaliações...');
+            alert('Lista atualizada!');
+        }
+
+        function toggleQuestionBuilder(questionType) {
+            const builder = document.getElementById('questionBuilder');
+            if (questionType === 'multiple-choice' || questionType === 'true-false') {
+                builder.style.display = 'block';
+            } else {
+                builder.style.display = 'none';
+            }
+        }
+
+        function addQuestion() {
+            const questionType = document.getElementById('questionType').value;
+            const questionText = document.getElementById('questionText').value;
+            const questionPoints = document.getElementById('questionPoints').value;
+
+            if (!questionText || !questionPoints) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+
+            // Simulação de salvamento
+            const newQuestion = {
+                id: Date.now(),
+                type: questionType,
+                text: questionText,
+                points: questionPoints
+            };
+
+            console.log('Nova questão:', newQuestion);
+            alert('Questão salva com sucesso!');
+            
+            // Limpar formulário
+            document.getElementById('questionText').value = '';
+            document.getElementById('questionPoints').value = '';
+        }
+
+        function saveQuestion() {
+            addQuestion();
+        }
+
+        function addOption() {
+            const optionsList = document.getElementById('optionsList');
+            const optionCount = optionsList.children.length;
+            
+            const newOption = document.createElement('div');
+            newOption.className = 'option-item';
+            newOption.innerHTML = `
+                <input type="radio" class="option-input" name="correct" value="${optionCount}">
+                <input type="text" class="option-text" placeholder="Opção ${optionCount + 1}">
+                <button class="btn btn-danger btn-sm" onclick="removeOption(this)">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            
+            optionsList.appendChild(newOption);
+        }
+
+        function removeOption(button) {
+            button.parentElement.remove();
+        }
+
+        function switchTab(tabName) {
+            // Remover classe ativa de todas as tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Ativar tab selecionada
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+            currentTab = tabName;
+        }
+
+        function gradeSubmission(submissionId) {
+            currentSubmission = submissionId;
+            document.getElementById('gradeModal').style.display = 'block';
+        }
+
+        function saveGrade() {
+            const grade = document.querySelector('.grade-input').value;
+            const comments = document.querySelector('#gradeModal textarea').value;
+
+            if (!grade) {
+                alert('Por favor, insira uma nota.');
+                return;
+            }
+
+            console.log(`Salvando nota para submissão ${currentSubmission}: ${grade}`);
+            alert('Nota salva com sucesso!');
+            closeModal('gradeModal');
+        }
+
+        function editGrade(submissionId) {
+            console.log(`Editando nota: ${submissionId}`);
+            alert('Funcionalidade de edição de nota será implementada.');
+        }
+
+        function refreshSubmissions() {
+            console.log('Atualizando submissões...');
+            alert('Submissões atualizadas!');
+        }
+
+        // Fechar modais ao clicar fora
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

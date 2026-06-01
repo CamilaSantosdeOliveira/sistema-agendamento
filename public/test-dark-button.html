@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste - Botão Dark Mode Refinado</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="dark-mode.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 40px 20px;
+            transition: background 0.35s ease, color 0.35s ease;
+        }
+        
+        html.dark-mode, 
+        body.dark-mode {
+            background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 100%);
+        }
+        
+        .header {
+            position: relative;
+            text-align: center;
+            margin-bottom: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        html.dark-mode .header h1,
+        body.dark-mode .header h1 {
+            color: #f8fafc;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        html.dark-mode .header p,
+        body.dark-mode .header p {
+            color: #cbd5e1;
+        }
+        
+        #darkModeToggle {
+            position: relative;
+            /* Remover absolute para teste */
+            margin: 0 auto;
+            display: inline-block;
+        }
+        
+        .demo-box {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 40px auto;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        html.dark-mode .demo-box,
+        body.dark-mode .demo-box {
+            background: #1e293b;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .demo-box h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        html.dark-mode .demo-box h2,
+        body.dark-mode .demo-box h2 {
+            color: #f8fafc;
+        }
+        
+        .features {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .features li {
+            padding: 12px 0;
+            border-bottom: 1px solid #e5e7eb;
+            color: #555;
+        }
+        
+        html.dark-mode .features li,
+        body.dark-mode .features li {
+            border-bottom-color: #334155;
+            color: #cbd5e1;
+        }
+        
+        .features li:before {
+            content: "✓ ";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #999;
+        }
+        
+        html.dark-mode .footer,
+        body.dark-mode .footer {
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🌓 Teste do Botão Dark Mode Refinado</h1>
+        <p>Clique no botão abaixo para alternar tema</p>
+        
+        <button id="darkModeToggle" title="Alternar tema" aria-label="Alternar Dark Mode">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+    
+    <div class="demo-box">
+        <h2>✨ Melhorias Implementadas</h2>
+        <ul class="features">
+            <li>Dimensões refinadas (90x44px) com padding perfeito</li>
+            <li>Transições suaves com cubic-bezier sofisticado</li>
+            <li>Gradientes + backdrop-filter blur moderno</li>
+            <li>Efeitos hover e click com transformações 3D</li>
+            <li>Ícones coloridos com text-shadow para profundidade</li>
+            <li>Slider animado que se move entre os modos</li>
+            <li>Cores adaptadas para modo claro e escuro</li>
+            <li>Acessibilidade garantida com ARIA labels</li>
+        </ul>
+    </div>
+    
+    <div class="footer">
+        <p>✅ Se o botão está visível acima e funciona ao clicar,<br>então o CSS está funcionando corretamente!</p>
+    </div>
+    
+    <script src="dark-mode.js"></script>
+</body>
+</html>

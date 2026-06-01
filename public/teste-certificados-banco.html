@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 Teste Certificados com Banco de Dados</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #2d3436;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .error-box {
+            background: #ffeaa7;
+            border: 2px solid #fdcb6e;
+            color: #2d3436;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .test-btn {
+            background: #0984e3;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .test-btn:hover {
+            background: #74b9ff;
+        }
+        
+        .test-btn.success {
+            background: #00b894;
+        }
+        
+        .test-btn.success:hover {
+            background: #00a085;
+        }
+        
+        .test-btn.danger {
+            background: #e17055;
+        }
+        
+        .test-btn.danger:hover {
+            background: #d63031;
+        }
+        
+        .test-btn.warning {
+            background: #fdcb6e;
+            color: #2d3436;
+        }
+        
+        .test-btn.warning:hover {
+            background: #e17055;
+            color: white;
+        }
+        
+        .result-box {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .result-box.success {
+            background: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        
+        .result-box.error {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        
+        .status-info {
+            background: #74b9ff;
+            border: 1px solid #0984e3;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .step-list {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .step-list ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .step-list li {
+            margin: 10px 0;
+            color: #2d3436;
+        }
+        
+        .step-list strong {
+            color: #0984e3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 Teste Certificados com Banco de Dados</h1>
+            <p>Resolvendo o erro "Erro de conexão ao carregar certificado"</p>
+        </div>
+        
+        <div class="error-box">
+            <h3>❌ ERRO IDENTIFICADO:</h3>
+            <p><strong>"Erro de conexão ao carregar certificado"</strong></p>
+            <p>Este erro acontece quando a API não consegue conectar ao banco de dados ou há problemas na configuração.</p>
+        </div>
+        
+        <div class="status-info">
+            <h3>📊 Status do Sistema</h3>
+            <p><strong>✅ Servidor Apache:</strong> Funcionando (porta 8080)</p>
+            <p><strong>✅ PHP:</strong> Versão 8.0.30 ativa</p>
+            <p><strong>❌ Problema:</strong> API de certificados não conecta ao banco</p>
+            <p><strong>🔧 Solução:</strong> Configurar banco de dados e testar conexão</p>
+        </div>
+        
+        <div class="step-list">
+            <h3>🔧 PASSOS PARA RESOLVER:</h3>
+            <ol>
+                <li><strong>Testar conexão com banco:</strong> Verificar se MySQL está funcionando</li>
+                <li><strong>Criar banco de dados:</strong> Configurar tabelas necessárias</li>
+                <li><strong>Inserir dados de teste:</strong> Adicionar alunos e certificados</li>
+                <li><strong>Testar API:</strong> Verificar se a API responde corretamente</li>
+                <li><strong>Testar certificados:</strong> Verificar se os certificados carregam</li>
+            </ol>
+        </div>
+        
+        <div>
+            <h3>🧪 TESTES DE DIAGNÓSTICO</h3>
+            <p>Execute estes testes na ordem para resolver o problema:</p>
+            
+            <button class="test-btn success" onclick="testarConexaoBanco()">🗄️ 1. Testar Conexão com Banco</button>
+            <button class="test-btn" onclick="criarBancoDados()">📊 2. Criar Banco de Dados</button>
+            <button class="test-btn" onclick="inserirDadosTeste()">👥 3. Inserir Dados de Teste</button>
+            <button class="test-btn" onclick="testarAPICertificados()">🔗 4. Testar API de Certificados</button>
+            <button class="test-btn" onclick="testarCarregarCertificado()">📄 5. Testar Carregar Certificado</button>
+            <button class="test-btn warning" onclick="executarTodosTestes()">🧪 Executar Todos os Testes</button>
+            <button class="test-btn danger" onclick="abrirSistemaCertificados()">🎓 Abrir Sistema de Certificados</button>
+            
+            <div id="resultado" class="result-box" style="display: none;"></div>
+        </div>
+        
+        <div class="step-list">
+            <h3>✅ SOLUÇÕES ALTERNATIVAS</h3>
+            <ol>
+                <li><strong>Se o banco não funcionar:</strong> Use dados simulados temporariamente</li>
+                <li><strong>Se a API não responder:</strong> Verifique se o arquivo api/certificados.php existe</li>
+                <li><strong>Se o MySQL não conectar:</strong> Inicie o MySQL no XAMPP</li>
+                <li><strong>Se houver erro de sintaxe:</strong> Verifique o arquivo db.php</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        async function fazerRequisicao(url, options = {}) {
+            try {
+                const response = await fetch(url, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...options.headers
+                    },
+                    ...options
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                return { success: true, data, status: response.status };
+            } catch (error) {
+                return { success: false, error: error.message };
+            }
+        }
+        
+        function mostrarResultado(resultado, tipo = 'info') {
+            const element = document.getElementById('resultado');
+            element.style.display = 'block';
+            element.className = `result-box ${tipo}`;
+            
+            if (resultado.success) {
+                element.textContent = `✅ SUCESSO (${resultado.status})\n\n${JSON.stringify(resultado.data, null, 2)}`;
+            } else {
+                element.textContent = `❌ ERRO\n\n${resultado.error}`;
+            }
+        }
+        
+        async function testarConexaoBanco() {
+            console.log('🗄️ Testando conexão com banco...');
+            const resultado = await fazerRequisicao('http://localhost:8080/db_teste.php');
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error');
+        }
+        
+        async function criarBancoDados() {
+            console.log('📊 Criando banco de dados...');
+            const resultado = await fazerRequisicao('http://localhost:8080/criar_banco.php');
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error');
+        }
+        
+        async function inserirDadosTeste() {
+            console.log('👥 Inserindo dados de teste...');
+            const resultado = await fazerRequisicao('http://localhost:8080/inserir_dados_teste.php');
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error');
+        }
+        
+        async function testarAPICertificados() {
+            console.log('🔗 Testando API de certificados...');
+            const resultado = await fazerRequisicao('http://localhost:8080/api/certificados.php?action=listar_certificados');
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error');
+        }
+        
+        async function testarCarregarCertificado() {
+            console.log('📄 Testando carregar certificado...');
+            const resultado = await fazerRequisicao('http://localhost:8080/api/certificados.php?action=ver_certificado&id=1');
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error');
+        }
+        
+        async function executarTodosTestes() {
+            console.log('🧪 Executando todos os testes...');
+            
+            const element = document.getElementById('resultado');
+            element.style.display = 'block';
+            element.className = 'result-box';
+            element.textContent = '🧪 Executando todos os testes...\n\n';
+            
+            // Teste 1: Conexão com banco
+            element.textContent += '1. Testando conexão com banco...\n';
+            const conexaoResult = await fazerRequisicao('http://localhost:8080/db_teste.php');
+            element.textContent += conexaoResult.success ? '✅ Conexão funcionando\n' : '❌ Conexão com erro\n';
+            
+            // Teste 2: Criar banco
+            element.textContent += '2. Criando banco de dados...\n';
+            const bancoResult = await fazerRequisicao('http://localhost:8080/criar_banco.php');
+            element.textContent += bancoResult.success ? '✅ Banco criado\n' : '❌ Banco com erro\n';
+            
+            // Teste 3: Inserir dados
+            element.textContent += '3. Inserindo dados de teste...\n';
+            const dadosResult = await fazerRequisicao('http://localhost:8080/inserir_dados_teste.php');
+            element.textContent += dadosResult.success ? '✅ Dados inseridos\n' : '❌ Dados com erro\n';
+            
+            // Teste 4: API
+            element.textContent += '4. Testando API de certificados...\n';
+            const apiResult = await fazerRequisicao('http://localhost:8080/api/certificados.php?action=listar_certificados');
+            element.textContent += apiResult.success ? '✅ API funcionando\n' : '❌ API com erro\n';
+            
+            // Teste 5: Carregar certificado
+            element.textContent += '5. Testando carregar certificado...\n';
+            const certResult = await fazerRequisicao('http://localhost:8080/api/certificados.php?action=ver_certificado&id=1');
+            element.textContent += certResult.success ? '✅ Certificado carregado\n' : '❌ Certificado com erro\n';
+            
+            element.textContent += '\n📊 DIAGNÓSTICO COMPLETO';
+            
+            const sucessos = [conexaoResult.success, bancoResult.success, dadosResult.success, apiResult.success, certResult.success].filter(Boolean).length;
+            if (sucessos === 5) {
+                element.className = 'result-box success';
+                element.textContent += '\n🎉 PROBLEMA RESOLVIDO! Certificados funcionando perfeitamente!';
+            } else if (sucessos >= 3) {
+                element.className = 'result-box info';
+                element.textContent += `\n⚠️ ${sucessos}/5 testes passaram - Sistema parcialmente funcional`;
+            } else {
+                element.className = 'result-box error';
+                element.textContent += `\n❌ Apenas ${sucessos}/5 testes passaram - Problema persistente`;
+            }
+        }
+        
+        function abrirSistemaCertificados() {
+            window.open('http://localhost:8080/certificados.php', '_blank');
+        }
+        
+        // Auto-executar teste ao carregar
+        window.onload = function() {
+            console.log('🧪 Teste Certificados Banco carregado');
+            console.log('📍 URL atual:', window.location.href);
+            
+            // Teste automático após 2 segundos
+            setTimeout(() => {
+                testarConexaoBanco();
+            }, 2000);
+        };
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

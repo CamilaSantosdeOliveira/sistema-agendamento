@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 Diagnóstico de Acesso - Sistema de Agendamento</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            background: #f9f9f9;
+        }
+        
+        .section h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .url-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .url-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .url-card h4 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        
+        .url-link {
+            display: block;
+            background: #3b82f6;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-align: center;
+            margin: 10px 0;
+            transition: background 0.3s;
+        }
+        
+        .url-link:hover {
+            background: #2563eb;
+        }
+        
+        .url-link.success {
+            background: #10b981;
+        }
+        
+        .url-link.success:hover {
+            background: #059669;
+        }
+        
+        .url-link.danger {
+            background: #ef4444;
+        }
+        
+        .url-link.danger:hover {
+            background: #dc2626;
+        }
+        
+        .status-info {
+            background: #dbeafe;
+            border: 1px solid #3b82f6;
+            color: #1e40af;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .file-list {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .file-item {
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .file-item:last-child {
+            border-bottom: none;
+        }
+        
+        .test-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        
+        .test-btn:hover {
+            background: #2563eb;
+        }
+        
+        .test-btn.success {
+            background: #10b981;
+        }
+        
+        .test-btn.success:hover {
+            background: #059669;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 Diagnóstico de Acesso</h1>
+            <p>Identificando e resolvendo problemas de acesso ao sistema</p>
+        </div>
+        
+        <div class="status-info">
+            <h3>📊 Status do Sistema</h3>
+            <p><strong>Servidor:</strong> Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.0.30</p>
+            <p><strong>Porta:</strong> 8080</p>
+            <p><strong>URL Base:</strong> http://localhost:8080/</p>
+            <p><strong>Diretório Atual:</strong> Sistema De Agendamento/public</p>
+        </div>
+        
+        <div class="section">
+            <h3>🚀 URLs Principais do Sistema</h3>
+            <p>Clique nos links abaixo para testar o acesso aos arquivos principais:</p>
+            
+            <div class="url-list">
+                <div class="url-card">
+                    <h4>🏠 Página Principal</h4>
+                    <a href="http://localhost:8080/index.php" class="url-link" target="_blank">
+                        📄 index.php
+                    </a>
+                    <a href="http://localhost:8080/index-simples.html" class="url-link" target="_blank">
+                        🏠 index-simples.html
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>📊 Dashboard</h4>
+                    <a href="http://localhost:8080/dashboard_corrigido.php" class="url-link" target="_blank">
+                        📊 Dashboard Principal
+                    </a>
+                    <a href="http://localhost:8080/dashboard_completo.php" class="url-link" target="_blank">
+                        📈 Dashboard Completo
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>📋 Sistema de Certificados</h4>
+                    <a href="http://localhost:8080/certificados.php" class="url-link" target="_blank">
+                        🎓 Certificados
+                    </a>
+                    <a href="http://localhost:8080/validacao_certificados.php" class="url-link" target="_blank">
+                        ✅ Validação
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>📊 Relatórios</h4>
+                    <a href="http://localhost:8080/relatorios.html" class="url-link" target="_blank">
+                        📊 Relatórios
+                    </a>
+                    <a href="http://localhost:8080/relatorios-detalhados.html" class="url-link" target="_blank">
+                        📈 Relatórios Detalhados
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>🧪 Testes de API</h3>
+            <p>Teste se as APIs estão funcionando corretamente:</p>
+            
+            <div class="url-list">
+                <div class="url-card">
+                    <h4>🔗 Teste API Simples</h4>
+                    <a href="http://localhost:8080/teste-api-simples.html" class="url-link success" target="_blank">
+                        🧪 Teste API Simples
+                    </a>
+                    <a href="http://localhost:8080/teste-api-dados-reais.html" class="url-link success" target="_blank">
+                        🧪 Teste API Dados Reais
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>🗄️ Teste Banco de Dados</h4>
+                    <a href="http://localhost:8080/db_teste.php" class="url-link" target="_blank">
+                        🗄️ Teste Conexão DB
+                    </a>
+                    <a href="http://localhost:8080/ver_dados_banco.php" class="url-link" target="_blank">
+                        👀 Ver Dados do Banco
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>🔧 Ferramentas de Diagnóstico</h4>
+                    <a href="http://localhost:8080/verificar.html" class="url-link" target="_blank">
+                        🔍 Verificar Sistema
+                    </a>
+                    <a href="http://localhost:8080/SOLUCAO-CONEXAO.html" class="url-link" target="_blank">
+                        🛠️ Solução Conexão
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>📁 Arquivos Disponíveis</h3>
+            <p>Lista dos principais arquivos no diretório atual:</p>
+            
+            <div class="file-list">
+                <div class="file-item"><strong>🏠 Páginas Principais:</strong></div>
+                <div class="file-item">• index.php</div>
+                <div class="file-item">• index-simples.html</div>
+                <div class="file-item">• dashboard_corrigido.php</div>
+                <div class="file-item">• dashboard_completo.php</div>
+                
+                <div class="file-item"><strong>🎓 Sistema de Certificados:</strong></div>
+                <div class="file-item">• certificados.php</div>
+                <div class="file-item">• validacao_certificados.php</div>
+                <div class="file-item">• api/certificados.php</div>
+                
+                <div class="file-item"><strong>📊 Relatórios:</strong></div>
+                <div class="file-item">• relatorios.html</div>
+                <div class="file-item">• relatorios-detalhados.html</div>
+                
+                <div class="file-item"><strong>🧪 Testes:</strong></div>
+                <div class="file-item">• teste-api-simples.html</div>
+                <div class="file-item">• teste-api-dados-reais.html</div>
+                <div class="file-item">• db_teste.php</div>
+                
+                <div class="file-item"><strong>🔧 Diagnóstico:</strong></div>
+                <div class="file-item">• verificar.html</div>
+                <div class="file-item">• SOLUCAO-CONEXAO.html</div>
+                <div class="file-item">• INSTRUCOES-PORTA-8080.html</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>🚨 Solução para "Not Found"</h3>
+            <p>Se você está recebendo erro "Not Found", tente estas soluções:</p>
+            
+            <div style="background: #fee2e2; border: 1px solid #ef4444; color: #991b1b; padding: 15px; border-radius: 8px;">
+                <h4>1. Verifique a URL:</h4>
+                <p>• Certifique-se de que está usando: <code>http://localhost:8080/</code></p>
+                <p>• Não use: <code>http://localhost/</code> (porta 80)</p>
+                
+                <h4>2. Verifique o nome do arquivo:</h4>
+                <p>• Os nomes dos arquivos são sensíveis a maiúsculas/minúsculas</p>
+                <p>• Use exatamente: <code>certificados.php</code> (não Certificados.php)</p>
+                
+                <h4>3. Teste com arquivos que existem:</h4>
+                <p>• Comece com: <code>http://localhost:8080/teste-api-simples.html</code></p>
+                <p>• Depois teste: <code>http://localhost:8080/certificados.php</code></p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>🔧 Testes Rápidos</h3>
+            <button class="test-btn" onclick="testarURLs()">🧪 Testar URLs Principais</button>
+            <button class="test-btn success" onclick="abrirTesteAPI()">🔗 Abrir Teste API</button>
+            <button class="test-btn" onclick="abrirCertificados()">🎓 Abrir Certificados</button>
+            <button class="test-btn" onclick="abrirDashboard()">📊 Abrir Dashboard</button>
+        </div>
+    </div>
+    
+    <script>
+        function testarURLs() {
+            const urls = [
+                'http://localhost:8080/teste-api-simples.html',
+                'http://localhost:8080/certificados.php',
+                'http://localhost:8080/dashboard_corrigido.php',
+                'http://localhost:8080/relatorios.html'
+            ];
+            
+            urls.forEach(url => {
+                window.open(url, '_blank');
+            });
+        }
+        
+        function abrirTesteAPI() {
+            window.open('http://localhost:8080/teste-api-simples.html', '_blank');
+        }
+        
+        function abrirCertificados() {
+            window.open('http://localhost:8080/certificados.php', '_blank');
+        }
+        
+        function abrirDashboard() {
+            window.open('http://localhost:8080/dashboard_corrigido.php', '_blank');
+        }
+        
+        // Auto-executar teste ao carregar
+        window.onload = function() {
+            console.log('🔍 Diagnóstico de Acesso carregado');
+            console.log('📍 URL atual:', window.location.href);
+            console.log('📁 Diretório:', window.location.pathname);
+        };
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

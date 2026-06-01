@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .sidebar { width: 200px; float: left; background: #f0f0f0; padding: 20px; }
+        .content { margin-left: 220px; }
+        .screen { display: none; padding: 20px; border: 1px solid #ccc; }
+        .screen.active { display: block; }
+        .sidebar-link { display: block; padding: 10px; margin: 5px 0; background: #ddd; text-decoration: none; }
+        .sidebar-link:hover { background: #ccc; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h3>Menu</h3>
+        <a href="#" class="sidebar-link" data-screen="dashboard">Dashboard</a>
+        <a href="#" class="sidebar-link" data-screen="cursos">Cursos</a>
+        <a href="#" class="sidebar-link" data-screen="agendamentos">Agendamentos</a>
+        <a href="#" class="sidebar-link" data-screen="professores">Professores</a>
+    </div>
+    
+    <div class="content">
+        <div id="dashboard" class="screen active">
+            <h2>Dashboard Principal</h2>
+            <p>Esta é a tela principal do dashboard.</p>
+        </div>
+        
+        <div id="cursos" class="screen">
+            <h2>Cursos de Tecnologia</h2>
+            <p>Lista de cursos profissionalizantes.</p>
+        </div>
+        
+        <div id="agendamentos" class="screen">
+            <h2>Agendamentos</h2>
+            <p>Calendário de aulas e eventos.</p>
+        </div>
+        
+        <div id="professores" class="screen">
+            <h2>Professores</h2>
+            <p>Equipe docente.</p>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const screen = this.getAttribute('data-screen');
+                showScreen(screen);
+            });
+        });
+
+        function showScreen(screen) {
+            // Esconde todas as telas
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            
+            // Mostra a tela selecionada
+            const targetScreen = document.getElementById(screen);
+            if (targetScreen) {
+                targetScreen.classList.add('active');
+            }
+            
+            console.log('Mostrando tela:', screen);
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

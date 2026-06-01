@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 Teste API - Dados Reais</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            background: #f9f9f9;
+        }
+        
+        .test-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .test-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        
+        .test-btn:hover {
+            background: #2563eb;
+        }
+        
+        .test-btn.success {
+            background: #10b981;
+        }
+        
+        .test-btn.success:hover {
+            background: #059669;
+        }
+        
+        .test-btn.danger {
+            background: #ef4444;
+        }
+        
+        .test-btn.danger:hover {
+            background: #dc2626;
+        }
+        
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .result.success {
+            background: #d1fae5;
+            border: 1px solid #10b981;
+            color: #065f46;
+        }
+        
+        .result.error {
+            background: #fee2e2;
+            border: 1px solid #ef4444;
+            color: #991b1b;
+        }
+        
+        .result.info {
+            background: #dbeafe;
+            border: 1px solid #3b82f6;
+            color: #1e40af;
+        }
+        
+        .aluno-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .aluno-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .aluno-card h4 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        
+        .aluno-card p {
+            margin: 5px 0;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .aluno-card button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        
+        .aluno-card button:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 Teste API - Dados Reais dos Alunos</h1>
+            <p>Testando se a API está buscando dados reais do banco de dados</p>
+        </div>
+        
+        <div class="test-section">
+            <h3>🔗 Testes de Conectividade</h3>
+            <button class="test-btn" onclick="testarConectividade()">
+                🔗 Testar Conectividade
+            </button>
+            <button class="test-btn" onclick="listarAlunos()">
+                👥 Listar Alunos
+            </button>
+            <button class="test-btn success" onclick="testarTodos()">
+                🚀 Executar Todos os Testes
+            </button>
+            <div id="result-conectividade" class="result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>👥 Alunos Encontrados</h3>
+            <div id="alunos-container">
+                <p>Clique em "Listar Alunos" para ver os alunos disponíveis</p>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>📋 Testes de Certificados</h3>
+            <div id="testes-certificados">
+                <p>Os testes de certificados aparecerão aqui após listar os alunos</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const API_BASE = 'api/certificados.php';
+        let alunosEncontrados = [];
+        
+        async function fazerRequisicao(url, options = {}) {
+            try {
+                const response = await fetch(url, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...options.headers
+                    },
+                    ...options
+                });
+                const data = await response.json();
+                return { success: true, data, status: response.status };
+            } catch (error) {
+                return { success: false, error: error.message };
+            }
+        }
+        
+        function mostrarResultado(elementId, resultado, tipo = 'info') {
+            const element = document.getElementById(elementId);
+            element.style.display = 'block';
+            element.className = `result ${tipo}`;
+            
+            if (resultado.success) {
+                element.textContent = `✅ SUCESSO (${resultado.status})\n\n${JSON.stringify(resultado.data, null, 2)}`;
+            } else {
+                element.textContent = `❌ ERRO\n\n${resultado.error}`;
+            }
+        }
+        
+        async function testarConectividade() {
+            const resultado = await fazerRequisicao(`${API_BASE}?action=listar_certificados`);
+            mostrarResultado('result-conectividade', resultado, resultado.success ? 'success' : 'error');
+            return resultado;
+        }
+        
+        async function listarAlunos() {
+            const resultado = await fazerRequisicao(`${API_BASE}?action=listar_certificados`);
+            
+            if (resultado.success && resultado.data.data) {
+                alunosEncontrados = resultado.data.data;
+                mostrarAlunos(alunosEncontrados);
+                mostrarTestesCertificados();
+            } else {
+                document.getElementById('alunos-container').innerHTML = 
+                    '<p style="color: red;">❌ Erro ao buscar alunos: ' + (resultado.error || 'Erro desconhecido') + '</p>';
+            }
+            
+            return resultado;
+        }
+        
+        function mostrarAlunos(alunos) {
+            const container = document.getElementById('alunos-container');
+            
+            if (alunos.length === 0) {
+                container.innerHTML = '<p>Nenhum aluno encontrado no banco de dados</p>';
+                return;
+            }
+            
+            const html = `
+                <p><strong>${alunos.length} alunos encontrados:</strong></p>
+                <div class="aluno-list">
+                    ${alunos.map(aluno => `
+                        <div class="aluno-card">
+                            <h4>${aluno.aluno_nome}</h4>
+                            <p><strong>ID:</strong> ${aluno.id}</p>
+                            <p><strong>Email:</strong> ${aluno.aluno_email}</p>
+                            <p><strong>Curso:</strong> ${aluno.curso_nome}</p>
+                            <p><strong>Status:</strong> ${aluno.status}</p>
+                            <button onclick="testarCertificado(${aluno.id})">
+                                👁️ Ver Certificado
+                            </button>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+        
+        function mostrarTestesCertificados() {
+            const container = document.getElementById('testes-certificados');
+            
+            if (alunosEncontrados.length === 0) {
+                container.innerHTML = '<p>Nenhum aluno disponível para teste</p>';
+                return;
+            }
+            
+            const primeiroAluno = alunosEncontrados[0];
+            
+            const html = `
+                <p><strong>Testes disponíveis para o primeiro aluno (${primeiroAluno.aluno_nome}):</strong></p>
+                <button class="test-btn" onclick="testarCertificado(${primeiroAluno.id})">
+                    👁️ Ver Certificado (ID: ${primeiroAluno.id})
+                </button>
+                <button class="test-btn" onclick="testarDownload(${primeiroAluno.id})">
+                    📥 Baixar Certificado (ID: ${primeiroAluno.id})
+                </button>
+                <button class="test-btn success" onclick="testarValidacao(${primeiroAluno.id})">
+                    ✅ Validar Certificado (ID: ${primeiroAluno.id})
+                </button>
+                <div id="result-certificado" class="result" style="display: none;"></div>
+            `;
+            
+            container.innerHTML = html;
+        }
+        
+        async function testarCertificado(id) {
+            const resultado = await fazerRequisicao(`${API_BASE}?action=ver_certificado&id=${id}`);
+            mostrarResultado('result-certificado', resultado, resultado.success ? 'success' : 'error');
+            return resultado;
+        }
+        
+        async function testarDownload(id) {
+            const resultado = await fazerRequisicao(`${API_BASE}?action=baixar_certificado&id=${id}`);
+            mostrarResultado('result-certificado', resultado, resultado.success ? 'success' : 'error');
+            return resultado;
+        }
+        
+        async function testarValidacao(id) {
+            const resultado = await fazerRequisicao(API_BASE, {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: 'validar_certificado',
+                    id: id
+                })
+            });
+            mostrarResultado('result-certificado', resultado, resultado.success ? 'success' : 'error');
+            return resultado;
+        }
+        
+        async function testarTodos() {
+            console.log('🚀 Executando todos os testes...');
+            
+            // Teste 1: Conectividade
+            console.log('1. Testando conectividade...');
+            const conectividade = await testarConectividade();
+            
+            // Teste 2: Listar alunos
+            console.log('2. Listando alunos...');
+            const alunos = await listarAlunos();
+            
+            // Teste 3: Ver certificado (se houver alunos)
+            if (alunosEncontrados.length > 0) {
+                console.log('3. Testando certificado...');
+                await testarCertificado(alunosEncontrados[0].id);
+            }
+            
+            console.log('✅ Todos os testes concluídos!');
+        }
+        
+        // Executar teste inicial
+        window.onload = function() {
+            console.log('🧪 Teste API - Dados Reais carregado');
+        };
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

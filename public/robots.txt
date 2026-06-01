@@ -1,0 +1,37 @@
+# robots.txt para EduConnect Tech
+# Permite que todos os buscadores indexem o site
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.educonnecttech.com.br/sitemap.xml
+
+# Bloquear arquivos sensíveis
+Disallow: /config.php
+Disallow: /db.php
+Disallow: /config_security.php
+Disallow: /backup_*.php
+Disallow: /teste_*.php
+Disallow: /teste*.html
+Disallow: /debug_*.php
+Disallow: /verificar_*.php
+Disallow: /corrigir_*.php
+Disallow: /logs_*.php
+Disallow: /cache.php
+Disallow: /utils.php
+
+# Permitir arquivos públicos importantes
+Allow: /index.php
+Allow: /login.php
+Allow: /dashboard.php
+Allow: /dashboard_aluno.php
+Allow: /dashboard_professor.php
+Allow: /cursos.php
+Allow: /agendamentos.php
+Allow: /certificados.php
+Allow: /assets/
+Allow: /api/
+
+
+

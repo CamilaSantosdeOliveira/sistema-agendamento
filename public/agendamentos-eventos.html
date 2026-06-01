@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Agendamentos e Eventos</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Calendar CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
+    
+    <!-- Calendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/pt-br.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary-color: #64748b;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --info-color: #06b6d4;
+            --light-color: #f8fafc;
+            --dark-color: #1e293b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--info-color) 0%, var(--primary-color) 100%);
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 30px;
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .stats-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            border-left: 4px solid var(--info-color);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--info-color);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, var(--info-color) 0%, var(--primary-color) 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .section-header h3 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-header i {
+            font-size: 1.5rem;
+        }
+
+        .section-content {
+            padding: 25px;
+        }
+
+        .btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-success {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .btn-warning {
+            background: var(--warning-color);
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #d97706;
+        }
+
+        .btn-danger {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--secondary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--light-color);
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+        }
+
+        .calendar-container {
+            height: 600px;
+            background: white;
+        }
+
+        .event-item {
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-bottom: 15px;
+            background: var(--light-color);
+            transition: var(--transition);
+        }
+
+        .event-item:hover {
+            box-shadow: var(--shadow-sm);
+            border-color: var(--primary-color);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .event-title {
+            font-weight: 600;
+            color: var(--dark-color);
+            font-size: 1rem;
+        }
+
+        .event-type {
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .event-type.live {
+            background: var(--danger-color);
+        }
+
+        .event-type.office-hours {
+            background: var(--warning-color);
+        }
+
+        .event-type.workshop {
+            background: var(--success-color);
+        }
+
+        .event-type.webinar {
+            background: var(--info-color);
+        }
+
+        .event-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .event-details {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .event-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 3% auto;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            max-width: 700px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--secondary-color);
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .tab.active {
+            border-bottom-color: var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .upcoming-events {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .event-card {
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-bottom: 10px;
+            background: white;
+            transition: var(--transition);
+        }
+
+        .event-card:hover {
+            box-shadow: var(--shadow-sm);
+        }
+
+        .event-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .event-card-title {
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .event-card-time {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .event-card-details {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .event-card-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .quick-action {
+            background: var(--light-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .quick-action:hover {
+            border-color: var(--primary-color);
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .quick-action i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .quick-action h4 {
+            color: var(--dark-color);
+            margin-bottom: 5px;
+        }
+
+        .quick-action p {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        .recurring-options {
+            background: var(--light-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .recurring-options h4 {
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+
+        .recurring-options label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .recurring-options input[type="radio"] {
+            accent-color: var(--primary-color);
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* FullCalendar Customization */
+        .fc {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .fc-toolbar-title {
+            font-size: 1.5rem !important;
+            font-weight: 600 !important;
+        }
+
+        .fc-button-primary {
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+        }
+
+        .fc-button-primary:hover {
+            background-color: var(--primary-dark) !important;
+            border-color: var(--primary-dark) !important;
+        }
+
+        .fc-event {
+            border-radius: 4px !important;
+            border: none !important;
+        }
+
+        .fc-event-title {
+            font-weight: 500 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="dashboard.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Voltar ao Dashboard
+        </a>
+
+        <div class="header">
+            <h1>📅 Agendamentos e Eventos</h1>
+            <p>Gerencie aulas ao vivo, plantões de dúvidas e eventos educacionais</p>
+        </div>
+
+        <!-- Estatísticas -->
+        <div class="stats-overview">
+            <div class="stat-card">
+                <div class="stat-number">24</div>
+                <div class="stat-label">Eventos Este Mês</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">156</div>
+                <div class="stat-label">Participantes</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Aulas ao Vivo</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Plantões de Dúvidas</div>
+            </div>
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <div class="main-content">
+            <!-- Calendário -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-calendar-alt"></i> Calendário de Eventos</h3>
+                    <button class="btn btn-success" onclick="showAddEventModal()">
+                        <i class="fas fa-plus"></i> Novo Evento
+                    </button>
+                </div>
+                <div class="section-content">
+                    <div class="calendar-container" id="calendar"></div>
+                </div>
+            </div>
+
+            <!-- Painel Lateral -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-clock"></i> Próximos Eventos</h3>
+                    <button class="btn btn-outline" onclick="refreshEvents()">
+                        <i class="fas fa-sync"></i>
+                    </button>
+                </div>
+                <div class="section-content">
+                    <div class="quick-actions">
+                        <div class="quick-action" onclick="showAddEventModal('live')">
+                            <i class="fas fa-video"></i>
+                            <h4>Aula ao Vivo</h4>
+                            <p>Agendar aula em tempo real</p>
+                        </div>
+                        <div class="quick-action" onclick="showAddEventModal('office-hours')">
+                            <i class="fas fa-question-circle"></i>
+                            <h4>Plantão de Dúvidas</h4>
+                            <p>Horário para tirar dúvidas</p>
+                        </div>
+                        <div class="quick-action" onclick="showAddEventModal('workshop')">
+                            <i class="fas fa-tools"></i>
+                            <h4>Workshop</h4>
+                            <p>Sessão prática interativa</p>
+                        </div>
+                        <div class="quick-action" onclick="showAddEventModal('webinar')">
+                            <i class="fas fa-users"></i>
+                            <h4>Webinar</h4>
+                            <p>Palestra online</p>
+                        </div>
+                    </div>
+
+                    <div class="upcoming-events">
+                        <div class="event-card">
+                            <div class="event-card-header">
+                                <div class="event-card-title">JavaScript Avançado - Aula 5</div>
+                                <div class="event-card-time">Hoje 19:00</div>
+                            </div>
+                            <div class="event-card-details">
+                                <strong>Tipo:</strong> Aula ao Vivo<br>
+                                <strong>Professor:</strong> João Silva<br>
+                                <strong>Duração:</strong> 90 min
+                            </div>
+                            <div class="event-card-actions">
+                                <button class="btn btn-primary btn-sm" onclick="joinEvent('event1')">
+                                    <i class="fas fa-play"></i> Entrar
+                                </button>
+                                <button class="btn btn-outline btn-sm" onclick="editEvent('event1')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="event-card">
+                            <div class="event-card-header">
+                                <div class="event-card-title">Plantão Python - Dúvidas</div>
+                                <div class="event-card-time">Amanhã 15:00</div>
+                            </div>
+                            <div class="event-card-details">
+                                <strong>Tipo:</strong> Plantão de Dúvidas<br>
+                                <strong>Professor:</strong> Maria Costa<br>
+                                <strong>Duração:</strong> 60 min
+                            </div>
+                            <div class="event-card-actions">
+                                <button class="btn btn-warning btn-sm" onclick="joinEvent('event2')">
+                                    <i class="fas fa-clock"></i> Lembrar
+                                </button>
+                                <button class="btn btn-outline btn-sm" onclick="editEvent('event2')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="event-card">
+                            <div class="event-card-header">
+                                <div class="event-card-title">Workshop React Hooks</div>
+                                <div class="event-card-time">23/12 14:00</div>
+                            </div>
+                            <div class="event-card-details">
+                                <strong>Tipo:</strong> Workshop<br>
+                                <strong>Professor:</strong> Carlos Santos<br>
+                                <strong>Duração:</strong> 120 min
+                            </div>
+                            <div class="event-card-actions">
+                                <button class="btn btn-success btn-sm" onclick="joinEvent('event3')">
+                                    <i class="fas fa-check"></i> Confirmado
+                                </button>
+                                <button class="btn btn-outline btn-sm" onclick="editEvent('event3')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lista de Eventos -->
+        <div class="content-section">
+            <div class="section-header">
+                <h3><i class="fas fa-list"></i> Todos os Eventos</h3>
+                <div>
+                    <button class="btn btn-outline" onclick="filterEvents('all')">Todos</button>
+                    <button class="btn btn-outline" onclick="filterEvents('live')">Aulas ao Vivo</button>
+                    <button class="btn btn-outline" onclick="filterEvents('office-hours')">Plantões</button>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="tabs">
+                    <div class="tab active" onclick="switchTab('upcoming')">Próximos</div>
+                    <div class="tab" onclick="switchTab('past')">Passados</div>
+                    <div class="tab" onclick="switchTab('recurring')">Recorrentes</div>
+                </div>
+
+                <div id="upcoming" class="tab-content active">
+                    <div class="event-item">
+                        <div class="event-header">
+                            <div class="event-title">JavaScript Avançado - Aula 5</div>
+                            <div class="event-type live">Aula ao Vivo</div>
+                            <div class="event-actions">
+                                <button class="btn btn-outline btn-sm" onclick="editEvent('event1')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteEvent('event1')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="event-details">
+                            Aula sobre closures e módulos em JavaScript. Será transmitida ao vivo com interação dos alunos.
+                        </div>
+                        <div class="event-meta">
+                            <span><i class="fas fa-calendar"></i> Hoje, 19:00 - 20:30</span>
+                            <span><i class="fas fa-user"></i> João Silva</span>
+                            <span><i class="fas fa-users"></i> 45 participantes</span>
+                        </div>
+                    </div>
+
+                    <div class="event-item">
+                        <div class="event-header">
+                            <div class="event-title">Plantão Python - Dúvidas</div>
+                            <div class="event-type office-hours">Plantão de Dúvidas</div>
+                            <div class="event-actions">
+                                <button class="btn btn-outline btn-sm" onclick="editEvent('event2')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteEvent('event2')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="event-details">
+                            Horário dedicado para esclarecer dúvidas sobre Python. Traga suas perguntas!
+                        </div>
+                        <div class="event-meta">
+                            <span><i class="fas fa-calendar"></i> Amanhã, 15:00 - 16:00</span>
+                            <span><i class="fas fa-user"></i> Maria Costa</span>
+                            <span><i class="fas fa-users"></i> 23 participantes</span>
+                        </div>
+                    </div>
+
+                    <div class="event-item">
+                        <div class="event-header">
+                            <div class="event-title">Workshop React Hooks</div>
+                            <div class="event-type workshop">Workshop</div>
+                            <div class="event-actions">
+                                <button class="btn btn-outline btn-sm" onclick="editEvent('event3')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteEvent('event3')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="event-details">
+                            Workshop prático sobre React Hooks com exercícios e projetos reais.
+                        </div>
+                        <div class="event-meta">
+                            <span><i class="fas fa-calendar"></i> 23/12, 14:00 - 16:00</span>
+                            <span><i class="fas fa-user"></i> Carlos Santos</span>
+                            <span><i class="fas fa-users"></i> 67 participantes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="past" class="tab-content">
+                    <p>Visualize eventos passados aqui...</p>
+                </div>
+
+                <div id="recurring" class="tab-content">
+                    <p>Visualize eventos recorrentes aqui...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Novo Evento -->
+    <div id="addEventModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Agendar Novo Evento</h3>
+                <button class="close" onclick="closeModal('addEventModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addEventForm">
+                    <div class="form-group">
+                        <label>Título do Evento</label>
+                        <input type="text" name="titulo" class="form-control" placeholder="Digite o título do evento..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Descrição</label>
+                        <textarea name="descricao" class="form-control" rows="3" placeholder="Descreva o evento..."></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Tipo de Evento</label>
+                            <select name="tipo_evento" class="form-control" required>
+                                <option value="">Selecione o tipo...</option>
+                                <option value="live">Aula ao Vivo</option>
+                                <option value="office-hours">Plantão de Dúvidas</option>
+                                <option value="workshop">Workshop</option>
+                                <option value="webinar">Webinar</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Professor</label>
+                            <select name="professor_id" class="form-control" required>
+                                <option value="">Selecione o professor...</option>
+                                <option value="1">João Silva</option>
+                                <option value="2">Maria Costa</option>
+                                <option value="3">Carlos Santos</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Data</label>
+                            <input type="date" name="data" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Horário</label>
+                            <input type="time" name="horario" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Duração (minutos)</label>
+                            <input type="number" name="duracao" class="form-control" min="15" max="480" placeholder="90" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Capacidade Máxima</label>
+                            <input type="number" name="capacidade" class="form-control" min="1" max="500" placeholder="100">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Link da Reunião</label>
+                        <input type="url" name="link_reuniao" class="form-control" placeholder="https://meet.google.com/... (opcional)">
+                        <small style="color: #64748b; font-size: 0.8rem;">
+                            💡 <strong>Dica:</strong> Pode ser preenchido depois! 
+                            Agende primeiro e adicione o link quando criar a reunião no Google Meet, Zoom, etc.
+                        </small>
+                    </div>
+
+                    <div class="recurring-options">
+                        <h4>Opções de Recorrência</h4>
+                        <label>
+                            <input type="radio" name="recurring" value="none" checked>
+                            Evento único
+                        </label>
+                        <label>
+                            <input type="radio" name="recurring" value="daily">
+                            Diariamente
+                        </label>
+                        <label>
+                            <input type="radio" name="recurring" value="weekly">
+                            Semanalmente
+                        </label>
+                        <label>
+                            <input type="radio" name="recurring" value="monthly">
+                            Mensalmente
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Agendar Evento</button>
+                        <button type="button" class="btn btn-outline" onclick="closeModal('addEventModal')">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let calendar;
+        let currentTab = 'upcoming';
+        let currentEventType = null;
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCalendar();
+            initializeEventManagement();
+        });
+
+        function initializeCalendar() {
+            const calendarEl = document.getElementById('calendar');
+            
+            calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'pt-br',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                buttonText: {
+                    today: 'Hoje',
+                    month: 'Mês',
+                    week: 'Semana',
+                    day: 'Dia'
+                },
+                events: [
+                    {
+                        title: 'JavaScript Avançado - Aula 5',
+                        start: new Date().toISOString().split('T')[0] + 'T19:00:00',
+                        end: new Date().toISOString().split('T')[0] + 'T20:30:00',
+                        backgroundColor: '#ef4444',
+                        borderColor: '#ef4444'
+                    },
+                    {
+                        title: 'Plantão Python - Dúvidas',
+                        start: new Date(Date.now() + 24*60*60*1000).toISOString().split('T')[0] + 'T15:00:00',
+                        end: new Date(Date.now() + 24*60*60*1000).toISOString().split('T')[0] + 'T16:00:00',
+                        backgroundColor: '#f59e0b',
+                        borderColor: '#f59e0b'
+                    },
+                    {
+                        title: 'Workshop React Hooks',
+                        start: '2024-12-23T14:00:00',
+                        end: '2024-12-23T16:00:00',
+                        backgroundColor: '#10b981',
+                        borderColor: '#10b981'
+                    }
+                ],
+                eventClick: function(info) {
+                    showEventDetails(info.event);
+                },
+                selectable: true,
+                select: function(info) {
+                    showAddEventModal(null, info.start, info.end);
+                }
+            });
+            
+            calendar.render();
+        }
+
+        function initializeEventManagement() {
+            // Formulário de novo evento
+            document.getElementById('addEventForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                createNewEvent();
+            });
+        }
+
+        function showAddEventModal(eventType = null, startDate = null, endDate = null) {
+            currentEventType = eventType;
+            document.getElementById('addEventModal').style.display = 'block';
+            
+            if (startDate && endDate) {
+                // Preencher datas se selecionadas no calendário
+                const startInput = document.querySelector('#addEventModal input[type="datetime-local"]');
+                if (startInput) {
+                    startInput.value = startDate.toISOString().slice(0, 16);
+                }
+            }
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function createNewEvent() {
+            const form = document.getElementById('addEventForm');
+            const formData = new FormData(form);
+            
+            // Adicionar campos que não estão no formulário
+            formData.append('curso_id', '1'); // Valor padrão, pode ser ajustado
+            
+            // Fazer requisição para o backend
+            fetch('debug_agendamento.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('✅ ' + data.message);
+                    closeModal('addEventModal');
+                    form.reset();
+                    
+                    // Adicionar evento ao calendário
+                    addEventToCalendar(data.data);
+                    
+                    // Atualizar calendário
+                    refreshCalendar();
+                } else {
+                    alert('❌ Erro: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('❌ Erro ao agendar evento. Tente novamente.');
+            });
+        }
+
+        function addEventToCalendar(eventData) {
+            if (calendar) {
+                const event = {
+                    title: eventData.titulo || 'Novo Evento',
+                    start: eventData.data + 'T' + eventData.horario + ':00',
+                    end: new Date(new Date(eventData.data + 'T' + eventData.horario + ':00').getTime() + (eventData.duracao || 90) * 60000),
+                    backgroundColor: '#10b981',
+                    borderColor: '#10b981',
+                    extendedProps: {
+                        id: eventData.id,
+                        curso: eventData.curso,
+                        status: eventData.status
+                    }
+                };
+                
+                calendar.addEvent(event);
+            }
+        }
+
+        function showEventDetails(event) {
+            alert(`Detalhes do evento: ${event.title}`);
+        }
+
+        function joinEvent(eventId) {
+            console.log(`Entrando no evento: ${eventId}`);
+            alert('Entrando no evento...');
+        }
+
+        function editEvent(eventId) {
+            console.log(`Editando evento: ${eventId}`);
+            alert('Funcionalidade de edição será implementada.');
+        }
+
+        function deleteEvent(eventId) {
+            if (confirm('Tem certeza que deseja excluir este evento?')) {
+                console.log(`Excluindo evento: ${eventId}`);
+                alert('Evento excluído com sucesso!');
+            }
+        }
+
+        function filterEvents(type) {
+            console.log(`Filtrando eventos por tipo: ${type}`);
+            // Implementar filtro de eventos
+        }
+
+        function refreshEvents() {
+            console.log('Atualizando lista de eventos...');
+            alert('Eventos atualizados!');
+        }
+
+        function refreshCalendar() {
+            if (calendar) {
+                calendar.refetchEvents();
+            }
+        }
+
+        function switchTab(tabName) {
+            // Remover classe ativa de todas as tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Ativar tab selecionada
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+            currentTab = tabName;
+        }
+
+        // Fechar modais ao clicar fora
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 Instruções Rápidas - Porta 8080</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #007bff;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .port-box {
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+            color: #0d47a1;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .port-box h2 {
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+        
+        .url-list {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .url-item {
+            background: white;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .step {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #28a745;
+        }
+        
+        .step h3 {
+            color: #28a745;
+            margin-top: 0;
+        }
+        
+        .button {
+            background: #007bff;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .button:hover {
+            background: #0056b3;
+        }
+        
+        .button.success {
+            background: #28a745;
+        }
+        
+        .button.success:hover {
+            background: #218838;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔧 Configuração Porta 8080</h1>
+            <p>Instruções rápidas para acessar o sistema</p>
+        </div>
+
+        <div class="port-box">
+            <h2>🚀 SERVIDOR CONFIGURADO</h2>
+            <p><strong>Porta:</strong> 8080</p>
+            <p><strong>URL Base:</strong> http://localhost:8080</p>
+        </div>
+
+        <div class="step">
+            <h3>✅ Passos para Acessar</h3>
+            <ol>
+                <li><strong>Inicie o XAMPP</strong>
+                    <ul>
+                        <li>Abra o XAMPP Control Panel</li>
+                        <li>Clique "Start" no Apache</li>
+                        <li>Clique "Start" no MySQL</li>
+                    </ul>
+                </li>
+                <li><strong>Teste a conexão</strong>
+                    <ul>
+                        <li>Abra: <code>http://localhost:8080</code></li>
+                        <li>Deve aparecer a página do XAMPP</li>
+                    </ul>
+                </li>
+                <li><strong>Acesse o sistema</strong>
+                    <ul>
+                        <li>Use os links abaixo</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <div class="url-list">
+            <h3>🔗 Links do Sistema</h3>
+            
+            <div class="url-item">
+                <strong>🏠 Sistema Principal:</strong><br>
+                <code>http://localhost:8080/sistema_final.html</code>
+            </div>
+            
+            <div class="url-item">
+                <strong>📊 Relatórios:</strong><br>
+                <code>http://localhost:8080/relatorios.html</code>
+            </div>
+            
+            <div class="url-item">
+                <strong>🧪 Teste dos Botões:</strong><br>
+                <code>http://localhost:8080/teste-botoes-relatorios.html</code>
+            </div>
+            
+            <div class="url-item">
+                <strong>🔧 Verificador:</strong><br>
+                <code>http://localhost:8080/verificar.html</code>
+            </div>
+            
+            <div class="url-item">
+                <strong>⚙️ Configuração:</strong><br>
+                <code>http://localhost:8080/setup_final.php</code>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="sistema_final.html" class="button success">🚀 Acessar Sistema</a>
+            <a href="relatorios.html" class="button">📊 Ver Relatórios</a>
+            <a href="teste-botoes-relatorios.html" class="button">🧪 Testar Botões</a>
+        </div>
+
+        <div class="warning">
+            <h3>⚠️ Problemas Comuns</h3>
+            <ul>
+                <li><strong>Erro de conexão:</strong> Verifique se o Apache está rodando no XAMPP</li>
+                <li><strong>Porta ocupada:</strong> Feche outros programas que usem a porta 8080</li>
+                <li><strong>Firewall:</strong> Permita o XAMPP no firewall do Windows</li>
+                <li><strong>Permissões:</strong> Execute o XAMPP como administrador</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3>🎯 Botões dos Relatórios</h3>
+            <p>Os botões dos relatórios estão funcionais em:</p>
+            <ul>
+                <li><strong>Relatório de Cursos</strong> - Análise completa dos cursos</li>
+                <li><strong>Relatório de Usuários</strong> - Estatísticas dos usuários</li>
+                <li><strong>Relatório Financeiro</strong> - Análise financeira</li>
+                <li><strong>Relatório de Agendamentos</strong> - Análise de aulas</li>
+            </ul>
+            <p><a href="relatorios.html" class="button success">📊 Acessar Relatórios</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Verificar se o servidor está funcionando
+        function verificarConexao() {
+            const status = document.createElement('div');
+            status.innerHTML = '🔍 Verificando conexão...';
+            status.style.cssText = 'background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center;';
+            document.body.appendChild(status);
+            
+            fetch('http://localhost:8080/')
+                .then(response => {
+                    if (response.ok) {
+                        status.innerHTML = '✅ Servidor funcionando na porta 8080!';
+                        status.style.color = 'green';
+                        status.style.background = '#d4edda';
+                    } else {
+                        throw new Error('Servidor não responde');
+                    }
+                })
+                .catch(error => {
+                    status.innerHTML = '❌ Servidor não está funcionando. Inicie o XAMPP.';
+                    status.style.color = 'red';
+                    status.style.background = '#f8d7da';
+                });
+        }
+        
+        // Verificar automaticamente
+        setTimeout(verificarConexao, 3000);
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

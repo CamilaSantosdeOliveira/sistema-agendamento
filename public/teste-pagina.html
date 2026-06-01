@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Teste</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .test-button {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .test-button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🎯 Página de Teste - EduConnect</h1>
+        <p>Esta é uma página de teste para verificar se o sistema está funcionando.</p>
+        
+        <h2>Funcionalidades de Teste:</h2>
+        <ul>
+            <li>✅ HTML básico funcionando</li>
+            <li>✅ CSS aplicado corretamente</li>
+            <li>✅ JavaScript interativo</li>
+        </ul>
+        
+        <button class="test-button" onclick="testarJavaScript()">Testar JavaScript</button>
+        <button class="test-button" onclick="mostrarData()">Mostrar Data/Hora</button>
+        
+        <div id="resultado" style="margin-top: 20px; padding: 10px; background: #e9ecef; border-radius: 5px;"></div>
+        
+        <hr style="margin: 30px 0;">
+        
+        <h3>Links para as Páginas Principais:</h3>
+        <p><a href="gestao-conteudo.html">📚 Gestão de Conteúdo</a></p>
+        <p><a href="sistema-avaliacao.html">📝 Sistema de Avaliação</a></p>
+        <p><a href="comunicacao-interacao.html">💬 Comunicação</a></p>
+        <p><a href="relatorios-detalhados.html">📊 Relatórios</a></p>
+        <p><a href="gestao-usuarios.html">👥 Gestão de Usuários</a></p>
+        <p><a href="agendamentos-eventos.html">📅 Agendamentos</a></p>
+        <p><a href="dashboard.html">🏠 Dashboard Principal</a></p>
+    </div>
+
+    <script>
+        function testarJavaScript() {
+            const resultado = document.getElementById('resultado');
+            resultado.innerHTML = '<strong>✅ JavaScript funcionando perfeitamente!</strong><br>Timestamp: ' + new Date().toLocaleString('pt-BR');
+        }
+        
+        function mostrarData() {
+            const resultado = document.getElementById('resultado');
+            const agora = new Date();
+            resultado.innerHTML = `
+                <strong>📅 Data e Hora Atual:</strong><br>
+                <strong>Data:</strong> ${agora.toLocaleDateString('pt-BR')}<br>
+                <strong>Hora:</strong> ${agora.toLocaleTimeString('pt-BR')}<br>
+                <strong>Timestamp:</strong> ${agora.getTime()}
+            `;
+        }
+        
+        // Teste automático ao carregar a página
+        window.onload = function() {
+            console.log('✅ Página carregada com sucesso!');
+            document.getElementById('resultado').innerHTML = '<strong>🚀 Página carregada e funcionando!</strong>';
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento - EduConnect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container { 
+            max-width: 600px; 
+            margin: 0 auto; 
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 25px; 
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            backdrop-filter: blur(20px);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            padding: 50px 30px;
+            text-align: center;
+            color: white;
+        }
+        
+        h1 { 
+            font-size: 2.5em; 
+            margin-bottom: 15px;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        .content {
+            padding: 50px 30px;
+        }
+        
+        .resumo-pedido {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 5px solid #0ea5e9;
+        }
+        
+        .resumo-pedido h3 {
+            color: #0c4a6e;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+        }
+        
+        .detalhe {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(14, 165, 233, 0.2);
+        }
+        
+        .valor-total {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #10b981;
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 12px;
+        }
+        
+        .metodos-pagamento {
+            margin: 30px 0;
+        }
+        
+        .metodos-pagamento h3 {
+            color: #1f2937;
+            margin-bottom: 20px;
+        }
+        
+        .metodo {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .metodo:hover {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.05);
+        }
+        
+        .metodo.selecionado {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+        
+        .metodo input[type="radio"] {
+            margin-right: 15px;
+            transform: scale(1.2);
+        }
+        
+        .metodo-icon {
+            font-size: 2em;
+            margin-right: 15px;
+        }
+        
+        .metodo-info h4 {
+            color: #1f2937;
+            margin-bottom: 5px;
+        }
+        
+        .metodo-info p {
+            color: #6b7280;
+            font-size: 0.9em;
+        }
+        
+        .form-cartao {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        .form-cartao.ativo {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+        
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+        }
+        
+        .btn-pagar {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-pagar:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-pagar:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .seguranca {
+            text-align: center;
+            margin: 20px 0;
+            color: #6b7280;
+            font-size: 0.9em;
+        }
+        
+        .seguranca .icon {
+            color: #10b981;
+            margin-right: 8px;
+        }
+        
+        .resultado {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+        }
+        
+        .resultado.sucesso {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+        
+        .resultado.erro {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .loading.ativo {
+            display: block;
+        }
+        
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #10b981;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💳 Pagamento Seguro</h1>
+            <p>Finalize sua aula particular</p>
+        </div>
+        
+        <div class="content">
+            <div class="resumo-pedido">
+                <h3>📋 Resumo do Pedido</h3>
+                <div id="detalhes-aula"></div>
+                <div class="valor-total" id="valor-total">
+                    Carregando...
+                </div>
+            </div>
+            
+            <div class="metodos-pagamento">
+                <h3>💰 Escolha a forma de pagamento</h3>
+                
+                <div class="metodo" onclick="selecionarMetodo('cartao')">
+                    <input type="radio" name="metodo" value="cartao" id="cartao">
+                    <div class="metodo-icon">💳</div>
+                    <div class="metodo-info">
+                        <h4>Cartão de Crédito</h4>
+                        <p>Pagamento instantâneo e seguro</p>
+                    </div>
+                </div>
+                
+                <div class="metodo" onclick="selecionarMetodo('pix')">
+                    <input type="radio" name="metodo" value="pix" id="pix">
+                    <div class="metodo-icon">📱</div>
+                    <div class="metodo-info">
+                        <h4>PIX</h4>
+                        <p>Transferência instantânea</p>
+                    </div>
+                </div>
+                
+                <div class="metodo" onclick="selecionarMetodo('boleto')">
+                    <input type="radio" name="metodo" value="boleto" id="boleto">
+                    <div class="metodo-icon">🧾</div>
+                    <div class="metodo-info">
+                        <h4>Boleto Bancário</h4>
+                        <p>Vencimento em 3 dias úteis</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-cartao" id="form-cartao">
+                <h4 style="margin-bottom: 20px; color: #1f2937;">💳 Dados do Cartão</h4>
+                
+                <div class="form-group">
+                    <label>Número do Cartão</label>
+                    <input type="text" id="numero-cartao" placeholder="1234 5678 9012 3456" maxlength="19">
+                </div>
+                
+                <div class="form-group">
+                    <label>Nome no Cartão</label>
+                    <input type="text" id="nome-cartao" placeholder="Como impresso no cartão">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Validade</label>
+                        <input type="text" id="validade" placeholder="MM/AA" maxlength="5">
+                    </div>
+                    <div class="form-group">
+                        <label>CVV</label>
+                        <input type="text" id="cvv" placeholder="123" maxlength="4">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="seguranca">
+                <span class="icon">🔒</span>
+                Pagamento 100% seguro e criptografado
+            </div>
+            
+            <div class="loading" id="loading">
+                <div class="loading-spinner"></div>
+                <p>Processando pagamento...</p>
+            </div>
+            
+            <div class="resultado" id="resultado"></div>
+            
+            <button class="btn-pagar" onclick="processarPagamento()" disabled>
+                💳 Finalizar Pagamento
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let agendamentoId = null;
+        let valorAula = 0;
+        let metodoSelecionado = null;
+        
+        // Obter dados da URL
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            agendamentoId = urlParams.get('agendamento');
+            
+            if (agendamentoId) {
+                carregarDetalhesAula();
+            } else {
+                document.getElementById('detalhes-aula').innerHTML = 
+                    '<p style="color: #ef4444;">❌ Agendamento não encontrado</p>';
+            }
+            
+            carregarPrecos();
+            configurarMascaras();
+        };
+        
+        // Carregar detalhes da aula
+        async function carregarDetalhesAula() {
+            try {
+                const response = await fetch(`simple_api.php`);
+                const agendamentos = await response.json();
+                const aula = agendamentos.find(a => a.id == agendamentoId);
+                
+                if (aula) {
+                    const data = new Date(aula.data + 'T00:00:00').toLocaleDateString('pt-BR');
+                    const materiaIcons = {
+                        'matematica': '🔢', 'portugues': '📝', 'ingles': '🇺🇸',
+                        'fisica': '⚛️', 'quimica': '🧪', 'biologia': '🧬'
+                    };
+                    const icon = materiaIcons[aula.servico] || '📖';
+                    
+                    document.getElementById('detalhes-aula').innerHTML = `
+                        <div class="detalhe">
+                            <span><strong>👤 Aluno:</strong></span>
+                            <span>${aula.nome}</span>
+                        </div>
+                        <div class="detalhe">
+                            <span><strong>👨‍🏫 Professor:</strong></span>
+                            <span>${aula.professor || 'A definir'}</span>
+                        </div>
+                        <div class="detalhe">
+                            <span><strong>📚 Matéria:</strong></span>
+                            <span>${icon} ${aula.servico}</span>
+                        </div>
+                        <div class="detalhe">
+                            <span><strong>📅 Data:</strong></span>
+                            <span>${data}</span>
+                        </div>
+                        <div class="detalhe">
+                            <span><strong>⏰ Horário:</strong></span>
+                            <span>${aula.hora}</span>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Erro ao carregar aula:', error);
+            }
+        }
+        
+        // Carregar preços
+        async function carregarPrecos() {
+            try {
+                const response = await fetch('pagamento_api.php?action=precos');
+                const result = await response.json();
+                
+                if (result.sucesso) {
+                    // Para demonstração, usando matemática como padrão
+                    valorAula = result.precos.matematica || 45.00;
+                    
+                    document.getElementById('valor-total').innerHTML = `
+                        <div>Total: ${valorAula.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</div>
+                        <small style="opacity: 0.8;">Aula particular de 1 hora</small>
+                    `;
+                }
+            } catch (error) {
+                valorAula = 45.00;
+                document.getElementById('valor-total').textContent = 
+                    `Total: ${valorAula.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}`;
+            }
+        }
+        
+        // Selecionar método de pagamento
+        function selecionarMetodo(metodo) {
+            // Remover seleção anterior
+            document.querySelectorAll('.metodo').forEach(m => m.classList.remove('selecionado'));
+            document.querySelectorAll('input[name="metodo"]').forEach(i => i.checked = false);
+            
+            // Selecionar atual
+            document.getElementById(metodo).checked = true;
+            document.getElementById(metodo).closest('.metodo').classList.add('selecionado');
+            
+            metodoSelecionado = metodo;
+            
+            // Mostrar/ocultar formulário do cartão
+            const formCartao = document.getElementById('form-cartao');
+            if (metodo === 'cartao') {
+                formCartao.classList.add('ativo');
+            } else {
+                formCartao.classList.remove('ativo');
+            }
+            
+            // Habilitar botão
+            document.querySelector('.btn-pagar').disabled = false;
+        }
+        
+        // Configurar máscaras dos campos
+        function configurarMascaras() {
+            // Máscara do cartão
+            document.getElementById('numero-cartao').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+                let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+                if (formattedValue.length > 19) formattedValue = formattedValue.substring(0, 19);
+                e.target.value = formattedValue;
+            });
+            
+            // Máscara da validade
+            document.getElementById('validade').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length >= 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                e.target.value = value;
+            });
+            
+            // Máscara do CVV
+            document.getElementById('cvv').addEventListener('input', function(e) {
+                e.target.value = e.target.value.replace(/\D/g, '');
+            });
+        }
+        
+        // Processar pagamento
+        async function processarPagamento() {
+            if (!metodoSelecionado) {
+                mostrarResultado('Selecione uma forma de pagamento', 'erro');
+                return;
+            }
+            
+            // Validar dados do cartão se necessário
+            if (metodoSelecionado === 'cartao') {
+                const numero = document.getElementById('numero-cartao').value.replace(/\s/g, '');
+                const nome = document.getElementById('nome-cartao').value;
+                const validade = document.getElementById('validade').value;
+                const cvv = document.getElementById('cvv').value;
+                
+                if (!numero || numero.length < 16 || !nome || !validade || !cvv) {
+                    mostrarResultado('Preencha todos os dados do cartão', 'erro');
+                    return;
+                }
+            }
+            
+            // Mostrar loading
+            document.getElementById('loading').classList.add('ativo');
+            document.querySelector('.btn-pagar').disabled = true;
+            
+            try {
+                const response = await fetch('pagamento_api.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'criar_pagamento',
+                        agendamento_id: agendamentoId,
+                        metodo_pagamento: metodoSelecionado
+                    })
+                });
+                
+                const result = await response.json();
+                
+                document.getElementById('loading').classList.remove('ativo');
+                
+                if (result.sucesso) {
+                    if (result.status === 'aprovado') {
+                        mostrarResultado(`🎉 Pagamento aprovado! Transação: ${result.transacao_id}`, 'sucesso');
+                        
+                        setTimeout(() => {
+                            window.location.href = 'sistema_final.html';
+                        }, 3000);
+                    } else if (result.status === 'rejeitado') {
+                        mostrarResultado('❌ Pagamento rejeitado. Verifique os dados do cartão.', 'erro');
+                        document.querySelector('.btn-pagar').disabled = false;
+                    } else {
+                        mostrarResultado('⏳ Pagamento pendente de processamento', 'sucesso');
+                    }
+                } else {
+                    mostrarResultado(`❌ ${result.mensagem}`, 'erro');
+                    document.querySelector('.btn-pagar').disabled = false;
+                }
+                
+            } catch (error) {
+                document.getElementById('loading').classList.remove('ativo');
+                mostrarResultado('❌ Erro de conexão. Tente novamente.', 'erro');
+                document.querySelector('.btn-pagar').disabled = false;
+            }
+        }
+        
+        // Mostrar resultado
+        function mostrarResultado(mensagem, tipo) {
+            const resultado = document.getElementById('resultado');
+            resultado.textContent = mensagem;
+            resultado.className = `resultado ${tipo}`;
+            resultado.style.display = 'block';
+            
+            setTimeout(() => {
+                resultado.style.display = 'none';
+            }, 10000);
+        }
+    </script>
+</body>
+</html>

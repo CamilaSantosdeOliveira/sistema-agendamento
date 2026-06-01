@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Plataforma Educacional</title>
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #3498db 0%, #9b59b6 100%);
+            --accent-color: #3498db;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --background-light: #f8f9fa;
+            --border-light: #e9ecef;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.15);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.2);
+            --border-radius: 16px;
+            --border-radius-sm: 8px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+        
+        /* Login Screen */
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            padding: 2rem;
+            position: relative;
+        }
+
+        .login-container::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 450px;
+            animation: fadeInUp 0.8s ease;
+            position: relative;
+            z-index: 10;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+        
+        .login-header h1 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .login-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border-light);
+            border-radius: var(--border-radius-sm);
+            font-size: 1rem;
+            transition: var(--transition);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--border-radius-sm);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            gap: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: var(--text-secondary);
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-outline:hover {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+        
+        .btn-full {
+            width: 100%;
+        }
+        
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+        
+        .quick-login {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .quick-login p {
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+        
+        .quick-login-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .error-message {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            border: 1px solid #fecaca;
+        }
+        
+        /* Desktop Layout */
+        .desktop-layout {
+            display: grid;
+            grid-template-rows: auto 1fr;
+            min-height: 100vh;
+            background: white;
+            margin: 0;
+            max-width: none;
+            border-radius: 0;
+            overflow: visible;
+            box-shadow: none;
+        }
+        
+        .desktop-header {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .header-left h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: none;
+            -webkit-background-clip: initial;
+            -webkit-text-fill-color: initial;
+            background-clip: initial;
+            color: #111827;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .btn-icon {
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--border-light);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            font-size: 1.2rem;
+        }
+        
+        .btn-icon:hover {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+        
+        .desktop-main {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: calc(100vh - 70px);
+            gap: 0;
+        }
+        
+        .sidebar {
+            background: white;
+            color: #374151;
+            padding: 0;
+            position: relative;
+            overflow-y: auto;
+            border-right: 1px solid #e5e7eb;
+        }
+
+        .sidebar::before {
+            display: none;
+        }
+        
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            padding: 1rem 0;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1.5rem;
+            color: #6b7280;
+            text-decoration: none;
+            border-radius: 0;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            font-weight: 500;
+            position: relative;
+            margin: 0;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item::before {
+            display: none;
+        }
+        
+        .nav-item:hover {
+            background: #f3f4f6;
+            color: #374151;
+            transform: none;
+        }
+
+        .nav-item:hover::before {
+            display: none;
+        }
+        
+        .nav-item.active {
+            background: #eff6ff;
+            color: #1d4ed8;
+            font-weight: 600;
+            border-left-color: #1d4ed8;
+        }
+
+        .nav-item.active::before {
+            display: none;
+        }
+
+        .nav-icon {
+            font-size: 1.2rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .content-area {
+            padding: 2rem;
+            background: #f9fafb;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .content-area::before {
+            display: none;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            padding: 0.75rem;
+            border-radius: var(--border-radius-sm);
+            transition: var(--transition);
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+        
+        .user-profile:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            background: var(--secondary-gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .user-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            min-width: 220px;
+            z-index: 1000;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        
+        .user-dropdown a {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .user-dropdown a:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+        
+        /* Dashboard */
+        .dashboard {
+            max-width: none;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .dashboard-header {
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+        
+        .dashboard-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #111827;
+            font-weight: 700;
+            background: none;
+            -webkit-background-clip: initial;
+            -webkit-text-fill-color: initial;
+            background-clip: initial;
+        }
+
+        .dashboard-header p {
+            font-size: 1rem;
+            color: #6b7280;
+            font-weight: 400;
+        }
+        
+        .dashboard-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .metric-card {
+            background: white;
+            backdrop-filter: none;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid #e5e7eb;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            display: none;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .metric-card h3 {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            text-transform: none;
+            letter-spacing: normal;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #111827;
+            background: none;
+            -webkit-background-clip: initial;
+            -webkit-text-fill-color: initial;
+            background-clip: initial;
+        }
+        
+        /* Screen management */
+        .screen {
+            display: none;
+        }
+        
+        .screen.active {
+            display: block;
+        }
+        
+        /* Dark theme */
+        [data-theme="dark"] {
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --background-light: #1a1a1a;
+            --border-light: #333333;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.4);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.5);
+        }
+        
+        [data-theme="dark"] .desktop-layout {
+            background: rgba(26, 26, 26, 0.95);
+        }
+        
+        [data-theme="dark"] .desktop-header {
+            background: rgba(26, 26, 26, 0.95);
+            border-color: #333333;
+        }
+        
+        [data-theme="dark"] .content-area {
+            background: #1a1a1a;
+        }
+        
+        [data-theme="dark"] .login-card,
+        [data-theme="dark"] .metric-card {
+            background: rgba(45, 45, 45, 0.95);
+            color: var(--text-primary);
+            border-color: #333333;
+        }
+        
+        [data-theme="dark"] .form-group input {
+            background: rgba(45, 45, 45, 0.8);
+            border-color: #333333;
+            color: var(--text-primary);
+        }
+        
+        [data-theme="dark"] .form-group input:focus {
+            background: #2d2d2d;
+            border-color: var(--accent-color);
+        }
+        
+        [data-theme="dark"] .user-dropdown {
+            background: rgba(45, 45, 45, 0.95);
+            border-color: #333333;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .desktop-layout {
+                margin: 1rem;
+                border-radius: var(--border-radius);
+            }
+            
+            .desktop-main {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+            
+            .content-area {
+                padding: 1.5rem;
+            }
+            
+            .dashboard-header h1 {
+                font-size: 2rem;
+            }
+            
+            .dashboard-metrics {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .login-card {
+                margin: 1rem;
+                padding: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        /* Loading states */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--background-light);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-gradient);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="screen active">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-header">
+                    <div class="logo">🎓</div>
+                    <h1>EduConnect</h1>
+                    <p>Acesse sua plataforma educacional</p>
+                </div>
+                
+                <form id="loginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="username">Usuário</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    
+                    <div id="errorMessage" class="error-message" style="display: none;"></div>
+                    
+                    <button type="submit" class="btn btn-primary btn-full">Entrar</button>
+                </form>
+                
+                <div class="quick-login">
+                    <p>Acesso rápido:</p>
+                    <div class="quick-login-buttons">
+                        <button onclick="quickLogin('admin', 'admin123')" class="btn btn-outline btn-small">Admin</button>
+                        <button onclick="quickLogin('prof', 'prof123')" class="btn btn-outline btn-small">Professor</button>
+                        <button onclick="quickLogin('aluno', 'aluno123')" class="btn btn-outline btn-small">Aluno</button>
+                        <button onclick="quickLogin('teste', '123')" class="btn btn-outline btn-small">Teste</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Layout -->
+    <div id="desktopLayout" class="desktop-layout" style="display: none;">
+        <!-- Header -->
+        <header class="desktop-header">
+            <div class="header-left">
+                <div class="logo">🎓</div>
+                <h1>EduConnect</h1>
+            </div>
+            
+            <div class="header-right">
+                <button id="themeToggle" class="btn btn-icon" onclick="toggleTheme()">🌙</button>
+                
+                <div class="user-profile" onclick="toggleUserMenu()">
+                    <div id="userAvatar" class="user-avatar">U</div>
+                    <div class="user-info">
+                        <span id="userNameDisplay" class="user-name">Usuário</span>
+                    </div>
+                    <div class="dropdown-arrow">▼</div>
+                    
+                    <div id="userDropdown" class="user-dropdown" style="display: none;">
+                        <a href="#" onclick="logout()">🚪 Sair</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="desktop-main">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <a href="#" class="nav-item active" onclick="showSection('dashboard')" data-screen="dashboard">
+                        <span class="nav-icon">📊</span>
+                        <span class="nav-text">Dashboard</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showSection('calendar')" data-screen="calendar">
+                        <span class="nav-icon">📅</span>
+                        <span class="nav-text">Calendário</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showSection('chat')" data-screen="chat">
+                        <span class="nav-icon">💬</span>
+                        <span class="nav-text">Mensagens</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showSection('notifications')" data-screen="notifications">
+                        <span class="nav-icon">🔔</span>
+                        <span class="nav-text">Notificações</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showSection('analytics')" data-screen="analytics">
+                        <span class="nav-icon">📈</span>
+                        <span class="nav-text">Relatórios</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="showSection('settings')" data-screen="settings">
+                        <span class="nav-icon">⚙️</span>
+                        <span class="nav-text">Configurações</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Content Area -->
+            <main id="contentArea" class="content-area">
+                <div class="dashboard">
+                    <div class="dashboard-header">
+                        <h1>📊 Dashboard</h1>
+                        <p>Bem-vindo ao EduConnect! Aqui está seu resumo acadêmico.</p>
+                    </div>
+                    
+                    <div class="dashboard-metrics">
+                        <div class="metric-card">
+                            <h3>Aulas Assistidas</h3>
+                            <div class="metric-value">24</div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <h3>Média Geral</h3>
+                            <div class="metric-value">8.7</div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <h3>Horas de Estudo</h3>
+                            <div class="metric-value">156h</div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <h3>Próximas Aulas</h3>
+                            <div class="metric-value">3</div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Variáveis globais
+        let currentUser = null;
+        
+        // Usuários demo
+        const DEMO_USERS = {
+            'admin': { password: 'admin123', name: 'Administrador', role: 'admin' },
+            'prof': { password: 'prof123', name: 'Professor', role: 'professor' },
+            'aluno': { password: 'aluno123', name: 'Estudante', role: 'student' },
+            'teste': { password: '123', name: 'Usuário Teste', role: 'test' }
+        };
+        
+        // Inicialização INSTANTÂNEA
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎓 EduConnect carregando...');
+            
+            // Verificar usuário salvo
+            const savedUser = localStorage.getItem('educonnect-user');
+            if (savedUser) {
+                try {
+                    currentUser = JSON.parse(savedUser);
+                    showMainApp();
+                } catch (e) {
+                    showLoginScreen();
+                }
+            } else {
+                showLoginScreen();
+            }
+            
+            setupLoginForm();
+            loadTheme();
+            
+            console.log('✅ EduConnect carregado instantaneamente!');
+        });
+        
+        function showLoginScreen() {
+            document.getElementById('loginScreen').style.display = 'block';
+            document.getElementById('desktopLayout').style.display = 'none';
+        }
+        
+        function showMainApp() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('desktopLayout').style.display = 'grid';
+            updateUserInfo();
+            showSection('dashboard');
+        }
+        
+        function setupLoginForm() {
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const username = document.getElementById('username').value;
+                    const password = document.getElementById('password').value;
+                    login(username, password);
+                });
+            }
+        }
+        
+        function login(username, password) {
+            if (DEMO_USERS[username] && DEMO_USERS[username].password === password) {
+                currentUser = {
+                    username: username,
+                    name: DEMO_USERS[username].name,
+                    role: DEMO_USERS[username].role
+                };
+                
+                localStorage.setItem('educonnect-user', JSON.stringify(currentUser));
+                showNotification('✅ Login realizado com sucesso!', 'success');
+                
+                setTimeout(() => {
+                    showMainApp();
+                }, 300);
+            } else {
+                const errorDiv = document.getElementById('errorMessage');
+                if (errorDiv) {
+                    errorDiv.textContent = '❌ Usuário ou senha incorretos';
+                    errorDiv.style.display = 'block';
+                }
+                showNotification('❌ Credenciais inválidas!', 'error');
+            }
+        }
+        
+        function quickLogin(username, password) {
+            document.getElementById('username').value = username;
+            document.getElementById('password').value = password;
+            setTimeout(() => login(username, password), 100);
+        }
+        
+        function updateUserInfo() {
+            if (!currentUser) return;
+            
+            const userNameDisplay = document.getElementById('userNameDisplay');
+            const userAvatar = document.getElementById('userAvatar');
+            
+            const userName = currentUser.name;
+            const userInitial = userName.charAt(0).toUpperCase();
+            
+            if (userNameDisplay) userNameDisplay.textContent = userName;
+            if (userAvatar) userAvatar.textContent = userInitial;
+        }
+        
+        function showSection(sectionName) {
+            // Atualizar navegação ativa
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-screen') === sectionName) {
+                    item.classList.add('active');
+                }
+            });
+            
+            const contentArea = document.getElementById('contentArea');
+            
+            switch(sectionName) {
+                case 'dashboard':
+                    contentArea.innerHTML = `
+                        <div class="dashboard">
+                            <div class="dashboard-header">
+                                <h1>📊 Dashboard</h1>
+                                <p>Bem-vindo, ${currentUser ? currentUser.name : 'Usuário'}! Aqui está seu resumo acadêmico.</p>
+                            </div>
+                            
+                            <div class="dashboard-metrics">
+                                <div class="metric-card">
+                                    <h3>Aulas Assistidas</h3>
+                                    <div class="metric-value">24</div>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h3>Média Geral</h3>
+                                    <div class="metric-value">8.7</div>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h3>Horas de Estudo</h3>
+                                    <div class="metric-value">156h</div>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h3>Próximas Aulas</h3>
+                                    <div class="metric-value">3</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'calendar':
+                    contentArea.innerHTML = `
+                        <div class="dashboard">
+                            <div class="dashboard-header">
+                                <h1>📅 Calendário Acadêmico</h1>
+                                <p>Organize seus estudos e compromissos educacionais</p>
+                            </div>
+                            
+                            <div class="dashboard-metrics">
+                                <div class="metric-card">
+                                    <h3>Aulas Hoje</h3>
+                                    <div class="metric-value">3</div>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h3>Esta Semana</h3>
+                                    <div class="metric-value">12</div>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h3>Próxima Aula</h3>
+                                    <div class="metric-value">14:00</div>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h3>Provas Pendentes</h3>
+                                    <div class="metric-value">2</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'chat':
+                    contentArea.innerHTML = `
+                        <div class="dashboard">
+                            <div class="dashboard-header">
+                                <h1>💬 Central de Mensagens</h1>
+                                <p>Conecte-se com professores, colegas e toda comunidade acadêmica</p>
+                            </div>
+                            
+                            <div class="dashboard-metrics">
+                                <div class="metric-card">
+                                    <h3>Mensagens Não Lidas</h3>
+                                    <div class="metric-value">5</div>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h3>Conversas Ativas</h3>
+                                    <div class="metric-value">8</div>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h3>Grupo da Turma</h3>
+                                    <div class="metric-value">23</div>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h3>Professores Online</h3>
+                                    <div class="metric-value">4</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'notifications':
+                    contentArea.innerHTML = `
+                        <div class="dashboard">
+                            <div class="dashboard-header">
+                                <h1>🔔 Central de Notificações</h1>
+                                <p>Mantenha-se atualizado com avisos, lembretes e comunicados importantes</p>
+                            </div>
+                            
+                            <div class="dashboard-metrics">
+                                <div class="metric-card">
+                                    <h3>Não Lidas</h3>
+                                    <div class="metric-value">3</div>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h3>Avisos Importantes</h3>
+                                    <div class="metric-value">2</div>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h3>Lembretes Ativos</h3>
+                                    <div class="metric-value">5</div>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h3>Esta Semana</h3>
+                                    <div class="metric-value">12</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'analytics':
+                    contentArea.innerHTML = `
+                        <div class="dashboard">
+                            <div class="dashboard-header">
+                                <h1>📈 Relatórios & Analytics</h1>
+                                <p>Analise seu desempenho acadêmico e monitore seu progresso de aprendizado</p>
+                            </div>
+                            
+                            <div class="dashboard-metrics">
+                                <div class="metric-card">
+                                    <h3>Progresso Geral</h3>
+                                    <div class="metric-value">87%</div>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h3>Melhor Matéria</h3>
+                                    <div class="metric-value">Matemática</div>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h3>Tempo de Estudo Diário</h3>
+                                    <div class="metric-value">4.2h</div>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h3>Rank na Turma</h3>
+                                    <div class="metric-value">3º</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'settings':
+                    contentArea.innerHTML = `
+                        <div class="dashboard">
+                            <div class="dashboard-header">
+                                <h1>⚙️ Configurações do Sistema</h1>
+                                <p>Personalize sua experiência educacional e ajuste suas preferências</p>
+                            </div>
+                            
+                            <div class="dashboard-metrics">
+                                <div class="metric-card">
+                                    <h3>Perfil Acadêmico</h3>
+                                    <div class="metric-value">✓ Completo</div>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h3>Notificações</h3>
+                                    <div class="metric-value">Ativas</div>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h3>Tema Visual</h3>
+                                    <div class="metric-value" id="currentTheme">Claro</div>
+                                </div>
+                                
+                                <div class="metric-card">
+                                    <h3>Idioma</h3>
+                                    <div class="metric-value">Português</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+            }
+        }
+        
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('educonnect-theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeButton(savedTheme);
+        }
+        
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('educonnect-theme', newTheme);
+            updateThemeButton(newTheme);
+            showNotification('🎨 Tema alterado para: ' + (newTheme === 'dark' ? 'Escuro' : 'Claro'), 'info');
+        }
+        
+        function updateThemeButton(theme) {
+            const themeToggle = document.getElementById('themeToggle');
+            const icon = theme === 'dark' ? '☀️' : '🌙';
+            
+            if (themeToggle) themeToggle.textContent = icon;
+            
+            const currentThemeElement = document.getElementById('currentTheme');
+            if (currentThemeElement) {
+                currentThemeElement.textContent = theme === 'dark' ? 'Escuro' : 'Claro';
+            }
+        }
+        
+        function toggleUserMenu() {
+            const dropdown = document.getElementById('userDropdown');
+            if (dropdown) {
+                dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+            }
+        }
+        
+        function logout() {
+            if (confirm('Tem certeza que deseja sair?')) {
+                localStorage.removeItem('educonnect-user');
+                currentUser = null;
+                showNotification('👋 Logout realizado com sucesso!', 'info');
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
+            }
+        }
+        
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 9999;
+                max-width: 300px;
+                font-weight: 500;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            if (!document.getElementById('notificationStyles')) {
+                const style = document.createElement('style');
+                style.id = 'notificationStyles';
+                style.textContent = `
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOut {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+        
+        // Event listeners globais
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('userDropdown');
+            const userProfile = document.querySelector('.user-profile');
+            
+            if (dropdown && userProfile && !userProfile.contains(event.target)) {
+                dropdown.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

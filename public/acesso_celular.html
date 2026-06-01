@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Acesso Mobile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #1e293b;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #64748b;
+            font-size: 16px;
+        }
+        
+        .step {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .step h3 {
+            color: #1e293b;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .step p {
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+        
+        .link-box {
+            background: #f0f9ff;
+            border: 2px dashed #3b82f6;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            word-break: break-all;
+        }
+        
+        .link-box a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .btn {
+            background: #3b82f6;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #10b981;
+        }
+        
+        .btn-secondary:hover {
+            background: #059669;
+        }
+        
+        .warning {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            color: #92400e;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .success {
+            background: #d1fae5;
+            border: 1px solid #10b981;
+            color: #065f46;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .ip-info {
+            background: #e0e7ff;
+            border: 1px solid #6366f1;
+            color: #3730a3;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .ip-info strong {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📱 EduConnect Mobile</h1>
+            <p>Acesse o sistema no seu celular</p>
+        </div>
+        
+        <div class="ip-info">
+            <strong>🌐 Seu IP na rede: 192.168.31.196</strong><br>
+            <small>Use este IP para acessar no celular</small>
+        </div>
+        
+        <div class="step">
+            <h3>📋 Passo 1: Verificar Conexão</h3>
+            <p>Certifique-se de que:</p>
+            <ul style="color: #64748b; margin-left: 20px;">
+                <li>✅ Seu PC e celular estão na mesma rede Wi-Fi</li>
+                <li>✅ O XAMPP está rodando (Apache e MySQL)</li>
+                <li>✅ O firewall não está bloqueando a porta 8080</li>
+            </ul>
+        </div>
+        
+        <div class="step">
+            <h3>🔗 Passo 2: Links para Acessar</h3>
+            <p>Use estes links no seu celular:</p>
+            
+            <div class="link-box">
+                <strong>Dashboard Principal:</strong><br>
+                <a href="http://192.168.31.196:8080/Sistema%20De%20Agendamento/public/" target="_blank">
+                    http://192.168.31.196:8080/Sistema%20De%20Agendamento/public/
+                </a>
+            </div>
+            
+            <div class="link-box">
+                <strong>Dashboard Completo:</strong><br>
+                <a href="http://192.168.31.196:8080/Sistema%20De%20Agendamento/public/dashboard_final.php" target="_blank">
+                    http://192.168.31.196:8080/Sistema%20De%20Agendamento/public/dashboard_final.php
+                </a>
+            </div>
+            
+            <div class="link-box">
+                <strong>App Mobile:</strong><br>
+                <a href="http://192.168.31.196:8080/Sistema%20De%20Agendamento/public/mobile_app.html" target="_blank">
+                    http://192.168.31.196:8080/Sistema%20De%20Agendamento/public/mobile_app.html
+                </a>
+            </div>
+        </div>
+        
+        <div class="step">
+            <h3>📱 Passo 3: Testar no Celular</h3>
+            <p>Clique nos botões abaixo para testar:</p>
+            
+            <a href="http://192.168.31.196:8080/Sistema%20De%20Agendamento/public/" class="btn" target="_blank">
+                🚀 Testar Dashboard
+            </a>
+            
+            <a href="http://192.168.31.196:8080/Sistema%20De%20Agendamento/public/mobile_app.html" class="btn btn-secondary" target="_blank">
+                📱 Testar App Mobile
+            </a>
+        </div>
+        
+        <div class="warning">
+            <strong>⚠️ Se não funcionar:</strong><br>
+            1. Verifique se o XAMPP está rodando<br>
+            2. Tente desativar o firewall temporariamente<br>
+            3. Confirme que PC e celular estão na mesma rede
+        </div>
+        
+        <div class="success">
+            <strong>✅ Dica:</strong><br>
+            Depois de acessar, você pode instalar como app no celular clicando nos 3 pontos (⋮) e selecionando "Adicionar à tela inicial"
+        </div>
+    </div>
+    
+    <script>
+        // Testar se o servidor está rodando
+        fetch('http://192.168.31.196:8080/Sistema%20De%20Agendamento/public/')
+            .then(response => {
+                if (response.ok) {
+                    console.log('✅ Servidor acessível via IP');
+                }
+            })
+            .catch(error => {
+                console.log('❌ Servidor não acessível via IP');
+            });
+    </script>
+</body>
+</html>

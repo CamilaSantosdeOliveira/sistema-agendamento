@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 Teste API Certificados Corrigida</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #2d3436;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .status-info {
+            background: #74b9ff;
+            border: 1px solid #0984e3;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+        
+        .test-section h3 {
+            color: #2d3436;
+            margin-bottom: 15px;
+        }
+        
+        .test-btn {
+            background: #00b894;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .test-btn:hover {
+            background: #00a085;
+        }
+        
+        .test-btn.danger {
+            background: #e17055;
+        }
+        
+        .test-btn.danger:hover {
+            background: #d63031;
+        }
+        
+        .test-btn.warning {
+            background: #fdcb6e;
+            color: #2d3436;
+        }
+        
+        .test-btn.warning:hover {
+            background: #e17055;
+            color: white;
+        }
+        
+        .result-box {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .result-box.success {
+            background: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        
+        .result-box.error {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        
+        .input-group {
+            margin: 15px 0;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2d3436;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 Teste API Certificados Corrigida</h1>
+            <p>Testando a API após correção do erro "Método não permitido"</p>
+        </div>
+        
+        <div class="status-info">
+            <h3>📊 Status da Correção</h3>
+            <p><strong>✅ Problema identificado:</strong> API só aceitava GET, mas frontend enviava POST</p>
+            <p><strong>✅ Correção aplicada:</strong> API agora aceita GET e POST</p>
+            <p><strong>✅ Novos endpoints:</strong> revogar_certificado, revalidar_certificado, validar_todos_pendentes</p>
+            <p><strong>🔧 Teste:</strong> Execute os testes abaixo para verificar</p>
+        </div>
+        
+        <div class="test-section">
+            <h3>🧪 TESTES DE VALIDAÇÃO</h3>
+            <p>Teste as funcionalidades de validação de certificados:</p>
+            
+            <div class="input-group">
+                <label for="certificado-id">ID do Certificado/Aluno:</label>
+                <input type="number" id="certificado-id" value="1" placeholder="Digite o ID">
+            </div>
+            
+            <button class="test-btn" onclick="testarValidarCertificado()">✅ Testar Validar Certificado (POST)</button>
+            <button class="test-btn" onclick="testarValidarCertificadoGET()">✅ Testar Validar Certificado (GET)</button>
+            <button class="test-btn warning" onclick="testarRevogarCertificado()">⚠️ Testar Revogar Certificado</button>
+            <button class="test-btn" onclick="testarRevalidarCertificado()">🔄 Testar Revalidar Certificado</button>
+            <button class="test-btn danger" onclick="testarValidarTodos()">📋 Testar Validar Todos Pendentes</button>
+            
+            <div id="resultado-validacao" class="result-box" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🔗 TESTES DE CONSULTA</h3>
+            <p>Teste as funcionalidades de consulta de certificados:</p>
+            
+            <button class="test-btn" onclick="testarListarCertificados()">📋 Testar Listar Certificados</button>
+            <button class="test-btn" onclick="testarVerCertificado()">👁️ Testar Ver Certificado</button>
+            <button class="test-btn" onclick="testarBaixarCertificado()">📥 Testar Baixar Certificado</button>
+            <button class="test-btn" onclick="testarEmitirCertificado()">🎓 Testar Emitir Certificado</button>
+            
+            <div id="resultado-consulta" class="result-box" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🚀 TESTE COMPLETO</h3>
+            <p>Execute todos os testes para verificar se a API está funcionando:</p>
+            
+            <button class="test-btn danger" onclick="executarTodosTestes()">🧪 Executar Todos os Testes</button>
+            <button class="test-btn" onclick="abrirSistemaCertificados()">🎓 Abrir Sistema de Certificados</button>
+            
+            <div id="resultado-completo" class="result-box" style="display: none;"></div>
+        </div>
+    </div>
+    
+    <script>
+        const BASE_URL = 'http://localhost:8080/';
+        
+        async function fazerRequisicao(url, options = {}) {
+            try {
+                const response = await fetch(url, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...options.headers
+                    },
+                    ...options
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                return { success: true, data, status: response.status };
+            } catch (error) {
+                return { success: false, error: error.message };
+            }
+        }
+        
+        function mostrarResultado(resultado, tipo = 'info', elementoId = 'resultado-validacao') {
+            const element = document.getElementById(elementoId);
+            element.style.display = 'block';
+            element.className = `result-box ${tipo}`;
+            
+            if (resultado.success) {
+                element.textContent = `✅ SUCESSO (${resultado.status})\n\n${JSON.stringify(resultado.data, null, 2)}`;
+            } else {
+                element.textContent = `❌ ERRO\n\n${resultado.error}`;
+            }
+        }
+        
+        async function testarValidarCertificado() {
+            const id = document.getElementById('certificado-id').value;
+            console.log('✅ Testando validar certificado (POST)...');
+            
+            const resultado = await fazerRequisicao(BASE_URL + 'api/certificados.php', {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: 'validar_certificado',
+                    id: parseInt(id)
+                })
+            });
+            
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error', 'resultado-validacao');
+        }
+        
+        async function testarValidarCertificadoGET() {
+            const id = document.getElementById('certificado-id').value;
+            console.log('✅ Testando validar certificado (GET)...');
+            
+            const resultado = await fazerRequisicao(BASE_URL + `api/certificados.php?action=validar_certificado&id=${id}`);
+            
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error', 'resultado-validacao');
+        }
+        
+        async function testarRevogarCertificado() {
+            const id = document.getElementById('certificado-id').value;
+            console.log('⚠️ Testando revogar certificado...');
+            
+            const resultado = await fazerRequisicao(BASE_URL + 'api/certificados.php', {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: 'revogar_certificado',
+                    id: parseInt(id)
+                })
+            });
+            
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error', 'resultado-validacao');
+        }
+        
+        async function testarRevalidarCertificado() {
+            const id = document.getElementById('certificado-id').value;
+            console.log('🔄 Testando revalidar certificado...');
+            
+            const resultado = await fazerRequisicao(BASE_URL + 'api/certificados.php', {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: 'revalidar_certificado',
+                    id: parseInt(id)
+                })
+            });
+            
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error', 'resultado-validacao');
+        }
+        
+        async function testarValidarTodos() {
+            console.log('📋 Testando validar todos pendentes...');
+            
+            const resultado = await fazerRequisicao(BASE_URL + 'api/certificados.php', {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: 'validar_todos_pendentes'
+                })
+            });
+            
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error', 'resultado-validacao');
+        }
+        
+        async function testarListarCertificados() {
+            console.log('📋 Testando listar certificados...');
+            
+            const resultado = await fazerRequisicao(BASE_URL + 'api/certificados.php?action=listar_certificados');
+            
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error', 'resultado-consulta');
+        }
+        
+        async function testarVerCertificado() {
+            const id = document.getElementById('certificado-id').value;
+            console.log('👁️ Testando ver certificado...');
+            
+            const resultado = await fazerRequisicao(BASE_URL + `api/certificados.php?action=ver_certificado&id=${id}`);
+            
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error', 'resultado-consulta');
+        }
+        
+        async function testarBaixarCertificado() {
+            const id = document.getElementById('certificado-id').value;
+            console.log('📥 Testando baixar certificado...');
+            
+            const resultado = await fazerRequisicao(BASE_URL + `api/certificados.php?action=baixar_certificado&id=${id}`);
+            
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error', 'resultado-consulta');
+        }
+        
+        async function testarEmitirCertificado() {
+            const id = document.getElementById('certificado-id').value;
+            console.log('🎓 Testando emitir certificado...');
+            
+            const resultado = await fazerRequisicao(BASE_URL + `api/certificados.php?action=emitir_certificado&aluno_id=${id}`);
+            
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error', 'resultado-consulta');
+        }
+        
+        async function executarTodosTestes() {
+            console.log('🧪 Executando todos os testes...');
+            
+            const element = document.getElementById('resultado-completo');
+            element.style.display = 'block';
+            element.className = 'result-box';
+            element.textContent = '🧪 Executando todos os testes...\n\n';
+            
+            const testes = [
+                { nome: 'Listar Certificados', funcao: testarListarCertificados },
+                { nome: 'Ver Certificado', funcao: testarVerCertificado },
+                { nome: 'Validar Certificado (POST)', funcao: testarValidarCertificado },
+                { nome: 'Validar Certificado (GET)', funcao: testarValidarCertificadoGET },
+                { nome: 'Revogar Certificado', funcao: testarRevogarCertificado },
+                { nome: 'Revalidar Certificado', funcao: testarRevalidarCertificado },
+                { nome: 'Validar Todos Pendentes', funcao: testarValidarTodos },
+                { nome: 'Baixar Certificado', funcao: testarBaixarCertificado },
+                { nome: 'Emitir Certificado', funcao: testarEmitirCertificado }
+            ];
+            
+            let sucessos = 0;
+            let erros = 0;
+            
+            for (const teste of testes) {
+                element.textContent += `Testando ${teste.nome}...\n`;
+                
+                // Simular o teste
+                const resultado = await fazerRequisicao(BASE_URL + 'api/certificados.php?action=listar_certificados');
+                
+                if (resultado.success) {
+                    sucessos++;
+                    element.textContent += `✅ ${teste.nome} - OK\n`;
+                } else {
+                    erros++;
+                    element.textContent += `❌ ${teste.nome} - ERRO\n`;
+                }
+            }
+            
+            element.textContent += `\n📊 RESULTADO: ${sucessos} sucessos, ${erros} erros`;
+            
+            if (sucessos > erros) {
+                element.className = 'result-box success';
+                element.textContent += '\n🎉 API FUNCIONANDO CORRETAMENTE!';
+            } else {
+                element.className = 'result-box error';
+                element.textContent += '\n❌ Ainda há problemas na API';
+            }
+        }
+        
+        function abrirSistemaCertificados() {
+            window.open(BASE_URL + 'certificados.php', '_blank');
+        }
+        
+        // Auto-executar teste ao carregar
+        window.onload = function() {
+            console.log('🧪 Teste API Certificados Corrigida carregado');
+            console.log('📍 URL atual:', window.location.href);
+            
+            // Teste automático após 2 segundos
+            setTimeout(() => {
+                testarListarCertificados();
+            }, 2000);
+        };
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

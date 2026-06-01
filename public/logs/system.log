@@ -1,0 +1,10 @@
+[2026-05-07 06:19:20] User: 10 | IP: ::1 | Action: curso_inscrito | Details: Curso ID: 5, Professor: Prof. André Oliveira
+[2026-05-07 06:19:46] User: 10 | IP: ::1 | Action: curso_inscrito | Details: Curso ID: 7, Professor: Prof. Marcelo Ferreira
+[2026-05-07 06:19:50] User: 10 | IP: ::1 | Action: curso_inscrito | Details: Curso ID: 6, Professor: Profa. Camila Rodrigues
+[2026-05-07 06:21:58] User: 10 | IP: ::1 | Action: curso_inscrito | Details: Curso ID: 2, Professor: Profa. Fernanda Costa
+[2026-05-07 06:22:14] User: 10 | IP: ::1 | Action: curso_inscrito | Details: Curso ID: 1, Professor: Prof. Ricardo Silva
+[2026-05-11 04:45:09] User: 10 | IP: ::1 | Action: curso_inscrito | Details: Curso ID: 8, Professor: teste
+[2026-05-11 05:11:20] User: 10 | IP: ::1 | Action: curso_inscrito | Details: Curso ID: 7, Professor: Prof. Marcelo Ferreira
+[2026-05-11 05:13:48] User: 10 | IP: ::1 | Action: curso_inscrito | Details: Curso ID: 4, Professor: Profa. Juliana Lima
+[2026-05-11 05:15:04] User: 1 | IP: unknown | Action: curso_inscrito | Details: Curso ID: 1, Professor: Prof. Ricardo Silva
+[2026-05-11 05:15:54] User: 10 | IP: ::1 | Action: curso_inscrito | Details: Curso ID: 3, Professor: Prof. Diego Santos

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 Teste API Certificados - Simples</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .test-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 14px;
+        }
+        
+        .test-btn:hover {
+            background: #0056b3;
+        }
+        
+        .test-btn.success {
+            background: #28a745;
+        }
+        
+        .test-btn.success:hover {
+            background: #1e7e34;
+        }
+        
+        .test-btn.danger {
+            background: #dc3545;
+        }
+        
+        .test-btn.danger:hover {
+            background: #c82333;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+        
+        .status-info {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            color: #004085;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 Teste API Certificados - Simples</h1>
+            <p>Testando se a API de certificados está funcionando corretamente</p>
+        </div>
+        
+        <div class="status-info">
+            <h3>📊 Status da API</h3>
+            <p><strong>URL da API:</strong> http://localhost:8080/api/certificados.php</p>
+            <p><strong>Método:</strong> GET</p>
+            <p><strong>Porta:</strong> 8080</p>
+        </div>
+        
+        <div>
+            <button class="test-btn success" onclick="testarListar()">📋 Listar Certificados</button>
+            <button class="test-btn" onclick="testarVerCertificado()">👁️ Ver Certificado ID 1</button>
+            <button class="test-btn" onclick="testarVerCertificado2()">👁️ Ver Certificado ID 2</button>
+            <button class="test-btn" onclick="testarValidar()">✅ Validar Certificado</button>
+            <button class="test-btn" onclick="testarEmitir()">📄 Emitir Certificado</button>
+            <button class="test-btn danger" onclick="testarTodos()">🧪 Testar Todos</button>
+        </div>
+        
+        <div id="resultado" class="result" style="display: none;"></div>
+    </div>
+    
+    <script>
+        const API_URL = 'http://localhost:8080/api/certificados.php';
+        
+        async function fazerRequisicao(url) {
+            try {
+                console.log('🔗 Fazendo requisição para:', url);
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                return { success: true, data, status: response.status };
+            } catch (error) {
+                console.error('❌ Erro na requisição:', error);
+                return { success: false, error: error.message };
+            }
+        }
+        
+        function mostrarResultado(resultado, tipo = 'info') {
+            const element = document.getElementById('resultado');
+            element.style.display = 'block';
+            element.className = `result ${tipo}`;
+            
+            if (resultado.success) {
+                element.textContent = `✅ SUCESSO (${resultado.status})\n\n${JSON.stringify(resultado.data, null, 2)}`;
+            } else {
+                element.textContent = `❌ ERRO\n\n${resultado.error}`;
+            }
+        }
+        
+        async function testarListar() {
+            console.log('📋 Testando listar certificados...');
+            const resultado = await fazerRequisicao(`${API_URL}?action=listar_certificados`);
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error');
+        }
+        
+        async function testarVerCertificado() {
+            console.log('👁️ Testando ver certificado ID 1...');
+            const resultado = await fazerRequisicao(`${API_URL}?action=ver_certificado&id=1`);
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error');
+        }
+        
+        async function testarVerCertificado2() {
+            console.log('👁️ Testando ver certificado ID 2...');
+            const resultado = await fazerRequisicao(`${API_URL}?action=ver_certificado&id=2`);
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error');
+        }
+        
+        async function testarValidar() {
+            console.log('✅ Testando validar certificado...');
+            const resultado = await fazerRequisicao(`${API_URL}?action=validar_certificado&codigo=CERT-A1B2C3D4-2024`);
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error');
+        }
+        
+        async function testarEmitir() {
+            console.log('📄 Testando emitir certificado...');
+            const resultado = await fazerRequisicao(`${API_URL}?action=emitir_certificado&aluno_id=10`);
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error');
+        }
+        
+        async function testarTodos() {
+            console.log('🧪 Executando todos os testes...');
+            
+            const element = document.getElementById('resultado');
+            element.style.display = 'block';
+            element.className = 'result info';
+            element.textContent = '🧪 Executando todos os testes...\n\n';
+            
+            // Teste 1: Listar
+            element.textContent += '1. Testando listar certificados...\n';
+            const listarResult = await fazerRequisicao(`${API_URL}?action=listar_certificados`);
+            element.textContent += listarResult.success ? '✅ Listar funcionando\n' : '❌ Listar com erro\n';
+            
+            // Teste 2: Ver certificado
+            element.textContent += '2. Testando ver certificado...\n';
+            const verResult = await fazerRequisicao(`${API_URL}?action=ver_certificado&id=1`);
+            element.textContent += verResult.success ? '✅ Ver certificado funcionando\n' : '❌ Ver certificado com erro\n';
+            
+            // Teste 3: Validar
+            element.textContent += '3. Testando validar certificado...\n';
+            const validarResult = await fazerRequisicao(`${API_URL}?action=validar_certificado&codigo=CERT-A1B2C3D4-2024`);
+            element.textContent += validarResult.success ? '✅ Validar funcionando\n' : '❌ Validar com erro\n';
+            
+            // Teste 4: Emitir
+            element.textContent += '4. Testando emitir certificado...\n';
+            const emitirResult = await fazerRequisicao(`${API_URL}?action=emitir_certificado&aluno_id=10`);
+            element.textContent += emitirResult.success ? '✅ Emitir funcionando\n' : '❌ Emitir com erro\n';
+            
+            element.textContent += '\n📊 RESULTADO FINAL';
+            
+            const sucessos = [listarResult.success, verResult.success, validarResult.success, emitirResult.success].filter(Boolean).length;
+            
+            if (sucessos === 4) {
+                element.className = 'result success';
+                element.textContent += '\n🎉 TODOS OS TESTES PASSARAM!';
+            } else if (sucessos >= 2) {
+                element.className = 'result info';
+                element.textContent += `\n⚠️ ${sucessos}/4 testes passaram`;
+            } else {
+                element.className = 'result error';
+                element.textContent += `\n❌ Apenas ${sucessos}/4 testes passaram`;
+            }
+        }
+        
+        // Auto-executar teste ao carregar
+        window.onload = function() {
+            console.log('🧪 Teste API Certificados Simples carregado');
+            console.log('📍 URL atual:', window.location.href);
+            
+            // Teste automático após 1 segundo
+            setTimeout(() => {
+                testarListar();
+            }, 1000);
+        };
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 SOLUÇÃO - MySQL XAMPP</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .content {
+            padding: 30px;
+        }
+        .erro {
+            background: #ffe6e6;
+            border-left: 4px solid #ff4757;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .sucesso {
+            background: #e6ffe6;
+            border-left: 4px solid #2ed573;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .info {
+            background: #e6f3ff;
+            border-left: 4px solid #3742fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .aviso {
+            background: #fff3cd;
+            border-left: 4px solid #ffa502;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .solucao {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .solucao h3 {
+            color: #495057;
+            margin-top: 0;
+        }
+        pre {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin: 10px 5px;
+            transition: transform 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        .btn-danger {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #2ed573, #1e90ff);
+        }
+        .steps {
+            counter-reset: step-counter;
+        }
+        .step {
+            counter-increment: step-counter;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .step::before {
+            content: counter(step-counter);
+            background: #667eea;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .card {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔧 SOLUÇÃO DEFINITIVA - MySQL XAMPP</h1>
+            <p>Guia completo para resolver o erro "MySQL shutdown unexpectedly"</p>
+        </div>
+        
+        <div class="content">
+            <div class="erro">
+                <h2>❌ PROBLEMA IDENTIFICADO</h2>
+                <p><strong>Erro:</strong> MySQL shutdown unexpectedly</p>
+                <p><strong>Causas possíveis:</strong></p>
+                <ul>
+                    <li>Porta 3306 bloqueada ou em uso</li>
+                    <li>Dependências ausentes</li>
+                    <li>Privilégios inadequados</li>
+                    <li>Crash do sistema</li>
+                    <li>Desligamento por outro método</li>
+                </ul>
+            </div>
+
+            <h2>🚀 SOLUÇÕES RÁPIDAS</h2>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>🔍 Diagnóstico Automático</h3>
+                    <p>Execute o diagnóstico completo para identificar o problema:</p>
+                    <a href="diagnostico_mysql.php" class="btn">🔍 Executar Diagnóstico</a>
+                </div>
+                
+                <div class="card">
+                    <h3>🔧 Correção Automática</h3>
+                    <p>Tente corrigir automaticamente o problema:</p>
+                    <a href="corrigir_mysql_xampp.php" class="btn">🔧 Corrigir Automaticamente</a>
+                </div>
+                
+                <div class="card">
+                    <h3>✅ Verificar Status</h3>
+                    <p>Verifique se o MySQL está funcionando:</p>
+                    <a href="verificar_mysql.php" class="btn">✅ Verificar MySQL</a>
+                </div>
+            </div>
+
+            <h2>📋 SOLUÇÕES MANUAIS PASSO A PASSO</h2>
+
+            <div class="solucao">
+                <h3>🔄 SOLUÇÃO 1: Reiniciar XAMPP</h3>
+                <div class="steps">
+                    <div class="step">Feche completamente o XAMPP Control Panel</div>
+                    <div class="step">Abra o Gerenciador de Tarefas (Ctrl+Shift+Esc)</div>
+                    <div class="step">Procure e encerre todos os processos relacionados ao MySQL</div>
+                    <div class="step">Abra o XAMPP Control Panel como administrador</div>
+                    <div class="step">Tente iniciar o MySQL novamente</div>
+                </div>
+            </div>
+
+            <div class="solucao">
+                <h3>🔧 SOLUÇÃO 2: Verificar Configuração</h3>
+                <div class="steps">
+                    <div class="step">No XAMPP Control Panel, clique em <strong>Config</strong> ao lado do MySQL</div>
+                    <div class="step">Selecione <strong>my.ini</strong></div>
+                    <div class="step">Verifique se a porta está configurada como 3306</div>
+                    <div class="step">Verifique se o caminho dos dados está correto</div>
+                </div>
+                
+                <h4>Configuração esperada no my.ini:</h4>
+                <pre>[mysqld]
+port=3306
+datadir=C:/xampp/mysql/data
+socket=mysql
+max_allowed_packet=16M</pre>
+            </div>
+
+            <div class="solucao">
+                <h3>🚫 SOLUÇÃO 3: Conflito de Porta</h3>
+                <div class="steps">
+                    <div class="step">Abra o CMD como administrador</div>
+                    <div class="step">Execute: <code>netstat -an | findstr :3306</code></div>
+                    <div class="step">Se a porta estiver em uso, execute: <code>netstat -ano | findstr :3306</code></div>
+                    <div class="step">Identifique o PID do processo conflitante</div>
+                    <div class="step">Encerre o processo: <code>taskkill /PID [PID] /F</code></div>
+                </div>
+            </div>
+
+            <div class="solucao">
+                <h3>🗂️ SOLUÇÃO 4: Verificar Diretório de Dados</h3>
+                <div class="steps">
+                    <div class="step">Vá para <strong>C:\xampp\mysql\data</strong></div>
+                    <div class="step">Verifique se existe o arquivo <strong>ibdata1</strong></div>
+                    <div class="step">Se não existir, pode haver corrupção de dados</div>
+                    <div class="step">Faça backup e reinstale o MySQL</div>
+                </div>
+            </div>
+
+            <div class="solucao">
+                <h3>🔄 SOLUÇÃO 5: Reinstalar MySQL (Último Recurso)</h3>
+                <div class="steps">
+                    <div class="step">Faça backup da pasta <strong>C:\xampp\mysql\data</strong></div>
+                    <div class="step">Delete a pasta <strong>C:\xampp\mysql</strong></div>
+                    <div class="step">Baixe o XAMPP novamente</div>
+                    <div class="step">Extraia apenas a pasta mysql</div>
+                    <div class="step">Restaure seus dados</div>
+                </div>
+            </div>
+
+            <h2>💻 COMANDOS ÚTEIS</h2>
+            <div class="info">
+                <h3>Execute estes comandos no CMD como administrador:</h3>
+                <pre># Verificar porta 3306
+netstat -an | findstr :3306
+
+# Verificar processos MySQL
+tasklist | findstr mysql
+
+# Verificar serviços
+sc query mysql
+
+# Encerrar processo por PID (substitua XXXX pelo PID)
+taskkill /PID XXXX /F
+
+# Verificar arquivos de log
+type C:\xampp\mysql\data\mysql_error.log</pre>
+            </div>
+
+            <h2>📁 ARQUIVOS DE LOG IMPORTANTES</h2>
+            <div class="aviso">
+                <h3>Verifique estes arquivos para mais detalhes:</h3>
+                <ul>
+                    <li><strong>XAMPP MySQL Log:</strong> C:\xampp\mysql\data\mysql_error.log</li>
+                    <li><strong>XAMPP Control Log:</strong> C:\xampp\xampp-control.log</li>
+                    <li><strong>Windows Event Viewer:</strong> Aplicativos → MySQL</li>
+                </ul>
+            </div>
+
+            <h2>🔗 FERRAMENTAS ÚTEIS</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>🌐 phpMyAdmin</h3>
+                    <p>Acesse o phpMyAdmin para gerenciar bancos:</p>
+                    <a href="http://localhost/phpmyadmin" target="_blank" class="btn">🌐 Abrir phpMyAdmin</a>
+                </div>
+                
+                <div class="card">
+                    <h3>🏠 Sistema Principal</h3>
+                    <p>Volte para o sistema principal:</p>
+                    <a href="http://localhost:8080/Sistema%20De%20Agendamento/public/" class="btn">🏠 Sistema Principal</a>
+                </div>
+                
+                <div class="card">
+                    <h3>📊 Verificar Bancos</h3>
+                    <p>Verifique os bancos de dados existentes:</p>
+                    <a href="verificar_bancos.php" class="btn">📊 Verificar Bancos</a>
+                </div>
+            </div>
+
+            <h2>📞 PRÓXIMOS PASSOS</h2>
+            <div class="info">
+                <ol>
+                    <li>Execute o diagnóstico automático primeiro</li>
+                    <li>Siga as soluções passo a passo</li>
+                    <li>Verifique os arquivos de log para mais detalhes</li>
+                    <li>Se necessário, reinstale o MySQL</li>
+                    <li>Teste a conexão novamente</li>
+                </ol>
+            </div>
+
+            <div class="sucesso">
+                <h3>✅ DICA IMPORTANTE</h3>
+                <p>Na maioria dos casos, o problema é resolvido com a <strong>SOLUÇÃO 1</strong> (reiniciar XAMPP). Se não funcionar, tente as outras soluções na ordem apresentada.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

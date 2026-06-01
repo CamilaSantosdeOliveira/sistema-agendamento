@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 Teste PWA - Service Worker</title>
+    <style>
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+        }
+        .status {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+        .success { background: #f0fdf4; border-left-color: #10b981; color: #065f46; }
+        .error { background: #fef2f2; border-left-color: #ef4444; color: #991b1b; }
+        .warning { background: #fffbeb; border-left-color: #f59e0b; color: #92400e; }
+        .info { background: #eff6ff; border-left-color: #3b82f6; color: #1e40af; }
+        
+        .btn {
+            padding: 12px 24px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: #3b82f6;
+            color: white;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+        
+        #console {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Teste PWA - Service Worker</h1>
+        
+        <div id="status-container">
+            <div class="status info">
+                🔍 <strong>Verificando PWA...</strong>
+            </div>
+        </div>
+        
+        <div id="console"></div>
+        
+        <div id="actions" style="display: none;">
+            <h3>🔧 Ações Disponíveis:</h3>
+            <button class="btn" onclick="limparCache()">🧹 Limpar Cache</button>
+            <button class="btn" onclick="recarregarSW()">🔄 Recarregar Service Worker</button>
+            <button class="btn" onclick="verificarCache()">📦 Verificar Cache</button>
+        </div>
+        
+        <hr style="margin: 30px 0;">
+        
+        <h3>📋 Status do PWA:</h3>
+        <div id="pwa-status"></div>
+    </div>
+
+    <script>
+        const consoleDiv = document.getElementById('console');
+        const statusContainer = document.getElementById('status-container');
+        const actionsDiv = document.getElementById('actions');
+        const pwaStatusDiv = document.getElementById('pwa-status');
+        
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.innerHTML = `<span style="color: #94a3b8;">[${timestamp}]</span> ${message}`;
+            consoleDiv.appendChild(logEntry);
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        }
+        
+        function updateStatus(message, type) {
+            statusContainer.innerHTML = `<div class="status ${type}">${message}</div>`;
+        }
+        
+        // Verificar se o Service Worker é suportado
+        if ('serviceWorker' in navigator) {
+            log('✅ Service Worker suportado pelo navegador');
+            
+            // Registrar Service Worker
+            navigator.serviceWorker.register('./sw.js')
+                .then(registration => {
+                    log('✅ Service Worker registrado com sucesso');
+                    log(`📋 Escopo: ${registration.scope}`);
+                    
+                    // Verificar se está ativo
+                    if (registration.active) {
+                        log('✅ Service Worker ativo');
+                        updateStatus('✅ PWA funcionando corretamente!', 'success');
+                    } else {
+                        log('⏳ Service Worker instalando...');
+                        updateStatus('⏳ PWA instalando...', 'warning');
+                    }
+                    
+                    // Monitorar mudanças
+                    registration.addEventListener('updatefound', () => {
+                        log('🔄 Nova versão do Service Worker encontrada');
+                    });
+                    
+                    navigator.serviceWorker.addEventListener('controllerchange', () => {
+                        log('🎯 Service Worker tomou controle da página');
+                        updateStatus('✅ PWA ativo e funcionando!', 'success');
+                    });
+                    
+                    actionsDiv.style.display = 'block';
+                    verificarPWA();
+                })
+                .catch(error => {
+                    log(`❌ Erro ao registrar Service Worker: ${error.message}`, 'error');
+                    updateStatus('❌ Erro no PWA', 'error');
+                });
+        } else {
+            log('❌ Service Worker não suportado', 'error');
+            updateStatus('❌ PWA não suportado', 'error');
+        }
+        
+        function verificarPWA() {
+            // Verificar manifest
+            if ('manifest' in navigator) {
+                log('✅ Web App Manifest suportado');
+            }
+            
+            // Verificar cache
+            if ('caches' in window) {
+                log('✅ Cache API suportado');
+            }
+            
+            // Verificar notificações
+            if ('Notification' in window) {
+                log('✅ Notificações suportadas');
+            }
+            
+            // Verificar instalação
+            let deferredPrompt;
+            window.addEventListener('beforeinstallprompt', (e) => {
+                log('📱 PWA pode ser instalado');
+                deferredPrompt = e;
+            });
+        }
+        
+        function limparCache() {
+            log('🧹 Limpando cache...');
+            caches.keys().then(names => {
+                return Promise.all(
+                    names.map(name => {
+                        log(`🗑️ Removendo cache: ${name}`);
+                        return caches.delete(name);
+                    })
+                );
+            }).then(() => {
+                log('✅ Cache limpo com sucesso');
+            });
+        }
+        
+        function recarregarSW() {
+            log('🔄 Recarregando Service Worker...');
+            navigator.serviceWorker.getRegistrations().then(registrations => {
+                for (let registration of registrations) {
+                    registration.unregister();
+                    log('🗑️ Service Worker removido');
+                }
+                location.reload();
+            });
+        }
+        
+        function verificarCache() {
+            log('📦 Verificando cache...');
+            caches.keys().then(names => {
+                log(`📊 Total de caches: ${names.length}`);
+                names.forEach(name => {
+                    log(`📁 Cache: ${name}`);
+                });
+            });
+        }
+        
+        // Log inicial
+        log('🚀 Iniciando teste do PWA...');
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

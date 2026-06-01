@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Botão Mobile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f1f5f9;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .teste-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .mobile-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 9999;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-toggle:hover {
+            background: #2563eb;
+            transform: scale(1.1);
+        }
+        
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            padding: 20px;
+            position: fixed;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar.open {
+            transform: translateX(0);
+        }
+        
+        .main-content {
+            margin-left: 0;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .main-content {
+                padding-top: 80px;
+            }
+        }
+        
+        .info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+        
+        .btn {
+            background: #3b82f6;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <!-- Botão Mobile Toggle -->
+    <button class="mobile-toggle" onclick="toggleSidebar()">
+        ☰
+    </button>
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2>Menu Mobile</h2>
+        <ul>
+            <li><a href="#" style="color: white;">Início</a></li>
+            <li><a href="#" style="color: white;">Cursos</a></li>
+            <li><a href="#" style="color: white;">Professores</a></li>
+            <li><a href="#" style="color: white;">Alunos</a></li>
+        </ul>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <h1>🧪 Teste do Botão Mobile</h1>
+            
+            <div class="teste-card">
+                <h2>📱 Instruções de Teste</h2>
+                <ol>
+                    <li><strong>Redimensione</strong> a janela para menos de 768px de largura</li>
+                    <li><strong>Observe</strong> se o botão ☰ aparece no canto superior esquerdo</li>
+                    <li><strong>Clique</strong> no botão para abrir/fechar a sidebar</li>
+                    <li><strong>Teste</strong> o overlay escuro</li>
+                </ol>
+            </div>
+            
+            <div class="teste-card">
+                <h2>📊 Status Atual</h2>
+                <div class="info">
+                    <strong>Largura da tela:</strong> <span id="width">-</span>px<br>
+                    <strong>Modo:</strong> <span id="mode">-</span><br>
+                    <strong>Botão visível:</strong> <span id="button-status">-</span>
+                </div>
+            </div>
+            
+            <div class="teste-card">
+                <h2>🎯 Testes Manuais</h2>
+                <button class="btn" onclick="forcarMobile()">Forçar Modo Mobile</button>
+                <button class="btn" onclick="forcarDesktop()">Forçar Modo Desktop</button>
+                <button class="btn" onclick="testarToggle()">Testar Toggle</button>
+            </div>
+            
+            <div class="teste-card">
+                <h2>🔗 Link para Dashboard Real</h2>
+                <a href="dashboard_corrigido.php" class="btn" target="_blank">
+                    🏠 Abrir Dashboard Principal
+                </a>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('open');
+            
+            // Adicionar overlay se não existir
+            let overlay = document.querySelector('.mobile-overlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.className = 'mobile-overlay';
+                overlay.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.5);
+                    z-index: 999;
+                    display: none;
+                `;
+                
+                overlay.addEventListener('click', function() {
+                    sidebar.classList.remove('open');
+                    this.style.display = 'none';
+                });
+                
+                document.body.appendChild(overlay);
+            }
+            
+            overlay.style.display = sidebar.classList.contains('open') ? 'block' : 'none';
+        }
+        
+        function atualizarStatus() {
+            const width = window.innerWidth;
+            const mode = width <= 768 ? 'MOBILE' : 'DESKTOP';
+            const buttonVisible = width <= 768 ? 'SIM' : 'NÃO';
+            
+            document.getElementById('width').textContent = width;
+            document.getElementById('mode').textContent = mode;
+            document.getElementById('button-status').textContent = buttonVisible;
+        }
+        
+        function forcarMobile() {
+            // Simular redimensionamento para mobile
+            window.dispatchEvent(new Event('resize'));
+            setTimeout(() => {
+                window.resizeTo(375, 667);
+                atualizarStatus();
+            }, 100);
+        }
+        
+        function forcarDesktop() {
+            // Simular redimensionamento para desktop
+            window.dispatchEvent(new Event('resize'));
+            setTimeout(() => {
+                window.resizeTo(1024, 768);
+                atualizarStatus();
+            }, 100);
+        }
+        
+        function testarToggle() {
+            toggleSidebar();
+            setTimeout(() => {
+                toggleSidebar();
+            }, 1000);
+        }
+        
+        // Event listeners
+        window.addEventListener('load', atualizarStatus);
+        window.addEventListener('resize', atualizarStatus);
+        
+        // Atualizar a cada segundo
+        setInterval(atualizarStatus, 1000);
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

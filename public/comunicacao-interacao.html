@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Comunicação e Interação</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary-color: #64748b;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --info-color: #06b6d4;
+            --light-color: #f8fafc;
+            --dark-color: #1e293b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--success-color) 0%, #059669 100%);
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 30px;
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            border-left: 4px solid var(--success-color);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--success-color);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, var(--info-color) 0%, var(--primary-color) 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .section-header h3 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-header i {
+            font-size: 1.5rem;
+        }
+
+        .section-content {
+            padding: 25px;
+        }
+
+        .btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-success {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .btn-warning {
+            background: var(--warning-color);
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #d97706;
+        }
+
+        .btn-danger {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--secondary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--light-color);
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+        }
+
+        .chat-container {
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background: var(--light-color);
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .chat-status {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--success-color);
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            background: var(--light-color);
+        }
+
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .message.sent {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .message-content {
+            max-width: 70%;
+        }
+
+        .message-bubble {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 18px;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+        }
+
+        .message.sent .message-bubble {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            color: var(--secondary-color);
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        .message.sent .message-time {
+            text-align: left;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 10px;
+            padding: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .chat-input input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .chat-input button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .forum-container {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .forum-topic {
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-bottom: 15px;
+            background: var(--light-color);
+            transition: var(--transition);
+        }
+
+        .forum-topic:hover {
+            box-shadow: var(--shadow-sm);
+            border-color: var(--primary-color);
+        }
+
+        .topic-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .topic-title {
+            font-weight: 600;
+            color: var(--dark-color);
+            font-size: 1rem;
+        }
+
+        .topic-meta {
+            color: var(--secondary-color);
+            font-size: 0.8rem;
+        }
+
+        .topic-stats {
+            display: flex;
+            gap: 15px;
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+        }
+
+        .topic-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .message-item {
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-bottom: 10px;
+            background: white;
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .sender-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sender-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--info-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .sender-name {
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .message-date {
+            color: var(--secondary-color);
+            font-size: 0.8rem;
+        }
+
+        .message-text {
+            color: var(--dark-color);
+            line-height: 1.5;
+        }
+
+        .message-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: var(--secondary-color);
+            cursor: pointer;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+
+        .action-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--secondary-color);
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .tab.active {
+            border-bottom-color: var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .notification-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            margin-bottom: 10px;
+            background: white;
+            transition: var(--transition);
+        }
+
+        .notification-item:hover {
+            box-shadow: var(--shadow-sm);
+        }
+
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .notification-icon.info {
+            background: var(--info-color);
+        }
+
+        .notification-icon.success {
+            background: var(--success-color);
+        }
+
+        .notification-icon.warning {
+            background: var(--warning-color);
+        }
+
+        .notification-icon.danger {
+            background: var(--danger-color);
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-title {
+            font-weight: 500;
+            color: var(--dark-color);
+            margin-bottom: 5px;
+        }
+
+        .notification-text {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        .notification-time {
+            color: var(--secondary-color);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .chat-input {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="dashboard.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Voltar ao Dashboard
+        </a>
+
+        <div class="header">
+            <h1>💬 Comunicação e Interação</h1>
+            <p>Conecte alunos e professores através de fóruns, chats e mensagens</p>
+        </div>
+
+        <!-- Estatísticas -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">156</div>
+                <div class="stat-label">Conversas Ativas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">89</div>
+                <div class="stat-label">Tópicos do Fórum</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1,234</div>
+                <div class="stat-label">Mensagens</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">45</div>
+                <div class="stat-label">Notificações</div>
+            </div>
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <div class="main-content">
+            <!-- Chat em Tempo Real -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-comments"></i> Chat em Tempo Real</h3>
+                    <button class="btn btn-success" onclick="startNewChat()">
+                        <i class="fas fa-plus"></i> Nova Conversa
+                    </button>
+                </div>
+                <div class="section-content">
+                    <div class="chat-container">
+                        <div class="chat-header">
+                            <div class="chat-avatar">JS</div>
+                            <div>
+                                <div style="font-weight: 600;">João Silva</div>
+                                <div style="font-size: 0.8rem; opacity: 0.8;">Professor - JavaScript</div>
+                            </div>
+                            <div class="chat-status"></div>
+                        </div>
+                        
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="message">
+                                <div class="message-avatar">JS</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">Olá! Como posso ajudar com suas dúvidas sobre JavaScript?</div>
+                                    <div class="message-time">14:30</div>
+                                </div>
+                            </div>
+                            
+                            <div class="message sent">
+                                <div class="message-avatar">EU</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">Oi professor! Tenho uma dúvida sobre closures...</div>
+                                    <div class="message-time">14:32</div>
+                                </div>
+                            </div>
+                            
+                            <div class="message">
+                                <div class="message-avatar">JS</div>
+                                <div class="message-content">
+                                    <div class="message-bubble">Ótima pergunta! Closures são funções que têm acesso a variáveis de seu escopo externo...</div>
+                                    <div class="message-time">14:35</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chat-input">
+                            <input type="text" id="messageInput" placeholder="Digite sua mensagem..." onkeypress="handleKeyPress(event)">
+                            <button onclick="sendMessage()">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fórum de Discussão -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-users"></i> Fórum de Discussão</h3>
+                    <button class="btn btn-success" onclick="showNewTopicModal()">
+                        <i class="fas fa-plus"></i> Novo Tópico
+                    </button>
+                </div>
+                <div class="section-content">
+                    <div class="forum-container">
+                        <div class="forum-topic">
+                            <div class="topic-header">
+                                <div>
+                                    <div class="topic-title">Dúvida sobre Promises em JavaScript</div>
+                                    <div class="topic-meta">Por: Maria Silva • 2 horas atrás</div>
+                                </div>
+                                <div class="topic-actions">
+                                    <button class="btn btn-outline btn-sm" onclick="viewTopic('topic1')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <p>Estou tendo dificuldades para entender como funcionam as Promises. Alguém pode explicar com exemplos práticos?</p>
+                            <div class="topic-stats">
+                                <span><i class="fas fa-comment"></i> 8 respostas</span>
+                                <span><i class="fas fa-eye"></i> 45 visualizações</span>
+                                <span><i class="fas fa-thumbs-up"></i> 12 curtidas</span>
+                            </div>
+                        </div>
+
+                        <div class="forum-topic">
+                            <div class="topic-header">
+                                <div>
+                                    <div class="topic-title">Melhor IDE para Python</div>
+                                    <div class="topic-meta">Por: Carlos Santos • 5 horas atrás</div>
+                                </div>
+                                <div class="topic-actions">
+                                    <button class="btn btn-outline btn-sm" onclick="viewTopic('topic2')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <p>Qual IDE vocês recomendam para desenvolvimento Python? Estou começando e quero algo intuitivo.</p>
+                            <div class="topic-stats">
+                                <span><i class="fas fa-comment"></i> 15 respostas</span>
+                                <span><i class="fas fa-eye"></i> 78 visualizações</span>
+                                <span><i class="fas fa-thumbs-up"></i> 23 curtidas</span>
+                            </div>
+                        </div>
+
+                        <div class="forum-topic">
+                            <div class="topic-header">
+                                <div>
+                                    <div class="topic-title">Dicas para React Hooks</div>
+                                    <div class="topic-meta">Por: Ana Costa • 1 dia atrás</div>
+                                </div>
+                                <div class="topic-actions">
+                                    <button class="btn btn-outline btn-sm" onclick="viewTopic('topic3')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <p>Compartilhem suas melhores práticas para usar React Hooks! Quero aprender mais sobre useEffect e useState.</p>
+                            <div class="topic-stats">
+                                <span><i class="fas fa-comment"></i> 22 respostas</span>
+                                <span><i class="fas fa-eye"></i> 156 visualizações</span>
+                                <span><i class="fas fa-thumbs-up"></i> 34 curtidas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mensagens e Notificações -->
+        <div class="content-section">
+            <div class="section-header">
+                <h3><i class="fas fa-envelope"></i> Mensagens e Notificações</h3>
+                <button class="btn btn-outline" onclick="refreshMessages()">
+                    <i class="fas fa-sync"></i>
+                </button>
+            </div>
+            <div class="section-content">
+                <div class="tabs">
+                    <div class="tab active" onclick="switchTab('messages')">Mensagens</div>
+                    <div class="tab" onclick="switchTab('notifications')">Notificações</div>
+                </div>
+
+                <div id="messages" class="tab-content active">
+                    <div class="message-item">
+                        <div class="message-header">
+                            <div class="sender-info">
+                                <div class="sender-avatar">MS</div>
+                                <div>
+                                    <div class="sender-name">Maria Silva</div>
+                                    <div class="message-date">15/12/2024 16:45</div>
+                                </div>
+                            </div>
+                            <div class="message-actions">
+                                <button class="btn btn-outline btn-sm" onclick="replyMessage('msg1')">
+                                    <i class="fas fa-reply"></i> Responder
+                                </button>
+                            </div>
+                        </div>
+                        <div class="message-text">
+                            Olá! Gostaria de saber se posso entregar o trabalho de JavaScript até amanhã. Tive alguns problemas técnicos.
+                        </div>
+                        <div class="message-actions">
+                            <button class="action-btn" onclick="markAsRead('msg1')">
+                                <i class="fas fa-check"></i> Marcar como lida
+                            </button>
+                            <button class="action-btn" onclick="deleteMessage('msg1')">
+                                <i class="fas fa-trash"></i> Excluir
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="message-item">
+                        <div class="message-header">
+                            <div class="sender-info">
+                                <div class="sender-avatar">JS</div>
+                                <div>
+                                    <div class="sender-name">João Santos</div>
+                                    <div class="message-date">15/12/2024 15:30</div>
+                                </div>
+                            </div>
+                            <div class="message-actions">
+                                <button class="btn btn-outline btn-sm" onclick="replyMessage('msg2')">
+                                    <i class="fas fa-reply"></i> Responder
+                                </button>
+                            </div>
+                        </div>
+                        <div class="message-text">
+                            Professor, quando será a próxima aula sobre React? Quero me preparar melhor.
+                        </div>
+                        <div class="message-actions">
+                            <button class="action-btn" onclick="markAsRead('msg2')">
+                                <i class="fas fa-check"></i> Marcar como lida
+                            </button>
+                            <button class="action-btn" onclick="deleteMessage('msg2')">
+                                <i class="fas fa-trash"></i> Excluir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="notifications" class="tab-content">
+                    <div class="notification-item">
+                        <div class="notification-icon success">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="notification-content">
+                            <div class="notification-title">Trabalho Entregue</div>
+                            <div class="notification-text">Seu trabalho de JavaScript foi entregue com sucesso</div>
+                        </div>
+                        <div class="notification-time">2 min atrás</div>
+                    </div>
+
+                    <div class="notification-item">
+                        <div class="notification-icon info">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="notification-content">
+                            <div class="notification-title">Nova Aula Disponível</div>
+                            <div class="notification-text">Aula sobre React Hooks está disponível</div>
+                        </div>
+                        <div class="notification-time">1 hora atrás</div>
+                    </div>
+
+                    <div class="notification-item">
+                        <div class="notification-icon warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="notification-content">
+                            <div class="notification-title">Lembrete de Prova</div>
+                            <div class="notification-text">Prova de Python será amanhã às 14h</div>
+                        </div>
+                        <div class="notification-time">3 horas atrás</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nova Mensagem -->
+        <div class="content-section">
+            <div class="section-header">
+                <h3><i class="fas fa-paper-plane"></i> Enviar Nova Mensagem</h3>
+            </div>
+            <div class="section-content">
+                <form id="newMessageForm">
+                    <div class="form-group">
+                        <label for="messageRecipient">Destinatário</label>
+                        <select class="form-control" id="messageRecipient" required>
+                            <option value="">Selecione o destinatário...</option>
+                            <option value="professor">Professor João Silva</option>
+                            <option value="coordenador">Coordenador Ana Costa</option>
+                            <option value="aluno1">Maria Silva (Aluna)</option>
+                            <option value="aluno2">Carlos Santos (Aluno)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="messageSubject">Assunto</label>
+                        <input type="text" class="form-control" id="messageSubject" placeholder="Digite o assunto..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="messageContent">Mensagem</label>
+                        <textarea class="form-control" id="messageContent" rows="4" placeholder="Digite sua mensagem..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="messageUrgent"> Marcar como urgente
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-send"></i>
+                        Enviar Mensagem
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Novo Tópico -->
+    <div id="newTopicModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Criar Novo Tópico</h3>
+                <button class="close" onclick="closeModal('newTopicModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="newTopicForm">
+                    <div class="form-group">
+                        <label>Título do Tópico</label>
+                        <input type="text" class="form-control" placeholder="Digite o título..." required>
+                    </div>
+                    <div class="form-group">
+                        <label>Categoria</label>
+                        <select class="form-control" required>
+                            <option value="">Selecione a categoria...</option>
+                            <option value="javascript">JavaScript</option>
+                            <option value="python">Python</option>
+                            <option value="react">React</option>
+                            <option value="geral">Geral</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Conteúdo</label>
+                        <textarea class="form-control" rows="4" placeholder="Descreva seu tópico..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Criar Tópico</button>
+                        <button type="button" class="btn btn-outline" onclick="closeModal('newTopicModal')">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentTab = 'messages';
+        let chatMessages = [
+            {
+                sender: 'JS',
+                text: 'Olá! Como posso ajudar com suas dúvidas sobre JavaScript?',
+                time: '14:30',
+                sent: false
+            },
+            {
+                sender: 'EU',
+                text: 'Oi professor! Tenho uma dúvida sobre closures...',
+                time: '14:32',
+                sent: true
+            },
+            {
+                sender: 'JS',
+                text: 'Ótima pergunta! Closures são funções que têm acesso a variáveis de seu escopo externo...',
+                time: '14:35',
+                sent: false
+            }
+        ];
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCommunicationSystem();
+        });
+
+        function initializeCommunicationSystem() {
+            // Formulário de nova mensagem
+            document.getElementById('newMessageForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                sendNewMessage();
+            });
+
+            // Formulário de novo tópico
+            document.getElementById('newTopicForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                createNewTopic();
+            });
+        }
+
+        function startNewChat() {
+            alert('Funcionalidade de nova conversa será implementada.');
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                const newMessage = {
+                    sender: 'EU',
+                    text: message,
+                    time: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+                    sent: true
+                };
+                
+                chatMessages.push(newMessage);
+                displayMessage(newMessage);
+                input.value = '';
+                
+                // Simular resposta automática
+                setTimeout(() => {
+                    const autoReply = {
+                        sender: 'JS',
+                        text: 'Mensagem recebida! Responderei em breve.',
+                        time: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+                        sent: false
+                    };
+                    chatMessages.push(autoReply);
+                    displayMessage(autoReply);
+                }, 1000);
+            }
+        }
+
+        function displayMessage(message) {
+            const chatMessagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${message.sent ? 'sent' : ''}`;
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar">${message.sender}</div>
+                <div class="message-content">
+                    <div class="message-bubble">${message.text}</div>
+                    <div class="message-time">${message.time}</div>
+                </div>
+            `;
+            
+            chatMessagesDiv.appendChild(messageDiv);
+            chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function showNewTopicModal() {
+            document.getElementById('newTopicModal').style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function createNewTopic() {
+            alert('Tópico criado com sucesso!');
+            closeModal('newTopicModal');
+            document.getElementById('newTopicForm').reset();
+        }
+
+        function viewTopic(topicId) {
+            console.log(`Visualizando tópico: ${topicId}`);
+            alert('Funcionalidade de visualização será implementada.');
+        }
+
+        function switchTab(tabName) {
+            // Remover classe ativa de todas as tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Ativar tab selecionada
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+            currentTab = tabName;
+        }
+
+        function sendNewMessage() {
+            const recipient = document.getElementById('messageRecipient').value;
+            const subject = document.getElementById('messageSubject').value;
+            const content = document.getElementById('messageContent').value;
+            const urgent = document.getElementById('messageUrgent').checked;
+
+            if (!recipient || !subject || !content) {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+                return;
+            }
+
+            // Simulação de envio
+            const newMessage = {
+                id: Date.now(),
+                recipient: recipient,
+                subject: subject,
+                content: content,
+                urgent: urgent
+            };
+
+            console.log('Nova mensagem:', newMessage);
+            alert('Mensagem enviada com sucesso!');
+            
+            // Limpar formulário
+            document.getElementById('newMessageForm').reset();
+        }
+
+        function replyMessage(messageId) {
+            console.log(`Respondendo mensagem: ${messageId}`);
+            alert('Funcionalidade de resposta será implementada.');
+        }
+
+        function markAsRead(messageId) {
+            console.log(`Marcando como lida: ${messageId}`);
+            alert('Mensagem marcada como lida!');
+        }
+
+        function deleteMessage(messageId) {
+            if (confirm('Tem certeza que deseja excluir esta mensagem?')) {
+                console.log(`Excluindo mensagem: ${messageId}`);
+                alert('Mensagem excluída com sucesso!');
+            }
+        }
+
+        function refreshMessages() {
+            console.log('Atualizando mensagens...');
+            alert('Mensagens atualizadas!');
+        }
+
+        // Fechar modais ao clicar fora
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

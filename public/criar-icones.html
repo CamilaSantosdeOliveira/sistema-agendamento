@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Criando Ícones para PWA</title>
+</head>
+<body>
+    <script>
+        // Função para criar ícone SVG como Base64
+        function criarIconeSVG(tamanho) {
+            const svg = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="${tamanho}" height="${tamanho}" viewBox="0 0 ${tamanho} ${tamanho}">
+                    <defs>
+                        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <rect width="${tamanho}" height="${tamanho}" rx="${tamanho * 0.15}" fill="url(#grad)"/>
+                    <text x="50%" y="50%" font-family="Arial" font-size="${tamanho * 0.5}" text-anchor="middle" dominant-baseline="middle" fill="white">🎓</text>
+                </svg>
+            `;
+            return 'data:image/svg+xml;base64,' + btoa(svg);
+        }
+
+        // Função para converter SVG para PNG
+        function svgToPng(svgData, tamanho, callback) {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            
+            canvas.width = tamanho;
+            canvas.height = tamanho;
+            
+            img.onload = function() {
+                ctx.drawImage(img, 0, 0, tamanho, tamanho);
+                canvas.toBlob(callback, 'image/png');
+            };
+            
+            img.src = svgData;
+        }
+
+        // Criar todos os tamanhos necessários
+        const tamanhos = [72, 96, 128, 144, 152, 192, 384, 512];
+        
+        tamanhos.forEach(tamanho => {
+            const svgData = criarIconeSVG(tamanho);
+            
+            svgToPng(svgData, tamanho, (blob) => {
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `icon-${tamanho}x${tamanho}.png`;
+                link.textContent = `Baixar ${tamanho}x${tamanho}`;
+                link.style.display = 'block';
+                link.style.margin = '10px';
+                document.body.appendChild(link);
+            });
+        });
+    </script>
+    
+    <h1>Clique nos links abaixo para baixar os ícones:</h1>
+    <p>Salve todos na pasta: <code>public/icons/</code></p>
+</body>
+</html>

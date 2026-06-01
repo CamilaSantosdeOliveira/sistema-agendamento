@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚨 SOLUÇÃO - Erro "Not Found"</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #d63031;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .error-box {
+            background: #ffeaa7;
+            border: 2px solid #fdcb6e;
+            color: #2d3436;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .solution-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+        
+        .solution-section h3 {
+            color: #2d3436;
+            margin-bottom: 15px;
+        }
+        
+        .url-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .url-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .url-link {
+            display: block;
+            background: #00b894;
+            color: white;
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .url-link:hover {
+            background: #00a085;
+        }
+        
+        .url-link.danger {
+            background: #e17055;
+        }
+        
+        .url-link.danger:hover {
+            background: #d63031;
+        }
+        
+        .url-link.warning {
+            background: #fdcb6e;
+            color: #2d3436;
+        }
+        
+        .url-link.warning:hover {
+            background: #e17055;
+            color: white;
+        }
+        
+        .test-btn {
+            background: #0984e3;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .test-btn:hover {
+            background: #74b9ff;
+        }
+        
+        .test-btn.success {
+            background: #00b894;
+        }
+        
+        .test-btn.success:hover {
+            background: #00a085;
+        }
+        
+        .test-btn.danger {
+            background: #e17055;
+        }
+        
+        .test-btn.danger:hover {
+            background: #d63031;
+        }
+        
+        .status-info {
+            background: #74b9ff;
+            border: 1px solid #0984e3;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .step-list {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .step-list ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .step-list li {
+            margin: 10px 0;
+            color: #2d3436;
+        }
+        
+        .step-list strong {
+            color: #d63031;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚨 SOLUÇÃO PARA "NOT FOUND"</h1>
+            <p>Resolvendo o erro de acesso ao sistema</p>
+        </div>
+        
+        <div class="error-box">
+            <h3>❌ ERRO IDENTIFICADO:</h3>
+            <p><strong>"Not Found - The requested URL was not found on this server"</strong></p>
+            <p>Este erro acontece quando você tenta acessar um arquivo que não existe ou está no caminho errado.</p>
+        </div>
+        
+        <div class="status-info">
+            <h3>📊 Status do Seu Servidor</h3>
+            <p><strong>✅ Servidor Apache:</strong> Funcionando (porta 8080)</p>
+            <p><strong>✅ PHP:</strong> Versão 8.0.30 ativa</p>
+            <p><strong>✅ Diretório:</strong> Sistema De Agendamento/public</p>
+            <p><strong>❌ Problema:</strong> URL ou arquivo incorreto</p>
+        </div>
+        
+        <div class="solution-section">
+            <h3>🔧 SOLUÇÃO PASSO A PASSO</h3>
+            
+            <div class="step-list">
+                <ol>
+                    <li><strong>Verifique a porta:</strong> Use sempre <code>http://localhost:8080/</code> (não porta 80)</li>
+                    <li><strong>Verifique o nome do arquivo:</strong> Os nomes são sensíveis a maiúsculas/minúsculas</li>
+                    <li><strong>Teste primeiro:</strong> Comece com arquivos que sabemos que existem</li>
+                    <li><strong>Use os links abaixo:</strong> Todos foram testados e funcionam</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="solution-section">
+            <h3>✅ URLs QUE FUNCIONAM GARANTIDAMENTE</h3>
+            <p>Clique nos links abaixo para acessar o sistema:</p>
+            
+            <div class="url-list">
+                <div class="url-card">
+                    <h4>🏠 Página Inicial</h4>
+                    <a href="http://localhost:8080/index.html" class="url-link success" target="_blank">
+                        🏠 Acessar Sistema
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>🧪 Teste de URLs</h4>
+                    <a href="http://localhost:8080/teste-urls.html" class="url-link warning" target="_blank">
+                        🔗 Testar Todas as URLs
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>🎓 Sistema de Certificados</h4>
+                    <a href="http://localhost:8080/certificados.php" class="url-link" target="_blank">
+                        🎓 Gerenciar Certificados
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>📊 Dashboard</h4>
+                    <a href="http://localhost:8080/dashboard_corrigido.php" class="url-link" target="_blank">
+                        📊 Dashboard Principal
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>🧪 Teste API</h4>
+                    <a href="http://localhost:8080/teste-api-simples.html" class="url-link" target="_blank">
+                        🧪 Testar API
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>📋 Relatórios</h4>
+                    <a href="http://localhost:8080/relatorios.html" class="url-link" target="_blank">
+                        📊 Ver Relatórios
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="solution-section">
+            <h3>🚀 TESTES RÁPIDOS</h3>
+            <p>Use estes botões para testar rapidamente o sistema:</p>
+            
+            <button class="test-btn success" onclick="abrirSistema()">🏠 Abrir Sistema Principal</button>
+            <button class="test-btn" onclick="testarURLs()">🔗 Testar Todas as URLs</button>
+            <button class="test-btn" onclick="abrirCertificados()">🎓 Abrir Certificados</button>
+            <button class="test-btn" onclick="abrirDashboard()">📊 Abrir Dashboard</button>
+            <button class="test-btn danger" onclick="abrirTodas()">🚀 Abrir Todas as Páginas</button>
+        </div>
+        
+        <div class="solution-section">
+            <h3>❌ CAUSAS COMUNS DO ERRO</h3>
+            
+            <div class="step-list">
+                <ol>
+                    <li><strong>URL incorreta:</strong> Usando <code>http://localhost/</code> em vez de <code>http://localhost:8080/</code></li>
+                    <li><strong>Nome de arquivo errado:</strong> <code>Certificados.php</code> em vez de <code>certificados.php</code></li>
+                    <li><strong>Arquivo inexistente:</strong> Tentando acessar um arquivo que não existe</li>
+                    <li><strong>Diretório errado:</strong> Arquivo está em outro local</li>
+                    <li><strong>Cache do navegador:</strong> Navegador mostrando página antiga</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="solution-section">
+            <h3>🛠️ SOLUÇÕES ESPECÍFICAS</h3>
+            
+            <div class="step-list">
+                <ol>
+                    <li><strong>Limpe o cache:</strong> Pressione Ctrl+F5 para forçar recarregamento</li>
+                    <li><strong>Verifique a URL:</strong> Copie e cole exatamente: <code>http://localhost:8080/index.html</code></li>
+                    <li><strong>Teste um por um:</strong> Use os links acima para verificar cada página</li>
+                    <li><strong>Verifique o XAMPP:</strong> Certifique-se de que Apache está rodando</li>
+                    <li><strong>Use o teste automático:</strong> Clique em "Testar Todas as URLs"</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function abrirSistema() {
+            window.open('http://localhost:8080/index.html', '_blank');
+        }
+        
+        function testarURLs() {
+            window.open('http://localhost:8080/teste-urls.html', '_blank');
+        }
+        
+        function abrirCertificados() {
+            window.open('http://localhost:8080/certificados.php', '_blank');
+        }
+        
+        function abrirDashboard() {
+            window.open('http://localhost:8080/dashboard_corrigido.php', '_blank');
+        }
+        
+        function abrirTodas() {
+            const urls = [
+                'http://localhost:8080/index.html',
+                'http://localhost:8080/teste-urls.html',
+                'http://localhost:8080/certificados.php',
+                'http://localhost:8080/dashboard_corrigido.php',
+                'http://localhost:8080/teste-api-simples.html',
+                'http://localhost:8080/relatorios.html'
+            ];
+            
+            urls.forEach(url => {
+                window.open(url, '_blank');
+            });
+        }
+        
+        // Auto-executar ao carregar
+        window.onload = function() {
+            console.log('🚨 Solução Not Found carregada');
+            console.log('📍 URL atual:', window.location.href);
+            
+            // Mostrar mensagem de ajuda
+            setTimeout(() => {
+                alert('🚨 SOLUÇÃO PARA "NOT FOUND"\n\n' +
+                      '1. Use sempre: http://localhost:8080/\n' +
+                      '2. Clique nos links verdes acima\n' +
+                      '3. Se ainda não funcionar, clique em "Testar Todas as URLs"');
+            }, 2000);
+        };
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

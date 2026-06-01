@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Relatórios</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .reports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .report-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .report-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .report-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .cursos .report-icon { color: #3b82f6; }
+        .usuarios .report-icon { color: #10b981; }
+        .financeiro .report-icon { color: #f59e0b; }
+        .agendamentos .report-icon { color: #06b6d4; }
+
+        .report-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 15px;
+        }
+
+        .report-description {
+            color: #6b7280;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .report-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .report-btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        .cursos .report-btn { background: #3b82f6; }
+        .cursos .report-btn:hover { background: #2563eb; }
+
+        .usuarios .report-btn { background: #10b981; }
+        .usuarios .report-btn:hover { background: #059669; }
+
+        .financeiro .report-btn { background: #f59e0b; }
+        .financeiro .report-btn:hover { background: #d97706; }
+
+        .agendamentos .report-btn { background: #06b6d4; }
+        .agendamentos .report-btn:hover { background: #0891b2; }
+
+        .stats-overview {
+            background: #f8fafc;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .stats-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #3b82f6;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #6b7280;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .result-area {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #6b7280;
+        }
+
+        .loading {
+            color: #3b82f6;
+            font-size: 1.1rem;
+        }
+
+        .loading::after {
+            content: '';
+            animation: dots 1.5s infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: ''; }
+            40% { content: '.'; }
+            60% { content: '..'; }
+            80%, 100% { content: '...'; }
+        }
+
+        .report-result {
+            width: 100%;
+        }
+
+        .report-result h3 {
+            color: #1f2937;
+            margin-bottom: 20px;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .result-item {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3b82f6;
+            margin-bottom: 5px;
+        }
+
+        .result-label {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .export-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+
+        .export-btn:hover {
+            background: #059669;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .reports-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="sistema_final.html" class="back-btn">
+                ← Voltar ao Sistema
+            </a>
+            <h1>📊 Relatórios Disponíveis</h1>
+            <p>Análises completas e insights detalhados sobre o sistema educacional</p>
+        </div>
+
+        <div class="content">
+            <!-- Cards dos Relatórios -->
+            <div class="reports-grid">
+                <!-- Relatório de Cursos -->
+                <div class="report-card cursos">
+                    <span class="report-icon">📚</span>
+                    <h3 class="report-title">Relatório de Cursos</h3>
+                    <p class="report-description">Análise completa dos cursos, incluindo popularidade, desempenho dos alunos, taxa de conclusão e avaliações detalhadas.</p>
+                    <button class="report-btn" onclick="gerarRelatorio('cursos')">
+                        📊 Gerar Relatório
+                    </button>
+                </div>
+
+                <!-- Relatório de Usuários -->
+                <div class="report-card usuarios">
+                    <span class="report-icon">👥</span>
+                    <h3 class="report-title">Relatório de Usuários</h3>
+                    <p class="report-description">Estatísticas dos usuários, análise de perfis, comportamento de navegação e dados demográficos completos.</p>
+                    <button class="report-btn" onclick="gerarRelatorio('usuarios')">
+                        📊 Gerar Relatório
+                    </button>
+                </div>
+
+                <!-- Relatório Financeiro -->
+                <div class="report-card financeiro">
+                    <span class="report-icon">💰</span>
+                    <h3 class="report-title">Relatório Financeiro</h3>
+                    <p class="report-description">Análise financeira completa, receitas, despesas, lucros, projeções e indicadores de performance financeira.</p>
+                    <button class="report-btn" onclick="gerarRelatorio('financeiro')">
+                        📊 Gerar Relatório
+                    </button>
+                </div>
+
+                <!-- Relatório de Agendamentos -->
+                <div class="report-card agendamentos">
+                    <span class="report-icon">📅</span>
+                    <h3 class="report-title">Relatório de Agendamentos</h3>
+                    <p class="report-description">Análise de aulas agendadas, horários mais populares, taxa de ocupação e eficiência do sistema de agendamento.</p>
+                    <button class="report-btn" onclick="gerarRelatorio('agendamentos')">
+                        📊 Gerar Relatório
+                    </button>
+                </div>
+            </div>
+
+            <!-- Estatísticas Gerais -->
+            <div class="stats-overview">
+                <h3 class="stats-title">📈 Estatísticas Gerais</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" id="total-cursos">156</div>
+                        <div class="stat-label">Total de Cursos</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="total-usuarios">1,234</div>
+                        <div class="stat-label">Total de Usuários</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="total-agendamentos">2,567</div>
+                        <div class="stat-label">Agendamentos</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="receita-total">R$ 45.678</div>
+                        <div class="stat-label">Receita Total</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Área de Resultado -->
+            <div class="result-area" id="resultado">
+                Clique em um dos botões acima para gerar um relatório
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados dos relatórios
+        const relatorios = {
+            'cursos': {
+                titulo: '📚 Relatório de Cursos',
+                dados: {
+                    'Cursos Ativos': '156',
+                    'Taxa de Conclusão': '87.5%',
+                    'Avaliação Média': '4.7/5.0',
+                    'Total de Matrículas': '1,234'
+                }
+            },
+            'usuarios': {
+                titulo: '👥 Relatório de Usuários',
+                dados: {
+                    'Total de Usuários': '1,234',
+                    'Usuários Ativos': '892',
+                    'Novos Este Mês': '342',
+                    'Taxa de Retenção': '72%'
+                }
+            },
+            'financeiro': {
+                titulo: '💰 Relatório Financeiro',
+                dados: {
+                    'Receita Total': 'R$ 45.678',
+                    'Despesas': 'R$ 12.345',
+                    'Lucro Líquido': 'R$ 33.333',
+                    'Margem de Lucro': '73%'
+                }
+            },
+            'agendamentos': {
+                titulo: '📅 Relatório de Agendamentos',
+                dados: {
+                    'Total de Agendamentos': '2,567',
+                    'Este Mês': '156',
+                    'Taxa de Ocupação': '89%',
+                    'Duração Média': '4.2h'
+                }
+            }
+        };
+
+        // Função para gerar relatório
+        async function gerarRelatorio(tipo) {
+            const resultado = document.getElementById('resultado');
+            
+            // Mostrar loading
+            resultado.innerHTML = '<div class="loading">Gerando relatório</div>';
+            
+            // Simular processamento
+            setTimeout(() => {
+                const relatorio = relatorios[tipo];
+                
+                let html = `
+                    <div class="report-result">
+                        <h3>${relatorio.titulo}</h3>
+                        <div class="result-grid">
+                `;
+                
+                for (const [chave, valor] of Object.entries(relatorio.dados)) {
+                    html += `
+                        <div class="result-item">
+                            <div class="result-value">${valor}</div>
+                            <div class="result-label">${chave}</div>
+                        </div>
+                    `;
+                }
+                
+                html += `
+                        </div>
+                        <button class="export-btn" onclick="exportarRelatorio('${tipo}')">
+                            📥 Exportar PDF
+                        </button>
+                    </div>
+                `;
+                
+                resultado.innerHTML = html;
+            }, 2000);
+        }
+
+        // Função para exportar relatório
+        function exportarRelatorio(tipo) {
+            alert(`✅ Relatório de ${tipo} exportado com sucesso!`);
+        }
+
+        // Carregar estatísticas ao iniciar
+        document.addEventListener('DOMContentLoaded', function() {
+            // Aqui você pode adicionar uma chamada para API real
+            console.log('Página de relatórios carregada com sucesso!');
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

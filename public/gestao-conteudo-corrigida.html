@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Gestão de Conteúdo</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary-color: #64748b;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --info-color: #06b6d4;
+            --light-color: #f8fafc;
+            --dark-color: #1e293b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 30px;
+            border-radius: var(--border-radius);
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .header p {
+            text-align: center;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        .course-selector {
+            background: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 30px;
+        }
+
+        .course-selector h3 {
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+
+        .course-dropdown {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            background: white;
+        }
+
+        .add-content-form {
+            background: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 30px;
+        }
+
+        .add-content-form h3 {
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .file-upload {
+            border: 2px dashed var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--light-color);
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary-color);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .file-upload i {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 4px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--success-color);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-right: 10px;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--secondary-color);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .content-list {
+            background: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+        }
+
+        .content-list h3 {
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+
+        .content-item {
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 15px;
+            background: var(--light-color);
+        }
+
+        .content-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .content-title {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .content-type {
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .content-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .meta-item {
+            font-size: 0.9rem;
+        }
+
+        .meta-label {
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+
+        .content-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close {
+            color: var(--secondary-color);
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: var(--dark-color);
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .content-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="dashboard.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                Voltar ao Dashboard
+            </a>
+            
+            <h1>📚 Gestão de Conteúdo dos Cursos</h1>
+            <p>Organize e gerencie todo o material didático dos seus cursos</p>
+        </div>
+
+        <!-- Estatísticas do Conteúdo -->
+        <div class="content-stats">
+            <div class="stat-card">
+                <div class="stat-number">24</div>
+                <div class="stat-label">Cursos Ativos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">156</div>
+                <div class="stat-label">Lições Criadas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">89</div>
+                <div class="stat-label">Vídeos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">234</div>
+                <div class="stat-label">Arquivos</div>
+            </div>
+        </div>
+
+        <!-- Seletor de Curso -->
+        <div class="course-selector">
+            <h3>Selecione o Curso</h3>
+            <select class="course-dropdown" id="courseSelect">
+                <option value="">Escolha um curso...</option>
+                <option value="javascript">JavaScript Avançado</option>
+                <option value="python">Python para Data Science</option>
+                <option value="react">React & Node.js</option>
+                <option value="java">Java Enterprise</option>
+                <option value="devops">DevOps & CI/CD</option>
+            </select>
+        </div>
+
+        <!-- Formulário para Adicionar Conteúdo -->
+        <div class="add-content-form">
+            <h3>➕ Adicionar Novo Conteúdo</h3>
+            <form id="addContentForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contentType">Tipo de Conteúdo</label>
+                        <select class="form-control" id="contentType" required>
+                            <option value="">Selecione o tipo...</option>
+                            <option value="lesson">Lição</option>
+                            <option value="video">Vídeo</option>
+                            <option value="file">Arquivo</option>
+                            <option value="quiz">Quiz</option>
+                            <option value="assignment">Trabalho</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="contentTitle">Título do Conteúdo</label>
+                        <input type="text" class="form-control" id="contentTitle" placeholder="Ex: Introdução ao JavaScript" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="contentDescription">Descrição</label>
+                    <textarea class="form-control" id="contentDescription" rows="3" placeholder="Descreva o conteúdo desta lição..."></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contentDuration">Duração Estimada (minutos)</label>
+                        <input type="number" class="form-control" id="contentDuration" min="1" placeholder="30">
+                    </div>
+                    <div class="form-group">
+                        <label for="contentOrder">Ordem na Sequência</label>
+                        <input type="number" class="form-control" id="contentOrder" min="1" placeholder="1">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Upload de Arquivo</label>
+                    <div class="file-upload" id="fileUpload">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Clique ou arraste arquivos aqui</p>
+                        <p style="font-size: 0.9rem; color: var(--secondary-color);">PDF, DOC, MP4, MP3, ZIP (máx. 100MB)</p>
+                    </div>
+                    <div class="progress-bar" id="progressBar" style="display: none;">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">✅ Criar Conteúdo</button>
+                <button type="button" class="btn btn-outline" onclick="limparFormulario()">🔄 Limpar</button>
+            </form>
+        </div>
+
+        <!-- Lista de Conteúdo Existente -->
+        <div class="content-list">
+            <h3>📋 Conteúdo Existente</h3>
+            
+            <div class="content-item">
+                <div class="content-item-header">
+                    <div class="content-title">Introdução ao JavaScript</div>
+                    <div class="content-type">Lição</div>
+                </div>
+                <div class="content-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Curso:</span> JavaScript Avançado
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Duração:</span> 45 min
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Ordem:</span> 1
+                    </div>
+                </div>
+                <p>Conceitos fundamentais de JavaScript ES6+, incluindo arrow functions, destructuring, e módulos.</p>
+                <div class="content-actions">
+                    <button class="btn btn-primary" onclick="editContent(1)">✏️ Editar</button>
+                    <button class="btn btn-outline" onclick="deleteContent(1)">🗑️ Excluir</button>
+                </div>
+            </div>
+
+            <div class="content-item">
+                <div class="content-item-header">
+                    <div class="content-title">Arrays e Objetos</div>
+                    <div class="content-type">Vídeo</div>
+                </div>
+                <div class="content-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Curso:</span> JavaScript Avançado
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Duração:</span> 30 min
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Ordem:</span> 2
+                    </div>
+                </div>
+                <p>Manipulação avançada de arrays e objetos em JavaScript, incluindo métodos modernos.</p>
+                <div class="content-actions">
+                    <button class="btn btn-primary" onclick="editContent(2)">✏️ Editar</button>
+                    <button class="btn btn-outline" onclick="deleteContent(2)">🗑️ Excluir</button>
+                </div>
+            </div>
+
+            <div class="content-item">
+                <div class="content-item-header">
+                    <div class="content-title">Exercícios Práticos</div>
+                    <div class="content-type">Quiz</div>
+                </div>
+                <div class="content-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Curso:</span> JavaScript Avançado
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Duração:</span> 20 min
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Ordem:</span> 3
+                    </div>
+                </div>
+                <p>Exercícios práticos para fixar os conceitos aprendidos nas lições anteriores.</p>
+                <div class="content-actions">
+                    <button class="btn btn-primary" onclick="editContent(3)">✏️ Editar</button>
+                    <button class="btn btn-outline" onclick="deleteContent(3)">🗑️ Excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Edição -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>✏️ Editar Conteúdo</h3>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div id="modalBody">
+                <!-- Conteúdo do modal será inserido aqui -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Formulário de criação de conteúdo
+        document.getElementById('addContentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const course = document.getElementById('courseSelect').value;
+            const type = document.getElementById('contentType').value;
+            const title = document.getElementById('contentTitle').value;
+            const description = document.getElementById('contentDescription').value;
+            const duration = document.getElementById('contentDuration').value;
+            const order = document.getElementById('contentOrder').value;
+            
+            if (!course || !type || !title) {
+                alert('Por favor, preencha pelo menos o curso, tipo e título!');
+                return;
+            }
+            
+            // Simulação de criação
+            alert(`✅ Conteúdo criado com sucesso!\n\nTítulo: ${title}\nTipo: ${type}\nCurso: ${course}`);
+            
+            // Limpar formulário
+            limparFormulario();
+        });
+
+        function limparFormulario() {
+            document.getElementById('addContentForm').reset();
+        }
+
+        // Upload de arquivos
+        const fileUpload = document.getElementById('fileUpload');
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = '.pdf,.doc,.docx,.mp4,.avi,.mov,.mp3,.zip';
+        fileInput.style.display = 'none';
+        document.body.appendChild(fileInput);
+
+        fileUpload.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', handleFileSelect);
+
+        // Drag and drop
+        fileUpload.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUpload.style.borderColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-color');
+            fileUpload.style.background = 'rgba(59, 130, 246, 0.1)';
+        });
+
+        fileUpload.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            fileUpload.style.borderColor = getComputedStyle(document.documentElement).getPropertyValue('--border-color');
+            fileUpload.style.background = 'var(--light-color)';
+        });
+
+        fileUpload.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFileSelect({ target: { files: files } });
+            }
+        });
+
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (file) {
+                simulateFileUpload(file);
+            }
+        }
+
+        function simulateFileUpload(file) {
+            const progressBar = document.getElementById('progressBar');
+            const progressFill = document.getElementById('progressFill');
+            
+            progressBar.style.display = 'block';
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        progressBar.style.display = 'none';
+                        alert(`Arquivo "${file.name}" enviado com sucesso!`);
+                    }, 500);
+                }
+                progressFill.style.width = progress + '%';
+            }, 200);
+        }
+
+        function editContent(contentId) {
+            const modal = document.getElementById('editModal');
+            const modalBody = document.getElementById('modalBody');
+            
+            modalBody.innerHTML = `
+                <div class="form-group">
+                    <label>Título</label>
+                    <input type="text" class="form-control" value="Conteúdo ${contentId}" />
+                </div>
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <textarea class="form-control" rows="3">Descrição do conteúdo...</textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" onclick="saveContent('${contentId}')">Salvar</button>
+                    <button class="btn btn-outline" onclick="closeModal()">Cancelar</button>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+        }
+
+        function saveContent(contentId) {
+            console.log(`Salvando conteúdo: ${contentId}`);
+            alert('Conteúdo atualizado com sucesso!');
+            closeModal();
+        }
+
+        function deleteContent(contentId) {
+            if (confirm('Tem certeza que deseja excluir este conteúdo?')) {
+                console.log(`Excluindo conteúdo: ${contentId}`);
+                alert('Conteúdo excluído com sucesso!');
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+
+        // Fechar modal ao clicar fora
+        window.onclick = function(event) {
+            const modal = document.getElementById('editModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Teste de carregamento
+        console.log('✅ Página de Gestão de Conteúdo carregada com sucesso!');
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ DOM completamente carregado!');
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

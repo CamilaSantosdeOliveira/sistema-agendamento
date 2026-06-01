@@ -1,0 +1,36 @@
+# Configurações específicas para a pasta public
+Options +Indexes +FollowSymLinks +MultiViews
+Require all granted
+
+# Permitir todos os tipos de arquivo
+<FilesMatch ".*">
+    Require all granted
+</FilesMatch>
+
+# Configurações de diretório
+<Directory "public">
+    Options +Indexes +FollowSymLinks
+    Require all granted
+    AllowOverride All
+</Directory>
+
+# Redirecionar erro 403 para index.html
+ErrorDocument 403 /Sistema%20De%20Agendamento/public/index.html
+
+# Permitir acesso a todos os arquivos estáticos
+<Files "*.html">
+    Require all granted
+</Files>
+
+<Files "*.css">
+    Require all granted
+</Files>
+
+<Files "*.js">
+    Require all granted
+</Files>
+
+<Files "*.php">
+    Require all granted
+</Files>
+

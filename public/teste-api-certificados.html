@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 Teste API de Certificados</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #3b82f6;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .test-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .test-section h3 {
+            color: #1e293b;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            background: #3b82f6;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+        
+        .btn.success {
+            background: #10b981;
+        }
+        
+        .btn.success:hover {
+            background: #059669;
+        }
+        
+        .btn.warning {
+            background: #f59e0b;
+        }
+        
+        .btn.warning:hover {
+            background: #d97706;
+        }
+        
+        .btn.danger {
+            background: #ef4444;
+        }
+        
+        .btn.danger:hover {
+            background: #dc2626;
+        }
+        
+        .result {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .result.success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .result.error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .status.success {
+            background: #10b981;
+            color: white;
+        }
+        
+        .status.error {
+            background: #ef4444;
+            color: white;
+        }
+        
+        .status.loading {
+            background: #f59e0b;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 Teste API de Certificados</h1>
+            <p>Teste todas as funcionalidades da API de certificados</p>
+        </div>
+
+        <!-- Teste de Emissão -->
+        <div class="test-section">
+            <h3>📜 Emitir Certificado</h3>
+            <p>Testa a emissão de um novo certificado</p>
+            <button class="btn" onclick="testarEmissao()">Emitir Certificado</button>
+            <span id="status-emissao" class="status"></span>
+            <div id="result-emissao" class="result"></div>
+        </div>
+
+        <!-- Teste de Validação -->
+        <div class="test-section">
+            <h3>✅ Validar Certificado</h3>
+            <p>Testa a validação de um certificado</p>
+            <input type="number" id="id-validar" placeholder="ID do certificado" style="padding: 8px; margin-right: 10px;">
+            <button class="btn success" onclick="testarValidacao()">Validar Certificado</button>
+            <span id="status-validacao" class="status"></span>
+            <div id="result-validacao" class="result"></div>
+        </div>
+
+        <!-- Teste de Revogação -->
+        <div class="test-section">
+            <h3>❌ Revogar Certificado</h3>
+            <p>Testa a revogação de um certificado</p>
+            <input type="number" id="id-revogar" placeholder="ID do certificado" style="padding: 8px; margin-right: 10px;">
+            <button class="btn danger" onclick="testarRevogacao()">Revogar Certificado</button>
+            <span id="status-revogacao" class="status"></span>
+            <div id="result-revogacao" class="result"></div>
+        </div>
+
+        <!-- Teste de Revalidação -->
+        <div class="test-section">
+            <h3>🔄 Revalidar Certificado</h3>
+            <p>Testa a revalidação de um certificado</p>
+            <input type="number" id="id-revalidar" placeholder="ID do certificado" style="padding: 8px; margin-right: 10px;">
+            <button class="btn warning" onclick="testarRevalidacao()">Revalidar Certificado</button>
+            <span id="status-revalidacao" class="status"></span>
+            <div id="result-revalidacao" class="result"></div>
+        </div>
+
+        <!-- Teste de Validação em Lote -->
+        <div class="test-section">
+            <h3>📋 Validar Todos Pendentes</h3>
+            <p>Testa a validação em lote de certificados pendentes</p>
+            <button class="btn success" onclick="testarValidacaoLote()">Validar Todos Pendentes</button>
+            <span id="status-lote" class="status"></span>
+            <div id="result-lote" class="result"></div>
+        </div>
+
+        <!-- Teste de Visualização -->
+        <div class="test-section">
+            <h3>👁️ Ver Certificado</h3>
+            <p>Testa a visualização de um certificado</p>
+            <input type="number" id="id-ver" placeholder="ID do certificado" style="padding: 8px; margin-right: 10px;">
+            <button class="btn" onclick="testarVisualizacao()">Ver Certificado</button>
+            <span id="status-ver" class="status"></span>
+            <div id="result-ver" class="result"></div>
+        </div>
+
+        <!-- Teste de Download -->
+        <div class="test-section">
+            <h3>📥 Baixar Certificado</h3>
+            <p>Testa o download de um certificado</p>
+            <input type="number" id="id-baixar" placeholder="ID do certificado" style="padding: 8px; margin-right: 10px;">
+            <button class="btn" onclick="testarDownload()">Baixar Certificado</button>
+            <span id="status-baixar" class="status"></span>
+            <div id="result-baixar" class="result"></div>
+        </div>
+
+        <!-- Teste de Conectividade -->
+        <div class="test-section">
+            <h3>🔗 Teste de Conectividade</h3>
+            <p>Testa se a API está acessível</p>
+            <button class="btn" onclick="testarConectividade()">Testar Conectividade</button>
+            <span id="status-conectividade" class="status"></span>
+            <div id="result-conectividade" class="result"></div>
+        </div>
+
+        <!-- Resultado Geral -->
+        <div class="test-section">
+            <h3>📊 Resultado Geral</h3>
+            <button class="btn success" onclick="executarTodosTestes()">Executar Todos os Testes</button>
+            <div id="result-geral" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'api/certificados.php';
+        let certificadoId = null;
+
+        // Função para mostrar status
+        function mostrarStatus(elementId, status, message) {
+            const element = document.getElementById(elementId);
+            element.className = `status ${status}`;
+            element.textContent = message;
+        }
+
+        // Função para mostrar resultado
+        function mostrarResultado(elementId, data, isSuccess = true) {
+            const element = document.getElementById(elementId);
+            element.className = `result ${isSuccess ? 'success' : 'error'}`;
+            element.textContent = JSON.stringify(data, null, 2);
+        }
+
+        // Função para fazer requisição à API
+        async function fazerRequisicao(url, options = {}) {
+            try {
+                const response = await fetch(url, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...options.headers
+                    },
+                    ...options
+                });
+                
+                const data = await response.json();
+                return { success: true, data, status: response.status };
+            } catch (error) {
+                return { success: false, error: error.message };
+            }
+        }
+
+        // Teste de conectividade
+        async function testarConectividade() {
+            mostrarStatus('status-conectividade', 'loading', 'Testando...');
+            
+            const result = await fazerRequisicao(API_BASE + '?action=ver_certificado&id=1');
+            
+            if (result.success) {
+                mostrarStatus('status-conectividade', 'success', 'Conectado');
+                mostrarResultado('result-conectividade', result.data, true);
+            } else {
+                mostrarStatus('status-conectividade', 'error', 'Erro');
+                mostrarResultado('result-conectividade', result.error, false);
+            }
+        }
+
+        // Teste de emissão
+        async function testarEmissao() {
+            mostrarStatus('status-emissao', 'loading', 'Emitindo...');
+            
+            const result = await fazerRequisicao(API_BASE, {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: 'emitir_certificado'
+                })
+            });
+            
+            if (result.success && result.data.success) {
+                certificadoId = result.data.data.id;
+                mostrarStatus('status-emissao', 'success', 'Emitido');
+                mostrarResultado('result-emissao', result.data, true);
+            } else {
+                mostrarStatus('status-emissao', 'error', 'Erro');
+                mostrarResultado('result-emissao', result.data || result.error, false);
+            }
+        }
+
+        // Teste de validação
+        async function testarValidacao() {
+            const id = document.getElementById('id-validar').value || certificadoId || 1;
+            mostrarStatus('status-validacao', 'loading', 'Validando...');
+            
+            const result = await fazerRequisicao(API_BASE, {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: 'validar_certificado',
+                    id: parseInt(id)
+                })
+            });
+            
+            if (result.success && result.data.success) {
+                mostrarStatus('status-validacao', 'success', 'Validado');
+                mostrarResultado('result-validacao', result.data, true);
+            } else {
+                mostrarStatus('status-validacao', 'error', 'Erro');
+                mostrarResultado('result-validacao', result.data || result.error, false);
+            }
+        }
+
+        // Teste de revogação
+        async function testarRevogacao() {
+            const id = document.getElementById('id-revogar').value || certificadoId || 1;
+            mostrarStatus('status-revogacao', 'loading', 'Revogando...');
+            
+            const result = await fazerRequisicao(API_BASE, {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: 'revogar_certificado',
+                    id: parseInt(id)
+                })
+            });
+            
+            if (result.success && result.data.success) {
+                mostrarStatus('status-revogacao', 'success', 'Revogado');
+                mostrarResultado('result-revogacao', result.data, true);
+            } else {
+                mostrarStatus('status-revogacao', 'error', 'Erro');
+                mostrarResultado('result-revogacao', result.data || result.error, false);
+            }
+        }
+
+        // Teste de revalidação
+        async function testarRevalidacao() {
+            const id = document.getElementById('id-revalidar').value || certificadoId || 1;
+            mostrarStatus('status-revalidacao', 'loading', 'Revalidando...');
+            
+            const result = await fazerRequisicao(API_BASE, {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: 'revalidar_certificado',
+                    id: parseInt(id)
+                })
+            });
+            
+            if (result.success && result.data.success) {
+                mostrarStatus('status-revalidacao', 'success', 'Revalidado');
+                mostrarResultado('result-revalidacao', result.data, true);
+            } else {
+                mostrarStatus('status-revalidacao', 'error', 'Erro');
+                mostrarResultado('result-revalidacao', result.data || result.error, false);
+            }
+        }
+
+        // Teste de validação em lote
+        async function testarValidacaoLote() {
+            mostrarStatus('status-lote', 'loading', 'Validando...');
+            
+            const result = await fazerRequisicao(API_BASE, {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: 'validar_todos_pendentes'
+                })
+            });
+            
+            if (result.success && result.data.success) {
+                mostrarStatus('status-lote', 'success', 'Concluído');
+                mostrarResultado('result-lote', result.data, true);
+            } else {
+                mostrarStatus('status-lote', 'error', 'Erro');
+                mostrarResultado('result-lote', result.data || result.error, false);
+            }
+        }
+
+        // Teste de visualização
+        async function testarVisualizacao() {
+            const id = document.getElementById('id-ver').value || certificadoId || 1;
+            mostrarStatus('status-ver', 'loading', 'Carregando...');
+            
+            const result = await fazerRequisicao(API_BASE + `?action=ver_certificado&id=${id}`);
+            
+            if (result.success && result.data.success) {
+                mostrarStatus('status-ver', 'success', 'Carregado');
+                mostrarResultado('result-ver', result.data, true);
+            } else {
+                mostrarStatus('status-ver', 'error', 'Erro');
+                mostrarResultado('result-ver', result.data || result.error, false);
+            }
+        }
+
+        // Teste de download
+        async function testarDownload() {
+            const id = document.getElementById('id-baixar').value || certificadoId || 1;
+            mostrarStatus('status-baixar', 'loading', 'Baixando...');
+            
+            const result = await fazerRequisicao(API_BASE + `?action=baixar_certificado&id=${id}`);
+            
+            if (result.success && result.data.success) {
+                mostrarStatus('status-baixar', 'success', 'Baixado');
+                mostrarResultado('result-baixar', result.data, true);
+            } else {
+                mostrarStatus('status-baixar', 'error', 'Erro');
+                mostrarResultado('result-baixar', result.data || result.error, false);
+            }
+        }
+
+        // Executar todos os testes
+        async function executarTodosTestes() {
+            const resultados = [];
+            
+            // Teste de conectividade
+            resultados.push({ nome: 'Conectividade', resultado: await fazerRequisicao(API_BASE + '?action=ver_certificado&id=1') });
+            
+            // Teste de emissão
+            resultados.push({ nome: 'Emissão', resultado: await fazerRequisicao(API_BASE, {
+                method: 'POST',
+                body: JSON.stringify({ action: 'emitir_certificado' })
+            })});
+            
+            // Teste de validação
+            resultados.push({ nome: 'Validação', resultado: await fazerRequisicao(API_BASE, {
+                method: 'POST',
+                body: JSON.stringify({ action: 'validar_certificado', id: 1 })
+            })});
+            
+            // Teste de validação em lote
+            resultados.push({ nome: 'Validação em Lote', resultado: await fazerRequisicao(API_BASE, {
+                method: 'POST',
+                body: JSON.stringify({ action: 'validar_todos_pendentes' })
+            })});
+            
+            // Mostrar resultados
+            const resumo = resultados.map(r => ({
+                teste: r.nome,
+                sucesso: r.resultado.success && r.resultado.data?.success,
+                status: r.resultado.status || 'N/A'
+            }));
+            
+            mostrarResultado('result-geral', {
+                resumo: resumo,
+                total: resumo.length,
+                sucessos: resumo.filter(r => r.sucesso).length,
+                falhas: resumo.filter(r => !r.sucesso).length
+            }, true);
+        }
+
+        // Executar teste de conectividade ao carregar a página
+        window.onload = function() {
+            testarConectividade();
+        };
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

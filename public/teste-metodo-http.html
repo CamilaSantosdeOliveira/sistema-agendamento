@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 Teste Método HTTP - API Certificados</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #2d3436;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .status-info {
+            background: #ffeaa7;
+            border: 2px solid #fdcb6e;
+            color: #2d3436;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+        
+        .test-section h3 {
+            color: #2d3436;
+            margin-bottom: 15px;
+        }
+        
+        .test-btn {
+            background: #00b894;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .test-btn:hover {
+            background: #00a085;
+        }
+        
+        .test-btn.danger {
+            background: #e17055;
+        }
+        
+        .test-btn.danger:hover {
+            background: #d63031;
+        }
+        
+        .test-btn.warning {
+            background: #fdcb6e;
+            color: #2d3436;
+        }
+        
+        .test-btn.warning:hover {
+            background: #e17055;
+            color: white;
+        }
+        
+        .result-box {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .result-box.success {
+            background: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        
+        .result-box.error {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        
+        .result-box.info {
+            background: #d1ecf1;
+            border-color: #bee5eb;
+            color: #0c5460;
+        }
+        
+        .input-group {
+            margin: 15px 0;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2d3436;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .method-card {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .method-card.success {
+            border-color: #00b894;
+            background: #f0fff4;
+        }
+        
+        .method-card.error {
+            border-color: #e17055;
+            background: #fff5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔧 Teste Método HTTP - API Certificados</h1>
+            <p>Diagnosticando problemas com métodos HTTP na validação de certificados</p>
+        </div>
+        
+        <div class="status-info">
+            <h3>🚨 PROBLEMA IDENTIFICADO</h3>
+            <p><strong>❌ Erro:</strong> "Erro ao validar certificado: Método não permitido"</p>
+            <p><strong>🔍 Causa:</strong> API pode estar rejeitando o método HTTP usado</p>
+            <p><strong>🔧 Solução:</strong> Testar todos os métodos HTTP possíveis</p>
+        </div>
+        
+        <div class="test-section">
+            <h3>🧪 TESTE DE MÉTODOS HTTP</h3>
+            <p>Teste a API com diferentes métodos HTTP para identificar qual funciona:</p>
+            
+            <div class="input-group">
+                <label for="certificado-id">ID do Certificado/Aluno:</label>
+                <input type="number" id="certificado-id" value="1" placeholder="Digite o ID">
+            </div>
+            
+            <div class="method-grid">
+                <div class="method-card" id="method-get">
+                    <h4>GET</h4>
+                    <p>Método tradicional</p>
+                    <button class="test-btn" onclick="testarMetodo('GET')">Testar GET</button>
+                </div>
+                
+                <div class="method-card" id="method-post">
+                    <h4>POST</h4>
+                    <p>Método usado pelo frontend</p>
+                    <button class="test-btn" onclick="testarMetodo('POST')">Testar POST</button>
+                </div>
+                
+                <div class="method-card" id="method-put">
+                    <h4>PUT</h4>
+                    <p>Método alternativo</p>
+                    <button class="test-btn" onclick="testarMetodo('PUT')">Testar PUT</button>
+                </div>
+                
+                <div class="method-card" id="method-delete">
+                    <h4>DELETE</h4>
+                    <p>Método para exclusão</p>
+                    <button class="test-btn" onclick="testarMetodo('DELETE')">Testar DELETE</button>
+                </div>
+            </div>
+            
+            <div id="resultado-metodos" class="result-box" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🔍 TESTE DE DIAGNÓSTICO</h3>
+            <p>Testes específicos para identificar o problema:</p>
+            
+            <button class="test-btn danger" onclick="testarTodosMetodos()">🧪 Testar Todos os Métodos</button>
+            <button class="test-btn warning" onclick="testarValidacaoEspecifica()">✅ Testar Validação Específica</button>
+            <button class="test-btn" onclick="verificarLogs()">📋 Verificar Logs</button>
+            <button class="test-btn" onclick="abrirSistema()">🎓 Abrir Sistema de Certificados</button>
+            
+            <div id="resultado-diagnostico" class="result-box" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>📊 RESULTADOS DOS TESTES</h3>
+            <div id="resultados-resumo" class="result-box info">
+                Aguardando testes...
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const BASE_URL = 'http://localhost:8080/';
+        const resultados = {};
+        
+        async function fazerRequisicao(url, options = {}) {
+            try {
+                console.log(`🔧 Fazendo requisição ${options.method || 'GET'} para:`, url);
+                console.log('🔧 Opções:', options);
+                
+                const response = await fetch(url, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...options.headers
+                    },
+                    ...options
+                });
+                
+                console.log(`🔧 Resposta:`, response.status, response.statusText);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                return { success: true, data, status: response.status };
+            } catch (error) {
+                console.error(`🔧 Erro na requisição:`, error);
+                return { success: false, error: error.message };
+            }
+        }
+        
+        function mostrarResultado(resultado, tipo = 'info', elementoId = 'resultado-metodos') {
+            const element = document.getElementById(elementoId);
+            element.style.display = 'block';
+            element.className = `result-box ${tipo}`;
+            
+            if (resultado.success) {
+                element.textContent = `✅ SUCESSO (${resultado.status})\n\n${JSON.stringify(resultado.data, null, 2)}`;
+            } else {
+                element.textContent = `❌ ERRO\n\n${resultado.error}`;
+            }
+        }
+        
+        function atualizarCardMetodo(metodo, sucesso) {
+            const card = document.getElementById(`method-${metodo.toLowerCase()}`);
+            card.className = `method-card ${sucesso ? 'success' : 'error'}`;
+            
+            if (sucesso) {
+                card.innerHTML += '<p style="color: #00b894; font-weight: bold;">✅ FUNCIONA</p>';
+            } else {
+                card.innerHTML += '<p style="color: #e17055; font-weight: bold;">❌ FALHA</p>';
+            }
+        }
+        
+        async function testarMetodo(metodo) {
+            const id = document.getElementById('certificado-id').value;
+            console.log(`🧪 Testando método ${metodo}...`);
+            
+            let resultado;
+            
+            if (metodo === 'GET') {
+                resultado = await fazerRequisicao(BASE_URL + `api/certificados.php?action=validar_certificado&id=${id}`);
+            } else {
+                resultado = await fazerRequisicao(BASE_URL + 'api/certificados.php', {
+                    method: metodo,
+                    body: JSON.stringify({
+                        action: 'validar_certificado',
+                        id: parseInt(id)
+                    })
+                });
+            }
+            
+            resultados[metodo] = resultado;
+            atualizarCardMetodo(metodo, resultado.success);
+            
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error', 'resultado-metodos');
+            atualizarResumo();
+        }
+        
+        async function testarTodosMetodos() {
+            console.log('🧪 Testando todos os métodos...');
+            
+            const element = document.getElementById('resultado-diagnostico');
+            element.style.display = 'block';
+            element.className = 'result-box';
+            element.textContent = '🧪 Testando todos os métodos HTTP...\n\n';
+            
+            const metodos = ['GET', 'POST', 'PUT', 'DELETE'];
+            let sucessos = 0;
+            let erros = 0;
+            
+            for (const metodo of metodos) {
+                element.textContent += `Testando ${metodo}...\n`;
+                
+                const id = document.getElementById('certificado-id').value;
+                let resultado;
+                
+                if (metodo === 'GET') {
+                    resultado = await fazerRequisicao(BASE_URL + `api/certificados.php?action=validar_certificado&id=${id}`);
+                } else {
+                    resultado = await fazerRequisicao(BASE_URL + 'api/certificados.php', {
+                        method: metodo,
+                        body: JSON.stringify({
+                            action: 'validar_certificado',
+                            id: parseInt(id)
+                        })
+                    });
+                }
+                
+                resultados[metodo] = resultado;
+                atualizarCardMetodo(metodo, resultado.success);
+                
+                if (resultado.success) {
+                    sucessos++;
+                    element.textContent += `✅ ${metodo} - OK\n`;
+                } else {
+                    erros++;
+                    element.textContent += `❌ ${metodo} - ERRO: ${resultado.error}\n`;
+                }
+            }
+            
+            element.textContent += `\n📊 RESULTADO: ${sucessos} sucessos, ${erros} erros`;
+            
+            if (sucessos > 0) {
+                element.className = 'result-box success';
+                element.textContent += '\n🎉 PELO MENOS UM MÉTODO FUNCIONA!';
+            } else {
+                element.className = 'result-box error';
+                element.textContent += '\n❌ NENHUM MÉTODO FUNCIONA - PROBLEMA NA API';
+            }
+            
+            atualizarResumo();
+        }
+        
+        async function testarValidacaoEspecifica() {
+            console.log('✅ Testando validação específica...');
+            
+            const element = document.getElementById('resultado-diagnostico');
+            element.style.display = 'block';
+            element.className = 'result-box';
+            element.textContent = '✅ Testando validação específica...\n\n';
+            
+            // Teste 1: Listar certificados (deve funcionar sempre)
+            element.textContent += '1. Testando listar certificados...\n';
+            const resultado1 = await fazerRequisicao(BASE_URL + 'api/certificados.php?action=listar_certificados');
+            if (resultado1.success) {
+                element.textContent += '✅ Listar certificados - OK\n';
+            } else {
+                element.textContent += `❌ Listar certificados - ERRO: ${resultado1.error}\n`;
+            }
+            
+            // Teste 2: Ver certificado específico
+            const id = document.getElementById('certificado-id').value;
+            element.textContent += `2. Testando ver certificado ID ${id}...\n`;
+            const resultado2 = await fazerRequisicao(BASE_URL + `api/certificados.php?action=ver_certificado&id=${id}`);
+            if (resultado2.success) {
+                element.textContent += '✅ Ver certificado - OK\n';
+            } else {
+                element.textContent += `❌ Ver certificado - ERRO: ${resultado2.error}\n`;
+            }
+            
+            // Teste 3: Validar certificado com POST
+            element.textContent += '3. Testando validar certificado (POST)...\n';
+            const resultado3 = await fazerRequisicao(BASE_URL + 'api/certificados.php', {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: 'validar_certificado',
+                    id: parseInt(id)
+                })
+            });
+            if (resultado3.success) {
+                element.textContent += '✅ Validar certificado (POST) - OK\n';
+            } else {
+                element.textContent += `❌ Validar certificado (POST) - ERRO: ${resultado3.error}\n`;
+            }
+            
+            element.textContent += '\n📊 DIAGNÓSTICO COMPLETO';
+            
+            if (resultado1.success && resultado2.success && resultado3.success) {
+                element.className = 'result-box success';
+                element.textContent += '\n🎉 TODOS OS TESTES PASSARAM!';
+            } else {
+                element.className = 'result-box error';
+                element.textContent += '\n❌ ALGUNS TESTES FALHARAM';
+            }
+        }
+        
+        function verificarLogs() {
+            const element = document.getElementById('resultado-diagnostico');
+            element.style.display = 'block';
+            element.className = 'result-box info';
+            element.textContent = `📋 LOGS DE DIAGNÓSTICO
+
+🔧 Para verificar os logs da API:
+1. Abra o arquivo de log do Apache/PHP
+2. Procure por mensagens com "API Certificados"
+3. Verifique se há erros de método HTTP
+
+🔧 Logs esperados:
+- "API Certificados - Método: POST"
+- "API Certificados - Action: validar_certificado"
+- "API Certificados - Input: {...}"
+
+🔧 Se não encontrar logs:
+- Verifique se o PHP está logando erros
+- Verifique se o arquivo api/certificados.php existe
+- Verifique se o servidor está rodando na porta 8080
+
+🔧 URL da API: ${BASE_URL}api/certificados.php`;
+        }
+        
+        function abrirSistema() {
+            window.open(BASE_URL + 'certificados.php', '_blank');
+        }
+        
+        function atualizarResumo() {
+            const element = document.getElementById('resultados-resumo');
+            let resumo = '📊 RESUMO DOS TESTES:\n\n';
+            
+            const metodos = ['GET', 'POST', 'PUT', 'DELETE'];
+            let totalSucessos = 0;
+            let totalErros = 0;
+            
+            for (const metodo of metodos) {
+                if (resultados[metodo]) {
+                    if (resultados[metodo].success) {
+                        resumo += `✅ ${metodo}: FUNCIONA\n`;
+                        totalSucessos++;
+                    } else {
+                        resumo += `❌ ${metodo}: ${resultados[metodo].error}\n`;
+                        totalErros++;
+                    }
+                } else {
+                    resumo += `⏳ ${metodo}: NÃO TESTADO\n`;
+                }
+            }
+            
+            resumo += `\n📈 TOTAL: ${totalSucessos} sucessos, ${totalErros} erros`;
+            
+            if (totalSucessos > 0) {
+                element.className = 'result-box success';
+                resumo += '\n🎉 PROBLEMA PARCIALMENTE RESOLVIDO!';
+            } else if (totalErros > 0) {
+                element.className = 'result-box error';
+                resumo += '\n❌ PROBLEMA PERSISTE - VERIFICAR API';
+            } else {
+                element.className = 'result-box info';
+                resumo += '\n⏳ NENHUM TESTE EXECUTADO';
+            }
+            
+            element.textContent = resumo;
+        }
+        
+        // Auto-executar teste ao carregar
+        window.onload = function() {
+            console.log('🔧 Teste Método HTTP carregado');
+            console.log('📍 URL atual:', window.location.href);
+            
+            // Teste automático após 3 segundos
+            setTimeout(() => {
+                testarTodosMetodos();
+            }, 3000);
+        };
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

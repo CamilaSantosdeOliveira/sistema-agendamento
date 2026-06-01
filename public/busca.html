@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Professores - EduConnect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .navbar {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar h1 {
+            color: #1e40af;
+            font-size: 1.5em;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .nav-links a {
+            color: #374151;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background: #1e40af;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .search-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            margin-bottom: 30px;
+        }
+        
+        .search-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .search-header h2 {
+            color: #1e40af;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+        
+        .search-header p {
+            color: #6b7280;
+            font-size: 1.1em;
+        }
+        
+        .search-form {
+            display: grid;
+            grid-template-columns: 2fr 1fr auto;
+            gap: 15px;
+            align-items: end;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .form-group input, .form-group select {
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #1e40af;
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+        
+        .btn-search {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            height: fit-content;
+        }
+        
+        .btn-search:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.3);
+        }
+        
+        .filters-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .filter-chip {
+            background: #eff6ff;
+            color: #1e40af;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .filter-chip:hover, .filter-chip.active {
+            background: #1e40af;
+            color: white;
+            border-color: #1e40af;
+        }
+        
+        .results-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .results-header h3 {
+            color: #1e40af;
+            font-size: 1.5em;
+        }
+        
+        .results-count {
+            background: #eff6ff;
+            color: #1e40af;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        
+        .professor-card {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 2px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        
+        .professor-card:hover {
+            border-color: #1e40af;
+            background: #eff6ff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .professor-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .professor-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: white;
+        }
+        
+        .professor-info h4 {
+            color: #1f2937;
+            font-size: 1.4em;
+            margin-bottom: 5px;
+        }
+        
+        .professor-info p {
+            color: #6b7280;
+            margin-bottom: 3px;
+        }
+        
+        .professor-materias {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+        
+        .materia-tag {
+            background: #dcfce7;
+            color: #166534;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        
+        .professor-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+        
+        .btn-contact {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-contact:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-schedule {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-schedule:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6b7280;
+        }
+        
+        .empty-state .icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        
+        .empty-state h3 {
+            color: #374151;
+            margin-bottom: 10px;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #1e40af;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+            
+            .search-form {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .professor-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .professor-actions {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <h1>🔍 Buscar Professores</h1>
+        <div class="nav-links">
+            <a href="index.html">🏠 Início</a>
+            <a href="sistema_final.html">📝 Agendar Aula</a>
+            <a href="login.html">🔑 Login</a>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <!-- Seção de Busca -->
+        <div class="search-section">
+            <div class="search-header">
+                <h2>🎯 Encontre o Professor Ideal</h2>
+                <p>Busque professores especializados nas matérias que você precisa</p>
+            </div>
+            
+            <form class="search-form" id="search-form">
+                <div class="form-group">
+                    <label>📚 Matéria ou Nome do Professor</label>
+                    <input type="text" id="search-input" placeholder="Ex: Matemática, Física, João Silva...">
+                </div>
+                
+                <div class="form-group">
+                    <label>📖 Filtrar por Matéria</label>
+                    <select id="materia-filter">
+                        <option value="">Todas as matérias</option>
+                        <option value="matematica">🔢 Matemática</option>
+                        <option value="portugues">📝 Português</option>
+                        <option value="ingles">🇺🇸 Inglês</option>
+                        <option value="fisica">⚛️ Física</option>
+                        <option value="quimica">🧪 Química</option>
+                        <option value="biologia">🧬 Biologia</option>
+                        <option value="historia">📚 História</option>
+                        <option value="geografia">🌍 Geografia</option>
+                        <option value="filosofia">💭 Filosofia</option>
+                        <option value="sociologia">👥 Sociologia</option>
+                        <option value="redacao">✍️ Redação</option>
+                        <option value="informatica">💻 Informática</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn-search">
+                    🔍 Buscar
+                </button>
+            </form>
+        </div>
+        
+        <!-- Filtros Rápidos -->
+        <div class="filters-section">
+            <div class="filters-grid">
+                <div class="filter-chip active" onclick="filtrarPorMateria('')">📚 Todas</div>
+                <div class="filter-chip" onclick="filtrarPorMateria('matematica')">🔢 Matemática</div>
+                <div class="filter-chip" onclick="filtrarPorMateria('portugues')">📝 Português</div>
+                <div class="filter-chip" onclick="filtrarPorMateria('ingles')">🇺🇸 Inglês</div>
+                <div class="filter-chip" onclick="filtrarPorMateria('fisica')">⚛️ Física</div>
+                <div class="filter-chip" onclick="filtrarPorMateria('quimica')">🧪 Química</div>
+                <div class="filter-chip" onclick="filtrarPorMateria('biologia')">🧬 Biologia</div>
+                <div class="filter-chip" onclick="filtrarPorMateria('historia')">📚 História</div>
+            </div>
+        </div>
+        
+        <!-- Resultados -->
+        <div class="results-section">
+            <div class="results-header">
+                <h3>👨‍🏫 Professores Encontrados</h3>
+                <div class="results-count" id="results-count">
+                    <div class="loading"></div>
+                </div>
+            </div>
+            
+            <div id="results-container">
+                <div class="empty-state">
+                    <div class="loading"></div>
+                    <p>Carregando professores...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let todosProfessores = [];
+        let filtroAtivo = '';
+        
+        // Inicialização
+        window.onload = async function() {
+            await carregarProfessores();
+        };
+        
+        // Carregar professores
+        async function carregarProfessores() {
+            try {
+                const response = await fetch('usuarios_api.php?acao=listar_professores');
+                const result = await response.json();
+                
+                if (result.sucesso) {
+                    todosProfessores = result.professores;
+                    exibirProfessores(todosProfessores);
+                    document.getElementById('results-count').textContent = `${todosProfessores.length} professores`;
+                } else {
+                    document.getElementById('results-container').innerHTML = `
+                        <div class="empty-state">
+                            <div class="icon">😔</div>
+                            <h3>Nenhum professor encontrado</h3>
+                            <p>Ainda não temos professores cadastrados no sistema.</p>
+                        </div>
+                    `;
+                    document.getElementById('results-count').textContent = '0 professores';
+                }
+            } catch (error) {
+                document.getElementById('results-container').innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">❌</div>
+                        <h3>Erro ao carregar professores</h3>
+                        <p>Verifique sua conexão e tente novamente.</p>
+                    </div>
+                `;
+                document.getElementById('results-count').textContent = 'Erro';
+            }
+        }
+        
+        // Exibir professores
+        function exibirProfessores(professores) {
+            const container = document.getElementById('results-container');
+            
+            if (professores.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">🔍</div>
+                        <h3>Nenhum professor encontrado</h3>
+                        <p>Tente ajustar sua busca ou filtros.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const materiaIcons = {
+                'matematica': '🔢',
+                'portugues': '📝',
+                'ingles': '🇺🇸',
+                'fisica': '⚛️',
+                'quimica': '🧪',
+                'biologia': '🧬',
+                'historia': '📚',
+                'geografia': '🌍',
+                'filosofia': '💭',
+                'sociologia': '👥',
+                'redacao': '✍️',
+                'informatica': '💻'
+            };
+            
+            container.innerHTML = professores.map(professor => `
+                <div class="professor-card">
+                    <div class="professor-header">
+                        <div class="professor-avatar">👨‍🏫</div>
+                        <div class="professor-info">
+                            <h4>${professor.nome}</h4>
+                            <p>📧 ${professor.email}</p>
+                            <p>📱 ${professor.telefone || 'Telefone não informado'}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="professor-materias">
+                        ${professor.materias ? professor.materias.map(materia => 
+                            `<span class="materia-tag">${materiaIcons[materia] || '📖'} ${materia.charAt(0).toUpperCase() + materia.slice(1)}</span>`
+                        ).join('') : '<span class="materia-tag">📖 Matérias não informadas</span>'}
+                    </div>
+                    
+                    <div class="professor-actions">
+                        <button class="btn-contact" onclick="entrarEmContato('${professor.email}', '${professor.nome}')">
+                            📧 Contato
+                        </button>
+                        <button class="btn-schedule" onclick="agendarAula('${professor.nome}')">
+                            📅 Agendar Aula
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Busca
+        document.getElementById('search-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const materiaFilter = document.getElementById('materia-filter').value;
+            
+            let professoriesFiltrados = todosProfessores;
+            
+            // Filtrar por termo de busca
+            if (searchTerm) {
+                professoriesFiltrados = professoriesFiltrados.filter(professor =>
+                    professor.nome.toLowerCase().includes(searchTerm) ||
+                    (professor.materias && professor.materias.some(materia => 
+                        materia.toLowerCase().includes(searchTerm)
+                    ))
+                );
+            }
+            
+            // Filtrar por matéria
+            if (materiaFilter) {
+                professoriesFiltrados = professoriesFiltrados.filter(professor =>
+                    professor.materias && professor.materias.includes(materiaFilter)
+                );
+            }
+            
+            exibirProfessores(professoriesFiltrados);
+            document.getElementById('results-count').textContent = `${professoriesFiltrados.length} professores`;
+        });
+        
+        // Filtrar por matéria (chips)
+        function filtrarPorMateria(materia) {
+            // Atualizar visual dos chips
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                chip.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Aplicar filtro
+            filtroAtivo = materia;
+            
+            let professoriesFiltrados = todosProfessores;
+            
+            if (materia) {
+                professoriesFiltrados = todosProfessores.filter(professor =>
+                    professor.materias && professor.materias.includes(materia)
+                );
+            }
+            
+            exibirProfessores(professoriesFiltrados);
+            document.getElementById('results-count').textContent = `${professoriesFiltrados.length} professores`;
+            
+            // Atualizar select
+            document.getElementById('materia-filter').value = materia;
+        }
+        
+        // Entrar em contato
+        function entrarEmContato(email, nome) {
+            const assunto = `Interesse em aula particular - EduConnect`;
+            const corpo = `Olá ${nome},\n\nTenho interesse em agendar uma aula particular com você através da plataforma EduConnect.\n\nPodemos conversar sobre disponibilidade e valores?\n\nObrigado!`;
+            
+            window.open(`mailto:${email}?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`);
+        }
+        
+        // Agendar aula
+        function agendarAula(nomeProf) {
+            // Redirecionar para página de agendamento com professor pré-selecionado
+            window.location.href = `sistema_final.html?professor=${encodeURIComponent(nomeProf)}`;
+        }
+    </script>
+</body>
+</html>

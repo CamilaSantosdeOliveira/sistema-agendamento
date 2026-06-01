@@ -1,0 +1,19 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Iniciar XAMPP e Testar EduCerto",
+			"type": "shell",
+			"command": "php",
+			"args": [
+				"-S",
+				"localhost:8080",
+				"-t",
+				"public"
+			],
+			"group": "build",
+			"isBackground": true,
+			"problemMatcher": []
+		}
+	]
+}

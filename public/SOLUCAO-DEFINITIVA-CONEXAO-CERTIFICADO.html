@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚨 SOLUÇÃO DEFINITIVA - Erro de Conexão ao Carregar Certificado</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #d63031;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .definitive-box {
+            background: #ff6b6b;
+            border: 3px solid #d63031;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .solution-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+        
+        .solution-section h3 {
+            color: #2d3436;
+            margin-bottom: 15px;
+        }
+        
+        .test-btn {
+            background: #0984e3;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .test-btn:hover {
+            background: #74b9ff;
+        }
+        
+        .test-btn.success {
+            background: #00b894;
+        }
+        
+        .test-btn.success:hover {
+            background: #00a085;
+        }
+        
+        .test-btn.danger {
+            background: #e17055;
+        }
+        
+        .test-btn.danger:hover {
+            background: #d63031;
+        }
+        
+        .test-btn.warning {
+            background: #fdcb6e;
+            color: #2d3436;
+        }
+        
+        .test-btn.warning:hover {
+            background: #e17055;
+            color: white;
+        }
+        
+        .step-list {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .step-list ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .step-list li {
+            margin: 10px 0;
+            color: #2d3436;
+        }
+        
+        .step-list strong {
+            color: #d63031;
+        }
+        
+        .result-box {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .result-box.success {
+            background: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        
+        .result-box.error {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        
+        .url-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .url-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .url-link {
+            display: block;
+            background: #00b894;
+            color: white;
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .url-link:hover {
+            background: #00a085;
+        }
+        
+        .url-link.warning {
+            background: #fdcb6e;
+            color: #2d3436;
+        }
+        
+        .url-link.warning:hover {
+            background: #e17055;
+            color: white;
+        }
+        
+        .code-block {
+            background: #2d3436;
+            color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        
+        .definitive-section {
+            background: #ffeaa7;
+            border: 2px solid #fdcb6e;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .definitive-section h3 {
+            color: #d63031;
+            margin-bottom: 15px;
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .status-card {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .status-card.success {
+            border-color: #00b894;
+            background: #f0fff4;
+        }
+        
+        .status-card.error {
+            border-color: #e17055;
+            background: #fff5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚨 SOLUÇÃO DEFINITIVA - Erro de Conexão ao Carregar Certificado</h1>
+            <p>SOLUÇÃO DEFINITIVA E FINAL para o erro "Erro de conexão ao carregar certificado"</p>
+        </div>
+        
+        <div class="definitive-box">
+            <h3>🚨 PROBLEMA CRÍTICO CONFIRMADO!</h3>
+            <p><strong>"Erro de conexão ao carregar certificado"</strong></p>
+            <p>Este erro indica que a API de certificados não está respondendo corretamente!</p>
+        </div>
+        
+        <div class="definitive-section">
+            <h3>🚨 AÇÃO DEFINITIVA OBRIGATÓRIA</h3>
+            <p><strong>Você DEVE executar estas ações AGORA para resolver o problema DEFINITIVAMENTE:</strong></p>
+        </div>
+        
+        <div class="solution-section">
+            <h3>🔧 DIAGNÓSTICO DEFINITIVO</h3>
+            
+            <div class="step-list">
+                <ol>
+                    <li><strong>PROBLEMA PRINCIPAL:</strong> API de certificados não está funcionando</li>
+                    <li><strong>PROBLEMA SECUNDÁRIO:</strong> Arquivo api/certificados.php não existe ou tem erro</li>
+                    <li><strong>PROBLEMA TERCIÁRIO:</strong> Banco de dados não está conectado</li>
+                    <li><strong>PROBLEMA QUATERNÁRIO:</strong> PHP não está processando corretamente</li>
+                    <li><strong>PROBLEMA QUINTENÁRIO:</strong> Servidor Apache não está funcionando</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="solution-section">
+            <h3>🧪 TESTES DEFINITIVOS</h3>
+            <p>Execute estes testes AGORA para identificar o problema:</p>
+            
+            <button class="test-btn danger" onclick="testarServidor()">🌐 Testar Servidor</button>
+            <button class="test-btn" onclick="testarPHP()">🐘 Testar PHP</button>
+            <button class="test-btn" onclick="testarAPI()">🔗 Testar API</button>
+            <button class="test-btn" onclick="testarBanco()">🗄️ Testar Banco</button>
+            <button class="test-btn warning" onclick="testarTodos()">🧪 Executar Todos os Testes</button>
+            <button class="test-btn success" onclick="abrirTestes()">🚀 Abrir Páginas de Teste</button>
+            <button class="test-btn" onclick="limparCache()">🧹 Limpar Cache</button>
+            
+            <div id="resultado" class="result-box" style="display: none;"></div>
+        </div>
+        
+        <div class="solution-section">
+            <h3>📊 STATUS DO SISTEMA</h3>
+            <div class="status-grid">
+                <div class="status-card" id="status-servidor">
+                    <h4>🌐 Servidor</h4>
+                    <p>Verificando...</p>
+                </div>
+                <div class="status-card" id="status-php">
+                    <h4>🐘 PHP</h4>
+                    <p>Verificando...</p>
+                </div>
+                <div class="status-card" id="status-api">
+                    <h4>🔗 API</h4>
+                    <p>Verificando...</p>
+                </div>
+                <div class="status-card" id="status-banco">
+                    <h4>🗄️ Banco</h4>
+                    <p>Verificando...</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="solution-section">
+            <h3>✅ SOLUÇÕES ALTERNATIVAS DEFINITIVAS</h3>
+            <p>Use estas alternativas para contornar o problema:</p>
+            
+            <div class="url-list">
+                <div class="url-card">
+                    <h4>🌐 Teste Servidor</h4>
+                    <a href="http://localhost:8080/teste-html-simples.html" class="url-link" target="_blank">
+                        🌐 Teste Servidor
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>🐘 Teste PHP</h4>
+                    <a href="http://localhost:8080/teste-ultra-simples.php" class="url-link" target="_blank">
+                        🐘 Teste PHP
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>🔗 Teste API</h4>
+                    <a href="http://localhost:8080/teste-json-simples.php" class="url-link" target="_blank">
+                        🔗 Teste API
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>🗄️ Teste Banco</h4>
+                    <a href="http://localhost:8080/db_teste.php" class="url-link" target="_blank">
+                        🗄️ Teste Banco
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="solution-section">
+            <h3>🛠️ SOLUÇÕES ESPECÍFICAS DEFINITIVAS</h3>
+            
+            <div class="step-list">
+                <ol>
+                    <li><strong>1. VERIFICAR SERVIDOR:</strong></li>
+                    <ul>
+                        <li>Abra o XAMPP Control Panel</li>
+                        <li>Verifique se Apache está rodando (verde)</li>
+                        <li>Verifique se MySQL está rodando (verde)</li>
+                        <li>Se não estiver, clique em "Start"</li>
+                    </ul>
+                    <li><strong>2. TESTAR PHP:</strong></li>
+                    <ul>
+                        <li>Acesse: http://localhost:8080/teste-ultra-simples.php</li>
+                        <li>Deve mostrar: "PHP FUNCIONANDO!"</li>
+                        <li>Se não mostrar, reinicie o XAMPP</li>
+                    </ul>
+                    <li><strong>3. VERIFICAR API:</strong></li>
+                    <ul>
+                        <li>Confirme se api/certificados.php existe</li>
+                        <li>Verifique se não há erros de sintaxe</li>
+                        <li>Teste a API diretamente no navegador</li>
+                    </ul>
+                    <li><strong>4. VERIFICAR BANCO:</strong></li>
+                    <ul>
+                        <li>Acesse: http://localhost:8080/db_teste.php</li>
+                        <li>Deve mostrar dados do banco</li>
+                        <li>Se não mostrar, verifique MySQL</li>
+                    </ul>
+                    <li><strong>5. LIMPAR CACHE:</strong></li>
+                    <ul>
+                        <li>Pressione Ctrl+Shift+Delete</li>
+                        <li>Selecione "Limpar dados"</li>
+                        <li>Ou pressione Ctrl+F5</li>
+                    </ul>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="solution-section">
+            <h3>📋 CÓDIGO DE TESTE API SIMPLES</h3>
+            <p>Use este código para testar se a API está funcionando:</p>
+            
+            <div class="code-block">
+&lt;?php
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+
+echo json_encode([
+    'success' => true,
+    'message' => 'API funcionando!',
+    'timestamp' => date('Y-m-d H:i:s')
+]);
+?&gt;
+            </div>
+            
+            <p>Salve como <strong>teste-api-simples.php</strong> e acesse via navegador.</p>
+        </div>
+        
+        <div class="solution-section">
+            <h3>🚨 VERIFICAÇÃO XAMPP DEFINITIVA</h3>
+            <p>Verifique se o XAMPP está configurado corretamente:</p>
+            
+            <div class="step-list">
+                <ol>
+                    <li><strong>Abra o XAMPP Control Panel</strong></li>
+                    <li><strong>Pare TODOS os serviços</strong> (Apache, MySQL)</li>
+                    <li><strong>Feche o XAMPP Control Panel</strong></li>
+                    <li><strong>Aguarde 10 segundos</strong></li>
+                    <li><strong>Abra o XAMPP Control Panel novamente</strong></li>
+                    <li><strong>Inicie o MySQL primeiro</strong> (clique em "Start")</li>
+                    <li><strong>Inicie o Apache depois</strong> (clique em "Start")</li>
+                    <li><strong>Verifique se ambos estão verdes</strong></li>
+                    <li><strong>Teste: http://localhost:8080/teste-ultra-simples.php</strong></li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="solution-section">
+            <h3>🎯 DIAGNÓSTICO DEFINITIVO</h3>
+            <p>Se após todas essas ações o problema persistir:</p>
+            
+            <div class="step-list">
+                <ol>
+                    <li><strong>O arquivo api/certificados.php não existe</strong> - Crie o arquivo</li>
+                    <li><strong>O PHP não está funcionando</strong> - Reinstale o XAMPP</li>
+                    <li><strong>O Apache não está processando PHP</strong> - Verifique configuração</li>
+                    <li><strong>Erro de sintaxe no código</strong> - Corrija o código PHP</li>
+                    <li><strong>Banco de dados não conecta</strong> - Verifique MySQL</li>
+                    <li><strong>Cache do navegador</strong> - Limpe completamente o cache</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="solution-section">
+            <h3>🚨 SOLUÇÃO ALTERNATIVA DEFINITIVA</h3>
+            <p>Se nada funcionar, use esta solução alternativa:</p>
+            
+            <div class="step-list">
+                <ol>
+                    <li><strong>1. Desinstale o XAMPP completamente</strong></li>
+                    <li><strong>2. Baixe a versão mais recente do XAMPP</strong></li>
+                    <li><strong>3. Instale em um diretório diferente</strong></li>
+                    <li><strong>4. Configure a porta 8080</strong></li>
+                    <li><strong>5. Copie os arquivos para o novo diretório</strong></li>
+                    <li><strong>6. Teste novamente</strong></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const BASE_URL = 'http://localhost:8080/';
+        
+        async function fazerRequisicao(url, options = {}) {
+            try {
+                console.log(`🔧 Fazendo requisição para:`, url);
+                
+                const response = await fetch(url, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...options.headers
+                    },
+                    ...options
+                });
+                
+                console.log(`🔧 Status:`, response.status, response.statusText);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                return { success: true, data, status: response.status };
+            } catch (error) {
+                console.error(`🔧 Erro na requisição:`, error);
+                return { success: false, error: error.message };
+            }
+        }
+        
+        function mostrarResultado(resultado, tipo = 'info') {
+            const element = document.getElementById('resultado');
+            element.style.display = 'block';
+            element.className = `result-box ${tipo}`;
+            
+            if (resultado.success) {
+                element.textContent = `✅ SUCESSO (${resultado.status})\n\n${JSON.stringify(resultado.data, null, 2)}`;
+            } else {
+                element.textContent = `❌ ERRO\n\n${resultado.error}`;
+            }
+        }
+        
+        function atualizarStatus(elemento, sucesso, mensagem) {
+            const card = document.getElementById(elemento);
+            card.className = `status-card ${sucesso ? 'success' : 'error'}`;
+            card.innerHTML = `<h4>${card.querySelector('h4').textContent}</h4><p>${mensagem}</p>`;
+        }
+        
+        async function testarServidor() {
+            console.log('🌐 Testando servidor...');
+            
+            try {
+                const response = await fetch(BASE_URL + 'teste-html-simples.html');
+                const text = await response.text();
+                
+                if (text.includes('HTML FUNCIONANDO!')) {
+                    mostrarResultado({ success: true, data: { message: 'Servidor funcionando!' } }, 'success');
+                    atualizarStatus('status-servidor', true, '✅ Funcionando');
+                } else {
+                    mostrarResultado({ success: false, error: 'Servidor não está funcionando corretamente' }, 'error');
+                    atualizarStatus('status-servidor', false, '❌ Erro');
+                }
+            } catch (error) {
+                mostrarResultado({ success: false, error: 'Erro ao testar servidor: ' + error.message }, 'error');
+                atualizarStatus('status-servidor', false, '❌ Erro');
+            }
+        }
+        
+        async function testarPHP() {
+            console.log('🐘 Testando PHP...');
+            
+            try {
+                const response = await fetch(BASE_URL + 'teste-ultra-simples.php');
+                const text = await response.text();
+                
+                if (text.includes('PHP FUNCIONANDO!')) {
+                    mostrarResultado({ success: true, data: { message: 'PHP funcionando!' } }, 'success');
+                    atualizarStatus('status-php', true, '✅ Funcionando');
+                } else {
+                    mostrarResultado({ success: false, error: 'PHP não está funcionando corretamente' }, 'error');
+                    atualizarStatus('status-php', false, '❌ Erro');
+                }
+            } catch (error) {
+                mostrarResultado({ success: false, error: 'Erro ao testar PHP: ' + error.message }, 'error');
+                atualizarStatus('status-php', false, '❌ Erro');
+            }
+        }
+        
+        async function testarAPI() {
+            console.log('🔗 Testando API...');
+            
+            const resultado = await fazerRequisicao(BASE_URL + 'api/certificados.php?action=listar_certificados');
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error');
+            atualizarStatus('status-api', resultado.success, resultado.success ? '✅ Funcionando' : '❌ Erro');
+        }
+        
+        async function testarBanco() {
+            console.log('🗄️ Testando banco...');
+            
+            try {
+                const response = await fetch(BASE_URL + 'db_teste.php');
+                const text = await response.text();
+                
+                if (text.includes('success') || text.includes('usuarios')) {
+                    mostrarResultado({ success: true, data: { message: 'Banco funcionando!' } }, 'success');
+                    atualizarStatus('status-banco', true, '✅ Funcionando');
+                } else {
+                    mostrarResultado({ success: false, error: 'Banco não está funcionando corretamente' }, 'error');
+                    atualizarStatus('status-banco', false, '❌ Erro');
+                }
+            } catch (error) {
+                mostrarResultado({ success: false, error: 'Erro ao testar banco: ' + error.message }, 'error');
+                atualizarStatus('status-banco', false, '❌ Erro');
+            }
+        }
+        
+        async function testarTodos() {
+            console.log('🧪 Executando todos os testes...');
+            
+            const element = document.getElementById('resultado');
+            element.style.display = 'block';
+            element.className = 'result-box';
+            element.textContent = '🧪 Executando todos os testes...\n\n';
+            
+            // Teste 1: Servidor
+            element.textContent += '1. Testando servidor...\n';
+            try {
+                const response = await fetch(BASE_URL + 'teste-html-simples.html');
+                const text = await response.text();
+                if (text.includes('HTML FUNCIONANDO!')) {
+                    element.textContent += '✅ Servidor funcionando\n';
+                    atualizarStatus('status-servidor', true, '✅ Funcionando');
+                } else {
+                    element.textContent += '❌ Servidor com erro\n';
+                    atualizarStatus('status-servidor', false, '❌ Erro');
+                }
+            } catch (error) {
+                element.textContent += '❌ Servidor com erro\n';
+                atualizarStatus('status-servidor', false, '❌ Erro');
+            }
+            
+            // Teste 2: PHP
+            element.textContent += '2. Testando PHP...\n';
+            try {
+                const response = await fetch(BASE_URL + 'teste-ultra-simples.php');
+                const text = await response.text();
+                if (text.includes('PHP FUNCIONANDO!')) {
+                    element.textContent += '✅ PHP funcionando\n';
+                    atualizarStatus('status-php', true, '✅ Funcionando');
+                } else {
+                    element.textContent += '❌ PHP com erro\n';
+                    atualizarStatus('status-php', false, '❌ Erro');
+                }
+            } catch (error) {
+                element.textContent += '❌ PHP com erro\n';
+                atualizarStatus('status-php', false, '❌ Erro');
+            }
+            
+            // Teste 3: API
+            element.textContent += '3. Testando API...\n';
+            const apiResult = await fazerRequisicao(BASE_URL + 'api/certificados.php?action=listar_certificados');
+            element.textContent += apiResult.success ? '✅ API funcionando\n' : '❌ API com erro\n';
+            atualizarStatus('status-api', apiResult.success, apiResult.success ? '✅ Funcionando' : '❌ Erro');
+            
+            // Teste 4: Banco
+            element.textContent += '4. Testando banco...\n';
+            try {
+                const response = await fetch(BASE_URL + 'db_teste.php');
+                const text = await response.text();
+                if (text.includes('success') || text.includes('usuarios')) {
+                    element.textContent += '✅ Banco funcionando\n';
+                    atualizarStatus('status-banco', true, '✅ Funcionando');
+                } else {
+                    element.textContent += '❌ Banco com erro\n';
+                    atualizarStatus('status-banco', false, '❌ Erro');
+                }
+            } catch (error) {
+                element.textContent += '❌ Banco com erro\n';
+                atualizarStatus('status-banco', false, '❌ Erro');
+            }
+            
+            element.textContent += '\n📊 DIAGNÓSTICO COMPLETO';
+            
+            // Determinar o problema principal
+            if (apiResult.success) {
+                element.className = 'result-box success';
+                element.textContent += '\n🎉 PROBLEMA RESOLVIDO!';
+            } else {
+                element.className = 'result-box error';
+                element.textContent += '\n❌ PROBLEMA PERSISTE - EXECUTE AS AÇÕES DEFINITIVAS';
+            }
+        }
+        
+        function abrirTestes() {
+            const urls = [
+                'http://localhost:8080/teste-html-simples.html',
+                'http://localhost:8080/teste-ultra-simples.php',
+                'http://localhost:8080/teste-json-simples.php',
+                'http://localhost:8080/db_teste.php'
+            ];
+            
+            urls.forEach(url => {
+                window.open(url, '_blank');
+            });
+        }
+        
+        function limparCache() {
+            console.log('🧹 Limpando cache do navegador...');
+            
+            // Forçar recarregamento da página
+            window.location.reload(true);
+            
+            // Mostrar mensagem
+            const element = document.getElementById('resultado');
+            element.style.display = 'block';
+            element.className = 'result-box success';
+            element.textContent = '🧹 Cache limpo! Página recarregada.';
+        }
+        
+        // Auto-executar teste ao carregar
+        window.onload = function() {
+            console.log('🚨 Solução Definitiva Conexão Certificado carregada');
+            console.log('📍 URL atual:', window.location.href);
+            
+            // Teste automático após 2 segundos
+            setTimeout(() => {
+                testarTodos();
+            }, 2000);
+        };
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

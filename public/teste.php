@@ -1,0 +1,19 @@
+<?php
+echo "Teste funcionando!";
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

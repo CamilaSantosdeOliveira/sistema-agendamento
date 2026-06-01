@@ -1,0 +1,73 @@
+# Pastas de backup
+public/backup_*/
+public/backups/
+public/sistema-agendamento-aulas/
+educonnect-pro/
+
+# Arquivos de backup e zip
+*.zip
+*.sql
+
+# Arquivos de teste e debug
+public/api_debug.php
+public/api_super_debug.php
+public/api_ultra.php
+public/api_teste.php
+public/api_melhorada.php
+public/api_final.php
+public/teste_sistema.php
+public/teste_sistema.html
+public/teste_rapido.html
+public/teste_instantaneo.html
+public/teste-sistema.html
+public/teste-agendamento.html
+public/teste-botoes.html
+public/login-teste.html
+public/test.html
+public/diagnostico.html
+public/mysql_test.php
+public/testdb.php
+public/api_debug.php
+public/teste_conexao_login.php
+public/criar_usuarios_simples.php
+public/verificar_usuarios.php
+public/corrigir_senhas.php
+
+# Versões antigas / arquivos temporários
+public/sistema_final*.html
+public/sistema_v*.html
+public/educonnect-*.html
+public/educerto*.html
+public/index_melhorado.html
+public/central.html
+public/start.html
+public/demo.html
+public/qrcode.html
+public/mobile-*.html
+public/RESUMO-*.html
+public/instalar-app.html
+public/gerador-icones.html
+public/cadastro_backup_antes_redesign.html
+public/dashboard_backup.php
+public/dashboard_teste.php
+public/dashboard_corrigido_backup.php
+public/dashboard_problematico.php
+
+# Arquivos de documentação interna
+public/*.md
+public/MELHORIAS_AVANCADAS.md
+public/PROFESSORES_SISTEMA.md
+public/TROUBLESHOOTING.md
+public/SISTEMA_RESOLVIDO.md
+public/TODAS-ATUALIZACOES-v3.0.md
+public/MOBILE-OPTIMIZATIONS.md
+
+# Logs e dados sensíveis
+public/emails_log.json
+public/enviar_lembretes.bat
+
+# Configuração sensível (renomeie para db.example.php e adicione suas credenciais localmente)
+# public/db.php
+
+# Pasta vendor (dependências PHP)
+vendor/

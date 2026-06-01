@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview - Botão Dark Mode Refinado</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="dark-mode.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            background: #f8f9fa;
+            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background 0.35s ease, color 0.35s ease;
+            min-height: 100vh;
+        }
+
+        html.dark-mode, body.dark-mode {
+            background: #0f172a;
+            color: #f8fafc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            position: relative;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #0066ff 0%, #00ccff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 40px;
+        }
+
+        .header #darkModeToggle {
+            position: static;
+            margin-bottom: 40px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        html.dark-mode .feature-card,
+        body.dark-mode .feature-card {
+            background: #1e293b;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 102, 255, 0.2);
+        }
+
+        .feature-card h3 {
+            color: #0066ff;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        html.dark-mode .feature-card h3,
+        body.dark-mode .feature-card h3 {
+            color: #38bdf8;
+        }
+
+        .feature-card p {
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+
+        .demo-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        html.dark-mode .demo-section,
+        body.dark-mode .demo-section {
+            background: #1e293b;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .demo-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #0066ff;
+        }
+
+        html.dark-mode .demo-section h2,
+        body.dark-mode .demo-section h2 {
+            color: #38bdf8;
+        }
+
+        .demo-buttons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .demo-label {
+            font-size: 0.95rem;
+            opacity: 0.7;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            opacity: 0.7;
+        }
+
+        html.dark-mode .footer,
+        body.dark-mode .footer {
+            border-top-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .code-block {
+            background: #f5f5f5;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+
+        html.dark-mode .code-block,
+        body.dark-mode .code-block {
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #e2e8f0;
+        }
+
+        .checklist {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .checklist li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌓 Botão Dark Mode Refinado</h1>
+            <p>Preview completo do novo toggle com espaçamento, animações suaves e visual sofisticado</p>
+            
+            <div class="demo-buttons">
+                <span class="demo-label">Teste agora:</span>
+                <button id="darkModeToggle" title="Alternar tema" aria-label="Alternar Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>✨ Melhorias Implementadas</h2>
+            <ul class="checklist">
+                <li><strong>Espaçamento Perfeito:</strong> Padding refinado (8px) e tamanho aumentado (90x44px) para melhor visualização e usabilidade</li>
+                <li><strong>Transições Suaves:</strong> Cubic-bezier sofisticado (0.25, 0.46, 0.45, 0.94) em todas as animações</li>
+                <li><strong>Visual Moderno:</strong> Gradientes lineares, backdrop-filter blur, box-shadows em camadas</li>
+                <li><strong>Efeito Hover:</strong> Elevação do botão com transformação translateY(-1px) e aumento de sombra</li>
+                <li><strong>Animação ao Clicar:</strong> Feedback tátil com compressão e rotação dos ícones (180deg)</li>
+                <li><strong>Ícones Sofisticados:</strong> Text-shadow para profundidade, cores diferenciadas por tema</li>
+                <li><strong>Responsivo:</strong> Ajustamento automático para dispositivos móveis (20px top/right)</li>
+                <li><strong>Acessibilidade:</strong> Atributos aria-label para leitores de tela</li>
+            </ul>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <h3>🎨 Design Moderno</h3>
+                <p>Gradientes suavizados, backdrop-filter blur e box-shadows em múltiplas camadas criam um visual sofisticado e contemporâneo.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>⚡ Animações Fluidas</h3>
+                <p>Transições de 0.35s com easing cúbico refinado garantem movimentos suaves e naturais ao interagir com o elemento.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🎯 UX Excelente</h3>
+                <p>Feedback visual imediato com hover effects, transformações 3D sutis e mudanças de cor harmoniosas entre os temas.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>📱 Responsivo</h3>
+                <p>Adaptação automática para diferentes tamanhos de tela com posicionamento e dimensões ajustadas para mobile.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>♿ Acessível</h3>
+                <p>Atributos ARIA e labels descritivos garantem que leitores de tela entendam a função do botão corretamente.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🎭 Tema Dual</h3>
+                <p>Cores e efeitos adaptados para modo claro e escuro, mantendo contraste e legibilidade em ambos os contextos.</p>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>📝 Código HTML Refinado</h2>
+            <div class="code-block">&lt;button id="darkModeToggle" title="Alternar tema" aria-label="Alternar Dark Mode"&gt;
+    &lt;i class="fas fa-moon"&gt;&lt;/i&gt;
+&lt;/button&gt;</div>
+            <p style="margin-top: 15px;">⚠️ Removidos todos os estilos inline para permitir controle total via CSS!</p>
+        </div>
+
+        <div class="demo-section">
+            <h2>🎨 CSS Highlights</h2>
+            <div class="code-block">/* Dimensões aumentadas */
+width: 90px !important;
+height: 44px !important;
+
+/* Gradiente + Backdrop Blur */
+background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.1) 100%) !important;
+backdrop-filter: blur(10px) !important;
+
+/* Transição Sofisticada */
+transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);</div>
+        </div>
+
+        <div class="demo-section">
+            <h2>🚀 Como Usar</h2>
+            <ol style="line-height: 1.8; margin-left: 20px;">
+                <li><strong>CSS atualizado:</strong> dark-mode.css foi refinado com novas classes e estilos</li>
+                <li><strong>HTML simplificado:</strong> Todos os 11 arquivos PHP foram atualizados</li>
+                <li><strong>JS compatível:</strong> dark-mode.js continua funcionando naturalmente com os novos estilos</li>
+                <li><strong>Teste nos seus arquivos:</strong> O botão agora deve aparecer com o novo visual moderno</li>
+                <li><strong>Personalize conforme necessário:</strong> As cores e transições podem ser ajustadas no CSS</li>
+            </ol>
+        </div>
+
+        <div class="footer">
+            <p>✅ Todas as mudanças foram aplicadas com sucesso!</p>
+            <p>Clique no botão acima para testar a funcionalidade em tempo real 🌓</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="dark-mode.js"></script>
+</body>
+</html>

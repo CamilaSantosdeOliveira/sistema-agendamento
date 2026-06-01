@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - EduConnect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #f8fafc;
+        }
+        
+        .admin-header {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 20px 0;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border-bottom: 2px solid #334155;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+        
+        .admin-logo {
+            font-size: 2em;
+            font-weight: bold;
+            color: #3b82f6;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .admin-nav {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .admin-nav button {
+            background: rgba(59, 130, 246, 0.1);
+            color: #93c5fd;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-nav button:hover,
+        .admin-nav button.ativo {
+            background: #3b82f6;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 30px;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before { display: none; }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: inset 0 3px 0 #3b82f6, 0 20px 40px rgba(0,0,0,0.3);
+            border-color: #3b82f6;
+        }
+        
+        .stat-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #3b82f6;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #cbd5e1;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+        
+        .section {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            display: none;
+        }
+        
+        .section.ativo {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section h2 {
+            color: #3b82f6;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            border-radius: 10px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(15, 23, 42, 0.8);
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+        }
+        
+        th {
+            background: rgba(59, 130, 246, 0.1);
+            color: #93c5fd;
+            font-weight: 600;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        td {
+            color: #e2e8f0;
+        }
+        
+        tr:hover {
+            background: rgba(59, 130, 246, 0.05);
+        }
+        
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .status-pendente { background: #fbbf24; color: #92400e; }
+        .status-confirmada { background: #10b981; color: #064e3b; }
+        .status-concluida { background: #3b82f6; color: #1e3a8a; }
+        .status-cancelada { background: #ef4444; color: #7f1d1d; }
+        .status-ativo { background: #10b981; color: #064e3b; }
+        .status-inativo { background: #6b7280; color: #374151; }
+        .status-banido { background: #ef4444; color: #7f1d1d; }
+        
+        .action-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-aprovar { background: #10b981; color: white; }
+        .btn-aprovar:hover { background: #059669; transform: scale(1.05); }
+        
+        .btn-banir { background: #ef4444; color: white; }
+        .btn-banir:hover { background: #dc2626; transform: scale(1.05); }
+        
+        .btn-editar { background: #f59e0b; color: white; }
+        .btn-editar:hover { background: #d97706; transform: scale(1.05); }
+        
+        .btn-remover { background: #6b7280; color: white; }
+        .btn-remover:hover { background: #4b5563; transform: scale(1.05); }
+        
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .chart-card {
+            background: rgba(15, 23, 42, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .chart-title {
+            color: #3b82f6;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            color: #64748b;
+        }
+        
+        .loading::before {
+            content: '';
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(59, 130, 246, 0.3);
+            border-top: 4px solid #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+        
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #10b981;
+        }
+        
+        .alert-error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .charts-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .admin-nav {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .admin-nav button {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-header">
+        <div class="header-container">
+            <div class="admin-logo">
+                🛡️ Painel Administrativo
+            </div>
+            <div class="admin-nav">
+                <button onclick="mostrarSecao('dashboard')" class="ativo" id="btn-dashboard">
+                    📊 Dashboard
+                </button>
+                <button onclick="mostrarSecao('usuarios')" id="btn-usuarios">
+                    👥 Usuários
+                </button>
+                <button onclick="mostrarSecao('agendamentos')" id="btn-agendamentos">
+                    📅 Agendamentos
+                </button>
+                <button onclick="mostrarSecao('avaliacoes')" id="btn-avaliacoes">
+                    ⭐ Avaliações
+                </button>
+                <button onclick="mostrarSecao('relatorios')" id="btn-relatorios">
+                    📈 Relatórios
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="section ativo">
+            <h2>📊 Dashboard Geral</h2>
+            
+            <div class="dashboard-grid" id="stats-grid">
+                <div class="loading">Carregando estatísticas...</div>
+            </div>
+            
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-title">📈 Agendamentos por Dia (Últimos 7 dias)</div>
+                    <div id="chart-agendamentos"></div>
+                </div>
+                
+                <div class="chart-card">
+                    <div class="chart-title">📚 Matérias Mais Populares</div>
+                    <div id="chart-materias"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Usuários Section -->
+        <div id="usuarios" class="section">
+            <h2>👥 Gerenciar Usuários</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Tipo</th>
+                            <th>Status</th>
+                            <th>Cadastro</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usuarios-tbody">
+                        <tr><td colspan="7" class="loading">Carregando usuários...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Agendamentos Section -->
+        <div id="agendamentos" class="section">
+            <h2>📅 Gerenciar Agendamentos</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Aluno</th>
+                            <th>Professor</th>
+                            <th>Matéria</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                            <th>Avaliação</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="agendamentos-tbody">
+                        <tr><td colspan="8" class="loading">Carregando agendamentos...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Avaliações Section -->
+        <div id="avaliacoes" class="section">
+            <h2>⭐ Gerenciar Avaliações</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aluno</th>
+                            <th>Professor</th>
+                            <th>Matéria</th>
+                            <th>Nota</th>
+                            <th>Comentário</th>
+                            <th>Data</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="avaliacoes-tbody">
+                        <tr><td colspan="7" class="loading">Carregando avaliações...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Relatórios Section -->
+        <div id="relatorios" class="section">
+            <h2>📈 Relatórios</h2>
+            
+            <div style="margin-bottom: 30px;">
+                <label style="display: block; margin-bottom: 10px; color: #cbd5e1;">Selecionar Mês:</label>
+                <input type="month" id="mes-relatorio" 
+                       style="padding: 12px; border-radius: 8px; border: 1px solid rgba(59, 130, 246, 0.3); background: rgba(30, 41, 59, 0.8); color: #f8fafc;"
+                       value="<?= date('Y-m') ?>">
+                <button onclick="gerarRelatorio()" 
+                        style="margin-left: 15px; padding: 12px 24px; background: #3b82f6; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                    📊 Gerar Relatório
+                </button>
+            </div>
+            
+            <div id="relatorio-resultado"></div>
+        </div>
+    </div>
+
+    <script>
+        let dadosAtuais = {};
+        
+        // Mostrar seção
+        function mostrarSecao(secao) {
+            // Remover classe ativo de todas as seções
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('ativo'));
+            document.querySelectorAll('.admin-nav button').forEach(b => b.classList.remove('ativo'));
+            
+            // Adicionar classe ativo na seção atual
+            document.getElementById(secao).classList.add('ativo');
+            document.getElementById(`btn-${secao}`).classList.add('ativo');
+            
+            // Carregar dados da seção
+            switch(secao) {
+                case 'dashboard':
+                    carregarDashboard();
+                    break;
+                case 'usuarios':
+                    carregarUsuarios();
+                    break;
+                case 'agendamentos':
+                    carregarAgendamentos();
+                    break;
+                case 'avaliacoes':
+                    carregarAvaliacoes();
+                    break;
+            }
+        }
+        
+        // Carregar dashboard
+        async function carregarDashboard() {
+            try {
+                const response = await fetch('admin_api.php?action=estatisticas');
+                const stats = await response.json();
+                dadosAtuais.stats = stats;
+                
+                exibirEstatisticas(stats);
+                criarGraficos(stats);
+            } catch (error) {
+                document.getElementById('stats-grid').innerHTML = 
+                    '<div style="color: #ef4444;">❌ Erro ao carregar estatísticas</div>';
+            }
+        }
+        
+        // Exibir estatísticas
+        function exibirEstatisticas(stats) {
+            const statsGrid = document.getElementById('stats-grid');
+            
+            const cards = [
+                { icon: '👥', number: stats.total_usuarios, label: 'Total de Usuários' },
+                { icon: '📅', number: stats.total_agendamentos, label: 'Total de Agendamentos' },
+                { icon: '📚', number: stats.agendamentos_mes, label: 'Agendamentos Este Mês' },
+                { icon: '⭐', number: stats.media_avaliacoes, label: 'Média de Avaliações' },
+                { icon: '💰', number: (stats.total_agendamentos * 50).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}), label: 'Receita Estimada' },
+                { icon: '📊', number: stats.total_avaliacoes, label: 'Total de Avaliações' }
+            ];
+            
+            statsGrid.innerHTML = cards.map(card => `
+                <div class="stat-card">
+                    <span class="stat-icon">${card.icon}</span>
+                    <div class="stat-number">${card.number}</div>
+                    <div class="stat-label">${card.label}</div>
+                </div>
+            `).join('');
+        }
+        
+        // Criar gráficos simples
+        function criarGraficos(stats) {
+            // Gráfico de agendamentos por dia
+            let chartAgendamentos = '<div style="display: flex; flex-direction: column; gap: 10px;">';
+            if (stats.agendamentos_por_dia && stats.agendamentos_por_dia.length > 0) {
+                const maxValue = Math.max(...stats.agendamentos_por_dia.map(d => d.total));
+                stats.agendamentos_por_dia.forEach(dia => {
+                    const porcentagem = maxValue > 0 ? (dia.total / maxValue) * 100 : 0;
+                    const data = new Date(dia.data).toLocaleDateString('pt-BR');
+                    chartAgendamentos += `
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="min-width: 80px; font-size: 0.9em;">${data}</span>
+                            <div style="flex: 1; background: rgba(59, 130, 246, 0.2); height: 25px; border-radius: 12px; position: relative;">
+                                <div style="background: #3b82f6; height: 100%; width: ${porcentagem}%; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8em; font-weight: bold;">
+                                    ${dia.total}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            } else {
+                chartAgendamentos += '<div style="text-align: center; color: #64748b;">Nenhum dado disponível</div>';
+            }
+            chartAgendamentos += '</div>';
+            document.getElementById('chart-agendamentos').innerHTML = chartAgendamentos;
+            
+            // Gráfico de matérias populares
+            let chartMaterias = '<div style="display: flex; flex-direction: column; gap: 10px;">';
+            if (stats.materias_populares && stats.materias_populares.length > 0) {
+                const maxValue = Math.max(...stats.materias_populares.map(m => m.total));
+                const materiaIcons = {
+                    'matematica': '🔢', 'portugues': '📝', 'ingles': '🇺🇸',
+                    'fisica': '⚛️', 'quimica': '🧪', 'biologia': '🧬',
+                    'historia': '📚', 'geografia': '🌍', 'filosofia': '💭',
+                    'sociologia': '👥', 'redacao': '✍️', 'informatica': '💻'
+                };
+                
+                stats.materias_populares.forEach(materia => {
+                    const porcentagem = maxValue > 0 ? (materia.total / maxValue) * 100 : 0;
+                    const icon = materiaIcons[materia.servico] || '📖';
+                    chartMaterias += `
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="min-width: 120px; font-size: 0.9em;">${icon} ${materia.servico}</span>
+                            <div style="flex: 1; background: rgba(16, 185, 129, 0.2); height: 25px; border-radius: 12px; position: relative;">
+                                <div style="background: #10b981; height: 100%; width: ${porcentagem}%; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8em; font-weight: bold;">
+                                    ${materia.total}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            } else {
+                chartMaterias += '<div style="text-align: center; color: #64748b;">Nenhum dado disponível</div>';
+            }
+            chartMaterias += '</div>';
+            document.getElementById('chart-materias').innerHTML = chartMaterias;
+        }
+        
+        // Carregar usuários
+        async function carregarUsuarios() {
+            try {
+                const response = await fetch('admin_api.php?action=usuarios');
+                const usuarios = await response.json();
+                
+                const tbody = document.getElementById('usuarios-tbody');
+                if (usuarios.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #64748b;">Nenhum usuário encontrado</td></tr>';
+                    return;
+                }
+                
+                tbody.innerHTML = usuarios.map(usuario => {
+                    const data = new Date(usuario.criado_em).toLocaleDateString('pt-BR');
+                    const statusClass = `status-${usuario.status || 'ativo'}`;
+                    
+                    let acoes = '';
+                    if (usuario.tipo_usuario === 'professor' && usuario.status !== 'ativo') {
+                        acoes += `<button onclick="aprovarProfessor(${usuario.id})" class="action-btn btn-aprovar">✅ Aprovar</button>`;
+                    }
+                    if (usuario.status !== 'banido') {
+                        acoes += `<button onclick="banirUsuario(${usuario.id})" class="action-btn btn-banir">🚫 Banir</button>`;
+                    }
+                    acoes += `<button onclick="removerUsuario(${usuario.id})" class="action-btn btn-remover">🗑️ Remover</button>`;
+                    
+                    return `
+                        <tr>
+                            <td>${usuario.id}</td>
+                            <td>${usuario.nome}</td>
+                            <td>${usuario.email}</td>
+                            <td>${usuario.tipo_usuario}</td>
+                            <td><span class="status-badge ${statusClass}">${usuario.status || 'ativo'}</span></td>
+                            <td>${data}</td>
+                            <td>${acoes}</td>
+                        </tr>
+                    `;
+                }).join('');
+                
+            } catch (error) {
+                document.getElementById('usuarios-tbody').innerHTML = 
+                    '<tr><td colspan="7" style="color: #ef4444;">❌ Erro ao carregar usuários</td></tr>';
+            }
+        }
+        
+        // Carregar agendamentos
+        async function carregarAgendamentos() {
+            try {
+                const response = await fetch('admin_api.php?action=agendamentos');
+                const agendamentos = await response.json();
+                
+                const tbody = document.getElementById('agendamentos-tbody');
+                if (agendamentos.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: #64748b;">Nenhum agendamento encontrado</td></tr>';
+                    return;
+                }
+                
+                tbody.innerHTML = agendamentos.map(ag => {
+                    const data = new Date(ag.data + 'T00:00:00').toLocaleDateString('pt-BR');
+                    const statusClass = `status-${ag.status.toLowerCase().replace(' ', '')}`;
+                    const avaliacao = ag.avaliacao_nota ? `⭐ ${ag.avaliacao_nota}` : '—';
+                    
+                    return `
+                        <tr>
+                            <td>${ag.id}</td>
+                            <td>${ag.nome}</td>
+                            <td>${ag.professor || '—'}</td>
+                            <td>${ag.servico}</td>
+                            <td>${data} ${ag.hora}</td>
+                            <td><span class="status-badge ${statusClass}">${ag.status}</span></td>
+                            <td>${avaliacao}</td>
+                            <td>
+                                <select onchange="alterarStatusAgendamento(${ag.id}, this.value)" class="action-btn">
+                                    <option value="">Alterar Status</option>
+                                    <option value="Pendente">Pendente</option>
+                                    <option value="Confirmada">Confirmada</option>
+                                    <option value="Concluída">Concluída</option>
+                                    <option value="Cancelada">Cancelada</option>
+                                </select>
+                                <button onclick="removerAgendamento(${ag.id})" class="action-btn btn-remover">🗑️</button>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+                
+            } catch (error) {
+                document.getElementById('agendamentos-tbody').innerHTML = 
+                    '<tr><td colspan="8" style="color: #ef4444;">❌ Erro ao carregar agendamentos</td></tr>';
+            }
+        }
+        
+        // Carregar avaliações
+        async function carregarAvaliacoes() {
+            try {
+                const response = await fetch('admin_api.php?action=avaliacoes');
+                const avaliacoes = await response.json();
+                
+                const tbody = document.getElementById('avaliacoes-tbody');
+                if (avaliacoes.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #64748b;">Nenhuma avaliação encontrada</td></tr>';
+                    return;
+                }
+                
+                tbody.innerHTML = avaliacoes.map(av => {
+                    const data = new Date(av.criado_em).toLocaleDateString('pt-BR');
+                    const estrelas = '⭐'.repeat(av.nota);
+                    const comentario = av.comentario ? 
+                        (av.comentario.length > 50 ? av.comentario.substring(0, 50) + '...' : av.comentario) : 
+                        '—';
+                    
+                    return `
+                        <tr>
+                            <td>${av.aluno_nome}</td>
+                            <td>${av.professor_nome}</td>
+                            <td>${av.servico}</td>
+                            <td>${estrelas} (${av.nota})</td>
+                            <td title="${av.comentario || ''}">${comentario}</td>
+                            <td>${data}</td>
+                            <td>
+                                <button onclick="removerAvaliacao(${av.id})" class="action-btn btn-remover">🗑️</button>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+                
+            } catch (error) {
+                document.getElementById('avaliacoes-tbody').innerHTML = 
+                    '<tr><td colspan="7" style="color: #ef4444;">❌ Erro ao carregar avaliações</td></tr>';
+            }
+        }
+        
+        // Ações administrativas
+        async function aprovarProfessor(id) {
+            if (confirm('Aprovar este professor?')) {
+                try {
+                    const response = await fetch('admin_api.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ action: 'aprovar_professor', usuario_id: id })
+                    });
+                    const result = await response.json();
+                    
+                    if (result.sucesso) {
+                        mostrarAlerta('Professor aprovado com sucesso!', 'success');
+                        carregarUsuarios();
+                    } else {
+                        mostrarAlerta('Erro ao aprovar professor', 'error');
+                    }
+                } catch (error) {
+                    mostrarAlerta('Erro de conexão', 'error');
+                }
+            }
+        }
+        
+        async function banirUsuario(id) {
+            if (confirm('Banir este usuário? Esta ação pode ser revertida.')) {
+                try {
+                    const response = await fetch('admin_api.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ action: 'banir_usuario', usuario_id: id })
+                    });
+                    const result = await response.json();
+                    
+                    if (result.sucesso) {
+                        mostrarAlerta('Usuário banido com sucesso!', 'success');
+                        carregarUsuarios();
+                    } else {
+                        mostrarAlerta('Erro ao banir usuário', 'error');
+                    }
+                } catch (error) {
+                    mostrarAlerta('Erro de conexão', 'error');
+                }
+            }
+        }
+        
+        async function alterarStatusAgendamento(id, status) {
+            if (!status) return;
+            
+            try {
+                const response = await fetch('admin_api.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'alterar_status_agendamento', agendamento_id: id, status: status })
+                });
+                const result = await response.json();
+                
+                if (result.sucesso) {
+                    mostrarAlerta('Status alterado com sucesso!', 'success');
+                    carregarAgendamentos();
+                } else {
+                    mostrarAlerta('Erro ao alterar status', 'error');
+                }
+            } catch (error) {
+                mostrarAlerta('Erro de conexão', 'error');
+            }
+        }
+        
+        // Gerar relatório
+        async function gerarRelatorio() {
+            const mes = document.getElementById('mes-relatorio').value;
+            const resultado = document.getElementById('relatorio-resultado');
+            
+            resultado.innerHTML = '<div class="loading">Gerando relatório...</div>';
+            
+            try {
+                const response = await fetch(`admin_api.php?action=relatorio_mensal&mes=${mes}`);
+                const relatorio = await response.json();
+                
+                let html = `
+                    <div class="dashboard-grid">
+                        <div class="stat-card">
+                            <span class="stat-icon">💰</span>
+                            <div class="stat-number">${relatorio.receita_estimada.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</div>
+                            <div class="stat-label">Receita Estimada</div>
+                        </div>
+                `;
+                
+                // Agendamentos por status
+                if (relatorio.agendamentos) {
+                    Object.entries(relatorio.agendamentos).forEach(([status, total]) => {
+                        html += `
+                            <div class="stat-card">
+                                <span class="stat-icon">📅</span>
+                                <div class="stat-number">${total}</div>
+                                <div class="stat-label">${status}</div>
+                            </div>
+                        `;
+                    });
+                }
+                
+                html += '</div>';
+                
+                // Professores mais ativos
+                if (relatorio.professores_ativos && relatorio.professores_ativos.length > 0) {
+                    html += `
+                        <div class="chart-card" style="margin-top: 30px;">
+                            <div class="chart-title">👨‍🏫 Professores Mais Ativos</div>
+                            <div style="display: flex; flex-direction: column; gap: 10px;">
+                    `;
+                    
+                    relatorio.professores_ativos.forEach(prof => {
+                        html += `
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: rgba(59, 130, 246, 0.1); border-radius: 8px;">
+                                <span>${prof.professor}</span>
+                                <span style="font-weight: bold; color: #3b82f6;">${prof.total_aulas} aulas</span>
+                            </div>
+                        `;
+                    });
+                    
+                    html += '</div></div>';
+                }
+                
+                resultado.innerHTML = html;
+                
+            } catch (error) {
+                resultado.innerHTML = '<div style="color: #ef4444;">❌ Erro ao gerar relatório</div>';
+            }
+        }
+        
+        // Mostrar alerta
+        function mostrarAlerta(mensagem, tipo) {
+            const alerta = document.createElement('div');
+            alerta.className = `alert alert-${tipo}`;
+            alerta.textContent = mensagem;
+            
+            document.querySelector('.container').insertBefore(alerta, document.querySelector('.container').firstChild);
+            
+            setTimeout(() => {
+                alerta.remove();
+            }, 5000);
+        }
+        
+        // Inicializar
+        window.onload = () => {
+            carregarDashboard();
+        };
+    </script>
+</body>
+</html>

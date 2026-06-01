@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔗 Teste de URLs - Sistema de Agendamento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .test-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        
+        .test-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .test-btn:hover {
+            background: #0056b3;
+        }
+        
+        .test-btn.success {
+            background: #28a745;
+        }
+        
+        .test-btn.danger {
+            background: #dc3545;
+        }
+        
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        
+        .result.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .result.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .url-info {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            color: #004085;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔗 Teste de URLs</h1>
+            <p>Verificando quais arquivos estão acessíveis no servidor</p>
+        </div>
+        
+        <div class="url-info">
+            <h3>📊 Informações do Servidor</h3>
+            <p><strong>Servidor:</strong> Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.0.30</p>
+            <p><strong>Porta:</strong> 8080</p>
+            <p><strong>URL Base:</strong> http://localhost:8080/</p>
+            <p><strong>Diretório:</strong> Sistema De Agendamento/public</p>
+        </div>
+        
+        <div class="test-section">
+            <h3>🏠 Páginas Principais</h3>
+            <button class="test-btn" onclick="testarURL('index.html')">📄 index.html</button>
+            <button class="test-btn" onclick="testarURL('index.php')">📄 index.php</button>
+            <button class="test-btn" onclick="testarURL('index-simples.html')">📄 index-simples.html</button>
+            <div id="result-principal" class="result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>📊 Dashboard</h3>
+            <button class="test-btn" onclick="testarURL('dashboard_corrigido.php')">📊 Dashboard Principal</button>
+            <button class="test-btn" onclick="testarURL('dashboard_completo.php')">📈 Dashboard Completo</button>
+            <div id="result-dashboard" class="result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🎓 Sistema de Certificados</h3>
+            <button class="test-btn" onclick="testarURL('certificados.php')">🎓 Certificados</button>
+            <button class="test-btn" onclick="testarURL('validacao_certificados.php')">✅ Validação</button>
+            <div id="result-certificados" class="result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🧪 Testes</h3>
+            <button class="test-btn success" onclick="testarURL('teste-api-simples.html')">🧪 Teste API Simples</button>
+            <button class="test-btn" onclick="testarURL('db_teste.php')">🗄️ Teste Banco</button>
+            <button class="test-btn" onclick="testarURL('verificar.html')">🔍 Verificar Sistema</button>
+            <div id="result-testes" class="result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🔧 Ferramentas</h3>
+            <button class="test-btn" onclick="testarURL('diagnostico-acesso.html')">🔍 Diagnóstico</button>
+            <button class="test-btn" onclick="testarURL('SOLUCAO-CONEXAO.html')">🛠️ Solução Conexão</button>
+            <button class="test-btn success" onclick="testarURL('SOLUCAO-BANCO-DADOS.html')">🗄️ Solução Banco de Dados</button>
+            <button class="test-btn danger" onclick="testarURL('teste-certificados-banco.html')">🧪 Teste Certificados Banco</button>
+                         <button class="test-btn" onclick="testarURL('INSTRUCOES-PORTA-8080.html')">📋 Instruções</button>
+             <button class="test-btn danger" onclick="testarURL('SOLUCAO-NOT-FOUND-DEFINITIVA.html')">🚨 Solução Not Found</button>
+             <button class="test-btn danger" onclick="testarURL('DIAGNOSTICO-404.html')">🔍 Diagnóstico 404</button>
+             <div id="result-ferramentas" class="result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🚀 Teste Rápido</h3>
+            <button class="test-btn success" onclick="testarTodasURLs()">🧪 Testar Todas as URLs</button>
+            <button class="test-btn danger" onclick="abrirURLs()">🔗 Abrir URLs em Abas</button>
+            <div id="result-geral" class="result" style="display: none;"></div>
+        </div>
+    </div>
+    
+    <script>
+        const BASE_URL = 'http://localhost:8080/';
+                 const urls = [
+             'index.html',
+             'index.php',
+             'index-simples.html',
+             'dashboard_corrigido.php',
+             'dashboard_completo.php',
+             'certificados.php',
+             'validacao_certificados.php',
+             'teste-api-simples.html',
+             'db_teste.php',
+             'verificar.html',
+             'diagnostico-acesso.html',
+             'SOLUCAO-CONEXAO.html',
+             'SOLUCAO-BANCO-DADOS.html',
+             'teste-certificados-banco.html',
+             'SOLUCAO-NOT-FOUND-DEFINITIVA.html',
+             'DIAGNOSTICO-404.html',
+             'INSTRUCOES-PORTA-8080.html'
+         ];
+        
+        async function testarURL(arquivo) {
+            const url = BASE_URL + arquivo;
+            const resultId = getResultId(arquivo);
+            
+            try {
+                console.log(`Testando: ${url}`);
+                const response = await fetch(url, { method: 'HEAD' });
+                
+                const resultElement = document.getElementById(resultId);
+                resultElement.style.display = 'block';
+                
+                if (response.ok) {
+                    resultElement.className = 'result success';
+                    resultElement.textContent = `✅ SUCESSO (${response.status}) - ${url}`;
+                } else {
+                    resultElement.className = 'result error';
+                    resultElement.textContent = `❌ ERRO (${response.status}) - ${url}`;
+                }
+            } catch (error) {
+                const resultElement = document.getElementById(resultId);
+                resultElement.style.display = 'block';
+                resultElement.className = 'result error';
+                resultElement.textContent = `❌ ERRO DE CONEXÃO - ${url}\nErro: ${error.message}`;
+            }
+        }
+        
+        function getResultId(arquivo) {
+            if (arquivo.includes('index') || arquivo.includes('principal')) return 'result-principal';
+            if (arquivo.includes('dashboard')) return 'result-dashboard';
+            if (arquivo.includes('certificados') || arquivo.includes('validacao')) return 'result-certificados';
+            if (arquivo.includes('teste') || arquivo.includes('db') || arquivo.includes('verificar')) return 'result-testes';
+            if (arquivo.includes('diagnostico') || arquivo.includes('SOLUCAO') || arquivo.includes('INSTRUCOES')) return 'result-ferramentas';
+            return 'result-geral';
+        }
+        
+        async function testarTodasURLs() {
+            const resultElement = document.getElementById('result-geral');
+            resultElement.style.display = 'block';
+            resultElement.className = 'result';
+            resultElement.textContent = '🧪 Testando todas as URLs...\n';
+            
+            let sucessos = 0;
+            let erros = 0;
+            
+            for (const arquivo of urls) {
+                try {
+                    const response = await fetch(BASE_URL + arquivo, { method: 'HEAD' });
+                    if (response.ok) {
+                        sucessos++;
+                        resultElement.textContent += `✅ ${arquivo}\n`;
+                    } else {
+                        erros++;
+                        resultElement.textContent += `❌ ${arquivo} (${response.status})\n`;
+                    }
+                } catch (error) {
+                    erros++;
+                    resultElement.textContent += `❌ ${arquivo} (ERRO)\n`;
+                }
+            }
+            
+            resultElement.textContent += `\n📊 RESULTADO: ${sucessos} sucessos, ${erros} erros`;
+            
+            if (sucessos > erros) {
+                resultElement.className = 'result success';
+            } else {
+                resultElement.className = 'result error';
+            }
+        }
+        
+        function abrirURLs() {
+            urls.forEach(arquivo => {
+                window.open(BASE_URL + arquivo, '_blank');
+            });
+        }
+        
+        // Auto-executar teste ao carregar
+        window.onload = function() {
+            console.log('🔗 Teste de URLs carregado');
+            console.log('📍 URL atual:', window.location.href);
+            
+            // Testar automaticamente algumas URLs importantes
+            setTimeout(() => {
+                testarURL('index.html');
+                testarURL('teste-api-simples.html');
+                testarURL('certificados.php');
+            }, 1000);
+        };
+    </script>
+</body>
+</html>

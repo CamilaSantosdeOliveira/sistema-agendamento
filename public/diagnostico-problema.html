@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico - Problema das Páginas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+        .success { border-color: #28a745; background: #d4edda; }
+        .error { border-color: #dc3545; background: #f8d7da; }
+        .warning { border-color: #ffc107; background: #fff3cd; }
+        .btn {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .btn:hover { background: #0056b3; }
+        .log {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Diagnóstico - Problema das Páginas HTML</h1>
+        
+        <div class="test-section success">
+            <h3>✅ Teste Básico</h3>
+            <p>Esta página está funcionando corretamente.</p>
+            <button class="btn" onclick="testarJavaScript()">Testar JavaScript</button>
+            <button class="btn" onclick="testarCSS()">Testar CSS</button>
+        </div>
+        
+        <div class="test-section warning">
+            <h3>⚠️ Verificação de Arquivos</h3>
+            <p>Verificando se as páginas principais existem e são acessíveis:</p>
+            <button class="btn" onclick="verificarArquivos()">Verificar Arquivos</button>
+            <button class="btn" onclick="testarPaginas()">Testar Páginas</button>
+        </div>
+        
+        <div class="test-section error">
+            <h3>❌ Problemas Identificados</h3>
+            <p>Possíveis causas do problema:</p>
+            <ul>
+                <li>Estrutura HTML incorreta</li>
+                <li>Problemas de codificação de caracteres</li>
+                <li>Erros de sintaxe CSS/JavaScript</li>
+                <li>Problemas de servidor web</li>
+            </ul>
+        </div>
+        
+        <div class="test-section">
+            <h3>📋 Log de Testes</h3>
+            <div id="log" class="log"></div>
+            <button class="btn" onclick="limparLog()">Limpar Log</button>
+        </div>
+        
+        <div class="test-section">
+            <h3>🔗 Links para Teste</h3>
+            <p>Teste estas páginas diretamente:</p>
+            <p><a href="gestao-conteudo-corrigida.html" target="_blank">📚 Gestão de Conteúdo (Corrigida)</a></p>
+            <p><a href="gestao-conteudo-simples.html" target="_blank">📚 Gestão de Conteúdo (Simples)</a></p>
+            <p><a href="teste-pagina.html" target="_blank">🎯 Página de Teste</a></p>
+            <p><a href="dashboard.html" target="_blank">🏠 Dashboard Principal</a></p>
+        </div>
+    </div>
+
+    <script>
+        function log(mensagem, tipo = 'info') {
+            const logDiv = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString('pt-BR');
+            const prefix = tipo === 'error' ? '❌' : tipo === 'success' ? '✅' : tipo === 'warning' ? '⚠️' : 'ℹ️';
+            logDiv.innerHTML += `<div>[${timestamp}] ${prefix} ${mensagem}</div>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+
+        function testarJavaScript() {
+            log('Testando JavaScript...', 'info');
+            try {
+                const resultado = 2 + 2;
+                log(`JavaScript funcionando: 2 + 2 = ${resultado}`, 'success');
+            } catch (error) {
+                log(`Erro no JavaScript: ${error.message}`, 'error');
+            }
+        }
+
+        function testarCSS() {
+            log('Testando CSS...', 'info');
+            try {
+                const body = document.body;
+                const computedStyle = window.getComputedStyle(body);
+                const backgroundColor = computedStyle.backgroundColor;
+                log(`CSS funcionando: background-color = ${backgroundColor}`, 'success');
+            } catch (error) {
+                log(`Erro no CSS: ${error.message}`, 'error');
+            }
+        }
+
+        async function verificarArquivos() {
+            log('Verificando arquivos...', 'info');
+            
+            const arquivos = [
+                'gestao-conteudo.html',
+                'sistema-avaliacao.html',
+                'comunicacao-interacao.html',
+                'relatorios-detalhados.html',
+                'gestao-usuarios.html',
+                'agendamentos-eventos.html'
+            ];
+            
+            for (const arquivo of arquivos) {
+                try {
+                    const response = await fetch(arquivo);
+                    if (response.ok) {
+                        log(`✅ ${arquivo} - Status: ${response.status}`, 'success');
+                    } else {
+                        log(`❌ ${arquivo} - Status: ${response.status}`, 'error');
+                    }
+                } catch (error) {
+                    log(`❌ ${arquivo} - Erro: ${error.message}`, 'error');
+                }
+            }
+        }
+
+        async function testarPaginas() {
+            log('Testando páginas principais...', 'info');
+            
+            const paginas = [
+                { nome: 'Gestão de Conteúdo', url: 'gestao-conteudo.html' },
+                { nome: 'Sistema de Avaliação', url: 'sistema-avaliacao.html' },
+                { nome: 'Comunicação', url: 'comunicacao-interacao.html' },
+                { nome: 'Relatórios', url: 'relatorios-detalhados.html' },
+                { nome: 'Gestão de Usuários', url: 'gestao-usuarios.html' },
+                { nome: 'Agendamentos', url: 'agendamentos-eventos.html' }
+            ];
+            
+            for (const pagina of paginas) {
+                try {
+                    const response = await fetch(pagina.url);
+                    if (response.ok) {
+                        const html = await response.text();
+                        if (html.includes('<!DOCTYPE html>') && html.includes('</html>')) {
+                            log(`✅ ${pagina.nome} - HTML válido`, 'success');
+                        } else {
+                            log(`⚠️ ${pagina.nome} - Estrutura HTML suspeita`, 'warning');
+                        }
+                    } else {
+                        log(`❌ ${pagina.nome} - HTTP ${response.status}`, 'error');
+                    }
+                } catch (error) {
+                    log(`❌ ${pagina.nome} - Erro: ${error.message}`, 'error');
+                }
+            }
+        }
+
+        function limparLog() {
+            document.getElementById('log').innerHTML = '';
+        }
+
+        // Teste automático ao carregar
+        window.onload = function() {
+            log('🚀 Página de diagnóstico carregada com sucesso!', 'success');
+            log('Clique nos botões para executar os testes...', 'info');
+        }
+
+        // Log de erros globais
+        window.onerror = function(message, source, lineno, colno, error) {
+            log(`Erro JavaScript: ${message} em ${source}:${lineno}`, 'error');
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🗄️ SOLUÇÃO - Sistema com Banco de Dados</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #2d3436;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .info-box {
+            background: #d1ecf1;
+            border: 2px solid #bee5eb;
+            color: #0c5460;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .solution-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+        
+        .solution-section h3 {
+            color: #2d3436;
+            margin-bottom: 15px;
+        }
+        
+        .test-btn {
+            background: #0984e3;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .test-btn:hover {
+            background: #74b9ff;
+        }
+        
+        .test-btn.success {
+            background: #00b894;
+        }
+        
+        .test-btn.success:hover {
+            background: #00a085;
+        }
+        
+        .test-btn.danger {
+            background: #e17055;
+        }
+        
+        .test-btn.danger:hover {
+            background: #d63031;
+        }
+        
+        .test-btn.warning {
+            background: #fdcb6e;
+            color: #2d3436;
+        }
+        
+        .test-btn.warning:hover {
+            background: #e17055;
+            color: white;
+        }
+        
+        .status-info {
+            background: #74b9ff;
+            border: 1px solid #0984e3;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .step-list {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .step-list ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .step-list li {
+            margin: 10px 0;
+            color: #2d3436;
+        }
+        
+        .step-list strong {
+            color: #0984e3;
+        }
+        
+        .result-box {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 14px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .result-box.success {
+            background: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        
+        .result-box.error {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        
+        .url-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .url-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .url-link {
+            display: block;
+            background: #00b894;
+            color: white;
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .url-link:hover {
+            background: #00a085;
+        }
+        
+        .url-link.warning {
+            background: #fdcb6e;
+            color: #2d3436;
+        }
+        
+        .url-link.warning:hover {
+            background: #e17055;
+            color: white;
+        }
+        
+        .code-block {
+            background: #2d3436;
+            color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 14px;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗄️ SOLUÇÃO - Sistema com Banco de Dados</h1>
+            <p>Configurando e testando o sistema com dados reais do banco</p>
+        </div>
+        
+        <div class="info-box">
+            <h3>📊 OBJETIVO:</h3>
+            <p><strong>Configurar o sistema para usar banco de dados MySQL real</strong></p>
+            <p>Vamos conectar o sistema ao banco de dados e garantir que todos os dados sejam reais.</p>
+        </div>
+        
+        <div class="status-info">
+            <h3>📊 Status do Sistema</h3>
+            <p><strong>✅ Servidor Apache:</strong> Funcionando (porta 8080)</p>
+            <p><strong>✅ PHP:</strong> Versão 8.0.30 ativa</p>
+            <p><strong>❌ Problema:</strong> Sistema usando dados simulados</p>
+            <p><strong>🔧 Solução:</strong> Configurar banco de dados real</p>
+        </div>
+        
+        <div class="solution-section">
+            <h3>🔧 CONFIGURAÇÃO DO BANCO DE DADOS</h3>
+            
+            <div class="step-list">
+                <ol>
+                    <li><strong>Verificar XAMPP:</strong> Certifique-se de que MySQL está rodando</li>
+                    <li><strong>Configurar banco:</strong> Criar banco de dados e tabelas</li>
+                    <li><strong>Testar conexão:</strong> Verificar se a API conecta ao banco</li>
+                    <li><strong>Inserir dados:</strong> Adicionar dados reais de alunos</li>
+                    <li><strong>Testar sistema:</strong> Verificar se tudo funciona</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="solution-section">
+            <h3>🧪 TESTES DE CONFIGURAÇÃO</h3>
+            <p>Execute estes testes para configurar o banco de dados:</p>
+            
+            <button class="test-btn success" onclick="testarConexaoBanco()">🗄️ Testar Conexão com Banco</button>
+            <button class="test-btn" onclick="criarBancoDados()">📊 Criar Banco de Dados</button>
+            <button class="test-btn" onclick="inserirDadosTeste()">👥 Inserir Dados de Teste</button>
+            <button class="test-btn" onclick="testarAPIBanco()">🔗 Testar API com Banco</button>
+            <button class="test-btn warning" onclick="testarTodos()">🧪 Executar Todos os Testes</button>
+            <button class="test-btn danger" onclick="abrirFerramentas()">🚀 Abrir Ferramentas</button>
+            
+            <div id="resultado" class="result-box" style="display: none;"></div>
+        </div>
+        
+        <div class="solution-section">
+            <h3>📋 SCRIPT SQL PARA CRIAR BANCO</h3>
+            <p>Execute este script no phpMyAdmin para criar o banco de dados:</p>
+            
+            <div class="code-block">
+-- Criar banco de dados
+CREATE DATABASE IF NOT EXISTS sistema_agendamento;
+USE sistema_agendamento;
+
+-- Tabela de usuários
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    tipo_usuario ENUM('aluno', 'professor', 'admin') DEFAULT 'aluno',
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabela de cursos
+CREATE TABLE IF NOT EXISTS cursos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao TEXT,
+    carga_horaria INT DEFAULT 40,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabela de certificados
+CREATE TABLE IF NOT EXISTS certificados (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    aluno_id INT NOT NULL,
+    curso_id INT NOT NULL,
+    codigo_verificacao VARCHAR(50) UNIQUE NOT NULL,
+    data_emissao DATE NOT NULL,
+    data_conclusao_curso DATE NOT NULL,
+    status ENUM('emitido', 'validado', 'revogado') DEFAULT 'emitido',
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (aluno_id) REFERENCES usuarios(id),
+    FOREIGN KEY (curso_id) REFERENCES cursos(id)
+);
+
+-- Inserir dados de teste
+INSERT INTO usuarios (nome, email, senha, tipo_usuario) VALUES
+('João Silva', 'joao.silva@email.com', 'senha123', 'aluno'),
+('Maria Santos', 'maria.santos@email.com', 'senha123', 'aluno'),
+('Pedro Oliveira', 'pedro.oliveira@email.com', 'senha123', 'aluno'),
+('Ana Costa', 'ana.costa@email.com', 'senha123', 'aluno'),
+('Carlos Ferreira', 'carlos.ferreira@email.com', 'senha123', 'aluno');
+
+INSERT INTO cursos (nome, descricao, carga_horaria) VALUES
+('Curso de Formação Profissional', 'Curso completo de formação profissional', 40),
+('Desenvolvimento Web', 'Curso de desenvolvimento web moderno', 60),
+('Gestão de Projetos', 'Curso de gestão e liderança de projetos', 50);
+
+INSERT INTO certificados (aluno_id, curso_id, codigo_verificacao, data_emissao, data_conclusao_curso) VALUES
+(1, 1, 'CERT-A1B2C3D4-2024', '2024-01-15', '2024-01-15'),
+(2, 1, 'CERT-E5F6G7H8-2024', '2024-01-20', '2024-01-20'),
+(3, 1, 'CERT-I9J0K1L2-2024', '2024-01-25', '2024-01-25'),
+(4, 1, 'CERT-M3N4O5P6-2024', '2024-02-01', '2024-02-01'),
+(5, 1, 'CERT-Q7R8S9T0-2024', '2024-02-05', '2024-02-05');
+            </div>
+        </div>
+        
+        <div class="solution-section">
+            <h3>✅ FERRAMENTAS DE CONFIGURAÇÃO</h3>
+            <p>Acesse estas ferramentas para configurar o banco:</p>
+            
+            <div class="url-list">
+                <div class="url-card">
+                    <h4>🗄️ phpMyAdmin</h4>
+                    <a href="http://localhost:8080/phpmyadmin" class="url-link" target="_blank">
+                        🗄️ Acessar phpMyAdmin
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>🧪 Teste Banco</h4>
+                    <a href="http://localhost:8080/db_teste.php" class="url-link" target="_blank">
+                        🧪 Testar Conexão
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>📊 Ver Dados</h4>
+                    <a href="http://localhost:8080/ver_dados_banco.php" class="url-link" target="_blank">
+                        👀 Ver Dados do Banco
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>🎓 Sistema Certificados</h4>
+                    <a href="http://localhost:8080/certificados.php" class="url-link warning" target="_blank">
+                        🎓 Acessar Sistema
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="solution-section">
+            <h3>❌ PROBLEMAS COMUNS</h3>
+            
+            <div class="step-list">
+                <ol>
+                    <li><strong>MySQL não está rodando:</strong> Inicie o MySQL no XAMPP</li>
+                    <li><strong>Banco não existe:</strong> Execute o script SQL acima</li>
+                    <li><strong>Credenciais incorretas:</strong> Verifique o arquivo db.php</li>
+                    <li><strong>Tabelas vazias:</strong> Insira dados de teste</li>
+                    <li><strong>Permissões:</strong> Verifique permissões do MySQL</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="solution-section">
+            <h3>🛠️ SOLUÇÕES ESPECÍFICAS</h3>
+            
+            <div class="step-list">
+                <ol>
+                    <li><strong>Abra o XAMPP:</strong> Inicie Apache e MySQL</li>
+                    <li><strong>Acesse phpMyAdmin:</strong> http://localhost:8080/phpmyadmin</li>
+                    <li><strong>Execute o script SQL:</strong> Copie e cole o código acima</li>
+                    <li><strong>Teste a conexão:</strong> Use o botão "Testar Conexão com Banco"</li>
+                    <li><strong>Verifique os dados:</strong> Use "Ver Dados do Banco"</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        async function fazerRequisicao(url, options = {}) {
+            try {
+                const response = await fetch(url, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...options.headers
+                    },
+                    ...options
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                return { success: true, data, status: response.status };
+            } catch (error) {
+                return { success: false, error: error.message };
+            }
+        }
+        
+        function mostrarResultado(resultado, tipo = 'info') {
+            const element = document.getElementById('resultado');
+            element.style.display = 'block';
+            element.className = `result-box ${tipo}`;
+            
+            if (resultado.success) {
+                element.textContent = `✅ SUCESSO (${resultado.status})\n\n${JSON.stringify(resultado.data, null, 2)}`;
+            } else {
+                element.textContent = `❌ ERRO\n\n${resultado.error}`;
+            }
+        }
+        
+        async function testarConexaoBanco() {
+            console.log('🗄️ Testando conexão com banco...');
+            const resultado = await fazerRequisicao('http://localhost:8080/db_teste.php');
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error');
+        }
+        
+        async function criarBancoDados() {
+            console.log('📊 Criando banco de dados...');
+            const resultado = await fazerRequisicao('http://localhost:8080/criar_banco.php');
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error');
+        }
+        
+        async function inserirDadosTeste() {
+            console.log('👥 Inserindo dados de teste...');
+            const resultado = await fazerRequisicao('http://localhost:8080/inserir_dados_teste.php');
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error');
+        }
+        
+        async function testarAPIBanco() {
+            console.log('🔗 Testando API com banco...');
+            const resultado = await fazerRequisicao('http://localhost:8080/api/certificados.php?action=listar_certificados');
+            mostrarResultado(resultado, resultado.success ? 'success' : 'error');
+        }
+        
+        async function testarTodos() {
+            console.log('🧪 Executando todos os testes...');
+            
+            const element = document.getElementById('resultado');
+            element.style.display = 'block';
+            element.className = 'result-box';
+            element.textContent = '🧪 Executando todos os testes...\n\n';
+            
+            // Teste 1: Conexão
+            element.textContent += '1. Testando conexão com banco...\n';
+            const conexaoResult = await fazerRequisicao('http://localhost:8080/db_teste.php');
+            element.textContent += conexaoResult.success ? '✅ Conexão funcionando\n' : '❌ Conexão com erro\n';
+            
+            // Teste 2: API
+            element.textContent += '2. Testando API com banco...\n';
+            const apiResult = await fazerRequisicao('http://localhost:8080/api/certificados.php?action=listar_certificados');
+            element.textContent += apiResult.success ? '✅ API funcionando\n' : '❌ API com erro\n';
+            
+            // Teste 3: Dados
+            element.textContent += '3. Testando dados do banco...\n';
+            const dadosResult = await fazerRequisicao('http://localhost:8080/ver_dados_banco.php');
+            element.textContent += dadosResult.success ? '✅ Dados funcionando\n' : '❌ Dados com erro\n';
+            
+            element.textContent += '\n📊 DIAGNÓSTICO COMPLETO';
+            
+            const sucessos = [conexaoResult.success, apiResult.success, dadosResult.success].filter(Boolean).length;
+            if (sucessos === 3) {
+                element.className = 'result-box success';
+                element.textContent += '\n🎉 SISTEMA COMPLETAMENTE FUNCIONAL!';
+            } else if (sucessos >= 2) {
+                element.className = 'result-box info';
+                element.textContent += `\n⚠️ ${sucessos}/3 testes passaram`;
+            } else {
+                element.className = 'result-box error';
+                element.textContent += `\n❌ Apenas ${sucessos}/3 testes passaram`;
+            }
+        }
+        
+        function abrirFerramentas() {
+            const urls = [
+                'http://localhost:8080/phpmyadmin',
+                'http://localhost:8080/db_teste.php',
+                'http://localhost:8080/ver_dados_banco.php',
+                'http://localhost:8080/certificados.php'
+            ];
+            
+            urls.forEach(url => {
+                window.open(url, '_blank');
+            });
+        }
+        
+        // Auto-executar teste ao carregar
+        window.onload = function() {
+            console.log('🗄️ Solução Banco de Dados carregada');
+            console.log('📍 URL atual:', window.location.href);
+            
+            // Teste automático após 2 segundos
+            setTimeout(() => {
+                testarConexaoBanco();
+            }, 2000);
+        };
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

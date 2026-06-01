@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 Teste Modal Certificado</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #3b82f6;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .test-btn {
+            background: #3b82f6;
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .test-btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+        
+        .test-btn.success {
+            background: #10b981;
+        }
+        
+        .test-btn.success:hover {
+            background: #059669;
+        }
+        
+        .result {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .result.success {
+            border-left-color: #10b981;
+            background: #d1fae5;
+        }
+        
+        .result.error {
+            border-left-color: #ef4444;
+            background: #fee2e2;
+        }
+        
+        /* Estilos do Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .modal-footer {
+            padding: 20px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #64748b;
+        }
+        
+        .certificado-preview {
+            border: 2px solid #3b82f6;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        .certificado-header h2 {
+            color: #3b82f6;
+            margin-bottom: 5px;
+        }
+        
+        .certificado-content h3 {
+            color: #1e293b;
+            margin: 20px 0;
+            font-size: 1.5rem;
+        }
+        
+        .certificado-content h4 {
+            color: #3b82f6;
+            margin: 15px 0;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #3b82f6;
+            color: #3b82f6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 Teste Modal Certificado</h1>
+            <p>Teste o modal de visualização de certificados</p>
+        </div>
+
+        <button class="test-btn" onclick="testarModalComDadosReais()">
+            📜 Testar Modal com Dados Reais
+        </button>
+        
+        <button class="test-btn" onclick="testarModalComDadosSimulados()">
+            🎭 Testar Modal com Dados Simulados
+        </button>
+        
+        <button class="test-btn success" onclick="testarModalComDadosIncompletos()">
+            ⚠️ Testar Modal com Dados Incompletos
+        </button>
+
+        <div id="result" class="result" style="display: none;"></div>
+    </div>
+
+    <script>
+        function mostrarResultado(data, isSuccess = true) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = `result ${isSuccess ? 'success' : 'error'}`;
+            resultDiv.textContent = JSON.stringify(data, null, 2);
+            resultDiv.style.display = 'block';
+        }
+        
+        // Função para mostrar modal de certificado (copiada do validacao_certificados.php)
+        function showCertificadoModal(certificado) {
+            const modal = document.createElement('div');
+            modal.className = 'modal-overlay';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>📜 Certificado de Conclusão</h3>
+                        <button onclick="closeModal()" class="close-btn">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="certificado-preview">
+                            <div class="certificado-header">
+                                <h2>🎓 EduConnect</h2>
+                                <p>Sistema Educacional Profissional</p>
+                            </div>
+                            <div class="certificado-content">
+                                <p>Certificamos que</p>
+                                <h3>${certificado.aluno_nome}</h3>
+                                <p>concluiu com êxito o curso</p>
+                                <h4>${certificado.curso_nome}</h4>
+                                <p>com carga horária de ${certificado.carga_horaria || '40'} horas</p>
+                                <p>em ${certificado.data_conclusao || new Date().toLocaleDateString('pt-BR')}</p>
+                            </div>
+                            <div class="certificado-footer">
+                                <p>Código de Validação: ${certificado.codigo_verificacao || 'N/A'}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="baixarCertificado(${certificado.id})" class="btn btn-primary">
+                            📥 Baixar PDF
+                        </button>
+                        <button onclick="closeModal()" class="btn btn-outline">Fechar</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+        
+        // Função para fechar modal
+        function closeModal() {
+            const modal = document.querySelector('.modal-overlay');
+            if (modal) {
+                modal.remove();
+            }
+        }
+        
+        // Função para baixar certificado (simulada)
+        function baixarCertificado(id) {
+            alert(`Download do certificado ${id} iniciado!`);
+        }
+        
+        async function testarModalComDadosReais() {
+            try {
+                const response = await fetch('api/certificados.php?action=ver_certificado&id=1');
+                const result = await response.json();
+                
+                if (result.success) {
+                    showCertificadoModal(result.data);
+                    mostrarResultado({
+                        teste: 'Modal com Dados Reais',
+                        status: 'SUCESSO',
+                        certificado: result.data
+                    }, true);
+                } else {
+                    mostrarResultado({
+                        teste: 'Modal com Dados Reais',
+                        status: 'ERRO',
+                        erro: result.message
+                    }, false);
+                }
+            } catch (error) {
+                mostrarResultado({
+                    teste: 'Modal com Dados Reais',
+                    status: 'ERRO',
+                    erro: error.message
+                }, false);
+            }
+        }
+        
+        function testarModalComDadosSimulados() {
+            const certificado = {
+                id: 999,
+                codigo_verificacao: 'CERT-TEST123-2024',
+                data_emissao: '2024-01-15',
+                status: 'validado',
+                aluno_nome: 'João Silva',
+                aluno_email: 'joao.silva@email.com',
+                curso_nome: 'Programação Web',
+                carga_horaria: '60',
+                data_conclusao: '15/01/2024'
+            };
+            
+            showCertificadoModal(certificado);
+            mostrarResultado({
+                teste: 'Modal com Dados Simulados',
+                status: 'SUCESSO',
+                certificado: certificado
+            }, true);
+        }
+        
+        function testarModalComDadosIncompletos() {
+            const certificado = {
+                id: 888,
+                // Dados incompletos para testar fallbacks
+                status: 'emitido'
+            };
+            
+            showCertificadoModal(certificado);
+            mostrarResultado({
+                teste: 'Modal com Dados Incompletos',
+                status: 'SUCESSO',
+                certificado: certificado,
+                observacao: 'Deve mostrar valores padrão para campos ausentes'
+            }, true);
+        }
+        
+        // Teste automático ao carregar a página
+        window.onload = function() {
+            setTimeout(() => {
+                testarModalComDadosSimulados();
+            }, 1000);
+        };
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect Mobile</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3b82f6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="EduConnect">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        
+        .mobile-header {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .mobile-header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .mobile-header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        
+        .mobile-nav {
+            background: white;
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+        }
+        
+        .nav-btn {
+            background: #f1f5f9;
+            color: #64748b;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn.active {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .mobile-content {
+            padding: 20px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .card h3 {
+            color: #1e293b;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-item {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: #3b82f6;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #64748b;
+        }
+        
+        .btn {
+            background: #3b82f6;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #2563eb;
+        }
+        
+        .btn-secondary {
+            background: #10b981;
+        }
+        
+        .btn-secondary:hover {
+            background: #059669;
+        }
+        
+        .install-prompt {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .install-prompt h3 {
+            margin-bottom: 10px;
+        }
+        
+        .install-prompt p {
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .install-btn {
+            background: white;
+            color: #3b82f6;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .qr-code {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .qr-code h3 {
+            margin-bottom: 15px;
+        }
+        
+        .qr-placeholder {
+            width: 200px;
+            height: 200px;
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            color: #64748b;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .mobile-nav {
+                padding: 10px;
+            }
+            
+            .nav-btn {
+                padding: 10px 15px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-header">
+        <h1>🎓 EduConnect</h1>
+        <p>Sistema de Agendamento Mobile</p>
+    </div>
+    
+    <div class="mobile-nav">
+        <button class="nav-btn active" onclick="showSection('dashboard')">📊 Dashboard</button>
+        <button class="nav-btn" onclick="showSection('agendar')">📅 Agendar</button>
+        <button class="nav-btn" onclick="showSection('cursos')">📚 Cursos</button>
+        <button class="nav-btn" onclick="showSection('relatorios')">📈 Relatórios</button>
+    </div>
+    
+    <div class="mobile-content">
+        <!-- Seção Dashboard -->
+        <div id="dashboard" class="section">
+            <div class="install-prompt">
+                <h3>📱 Instalar App</h3>
+                <p>Adicione o EduConnect à sua tela inicial para acesso rápido!</p>
+                <button class="install-btn" onclick="installApp()">Instalar App</button>
+            </div>
+            
+            <div class="card">
+                <h3>📊 Estatísticas</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">10</div>
+                        <div class="stat-label">Cursos Ativos</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">11</div>
+                        <div class="stat-label">Professores</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Alunos</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Aulas Agendadas</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>⚡ Ações Rápidas</h3>
+                <button class="btn" onclick="openDashboard()">🚀 Abrir Dashboard Completo</button>
+                <button class="btn btn-secondary" onclick="openAgendar()">📅 Agendar Nova Aula</button>
+            </div>
+        </div>
+        
+        <!-- Seção Agendar -->
+        <div id="agendar" class="section" style="display: none;">
+            <div class="card">
+                <h3>📅 Agendar Aula</h3>
+                <p>Clique no botão abaixo para abrir o sistema de agendamento completo.</p>
+                <button class="btn" onclick="openAgendar()">📅 Abrir Agendamento</button>
+            </div>
+        </div>
+        
+        <!-- Seção Cursos -->
+        <div id="cursos" class="section" style="display: none;">
+            <div class="card">
+                <h3>📚 Gerenciar Cursos</h3>
+                <p>Acesse o sistema completo para gerenciar cursos, professores e alunos.</p>
+                <button class="btn" onclick="openDashboard()">📚 Gerenciar Cursos</button>
+            </div>
+        </div>
+        
+        <!-- Seção Relatórios -->
+        <div id="relatorios" class="section" style="display: none;">
+            <div class="card">
+                <h3>📈 Relatórios</h3>
+                <p>Visualize relatórios detalhados e estatísticas do sistema.</p>
+                <button class="btn" onclick="openRelatorios()">📊 Ver Relatórios</button>
+            </div>
+        </div>
+        
+        <div class="qr-code">
+            <h3>📱 Acesso Rápido</h3>
+            <p>Escaneie o QR Code para acessar no celular</p>
+            <div class="qr-placeholder">
+                QR Code do EduConnect<br>
+                (Use o link direto)
+            </div>
+            <p style="margin-top: 15px; font-size: 12px; color: #64748b;">
+                Link: http://localhost:8080/Sistema%20De%20Agendamento/public/
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // Função para mostrar seções
+        function showSection(sectionName) {
+            // Esconder todas as seções
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Mostrar seção selecionada
+            document.getElementById(sectionName).style.display = 'block';
+            
+            // Atualizar botões ativos
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+        
+        // Função para instalar app
+        function installApp() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        alert('✅ App instalado com sucesso!\n\nAgora você pode acessar o EduConnect diretamente da tela inicial do seu celular!');
+                    })
+                    .catch(error => {
+                        alert('❌ Erro ao instalar app. Tente novamente.');
+                    });
+            } else {
+                alert('📱 Para instalar o app:\n\n1. Clique nos 3 pontos (⋮)\n2. Selecione "Adicionar à tela inicial"\n3. Confirme a instalação');
+            }
+        }
+        
+        // Funções para abrir páginas
+        function openDashboard() {
+            window.open('http://192.168.31.196:8080/Sistema%20De%20Agendamento/public/dashboard_final.php', '_blank');
+        }
+        
+        function openAgendar() {
+            window.open('http://192.168.31.196:8080/Sistema%20De%20Agendamento/public/dashboard_final.php', '_blank');
+        }
+        
+        function openRelatorios() {
+            window.open('http://192.168.31.196:8080/Sistema%20De%20Agendamento/public/dashboard_final.php', '_blank');
+        }
+        
+        // Detectar se é mobile
+        if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            document.body.classList.add('mobile');
+        }
+    </script>
+</body>
+</html>

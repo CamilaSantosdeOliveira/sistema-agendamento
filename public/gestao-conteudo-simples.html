@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Conteúdo - Simples</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2563eb;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+        .btn {
+            background: #2563eb;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        .btn:hover {
+            background: #1d4ed8;
+        }
+        .content-list {
+            margin-top: 40px;
+            border-top: 2px solid #eee;
+            padding-top: 20px;
+        }
+        .content-item {
+            background: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #2563eb;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #2563eb;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="dashboard.html" class="back-link">← Voltar ao Dashboard</a>
+        
+        <h1>📚 Gestão de Conteúdo dos Cursos</h1>
+        
+        <form id="contentForm">
+            <div class="form-group">
+                <label for="courseSelect">Selecionar Curso:</label>
+                <select id="courseSelect" required>
+                    <option value="">Escolha um curso...</option>
+                    <option value="matematica">Matemática Básica</option>
+                    <option value="portugues">Português Intermediário</option>
+                    <option value="ingles">Inglês Avançado</option>
+                    <option value="programacao">Programação Web</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="lessonTitle">Título da Lição:</label>
+                <input type="text" id="lessonTitle" placeholder="Ex: Introdução às Equações" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="lessonDescription">Descrição:</label>
+                <textarea id="lessonDescription" rows="4" placeholder="Descreva o conteúdo da lição..." required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="lessonType">Tipo de Conteúdo:</label>
+                <select id="lessonType" required>
+                    <option value="">Escolha o tipo...</option>
+                    <option value="video">Vídeo</option>
+                    <option value="texto">Texto/PDF</option>
+                    <option value="ebook">E-book</option>
+                    <option value="quiz">Quiz/Exercício</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="lessonFile">Arquivo (opcional):</label>
+                <input type="file" id="lessonFile" accept=".pdf,.doc,.docx,.mp4,.avi,.mov">
+            </div>
+            
+            <button type="submit" class="btn">✅ Criar Lição</button>
+            <button type="button" class="btn" onclick="limparFormulario()">🔄 Limpar</button>
+        </form>
+        
+        <div class="content-list">
+            <h2>📋 Conteúdo Existente</h2>
+            
+            <div class="content-item">
+                <h3>Introdução às Equações</h3>
+                <p><strong>Curso:</strong> Matemática Básica</p>
+                <p><strong>Tipo:</strong> Vídeo</p>
+                <p><strong>Descrição:</strong> Conceitos fundamentais sobre equações de primeiro grau.</p>
+                <button class="btn" onclick="editarConteudo(1)">✏️ Editar</button>
+                <button class="btn" onclick="excluirConteudo(1)" style="background: #dc2626;">🗑️ Excluir</button>
+            </div>
+            
+            <div class="content-item">
+                <h3>Gramática Básica</h3>
+                <p><strong>Curso:</strong> Português Intermediário</p>
+                <p><strong>Tipo:</strong> PDF</p>
+                <p><strong>Descrição:</strong> Regras fundamentais de gramática portuguesa.</p>
+                <button class="btn" onclick="editarConteudo(2)">✏️ Editar</button>
+                <button class="btn" onclick="excluirConteudo(2)" style="background: #dc2626;">🗑️ Excluir</button>
+            </div>
+            
+            <div class="content-item">
+                <h3>HTML e CSS Básico</h3>
+                <p><strong>Curso:</strong> Programação Web</p>
+                <p><strong>Tipo:</strong> Vídeo</p>
+                <p><strong>Descrição:</strong> Primeiros passos no desenvolvimento web frontend.</p>
+                <button class="btn" onclick="editarConteudo(3)">✏️ Editar</button>
+                <button class="btn" onclick="excluirConteudo(3)" style="background: #dc2626;">🗑️ Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Formulário de criação de conteúdo
+        document.getElementById('contentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const course = document.getElementById('courseSelect').value;
+            const title = document.getElementById('lessonTitle').value;
+            const description = document.getElementById('lessonDescription').value;
+            const type = document.getElementById('lessonType').value;
+            const file = document.getElementById('lessonFile').files[0];
+            
+            if (!course || !title || !description || !type) {
+                alert('Por favor, preencha todos os campos obrigatórios!');
+                return;
+            }
+            
+            // Simulação de criação
+            alert(`✅ Lição criada com sucesso!\n\nTítulo: ${title}\nCurso: ${course}\nTipo: ${type}`);
+            
+            // Limpar formulário
+            limparFormulario();
+            
+            // Adicionar à lista (simulação)
+            adicionarConteudoLista(title, course, type, description);
+        });
+        
+        function limparFormulario() {
+            document.getElementById('contentForm').reset();
+        }
+        
+        function editarConteudo(id) {
+            alert(`✏️ Editando conteúdo ID: ${id}\n\nEsta funcionalidade abriria um modal de edição.`);
+        }
+        
+        function excluirConteudo(id) {
+            if (confirm('Tem certeza que deseja excluir este conteúdo?')) {
+                alert(`🗑️ Conteúdo ID: ${id} excluído com sucesso!`);
+            }
+        }
+        
+        function adicionarConteudoLista(titulo, curso, tipo, descricao) {
+            const contentList = document.querySelector('.content-list');
+            const newItem = document.createElement('div');
+            newItem.className = 'content-item';
+            newItem.innerHTML = `
+                <h3>${titulo}</h3>
+                <p><strong>Curso:</strong> ${curso}</p>
+                <p><strong>Tipo:</strong> ${tipo}</p>
+                <p><strong>Descrição:</strong> ${descricao}</p>
+                <button class="btn" onclick="editarConteudo('novo')">✏️ Editar</button>
+                <button class="btn" onclick="excluirConteudo('novo')" style="background: #dc2626;">🗑️ Excluir</button>
+            `;
+            
+            contentList.appendChild(newItem);
+        }
+        
+        // Teste de carregamento
+        console.log('✅ Página de Gestão de Conteúdo carregada com sucesso!');
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ DOM completamente carregado!');
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚨 SOLUÇÃO DEFINITIVA - Erro Not Found</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #d63031;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .error-box {
+            background: #ff6b6b;
+            border: 3px solid #d63031;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .solution-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+        
+        .solution-section h3 {
+            color: #2d3436;
+            margin-bottom: 15px;
+        }
+        
+        .test-btn {
+            background: #0984e3;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .test-btn:hover {
+            background: #74b9ff;
+        }
+        
+        .test-btn.success {
+            background: #00b894;
+        }
+        
+        .test-btn.success:hover {
+            background: #00a085;
+        }
+        
+        .test-btn.danger {
+            background: #e17055;
+        }
+        
+        .test-btn.danger:hover {
+            background: #d63031;
+        }
+        
+        .test-btn.warning {
+            background: #fdcb6e;
+            color: #2d3436;
+        }
+        
+        .test-btn.warning:hover {
+            background: #e17055;
+            color: white;
+        }
+        
+        .step-list {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .step-list ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .step-list li {
+            margin: 10px 0;
+            color: #2d3436;
+        }
+        
+        .step-list strong {
+            color: #d63031;
+        }
+        
+        .result-box {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .result-box.success {
+            background: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        
+        .result-box.error {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        
+        .url-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .url-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .url-link {
+            display: block;
+            background: #00b894;
+            color: white;
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .url-link:hover {
+            background: #00a085;
+        }
+        
+        .url-link.warning {
+            background: #fdcb6e;
+            color: #2d3436;
+        }
+        
+        .url-link.warning:hover {
+            background: #e17055;
+            color: white;
+        }
+        
+        .code-block {
+            background: #2d3436;
+            color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        
+        .critical-section {
+            background: #ffeaa7;
+            border: 2px solid #fdcb6e;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .critical-section h3 {
+            color: #d63031;
+            margin-bottom: 15px;
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .status-card {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .status-card.success {
+            border-color: #00b894;
+            background: #f0fff4;
+        }
+        
+        .status-card.error {
+            border-color: #e17055;
+            background: #fff5f5;
+        }
+        
+        .file-list {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .file-item {
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 4px;
+            background: white;
+            border-left: 4px solid #0984e3;
+        }
+        
+        .file-item.success {
+            border-left-color: #00b894;
+            background: #f0fff4;
+        }
+        
+        .file-item.error {
+            border-left-color: #e17055;
+            background: #fff5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚨 SOLUÇÃO DEFINITIVA - Erro Not Found</h1>
+            <p>SOLUÇÃO DEFINITIVA para o erro "The requested URL was not found on this server"</p>
+        </div>
+        
+        <div class="error-box">
+            <h3>🚨 PROBLEMA CRÍTICO CONFIRMADO!</h3>
+            <p><strong>"Not Found - The requested URL was not found on this server"</strong></p>
+            <p>O Apache está funcionando, mas o arquivo não foi encontrado!</p>
+            <p><strong>PROBLEMA:</strong> Arquivo não existe ou caminho incorreto</p>
+        </div>
+        
+        <div class="critical-section">
+            <h3>🚨 AÇÃO CRÍTICA OBRIGATÓRIA</h3>
+            <p><strong>Você DEVE executar estas ações AGORA para resolver o problema DEFINITIVAMENTE:</strong></p>
+        </div>
+        
+        <div class="solution-section">
+            <h3>🔧 DIAGNÓSTICO DO PROBLEMA</h3>
+            
+            <div class="step-list">
+                <ol>
+                    <li><strong>PROBLEMA PRINCIPAL:</strong> Arquivo não existe no diretório correto</li>
+                    <li><strong>PROBLEMA SECUNDÁRIO:</strong> Caminho do arquivo está incorreto</li>
+                    <li><strong>PROBLEMA TERCIÁRIO:</strong> Diretório raiz do Apache está configurado incorretamente</li>
+                    <li><strong>PROBLEMA QUATERNÁRIO:</strong> Arquivo foi movido ou renomeado</li>
+                    <li><strong>PROBLEMA QUINTENÁRIO:</strong> Permissões incorretas do arquivo</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="solution-section">
+            <h3>🧪 TESTES CRÍTICOS</h3>
+            <p>Execute estes testes AGORA para identificar o problema:</p>
+            
+            <button class="test-btn danger" onclick="verificarArquivos()">📁 Verificar Arquivos</button>
+            <button class="test-btn" onclick="testarCaminhos()">🛤️ Testar Caminhos</button>
+            <button class="test-btn" onclick="verificarDiretorio()">📂 Verificar Diretório</button>
+            <button class="test-btn" onclick="listarArquivos()">📋 Listar Arquivos</button>
+            <button class="test-btn warning" onclick="testarTodos()">🧪 Executar Todos os Testes</button>
+            <button class="test-btn success" onclick="abrirTestes()">🚀 Abrir Páginas de Teste</button>
+            <button class="test-btn" onclick="limparCache()">🧹 Limpar Cache</button>
+            
+            <div id="resultado" class="result-box" style="display: none;"></div>
+        </div>
+        
+        <div class="solution-section">
+            <h3>📊 STATUS DO SISTEMA</h3>
+            <div class="status-grid">
+                <div class="status-card" id="status-arquivos">
+                    <h4>📁 Arquivos</h4>
+                    <p>Verificando...</p>
+                </div>
+                <div class="status-card" id="status-caminhos">
+                    <h4>🛤️ Caminhos</h4>
+                    <p>Verificando...</p>
+                </div>
+                <div class="status-card" id="status-diretorio">
+                    <h4>📂 Diretório</h4>
+                    <p>Verificando...</p>
+                </div>
+                <div class="status-card" id="status-lista">
+                    <h4>📋 Lista</h4>
+                    <p>Verificando...</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="solution-section">
+            <h3>✅ SOLUÇÕES ALTERNATIVAS</h3>
+            <p>Use estas alternativas para contornar o problema:</p>
+            
+            <div class="url-list">
+                <div class="url-card">
+                    <h4>📁 Verificar Arquivos</h4>
+                    <a href="http://localhost:8080/" class="url-link" target="_blank">
+                        📁 Página Inicial
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>🐘 Teste PHP</h4>
+                    <a href="http://localhost:8080/teste-ultra-simples.php" class="url-link" target="_blank">
+                        🐘 Teste PHP
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>🔗 Teste API</h4>
+                    <a href="http://localhost:8080/teste-api-simples.php" class="url-link" target="_blank">
+                        🔗 Teste API
+                    </a>
+                </div>
+                
+                <div class="url-card">
+                    <h4>📋 Listar Arquivos</h4>
+                    <a href="http://localhost:8080/listar-arquivos.php" class="url-link" target="_blank">
+                        📋 Listar Arquivos
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="solution-section">
+            <h3>🛠️ SOLUÇÕES ESPECÍFICAS</h3>
+            
+            <div class="step-list">
+                <ol>
+                    <li><strong>1. VERIFICAR DIRETÓRIO RAIZ:</strong></li>
+                    <ul>
+                        <li>Confirme que os arquivos estão em: C:\xampp\htdocs\Sistema De Agendamento\public\</li>
+                        <li>Verifique se o XAMPP está apontando para o diretório correto</li>
+                        <li>Teste acessando: http://localhost:8080/</li>
+                    </ul>
+                    <li><strong>2. VERIFICAR ARQUIVOS:</strong></li>
+                    <ul>
+                        <li>Confirme se os arquivos existem no diretório correto</li>
+                        <li>Verifique se os nomes dos arquivos estão corretos</li>
+                        <li>Teste acessando arquivos específicos</li>
+                    </ul>
+                    <li><strong>3. VERIFICAR CAMINHOS:</strong></li>
+                    <ul>
+                        <li>Confirme se os caminhos nas URLs estão corretos</li>
+                        <li>Verifique se não há espaços ou caracteres especiais</li>
+                        <li>Teste caminhos alternativos</li>
+                    </ul>
+                    <li><strong>4. VERIFICAR PERMISSÕES:</strong></li>
+                    <ul>
+                        <li>Confirme se os arquivos têm permissões de leitura</li>
+                        <li>Verifique se o Apache pode acessar os arquivos</li>
+                        <li>Teste com arquivos de permissão total</li>
+                    </ul>
+                    <li><strong>5. REINICIAR XAMPP:</strong></li>
+                    <ul>
+                        <li>Pare TODOS os serviços</li>
+                        <li>Feche o XAMPP Control Panel</li>
+                        <li>Aguarde 10 segundos</li>
+                        <li>Abra novamente e inicie os serviços</li>
+                    </ul>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="solution-section">
+            <h3>📋 ARQUIVOS ESSENCIAIS</h3>
+            <p>Verifique se estes arquivos existem no diretório correto:</p>
+            
+            <div class="file-list" id="lista-arquivos">
+                <div class="file-item">📁 Verificando arquivos...</div>
+            </div>
+        </div>
+        
+        <div class="solution-section">
+            <h3>📋 CÓDIGO PARA LISTAR ARQUIVOS</h3>
+            <p>Use este código para listar os arquivos do diretório:</p>
+            
+            <div class="code-block">
+&lt;?php
+// Listar arquivos do diretório atual
+echo "&lt;h2&gt;📁 Arquivos no diretório: " . __DIR__ . "&lt;/h2&gt;";
+echo "&lt;ul&gt;";
+
+$files = scandir(__DIR__);
+foreach($files as $file) {
+    if($file != "." && $file != "..") {
+        $type = is_dir($file) ? "📁" : "📄";
+        echo "&lt;li&gt;{$type} {$file}&lt;/li&gt;";
+    }
+}
+
+echo "&lt;/ul&gt;";
+echo "&lt;h3&gt;📊 Total de arquivos: " . (count($files) - 2) . "&lt;/h3&gt;";
+?&gt;
+            </div>
+            
+            <p>Salve como <strong>listar-arquivos.php</strong> e acesse via navegador.</p>
+        </div>
+        
+        <div class="solution-section">
+            <h3>🚨 VERIFICAÇÃO XAMPP CRÍTICA</h3>
+            <p>Verifique se o XAMPP está configurado corretamente:</p>
+            
+            <div class="step-list">
+                <ol>
+                    <li><strong>Abra o XAMPP Control Panel</strong></li>
+                    <li><strong>Clique em "Config" do Apache</strong></li>
+                    <li><strong>Selecione "httpd.conf"</strong></li>
+                    <li><strong>Procure por "DocumentRoot"</strong></li>
+                    <li><strong>Verifique se aponta para: C:\xampp\htdocs</strong></li>
+                    <li><strong>Se não estiver correto, corrija o caminho</strong></li>
+                    <li><strong>Salve o arquivo</strong></li>
+                    <li><strong>Reinicie o Apache</strong></li>
+                    <li><strong>Teste: http://localhost:8080/</strong></li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="solution-section">
+            <h3>🎯 DIAGNÓSTICO FINAL</h3>
+            <p>Se após todas essas ações o problema persistir:</p>
+            
+            <div class="step-list">
+                <ol>
+                    <li><strong>Os arquivos não existem no diretório correto</strong> - Mova os arquivos</li>
+                    <li><strong>O XAMPP não está configurado corretamente</strong> - Verifique configuração</li>
+                    <li><strong>O diretório raiz está incorreto</strong> - Corrija o DocumentRoot</li>
+                    <li><strong>Permissões incorretas</strong> - Verifique permissões dos arquivos</li>
+                    <li><strong>Cache do navegador</strong> - Limpe completamente o cache</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="solution-section">
+            <h3>🚨 SOLUÇÃO ALTERNATIVA CRÍTICA</h3>
+            <p>Se nada funcionar, use esta solução alternativa:</p>
+            
+            <div class="step-list">
+                <ol>
+                    <li><strong>1. Copie todos os arquivos para: C:\xampp\htdocs\</strong></li>
+                    <li><strong>2. Acesse: http://localhost:8080/</strong></li>
+                    <li><strong>3. Se funcionar, o problema é o diretório</strong></li>
+                    <li><strong>4. Configure o XAMPP para apontar para o diretório correto</strong></li>
+                    <li><strong>5. Ou mantenha os arquivos em htdocs</strong></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const BASE_URL = 'http://localhost:8080/';
+        
+        function mostrarResultado(resultado, tipo = 'info') {
+            const element = document.getElementById('resultado');
+            element.style.display = 'block';
+            element.className = `result-box ${tipo}`;
+            
+            if (typeof resultado === 'string') {
+                element.textContent = resultado;
+            } else {
+                element.textContent = JSON.stringify(resultado, null, 2);
+            }
+        }
+        
+        function atualizarStatus(elemento, sucesso, mensagem) {
+            const card = document.getElementById(elemento);
+            card.className = `status-card ${sucesso ? 'success' : 'error'}`;
+            card.innerHTML = `<h4>${card.querySelector('h4').textContent}</h4><p>${mensagem}</p>`;
+        }
+        
+        async function verificarArquivos() {
+            console.log('📁 Verificando arquivos...');
+            
+            const arquivos = [
+                'index.html',
+                'teste-ultra-simples.php',
+                'teste-api-simples.php',
+                'api/certificados.php',
+                'db.php',
+                'certificados.php'
+            ];
+            
+            let resultado = '📁 VERIFICAÇÃO DE ARQUIVOS\n\n';
+            let sucessos = 0;
+            
+            for (const arquivo of arquivos) {
+                try {
+                    const response = await fetch(BASE_URL + arquivo, { method: 'HEAD' });
+                    if (response.ok) {
+                        resultado += `✅ ${arquivo} - EXISTE\n`;
+                        sucessos++;
+                    } else {
+                        resultado += `❌ ${arquivo} - NÃO ENCONTRADO (${response.status})\n`;
+                    }
+                } catch (error) {
+                    resultado += `❌ ${arquivo} - ERRO: ${error.message}\n`;
+                }
+            }
+            
+            resultado += `\n📊 RESULTADO: ${sucessos}/${arquivos.length} arquivos encontrados`;
+            
+            mostrarResultado(resultado, sucessos === arquivos.length ? 'success' : 'error');
+            atualizarStatus('status-arquivos', sucessos > 0, `${sucessos}/${arquivos.length} encontrados`);
+        }
+        
+        async function testarCaminhos() {
+            console.log('🛤️ Testando caminhos...');
+            
+            const caminhos = [
+                '',
+                'index.html',
+                'teste-ultra-simples.php',
+                'api/',
+                'api/certificados.php'
+            ];
+            
+            let resultado = '🛤️ TESTE DE CAMINHOS\n\n';
+            let sucessos = 0;
+            
+            for (const caminho of caminhos) {
+                try {
+                    const response = await fetch(BASE_URL + caminho, { method: 'HEAD' });
+                    if (response.ok) {
+                        resultado += `✅ ${caminho || '/'} - ACESSÍVEL\n`;
+                        sucessos++;
+                    } else {
+                        resultado += `❌ ${caminho || '/'} - NÃO ACESSÍVEL (${response.status})\n`;
+                    }
+                } catch (error) {
+                    resultado += `❌ ${caminho || '/'} - ERRO: ${error.message}\n`;
+                }
+            }
+            
+            resultado += `\n📊 RESULTADO: ${sucessos}/${caminhos.length} caminhos acessíveis`;
+            
+            mostrarResultado(resultado, sucessos > 0 ? 'success' : 'error');
+            atualizarStatus('status-caminhos', sucessos > 0, `${sucessos}/${caminhos.length} acessíveis`);
+        }
+        
+        async function verificarDiretorio() {
+            console.log('📂 Verificando diretório...');
+            
+            try {
+                const response = await fetch(BASE_URL);
+                const text = await response.text();
+                
+                if (response.ok) {
+                    mostrarResultado('📂 DIREÓRIO RAIZ\n\n✅ Diretório raiz está acessível\n✅ Apache está funcionando\n✅ Página inicial carregada com sucesso', 'success');
+                    atualizarStatus('status-diretorio', true, '✅ Acessível');
+                } else {
+                    mostrarResultado('📂 DIREÓRIO RAIZ\n\n❌ Diretório raiz não está acessível\n❌ Erro: ' + response.status, 'error');
+                    atualizarStatus('status-diretorio', false, '❌ Não acessível');
+                }
+            } catch (error) {
+                mostrarResultado('📂 DIREÓRIO RAIZ\n\n❌ Erro ao acessar diretório raiz\n❌ Erro: ' + error.message, 'error');
+                atualizarStatus('status-diretorio', false, '❌ Erro');
+            }
+        }
+        
+        async function listarArquivos() {
+            console.log('📋 Listando arquivos...');
+            
+            try {
+                const response = await fetch(BASE_URL + 'listar-arquivos.php');
+                const text = await response.text();
+                
+                if (response.ok) {
+                    mostrarResultado('📋 LISTA DE ARQUIVOS\n\n✅ Arquivo listar-arquivos.php encontrado\n✅ Lista de arquivos carregada com sucesso\n\n' + text.substring(0, 500) + '...', 'success');
+                    atualizarStatus('status-lista', true, '✅ Encontrado');
+                } else {
+                    mostrarResultado('📋 LISTA DE ARQUIVOS\n\n❌ Arquivo listar-arquivos.php não encontrado\n❌ Erro: ' + response.status, 'error');
+                    atualizarStatus('status-lista', false, '❌ Não encontrado');
+                }
+            } catch (error) {
+                mostrarResultado('📋 LISTA DE ARQUIVOS\n\n❌ Erro ao listar arquivos\n❌ Erro: ' + error.message, 'error');
+                atualizarStatus('status-lista', false, '❌ Erro');
+            }
+        }
+        
+        async function testarTodos() {
+            console.log('🧪 Executando todos os testes...');
+            
+            const element = document.getElementById('resultado');
+            element.style.display = 'block';
+            element.className = 'result-box';
+            element.textContent = '🧪 Executando todos os testes...\n\n';
+            
+            // Teste 1: Verificar arquivos
+            element.textContent += '1. Verificando arquivos...\n';
+            await verificarArquivos();
+            
+            // Teste 2: Testar caminhos
+            element.textContent += '2. Testando caminhos...\n';
+            await testarCaminhos();
+            
+            // Teste 3: Verificar diretório
+            element.textContent += '3. Verificando diretório...\n';
+            await verificarDiretorio();
+            
+            // Teste 4: Listar arquivos
+            element.textContent += '4. Listando arquivos...\n';
+            await listarArquivos();
+            
+            element.textContent += '\n📊 DIAGNÓSTICO COMPLETO';
+            element.className = 'result-box success';
+            element.textContent += '\n🎉 TESTES CONCLUÍDOS!';
+        }
+        
+        function abrirTestes() {
+            const urls = [
+                'http://localhost:8080/',
+                'http://localhost:8080/teste-ultra-simples.php',
+                'http://localhost:8080/teste-api-simples.php',
+                'http://localhost:8080/listar-arquivos.php'
+            ];
+            
+            urls.forEach(url => {
+                window.open(url, '_blank');
+            });
+        }
+        
+        function limparCache() {
+            console.log('🧹 Limpando cache do navegador...');
+            
+            // Forçar recarregamento da página
+            window.location.reload(true);
+            
+            // Mostrar mensagem
+            const element = document.getElementById('resultado');
+            element.style.display = 'block';
+            element.className = 'result-box success';
+            element.textContent = '🧹 Cache limpo! Página recarregada.';
+        }
+        
+        // Auto-executar teste ao carregar
+        window.onload = function() {
+            console.log('🚨 Solução Not Found carregada');
+            console.log('📍 URL atual:', window.location.href);
+            
+            // Teste automático após 2 segundos
+            setTimeout(() => {
+                testarTodos();
+            }, 2000);
+        };
+    </script>
+</body>
+</html>
+

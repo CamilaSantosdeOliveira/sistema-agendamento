@@ -1,0 +1,39 @@
+<!-- ALUNO_TOAST_INJECT_START -->
+<div class="toast-container" id="toastContainer"></div>
+<script>
+if (typeof window.showToast !== 'function') {
+    window.showToast = function(title, message, type) {
+        type = type || 'info';
+        var container = document.getElementById('toastContainer');
+        if (!container) {
+            container = document.createElement('div');
+            container.className = 'toast-container';
+            container.id = 'toastContainer';
+            document.body.appendChild(container);
+        }
+        var toast = document.createElement('div');
+        toast.className = 'toast ' + type;
+        var icons = {
+            success: 'fa-check-circle',
+            error: 'fa-exclamation-circle',
+            warning: 'fa-exclamation-triangle',
+            info: 'fa-info-circle'
+        };
+        toast.innerHTML = '<i class="fas ' + (icons[type] || icons.info) + ' toast-icon"></i>' +
+            '<div class="toast-content">' +
+            '<div class="toast-title">' + title + '</div>' +
+            '<div class="toast-message">' + message + '</div>' +
+            '</div>' +
+            '<button class="toast-close" onclick="this.parentElement.remove()" aria-label="Fechar">' +
+            '<i class="fas fa-times"></i></button>';
+        container.appendChild(toast);
+        setTimeout(function () {
+            if (toast.parentElement) {
+                toast.style.animation = 'alunoToastSlideIn 0.3s ease-out reverse';
+                setTimeout(function () { toast.remove(); }, 300);
+            }
+        }, 3500);
+    };
+}
+</script>
+<!-- ALUNO_TOAST_INJECT_END -->

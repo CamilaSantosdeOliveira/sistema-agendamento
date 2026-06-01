@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 Solução para ERR_CONNECTION_REFUSED</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            color: #dc3545;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .error-box {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .solution-box {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .port-info {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .step {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .step h3 {
+            color: #007bff;
+            margin-top: 0;
+        }
+        
+        .step-number {
+            background: #007bff;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .success {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .button {
+            background: #28a745;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .button:hover {
+            background: #218838;
+        }
+        
+        .button.secondary {
+            background: #6c757d;
+        }
+        
+        .button.secondary:hover {
+            background: #545b62;
+        }
+        
+        .image-placeholder {
+            background: #e9ecef;
+            border: 2px dashed #adb5bd;
+            padding: 40px;
+            text-align: center;
+            border-radius: 8px;
+            margin: 15px 0;
+            color: #6c757d;
+        }
+        
+        .code {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚨 ERR_CONNECTION_REFUSED</h1>
+            <p>Problema de conexão com o servidor local</p>
+        </div>
+
+        <div class="port-info">
+            <h2>🔧 Configuração de Porta</h2>
+            <p><strong>Porta do Servidor:</strong> 8080</p>
+            <p><strong>URL de Acesso:</strong> http://localhost:8080</p>
+            <p><strong>URL do Sistema:</strong> http://localhost:8080/sistema_final.html</p>
+        </div>
+
+        <div class="error-box">
+            <h2>❌ Problema Identificado</h2>
+            <p><strong>Erro:</strong> "localhost recusou estabelecer ligação"</p>
+            <p><strong>Causa:</strong> O servidor Apache do XAMPP não está rodando na porta 8080</p>
+        </div>
+
+        <div class="solution-box">
+            <h2>✅ Solução</h2>
+            <p>Você precisa iniciar o servidor Apache no XAMPP Control Panel</p>
+        </div>
+
+        <!-- Passo 1 -->
+        <div class="step">
+            <h3><span class="step-number">1</span>Abrir o XAMPP Control Panel</h3>
+            <p>Existem várias formas de abrir o XAMPP:</p>
+            <ul>
+                <li><strong>Menu Iniciar:</strong> Digite "XAMPP" e clique no resultado</li>
+                <li><strong>Área de Trabalho:</strong> Procure pelo ícone do XAMPP</li>
+                <li><strong>Pasta de Instalação:</strong> Vá para <code>C:\xampp\xampp-control.exe</code></li>
+            </ul>
+            
+            <div class="image-placeholder">
+                📁 Localize e abra o XAMPP Control Panel
+            </div>
+        </div>
+
+        <!-- Passo 2 -->
+        <div class="step">
+            <h3><span class="step-number">2</span>Iniciar o Apache</h3>
+            <p>No XAMPP Control Panel:</p>
+            <ol>
+                <li>Procure pela linha "Apache"</li>
+                <li>Clique no botão <strong>"Start"</strong> ao lado de Apache</li>
+                <li>Aguarde até o status ficar <strong>verde</strong></li>
+            </ol>
+            
+            <div class="warning">
+                ⚠️ <strong>Atenção:</strong> Se aparecer um erro sobre porta ocupada, pode ser que outro programa esteja usando a porta 8080
+            </div>
+        </div>
+
+        <!-- Passo 3 -->
+        <div class="step">
+            <h3><span class="step-number">3</span>Iniciar o MySQL</h3>
+            <p>Após o Apache estar rodando:</p>
+            <ol>
+                <li>Procure pela linha "MySQL"</li>
+                <li>Clique no botão <strong>"Start"</strong> ao lado de MySQL</li>
+                <li>Aguarde até o status ficar <strong>verde</strong></li>
+            </ol>
+        </div>
+
+        <!-- Passo 4 -->
+        <div class="step">
+            <h3><span class="step-number">4</span>Testar a Conexão</h3>
+            <p>Após iniciar ambos os serviços:</p>
+            <ol>
+                <li>Abra seu navegador</li>
+                <li>Digite: <code>http://localhost:8080</code></li>
+                <li>Deve aparecer a página do XAMPP</li>
+            </ol>
+            
+            <div class="success">
+                ✅ <strong>Sucesso!</strong> Se você vê a página do XAMPP, o servidor está funcionando
+            </div>
+        </div>
+
+        <!-- Problemas Comuns -->
+        <div class="step">
+            <h3>🔍 Problemas Comuns e Soluções</h3>
+            
+            <h4>❌ Porta 8080 ocupada</h4>
+            <p><strong>Sintoma:</strong> Apache não inicia, erro de porta</p>
+            <p><strong>Solução:</strong></p>
+            <ul>
+                <li>Feche outros servidores web que possam estar usando a porta 8080</li>
+                <li>Ou mude a porta do Apache para 8081</li>
+            </ul>
+            
+            <h4>❌ Acesso Negado</h4>
+            <p><strong>Sintoma:</strong> Erro de permissão</p>
+            <p><strong>Solução:</strong></p>
+            <ul>
+                <li>Execute o XAMPP como <strong>Administrador</strong></li>
+                <li>Clique com botão direito → "Executar como administrador"</li>
+            </ul>
+            
+            <h4>❌ Firewall bloqueando</h4>
+            <p><strong>Sintoma:</strong> Serviços iniciam mas não acessa</p>
+            <p><strong>Solução:</strong></p>
+            <ul>
+                <li>Permita o XAMPP no firewall do Windows</li>
+                <li>Ou desative temporariamente o firewall</li>
+            </ul>
+        </div>
+
+        <!-- Botões de Ação -->
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="verificar.html" class="button">🔄 Verificar Novamente</a>
+            <a href="sistema_final.html" class="button secondary">🏠 Ir para o Sistema</a>
+            <a href="setup_final.php" class="button secondary">⚙️ Configurar Sistema</a>
+        </div>
+
+        <!-- URLs Importantes -->
+        <div class="step">
+            <h3>🔗 URLs Importantes</h3>
+            <p>Após o servidor estar funcionando, você pode acessar:</p>
+            <ul>
+                <li><strong>Sistema Principal:</strong> <code>http://localhost:8080/sistema_final.html</code></li>
+                <li><strong>Relatórios:</strong> <code>
+                http://localhost:8080/relatorios.html</code></li>
+                <li><strong>Teste dos Botões:</strong> <code>http://localhost:8080/teste-botoes-relatorios.html</code></li>
+                <li><strong>Verificador:</strong> <code>http://localhost:8080/verificar.html</code></li>
+            </ul>
+        </div>
+
+        <!-- Informações Adicionais -->
+        <div class="step">
+            <h3>📞 Precisa de Ajuda?</h3>
+            <p>Se ainda não conseguir resolver:</p>
+            <ul>
+                <li>Verifique se o XAMPP está instalado corretamente</li>
+                <li>Reinicie o computador e tente novamente</li>
+                <li>Desinstale e reinstale o XAMPP</li>
+                <li>Consulte a documentação oficial do XAMPP</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Verificar se o servidor está funcionando
+        function verificarServidor() {
+            const status = document.createElement('div');
+            status.innerHTML = '🔍 Verificando servidor na porta 8080...';
+            status.style.cssText = 'background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center;';
+            document.body.appendChild(status);
+            
+            fetch('http://localhost:8080/')
+                .then(response => {
+                    if (response.ok) {
+                        status.innerHTML = '✅ Servidor funcionando na porta 8080!';
+                        status.style.color = 'green';
+                        status.style.background = '#d4edda';
+                    } else {
+                        throw new Error('Servidor não responde');
+                    }
+                })
+                .catch(error => {
+                    status.innerHTML = '❌ Servidor ainda não está funcionando na porta 8080';
+                    status.style.color = 'red';
+                    status.style.background = '#f8d7da';
+                });
+        }
+        
+        // Verificar automaticamente após 5 segundos
+        setTimeout(verificarServidor, 5000);
+    </script>
+</body>
+</html>
