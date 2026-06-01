@@ -101,6 +101,6 @@ Acesse `public/criar_usuarios_demo.php` uma vez para criar os usuários de demon
 
 ## Autor
 
-**Bruno Figueira**
-- GitHub: [github.com/seu-usuario](https://github.com/seu-usuario)
+**Camila Santos de Oliveira**
+- GitHub: [github.com/CamilaSantosdeOliveira](https://github.com/CamilaSantosdeOliveira)
 - LinkedIn: [linkedin.com/in/seu-perfil](https://linkedin.com/in/seu-perfil)
