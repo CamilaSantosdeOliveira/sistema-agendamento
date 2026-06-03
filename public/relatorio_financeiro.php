@@ -660,6 +660,11 @@ if ($receita_mes_anterior > 0) {
             backdrop-filter: blur(20px);
         }
 
+        .table-scroll {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
         .stat-card::before,
         .chart-card::before,
         .table-container::before {
@@ -751,17 +756,35 @@ if ($receita_mes_anterior > 0) {
             .container {
                 padding: 16px;
             }
-            
+
             .stats-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
-            
+
             .charts-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .actions {
                 flex-direction: column;
+            }
+
+            .stat-number {
+                font-size: 1.6rem;
+            }
+
+            .header h1 {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-number {
+                font-size: 1.35rem;
             }
         }
     </style>
@@ -861,6 +884,7 @@ if ($receita_mes_anterior > 0) {
             <div class="table-header">
                 <h3 class="table-title">Histórico de Inscrições</h3>
             </div>
+            <div class="table-scroll">
             <table>
                 <thead>
                     <tr>
@@ -895,6 +919,7 @@ if ($receita_mes_anterior > 0) {
                     <?php endif; ?>
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
     <script src="dark-mode.js"></script>
