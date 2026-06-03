@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR" class="dark-mode-init">
 <head>
     <script>
@@ -17,7 +17,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Dark Mode CSS -->
-    <link rel="stylesheet" href="dark-mode.css">
+    <link rel="stylesheet" href="dark-mode.css?v=3">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -93,9 +93,9 @@
 
         body {
             background:
-                radial-gradient(circle at 8% 4%, rgba(217, 119, 6, 0.16), transparent 24%),
-                radial-gradient(circle at 92% 8%, rgba(37, 99, 235, 0.14), transparent 26%),
-                linear-gradient(135deg, #f8fafc 0%, #f1f5f9 42%, #fffbeb 100%) !important;
+                radial-gradient(circle at 8% 4%, rgba(37, 99, 235, 0.16), transparent 24%),
+                radial-gradient(circle at 92% 8%, rgba(16, 185, 129, 0.14), transparent 26%),
+                linear-gradient(135deg, #f8fafc 0%, #f1f5f9 42%, #ecfeff 100%) !important;
             font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
@@ -113,9 +113,9 @@
             background:
                 radial-gradient(circle at 10% 18%, rgba(255, 255, 255, 0.24), transparent 30%),
                 radial-gradient(circle at 84% 26%, rgba(37, 99, 235, 0.28), transparent 34%),
-                linear-gradient(135deg, #78350f 0%, #d97706 46%, #2563eb 100%) !important;
+                linear-gradient(135deg, #0f172a 0%, #2563eb 48%, #0891b2 100%) !important;
             border: 1px solid rgba(255, 255, 255, 0.42);
-            box-shadow: 0 28px 80px rgba(217, 119, 6, 0.2);
+            box-shadow: 0 28px 80px rgba(37, 99, 235, 0.18);
         }
 
         .navbar::after {
@@ -191,7 +191,7 @@
             position: absolute;
             inset: 0 0 auto 0;
             height: 6px;
-            background: linear-gradient(90deg, #f59e0b, #d97706, #2563eb);
+            background: linear-gradient(90deg, #2563eb, #0891b2, #10b981);
         }
 
         .stats-card {
@@ -244,7 +244,7 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #d97706, #2563eb) !important;
+            background: linear-gradient(135deg, #2563eb, #0891b2) !important;
             border: 0 !important;
         }
 
@@ -360,7 +360,7 @@
         .confirm-dialog-header {
             padding: 26px 28px;
             color: #ffffff;
-            background: linear-gradient(135deg, #78350f, #d97706, #2563eb);
+            background: linear-gradient(135deg, #0f172a, #2563eb, #0891b2);
         }
 
         .confirm-dialog-title {
@@ -1142,3 +1142,5 @@
     <script src="dark-mode.js"></script>
 </body>
 </html>
+
+

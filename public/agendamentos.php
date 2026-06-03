@@ -77,7 +77,7 @@ try {
             document.write('<style>.dark-mode-init body { visibility: hidden; background: #0f172a !important; }</style>');
         }
     </script>
-    <link rel="stylesheet" href="dark-mode.css">
+    <link rel="stylesheet" href="dark-mode.css?v=3">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1260,16 +1260,19 @@ body.dark-mode {
             left: 24px !important;
             right: 24px !important;
             display: flex !important;
-            justify-content: space-between !important;
             align-items: center !important;
-            width: auto !important;
-            margin-bottom: 0 !important;
             z-index: 10 !important;
         }
         .header .back-btn {
             position: relative !important;
             top: auto !important;
             left: auto !important;
+        }
+        .header > #darkModeToggle {
+            position: absolute !important;
+            top: 20px !important;
+            right: 24px !important;
+            z-index: 100 !important;
         }
         .header-content {
             display: block !important;
@@ -1289,12 +1292,10 @@ body.dark-mode {
                 <a href="dashboard_final.php" class="back-btn">
                     <i class="fas fa-arrow-left"></i> Voltar ao Dashboard
                 </a>
-                <div class="header-actions">
-                    <button id="darkModeToggle" title="Alternar tema" aria-label="Alternar Dark Mode">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                </div>
             </div>
+            <button id="darkModeToggle" title="Alternar tema" aria-label="Alternar Dark Mode">
+                <i class="fas fa-moon"></i>
+            </button>
             <div class="header-content">
                 <h1>Sistema de Agendamentos</h1>
                 <p>Gerencie aulas, eventos e compromissos do sistema educacional</p>
@@ -1752,6 +1753,8 @@ body.dark-mode {
     <script src="dark-mode.js"></script>
 </body>
 </html>
+
+
 
 
 

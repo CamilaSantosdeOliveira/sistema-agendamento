@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 
 // Verificar se o usuário está logado e é aluno
@@ -922,6 +922,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-color: #334155;
             color: #f1f5f9;
         }
+        body.dark-mode .progress-bar { background:transparent !important; }
 
         /* Mobile Menu Toggle */
         .mobile-menu-toggle {
@@ -1514,7 +1515,7 @@ input[type="number"], select, textarea {
 /* ALUNO_THEME_OVERRIDES_END */
 
 </style>
-    <link rel="stylesheet" href="dark-mode.css">
+    <link rel="stylesheet" href="dark-mode.css?v=3">
     <style>
         .header-actions {
             display: flex !important;
@@ -1527,6 +1528,7 @@ input[type="number"], select, textarea {
             right: auto !important;
             flex-shrink: 0;
         }
+        body.dark-mode .progress-bar { background:transparent !important; }
     </style>
 </head>
 <body>
@@ -1899,6 +1901,8 @@ if (typeof window.showToast !== 'function') {
     <script src="dark-mode.js"></script>
 </body>
 </html>
+
+
 
 
 

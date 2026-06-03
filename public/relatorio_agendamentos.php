@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Forçar atualização - sem cache
 header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Pragma: no-cache");
@@ -135,7 +135,7 @@ try {
             document.write('<style>.dark-mode-init body { visibility: hidden; background: #0f172a !important; }</style>');
         }
     </script>
-    <link rel="stylesheet" href="dark-mode.css">
+    <link rel="stylesheet" href="dark-mode.css?v=3">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduConnect - Relatório de Agendamentos</title>
@@ -409,9 +409,9 @@ try {
 
         body {
             background:
-                radial-gradient(circle at 8% 4%, rgba(124, 58, 237, 0.16), transparent 24%),
-                radial-gradient(circle at 92% 8%, rgba(8, 145, 178, 0.14), transparent 26%),
-                linear-gradient(135deg, #f8fafc 0%, #f1f5f9 42%, #f5f3ff 100%) !important;
+                radial-gradient(circle at 8% 4%, rgba(37, 99, 235, 0.16), transparent 24%),
+                radial-gradient(circle at 92% 8%, rgba(16, 185, 129, 0.14), transparent 26%),
+                linear-gradient(135deg, #f8fafc 0%, #f1f5f9 42%, #ecfeff 100%) !important;
         }
 
         .container {
@@ -435,9 +435,9 @@ try {
             background:
                 radial-gradient(circle at 10% 18%, rgba(255, 255, 255, 0.24), transparent 30%),
                 radial-gradient(circle at 84% 26%, rgba(8, 145, 178, 0.25), transparent 34%),
-                linear-gradient(135deg, #312e81 0%, #7c3aed 48%, #0891b2 100%);
+                linear-gradient(135deg, #0f172a 0%, #2563eb 48%, #0891b2 100%);
             border: 1px solid rgba(255, 255, 255, 0.42);
-            box-shadow: 0 28px 80px rgba(124, 58, 237, 0.18);
+            box-shadow: 0 28px 80px rgba(37, 99, 235, 0.18);
         }
 
         .back-btn {
@@ -656,7 +656,7 @@ try {
             position: absolute;
             inset: 0 0 auto 0;
             height: 6px;
-            background: linear-gradient(90deg, #7c3aed, #0891b2, #10b981);
+            background: linear-gradient(90deg, #2563eb, #0891b2, #10b981);
         }
 
         .stat-card {
@@ -673,8 +673,8 @@ try {
             margin-bottom: 18px;
             color: #ffffff;
             border-radius: 18px;
-            background: linear-gradient(135deg, #7c3aed, #0891b2);
-            box-shadow: 0 16px 34px rgba(124, 58, 237, 0.22);
+            background: linear-gradient(135deg, #2563eb, #0891b2);
+            box-shadow: 0 16px 34px rgba(37, 99, 235, 0.22);
             font-size: 1.18rem;
         }
 
@@ -903,6 +903,8 @@ try {
     <script src="dark-mode.js"></script>
 </body>
 </html>
+
+
 
 
 

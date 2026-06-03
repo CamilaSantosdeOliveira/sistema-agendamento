@@ -58,7 +58,7 @@ try {
             document.write('<style>.dark-mode-init body { visibility: hidden; background: #0f172a !important; }</style>');
         }
     </script>
-    <link rel="stylesheet" href="dark-mode.css">
+    <link rel="stylesheet" href="dark-mode.css?v=3">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1106,16 +1106,19 @@ try {
             left: 24px !important;
             right: 24px !important;
             display: flex !important;
-            justify-content: space-between !important;
             align-items: center !important;
-            width: auto !important;
-            margin-bottom: 0 !important;
             z-index: 10 !important;
         }
         .header .back-btn {
             position: relative !important;
             top: auto !important;
             left: auto !important;
+        }
+        .header > #darkModeToggle {
+            position: absolute !important;
+            top: 20px !important;
+            right: 24px !important;
+            z-index: 100 !important;
         }
         .header-content {
             display: block !important;
@@ -1136,12 +1139,10 @@ try {
                 <a href="dashboard_final.php" class="back-btn">
                     <i class="fas fa-arrow-left"></i> Voltar ao Dashboard
                 </a>
-                <div class="header-actions">
-                    <button id="darkModeToggle" title="Alternar tema" aria-label="Alternar Dark Mode">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                </div>
             </div>
+            <button id="darkModeToggle" title="Alternar tema" aria-label="Alternar Dark Mode">
+                <i class="fas fa-moon"></i>
+            </button>
             <div class="header-content">
                 <h1>Gestão de Alunos</h1>
                 <p>Gerencie os estudantes e suas inscrições nos cursos</p>
@@ -1878,6 +1879,8 @@ try {
     <script src="dark-mode.js"></script>
 </body>
 </html>
+
+
 
 
 

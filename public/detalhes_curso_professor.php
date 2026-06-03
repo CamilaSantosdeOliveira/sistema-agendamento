@@ -80,7 +80,7 @@ $aulas = $stmt->get_result();
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -111,7 +111,7 @@ $aulas = $stmt->get_result();
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #f1f5f9;
             color: #334155;
             line-height: 1.6;
@@ -650,6 +650,119 @@ $aulas = $stmt->get_result();
     
         
         
+        /* ===== SIDEBAR GROUPS & FOOTER ===== */
+        .sidebar-group { margin: 0 12px 18px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .sidebar-group:last-child { border-bottom: none; margin-bottom: 0; }
+        .sidebar-group-title { margin: 0 0 8px; padding: 8px 10px; color: rgba(255,255,255,0.55); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+        .sidebar-nav { padding-bottom: 80px; }
+        .sidebar-footer-fixed { position: fixed; bottom: 0; left: 0; width: 280px; padding: 12px 16px; border-top: 1px solid rgba(255,255,255,0.1); background: linear-gradient(180deg, rgba(15,23,42,0.95) 0%, rgba(30,58,138,0.95) 100%); z-index: 1001; backdrop-filter: blur(18px); }
+        .sidebar-user { display: flex; align-items: center; gap: 12px; padding: 8px; border-radius: 16px; background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.11); }
+        .sidebar-user .user-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+        .sidebar-user-info { flex: 1; min-width: 0; }
+        .sidebar-user-name { font-weight: 700; font-size: 0.72rem; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .sidebar-user-role { font-size: 0.62rem; color: rgba(255,255,255,0.65); }
+        .logout-btn-small { background: rgba(239,68,68,0.82); color: white; text-decoration: none; padding: 7px 10px; border-radius: 999px; font-size: 0.65rem; font-weight: 800; white-space: nowrap; display: inline-flex; align-items: center; gap: 4px; }
+
+        /* ===== PAGE HEADER (breadcrumb style) ===== */
+        .page-header { position: relative; margin-bottom: 28px; padding: 28px; background: radial-gradient(circle at 8% 18%, rgba(255,255,255,0.22), transparent 30%), linear-gradient(135deg, #0f172a 0%, #1e3a8a 58%, #2563eb 100%) !important; border: 1px solid rgba(255,255,255,0.42); border-radius: 28px; box-shadow: 0 28px 80px rgba(30,58,138,0.2); overflow: hidden; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .page-header::before { content: ''; position: absolute; inset: 0; opacity: 0.18; background: linear-gradient(90deg, rgba(255,255,255,0.34) 1px, transparent 1px), linear-gradient(rgba(255,255,255,0.28) 1px, transparent 1px); background-size: 42px 42px; pointer-events: none; }
+        .breadcrumb { font-size: 0.875rem; color: rgba(255,255,255,0.7); margin-bottom: 8px; }
+        .breadcrumb-link { color: rgba(255,255,255,0.9); text-decoration: none; font-weight: 600; }
+        .breadcrumb-link:hover { text-decoration: underline; }
+        .breadcrumb-separator { margin: 0 6px; }
+        .breadcrumb-current { color: rgba(255,255,255,0.75); font-weight: 500; }
+        .page-title { position: relative; z-index: 1; }
+        .page-title h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: white; letter-spacing: -0.055em; margin: 0; display: flex; align-items: center; gap: 12px; background: none !important; -webkit-text-fill-color: white !important; text-shadow: 0 2px 18px rgba(15,23,42,0.25); }
+        .page-title h1 i { color: white !important; -webkit-text-fill-color: white !important; }
+        .page-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; position: relative; z-index: 1; align-self: flex-start; margin-top: -36px; }
+
+        /* ===== COURSE INFO CARD ===== */
+        .course-info {
+            position: relative;
+            overflow: hidden;
+            padding: 34px;
+            background: rgba(255,255,255,0.92) !important;
+            border: 1px solid rgba(255,255,255,0.78) !important;
+            border-radius: 24px !important;
+            box-shadow: 0 18px 48px rgba(15,23,42,0.08) !important;
+            backdrop-filter: blur(18px);
+            margin-bottom: 28px;
+        }
+        .course-info::before {
+            content: '';
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 5px;
+            background: linear-gradient(90deg, #1e3a8a, #2563eb);
+        }
+        .course-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+            gap: 16px;
+        }
+        .course-title {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            color: #0f172a;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        .course-category-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(37,99,235,0.10);
+            color: #2563eb;
+            font-size: 0.82rem;
+            font-weight: 700;
+            border: 1px solid rgba(37,99,235,0.18);
+        }
+        .course-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 20px 16px;
+            background: rgba(248,250,252,0.85);
+            border-radius: 18px;
+            border: 1px solid rgba(226,232,240,0.85);
+            box-shadow: 0 4px 16px rgba(15,23,42,0.05);
+        }
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1e3a8a;
+            letter-spacing: -0.03em;
+        }
+        .stat-label {
+            font-size: 0.78rem;
+            color: #64748b;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-top: 4px;
+        }
+        .course-description-section { margin-top: 4px; }
+        .course-description-label { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #64748b; margin-bottom: 8px; }
+        .course-description-text { color: #475569; line-height: 1.7; font-size: 0.95rem; }
+
+        /* ===== DARK MODE ===== */
+        .dark-mode .course-info { background: rgba(30,41,59,0.95) !important; border-color: rgba(255,255,255,0.1) !important; }
+        .dark-mode .course-title { color: #f1f5f9 !important; }
+        .dark-mode .stat-item { background: rgba(255,255,255,0.05) !important; border-color: rgba(255,255,255,0.1) !important; }
+        .dark-mode .stat-number { color: #93c5fd !important; }
+        .dark-mode .course-description-text { color: #94a3b8 !important; }
+        .dark-mode .content-card { background: rgba(30,41,59,0.95) !important; border-color: rgba(255,255,255,0.1) !important; }
+        /* override da regra nuclear do dark-mode.css que força 2.5rem */
+        .dark-mode .stat-item .stat-number { font-size: 1.5rem !important; font-weight: 800 !important; }
+
         /* PROFESSOR_THEME_OVERRIDES_START */
         :root {
             --primary-color: #1e3a8a;
@@ -693,7 +806,7 @@ $aulas = $stmt->get_result();
             --card-padding: 28px;
             --card-padding-lg: 32px;
             --card-padding-xl: 36px;
-            --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            --font-family-base: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             --font-size-xs: 0.75rem;
             --font-size-sm: 0.875rem;
             --font-size-base: 1rem;
@@ -1174,6 +1287,13 @@ $aulas = $stmt->get_result();
 
 
     </style>
+    <script>
+        (function() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            if (isDark) document.documentElement.classList.add('dark-mode');
+        })();
+    </script>
+    <link rel="stylesheet" href="dark-mode.css?v=3">
 </head>
 <body>
     <div class="dashboard-container">
@@ -1185,86 +1305,105 @@ $aulas = $stmt->get_result();
                     <span>EduConnect</span>
                 </a>
             </div>
-            
             <nav class="sidebar-nav">
-                <ul>
-                    <li class="nav-item">
-                        <a href="dashboard_professor.php" class="nav-link">
-                            <i class="fas fa-tachometer-alt"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="cursos_professor.php" class="nav-link active">
-                            <i class="fas fa-book"></i>
-                            <span>Meus Cursos</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="aulas_professor.php" class="nav-link">
-                            <i class="fas fa-calendar-alt"></i>
-                            <span>Aulas</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="alunos_professor.php" class="nav-link">
-                            <i class="fas fa-users"></i>
-                            <span>Alunos</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="relatorios_professor.php" class="nav-link">
-                            <i class="fas fa-chart-bar"></i>
-                            <span>Relatórios</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="configuracoes_professor.php" class="nav-link">
-                            <i class="fas fa-cog"></i>
-                            <span>Configurações</span>
-                        </a>
-                    </li>
+                <ul class="sidebar-menu">
+                    <div class="sidebar-group">
+                        <div class="sidebar-group-title">Visão Geral</div>
+                        <li class="sidebar-item">
+                            <a href="dashboard_professor.php" class="nav-link sidebar-link">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                        </li>
+                    </div>
+                    <div class="sidebar-group">
+                        <div class="sidebar-group-title">Acadêmico</div>
+                        <li class="sidebar-item">
+                            <a href="cursos_professor.php" class="nav-link sidebar-link active">
+                                <i class="fas fa-book"></i> Meus Cursos
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="aulas_professor.php" class="nav-link sidebar-link">
+                                <i class="fas fa-calendar-alt"></i> Aulas
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="alunos_professor.php" class="nav-link sidebar-link">
+                                <i class="fas fa-users"></i> Alunos
+                            </a>
+                        </li>
+                    </div>
+                    <div class="sidebar-group">
+                        <div class="sidebar-group-title">Sistema</div>
+                        <li class="sidebar-item">
+                            <a href="relatorios_professor.php" class="nav-link sidebar-link">
+                                <i class="fas fa-chart-bar"></i> Relatórios
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="configuracoes_professor.php" class="nav-link sidebar-link">
+                                <i class="fas fa-cog"></i> Configurações
+                            </a>
+                        </li>
+                    </div>
                 </ul>
             </nav>
+            <div class="sidebar-footer-fixed">
+                <div class="sidebar-user">
+                    <div class="user-avatar"><?php echo strtoupper(substr($professor['nome'], 0, 1)); ?></div>
+                    <div class="sidebar-user-info">
+                        <div class="sidebar-user-name"><?php echo htmlspecialchars($professor['nome']); ?></div>
+                        <div class="sidebar-user-role">Professor</div>
+                    </div>
+                    <a href="logout.php" class="logout-btn-small"><i class="fas fa-sign-out-alt"></i> Sair</a>
+                </div>
+            </div>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content">
-            <header class="header">
-                <h1>📚 Detalhes do Curso</h1>
-                <div class="user-info">
-                    <div class="user-avatar">
-                        <?php echo strtoupper(substr($professor['nome'], 0, 1)); ?>
+            <header class="page-header">
+                <div class="page-title">
+                    <div class="breadcrumb">
+                        <a href="dashboard_professor.php" class="breadcrumb-link">Dashboard</a>
+                        <span class="breadcrumb-separator">/</span>
+                        <a href="cursos_professor.php" class="breadcrumb-link">Meus Cursos</a>
+                        <span class="breadcrumb-separator">/</span>
+                        <span class="breadcrumb-current"><?php echo htmlspecialchars($curso['nome']); ?></span>
                     </div>
-                    <div>
-                        <div style="font-weight: 600;"><?php echo $professor['nome']; ?></div>
-                        <div style="font-size: 0.875rem; color: var(--secondary-color);">Professor</div>
-                    </div>
-                    <a href="logout.php" class="logout-btn">
-                        <i class="fas fa-sign-out-alt"></i> Sair
-                    </a>
+                    <h1><i class="fas fa-book-open"></i> Detalhes do Curso</h1>
+                </div>
+                <div class="page-actions">
+                    <button id="darkModeToggle" class="theme-toggle-pill-active" title="Alternar tema">
+                        <div class="theme-slider"></div>
+                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-moon"></i>
+                    </button>
                 </div>
             </header>
 
             <!-- Course Info -->
             <div class="course-info">
-                <div class="course-header">
+                <div class="course-top">
                     <div>
-                        <h2 class="course-title"><?php echo $curso['nome']; ?></h2>
-                        <div class="course-category"><?php echo $curso['categoria']; ?></div>
+                        <h2 class="course-title"><?php echo htmlspecialchars($curso['nome']); ?></h2>
+                        <span class="course-category-pill"><i class="fas fa-tag" style="margin-right:6px;font-size:0.75rem;"></i><?php echo htmlspecialchars($curso['categoria']); ?></span>
                     </div>
-                    <a href="cursos_professor.php" class="btn btn-secondary">
-                        <i class="fas fa-arrow-left"></i> Voltar
-                    </a>
+                    <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+                        <span class="status-badge status-active">Ativo</span>
+                        <a href="cursos_professor.php" class="btn btn-secondary" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;">
+                            <i class="fas fa-arrow-left"></i> Voltar
+                        </a>
+                    </div>
                 </div>
 
                 <div class="course-stats">
                     <div class="stat-item">
-                        <div class="stat-number"><?php echo $curso['duracao_horas']; ?>h</div>
+                        <div class="stat-number"><?php echo (int)$curso['duracao_horas']; ?>h</div>
                         <div class="stat-label">Duração</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number"><?php echo $curso['nivel']; ?></div>
+                        <div class="stat-number"><?php echo htmlspecialchars($curso['nivel']); ?></div>
                         <div class="stat-label">Nível</div>
                     </div>
                     <div class="stat-item">
@@ -1277,9 +1416,9 @@ $aulas = $stmt->get_result();
                     </div>
                 </div>
 
-                <div class="course-description">
-                    <h3>Descrição do Curso</h3>
-                    <p><?php echo $curso['descricao']; ?></p>
+                <div class="course-description-section">
+                    <div class="course-description-label">Descrição do Curso</div>
+                    <p class="course-description-text"><?php echo htmlspecialchars($curso['descricao']); ?></p>
                 </div>
             </div>
 
@@ -1359,8 +1498,24 @@ $aulas = $stmt->get_result();
             </div>
         </main>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkBtn = document.getElementById('darkModeToggle');
+            if (!darkBtn) return;
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            document.body.classList.toggle('dark-mode', isDark);
+            document.documentElement.classList.toggle('dark-mode', isDark);
+            darkBtn.onclick = function() {
+                const nowDark = document.body.classList.toggle('dark-mode');
+                document.documentElement.classList.toggle('dark-mode', nowDark);
+                localStorage.setItem('darkMode', nowDark);
+            };
+        });
+    </script>
 </body>
 </html>
+
+
 
 
 

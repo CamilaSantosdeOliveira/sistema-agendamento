@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Forçar atualização - sem cache
 header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Pragma: no-cache");
@@ -98,8 +98,12 @@ try {
         ORDER BY c.nome
     ");
 
+    $max_categoria = !empty($cursos_por_categoria) ? max(array_column($cursos_por_categoria, 'total')) : 1;
+    $max_nivel     = !empty($cursos_por_nivel)     ? max(array_column($cursos_por_nivel, 'total'))     : 1;
+
 } catch (Exception $e) {
-    // Em caso de erro, usar valores padrão
+    $max_categoria = 1;
+    $max_nivel     = 1;
 }
 ?>
 <!DOCTYPE html>
@@ -113,7 +117,7 @@ try {
             document.write('<style>.dark-mode-init body { visibility: hidden; background: #0f172a !important; }</style>');
         }
     </script>
-    <link rel="stylesheet" href="dark-mode.css">
+    <link rel="stylesheet" href="dark-mode.css?v=3">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduConnect - Relatório de Cursos</title>
@@ -647,13 +651,122 @@ try {
             font-weight: 850;
         }
 
+        /* ===== STAT ICONS ===== */
+        .stat-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.45rem;
+            margin: 0 auto 18px;
+        }
+        .stat-card.success .stat-icon { background: rgba(16, 185, 129, 0.13); color: #10b981; }
+        .stat-card.info    .stat-icon { background: rgba(6, 182, 212, 0.13);  color: #06b6d4; }
+        .stat-card.warning .stat-icon { background: rgba(245, 158, 11, 0.13); color: #f59e0b; }
+        .stat-card:not(.success):not(.info):not(.warning) .stat-icon {
+            background: rgba(99, 102, 241, 0.13); color: #818cf8;
+        }
+        .dark-mode .stat-icon { background: rgba(255, 255, 255, 0.09) !important; }
+
+        /* ===== CHART BARS ===== */
+        .chart-item {
+            flex-direction: column;
+            gap: 0;
+        }
+        .chart-item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 7px;
+        }
+        .chart-bar {
+            height: 7px;
+            background: rgba(0, 0, 0, 0.07);
+            border-radius: 999px;
+            overflow: hidden;
+            width: 100%;
+            margin-bottom: 4px;
+        }
+        .chart-bar-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #2563eb, #0891b2);
+        }
+        .dark-mode .chart-bar { background: rgba(255, 255, 255, 0.11) !important; }
+
+        /* ===== PRINT HEADER (hidden on screen) ===== */
+        .print-header { display: none; }
+
+        /* ===== PRINT ===== */
         @media print {
-            body {
-                background: #ffffff !important;
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
 
-            .actions {
-                display: none;
+            @page {
+                size: A4 landscape;
+                margin: 1.5cm;
+            }
+
+            body {
+                background: #ffffff !important;
+                color: #1e293b !important;
+                font-size: 10pt;
+            }
+
+            .actions,
+            #darkModeToggle,
+            .back-btn { display: none !important; }
+
+            .print-header {
+                display: flex !important;
+                justify-content: space-between;
+                align-items: flex-start;
+                padding-bottom: 14px;
+                border-bottom: 2px solid #e2e8f0;
+                margin-bottom: 18px;
+            }
+
+            .header {
+                background: linear-gradient(135deg, #0f172a 0%, #2563eb 50%, #0891b2 100%) !important;
+                min-height: 0 !important;
+                padding: 22px 32px !important;
+                border-radius: 14px !important;
+                margin-bottom: 18px !important;
+                box-shadow: none !important;
+            }
+
+            .header h1 { font-size: 1.5rem !important; }
+            .header p  { font-size: 0.9rem !important; }
+
+            .stats-grid  { grid-template-columns: repeat(4, 1fr) !important; gap: 12px !important; margin-bottom: 18px !important; }
+            .charts-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; margin-bottom: 18px !important; }
+
+            .stat-card,
+            .chart-card,
+            .table-container {
+                box-shadow: none !important;
+                border: 1.5px solid #e2e8f0 !important;
+                backdrop-filter: none !important;
+                border-radius: 12px !important;
+            }
+
+            .stat-card { padding: 18px 16px !important; }
+            .stat-icon  { margin-bottom: 10px !important; width: 44px !important; height: 44px !important; font-size: 1.1rem !important; }
+            .stat-number { font-size: 1.75rem !important; }
+
+            .table-header { padding: 14px 18px !important; }
+            th, td { padding: 8px 12px !important; font-size: 9.5pt; }
+
+            table { page-break-inside: auto; }
+            tr    { page-break-inside: avoid; }
+            thead { display: table-header-group; }
+
+            .chart-bar-fill {
+                background: linear-gradient(90deg, #2563eb, #0891b2) !important;
             }
         }
 
@@ -700,18 +813,22 @@ try {
         <!-- Stats -->
         <div class="stats-grid">
             <div class="stat-card success">
+                <div class="stat-icon"><i class="fas fa-graduation-cap"></i></div>
                 <div class="stat-number"><?php echo $total_cursos; ?></div>
                 <div class="stat-label">Total de Cursos</div>
             </div>
             <div class="stat-card info">
+                <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
                 <div class="stat-number"><?php echo $cursos_ativos; ?></div>
                 <div class="stat-label">Cursos Ativos</div>
             </div>
             <div class="stat-card warning">
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
                 <div class="stat-number"><?php echo $total_inscricoes; ?></div>
                 <div class="stat-label">Inscrições Ativas</div>
             </div>
             <div class="stat-card success">
+                <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
                 <div class="stat-number">R$ <?php echo number_format($receita_total, 2, ',', '.'); ?></div>
                 <div class="stat-label">Receita Total</div>
             </div>
@@ -723,9 +840,13 @@ try {
                 <h3 class="chart-title">Cursos por Categoria</h3>
                 <?php if (!empty($cursos_por_categoria)): ?>
                     <?php foreach ($cursos_por_categoria as $categoria): ?>
+                        <?php $pct = round($categoria['total'] / $max_categoria * 100); ?>
                         <div class="chart-item">
-                            <span class="chart-label"><?php echo htmlspecialchars($categoria['categoria']); ?></span>
-                            <span class="chart-value"><?php echo $categoria['total']; ?> cursos</span>
+                            <div class="chart-item-row">
+                                <span class="chart-label"><?php echo htmlspecialchars($categoria['categoria']); ?></span>
+                                <span class="chart-value"><?php echo $categoria['total']; ?> cursos</span>
+                            </div>
+                            <div class="chart-bar"><div class="chart-bar-fill" style="width:<?php echo $pct; ?>%"></div></div>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
@@ -737,9 +858,13 @@ try {
                 <h3 class="chart-title">Cursos por Nível</h3>
                 <?php if (!empty($cursos_por_nivel)): ?>
                     <?php foreach ($cursos_por_nivel as $nivel): ?>
+                        <?php $pct = round($nivel['total'] / $max_nivel * 100); ?>
                         <div class="chart-item">
-                            <span class="chart-label"><?php echo htmlspecialchars($nivel['nivel']); ?></span>
-                            <span class="chart-value"><?php echo $nivel['total']; ?> cursos</span>
+                            <div class="chart-item-row">
+                                <span class="chart-label"><?php echo htmlspecialchars($nivel['nivel']); ?></span>
+                                <span class="chart-value"><?php echo $nivel['total']; ?> cursos</span>
+                            </div>
+                            <div class="chart-bar"><div class="chart-bar-fill" style="width:<?php echo $pct; ?>%"></div></div>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
@@ -798,6 +923,8 @@ try {
     <script src="dark-mode.js"></script>
 </body>
 </html>
+
+
 
 
 

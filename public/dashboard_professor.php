@@ -2260,7 +2260,7 @@ $dashboard_sem_dados = ((int)$cursos_count + (int)$alunos_count + (int)$aulas_co
             line-height: 1.55;
         }
     </style>
-    <link rel="stylesheet" href="dark-mode.css">
+    <link rel="stylesheet" href="dark-mode.css?v=3">
     <style>
         /* ===== ADMIN DASHBOARD STYLE OVERRIDES ===== */
         body.admin-dashboard { background: linear-gradient(135deg,#f0f4ff 0%,#e8f0fe 25%,#f0f4ff 50%,#e8effe 75%,#f0f4ff 100%) !important; }
@@ -2302,7 +2302,7 @@ $dashboard_sem_dados = ((int)$cursos_count + (int)$alunos_count + (int)$aulas_co
         .stat-card.warning .stat-icon { background:linear-gradient(135deg,#d97706,#b45309) !important; }
         .stat-card.info .stat-icon { background:linear-gradient(135deg,#0891b2,#0e7490) !important; }
         .stat-icon i { width:auto !important; height:auto !important; background:transparent !important; border-radius:0 !important; box-shadow:none !important; display:inline !important; }
-        .stat-value { font-size:2.5rem !important; font-weight:800 !important; letter-spacing:-.04em !important; color:#0f172a !important; margin-bottom:8px !important; line-height:1 !important; }
+        .stat-value { font-size:2.5rem !important; font-weight:800 !important; letter-spacing:-.04em !important; color:#0f172a !important; margin-bottom:18px !important; line-height:1 !important; }
         .stat-change { font-size:.82rem !important; color:#475569 !important; font-weight:600 !important; display:inline-flex !important; align-items:center !important; gap:6px !important; }
         .stat-change-icon { color:#2563eb; }
         .stat-card.success .stat-change-icon { color:#10b981; }
@@ -2319,6 +2319,15 @@ $dashboard_sem_dados = ((int)$cursos_count + (int)$alunos_count + (int)$aulas_co
         .dark-mode .stat-card { background:rgba(30,41,59,.92) !important; border-color:rgba(255,255,255,.1) !important; }
         .dark-mode .stat-value { color:#f8fafc !important; }
         .dark-mode .stat-change { color:rgba(248,250,252,.72) !important; }
+        body.dark-mode .progress-bar { background:transparent !important; height:auto !important; padding-top:14px !important; overflow:visible !important; }
+        body.dark-mode .progress-bar::before { display:block !important; background:rgba(255,255,255,0.18) !important; }
+        .dark-mode .course-pill { background:rgba(255,255,255,.08) !important; color:rgba(255,255,255,.75) !important; }
+        .proxima-aula-card { border:1px solid var(--border-color); border-radius:var(--border-radius); padding:20px; background:var(--light-secondary); transition:var(--transition); }
+        .proxima-aula-titulo { font-weight:500; margin-bottom:8px; color:#334155; font-size:1.0625rem; }
+        .proxima-aula-data { font-size:0.875rem; color:var(--primary-color); font-weight:500; display:flex; align-items:center; gap:8px; padding:8px 12px; background:rgba(37,99,235,.1); border-radius:var(--border-radius-sm); }
+        .dark-mode .proxima-aula-card { background:rgba(255,255,255,.04) !important; border-color:rgba(255,255,255,.1) !important; }
+        .dark-mode .proxima-aula-titulo { color:#f1f5f9 !important; }
+        .dark-mode .proxima-aula-data { background:rgba(99,141,255,.18) !important; color:#93c5fd !important; }
     </style>
 </head>
 <body class="admin-dashboard">
@@ -2721,14 +2730,14 @@ $dashboard_sem_dados = ((int)$cursos_count + (int)$alunos_count + (int)$aulas_co
                     <?php if ($proximas_aulas->num_rows > 0): ?>
                         <div style="display: flex; flex-direction: column; gap: 16px;">
                             <?php while ($aula = $proximas_aulas->fetch_assoc()): ?>
-                                <div style="border: 1px solid var(--border-color); border-radius: var(--border-radius); padding: 20px; background: var(--light-secondary); transition: var(--transition);" onmouseover="this.style.transform='translateX(4px)'; this.style.borderColor='var(--primary-color)'; this.style.boxShadow='var(--shadow-sm)';" onmouseout="this.style.transform='translateX(0)'; this.style.borderColor='var(--border-color)'; this.style.boxShadow='none';">
-                                    <div style="font-weight: 500; margin-bottom: 8px; color: #334155; font-size: 1.0625rem;"><?php echo $aula['curso_nome']; ?></div>
+                                <div class="proxima-aula-card" onmouseover="this.style.transform='translateX(4px)'; this.style.borderColor='var(--primary-color)'; this.style.boxShadow='var(--shadow-sm)';" onmouseout="this.style.transform='translateX(0)'; this.style.borderColor='var(--border-color)'; this.style.boxShadow='none';">
+                                    <div class="proxima-aula-titulo"><?php echo $aula['curso_nome']; ?></div>
                                     <div style="font-size: 0.875rem; color: var(--secondary-color); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-                                        <i class="fas fa-user" style="color: var(--primary-color);"></i> 
+                                        <i class="fas fa-user" style="color: var(--primary-color);"></i>
                                         <span style="font-weight: 500;"><?php echo $aula['aluno_nome']; ?></span>
                                     </div>
-                                    <div style="font-size: 0.875rem; color: var(--primary-color); font-weight: 500; display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: rgba(37, 99, 235, 0.1); border-radius: var(--border-radius-sm);">
-                                        <i class="fas fa-clock"></i> 
+                                    <div class="proxima-aula-data">
+                                        <i class="fas fa-clock"></i>
                                         <?php echo date('d/m/Y', strtotime($aula['data_agendamento'])); ?> às <?php echo $aula['hora_inicio']; ?>
                                     </div>
                                 </div>
@@ -3701,6 +3710,8 @@ $dashboard_sem_dados = ((int)$cursos_count + (int)$alunos_count + (int)$aulas_co
     <script src="dark-mode.js"></script>
 </body>
 </html>
+
+
 
 
 

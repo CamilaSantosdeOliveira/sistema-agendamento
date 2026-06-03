@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 
 // Verificar se o usuário está logado e é aluno
@@ -127,7 +127,7 @@ $total_avaliacoes = $curso['total_avaliacoes'] ?: count($avaliacoes);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <!-- Dark Mode -->
-    <link rel="stylesheet" href="dark-mode.css">
+    <link rel="stylesheet" href="dark-mode.css?v=3">
 
     <style>
         :root {
@@ -1182,6 +1182,7 @@ body.dark-mode .module-card.is-locked .module-badge {
     background: rgba(100,116,139,0.15) !important;
     color: #64748b !important;
 }
+body.dark-mode .progress-bar { background:rgba(255,255,255,0.18) !important; }
 
 </style>
 </head>
@@ -1505,3 +1506,5 @@ if (typeof window.showToast !== 'function') {
 <script src="dark-mode.js"></script>
 </body>
 </html>
+
+

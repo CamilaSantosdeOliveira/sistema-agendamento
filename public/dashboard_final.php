@@ -3558,9 +3558,15 @@ $professores_result = $conn->query($professores_query);
         opacity: 1 !important;
     }
 
-    body.admin-dashboard.dark-mode .stat-card .progress-bar::before {
-        /* Trilho mais escuro para não competir com a barra colorida */
+    body.admin-dashboard.dark-mode .stat-card .progress-bar::before,
+    body.dark-mode .stat-card .progress-bar::before,
+    html.dark-mode .stat-card .progress-bar::before {
         background: rgba(255, 255, 255, 0.14) !important;
+    }
+
+    body.dark-mode .stat-card .progress-bar,
+    html.dark-mode .stat-card .progress-bar {
+        background: transparent !important;
     }
 
     /* ===== Dark Mode (ADMIN) - Próximas Aulas e cards ===== */
@@ -3774,7 +3780,7 @@ $professores_result = $conn->query($professores_query);
                         <li class="sidebar-item">
                             <a href="cursos_completo.php" class="sidebar-link">
                                 <i class="fas fa-laptop-code sidebar-icon"></i>
-                                Cursos de Tech
+                                Cursos de Tecnologia
                             </a>
                         </li>
                         <li class="sidebar-item">

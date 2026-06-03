@@ -1582,7 +1582,8 @@ $cursos_disponiveis = $stmt->get_result();
             background: rgba(255, 255, 255, 0.1);
             color: #f1f5f9;
         }
-        
+        body.dark-mode .progress-bar { background:transparent !important; }
+
         .toast::before {
             content: '';
             position: absolute;
@@ -2850,7 +2851,7 @@ input[type="number"], select, textarea {
 .dark-mode .stat-card .progress-bar::before { background:rgba(255,255,255,.10) !important; }
 
 </style>
-    <link rel="stylesheet" href="dark-mode.css">
+    <link rel="stylesheet" href="dark-mode.css?v=3">
     <style>
         .header-actions {
             display: flex !important;
@@ -2863,6 +2864,7 @@ input[type="number"], select, textarea {
             right: auto !important;
             flex-shrink: 0;
         }
+        body.dark-mode .progress-bar { background:transparent !important; }
     </style>
 </head>
 <body>
@@ -4361,3 +4363,5 @@ input[type="number"], select, textarea {
     </script>
 </body>
 </html>
+
+

@@ -55,7 +55,7 @@ try {
             document.write('<style>.dark-mode-init body { visibility: hidden; background: #0f172a !important; }</style>');
         }
     </script>
-    <link rel="stylesheet" href="dark-mode.css">
+    <link rel="stylesheet" href="dark-mode.css?v=3">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -574,11 +574,15 @@ try {
             left: 24px !important;
             right: 24px !important;
             display: flex !important;
-            justify-content: space-between !important;
             align-items: center !important;
-            width: auto !important;
-            margin-bottom: 0 !important;
             z-index: 10 !important;
+        }
+
+        .header > #darkModeToggle {
+            position: absolute !important;
+            top: 20px !important;
+            right: 24px !important;
+            z-index: 100 !important;
         }
 
         .header .btn-back {
@@ -1184,12 +1188,10 @@ try {
                 <a href="dashboard_final.php" class="btn-back">
                     <i class="fas fa-arrow-left"></i> Voltar ao Dashboard
                 </a>
-                <div class="header-actions">
-                    <button id="darkModeToggle" title="Alternar tema" aria-label="Alternar Dark Mode">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                </div>
             </div>
+            <button id="darkModeToggle" title="Alternar tema" aria-label="Alternar Dark Mode">
+                <i class="fas fa-moon"></i>
+            </button>
             <div class="header-content">
                 <h1>Cursos de Tecnologia</h1>
                 <p>Explore nossa coleção completa de cursos profissionalizantes</p>
@@ -1546,6 +1548,8 @@ try {
     <script src="dark-mode.js"></script>
 </body>
 </html>
+
+
 
 
 

@@ -35,6 +35,8 @@ Require all granted
 
 DirectoryIndex index.php index.html
 
+ErrorDocument 404 /public/404.php
+
 # Redirecionar para index.php se não especificado
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f

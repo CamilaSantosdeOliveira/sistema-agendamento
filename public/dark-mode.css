@@ -454,7 +454,7 @@ body.dark-mode .certificate-details i {
 
 /* Progress Bars */
 body.dark-mode .progress-bar {
-    background: #0f172a !important;
+    background: rgba(255, 255, 255, 0.08) !important;
 }
 
 body.dark-mode .progress-fill {
@@ -651,26 +651,49 @@ body.dark-mode .page-subtitle {
     color: #ffffff !important;
 }
 
-body.dark-mode .breadcrumb-link,
-body.dark-mode .back-btn {
+body.dark-mode .breadcrumb-link {
     color: #60a5fa !important;
 }
 
-/* Voltar no header: pill compacto no canto, texto branco */
+body.dark-mode .header .header-top {
+    top: 20px !important;
+}
+
 body.dark-mode .header .back-btn,
 body.dark-mode .header .btn-back {
-    position: absolute !important;
-    width: auto !important;
-    max-width: max-content !important;
-    display: inline-flex !important;
     color: #ffffff !important;
     background: rgba(255, 255, 255, 0.15) !important;
     border: 1px solid rgba(255, 255, 255, 0.24) !important;
+    border-radius: 999px !important;
+    padding: 10px 18px !important;
+    backdrop-filter: blur(16px) !important;
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.16) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
 }
 
 body.dark-mode .agendamento-header {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
     background: rgba(255, 255, 255, 0.03) !important;
+}
+
+/* Atribuicoes: mini stat cards */
+body.dark-mode .stat-item {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark-mode .stat-item .stat-number {
+    color: #f8fafc !important;
+}
+
+body.dark-mode .stat-item .stat-label {
+    color: #94a3b8 !important;
 }
 
 /* Forçar fundo escuro no container principal de agendamentos.php se necessário */
@@ -702,8 +725,9 @@ body.dark-mode h2 {
     }
 }
 
-/* Quando o botão está dentro de header-actions (dashboards), flui normalmente */
-.header-actions #darkModeToggle {
+/* Quando o botão está dentro de header-actions ou page-actions, flui normalmente */
+.header-actions #darkModeToggle,
+.page-actions #darkModeToggle {
     position: relative !important;
     top: auto !important;
     right: auto !important;

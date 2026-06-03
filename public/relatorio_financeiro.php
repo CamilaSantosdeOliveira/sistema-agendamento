@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Forçar atualização - sem cache
 header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Pragma: no-cache");
@@ -160,7 +160,7 @@ if ($receita_mes_anterior > 0) {
             document.write('<style>.dark-mode-init body { visibility: hidden; background: #0f172a !important; }</style>');
         }
     </script>
-    <link rel="stylesheet" href="dark-mode.css">
+    <link rel="stylesheet" href="dark-mode.css?v=3">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduConnect - Relatório Financeiro</title>
@@ -420,9 +420,9 @@ if ($receita_mes_anterior > 0) {
 
         body {
             background:
-                radial-gradient(circle at 8% 4%, rgba(16, 185, 129, 0.16), transparent 24%),
-                radial-gradient(circle at 92% 8%, rgba(37, 99, 235, 0.14), transparent 26%),
-                linear-gradient(135deg, #f8fafc 0%, #f1f5f9 42%, #ecfdf5 100%) !important;
+                radial-gradient(circle at 8% 4%, rgba(37, 99, 235, 0.16), transparent 24%),
+                radial-gradient(circle at 92% 8%, rgba(16, 185, 129, 0.14), transparent 26%),
+                linear-gradient(135deg, #f8fafc 0%, #f1f5f9 42%, #ecfeff 100%) !important;
         }
 
         .container {
@@ -445,10 +445,10 @@ if ($receita_mes_anterior > 0) {
             color: #ffffff;
             background:
                 radial-gradient(circle at 10% 18%, rgba(255, 255, 255, 0.24), transparent 30%),
-                radial-gradient(circle at 84% 26%, rgba(34, 197, 94, 0.25), transparent 34%),
-                linear-gradient(135deg, #052e16 0%, #059669 48%, #2563eb 100%);
+                radial-gradient(circle at 84% 26%, rgba(16, 185, 129, 0.25), transparent 34%),
+                linear-gradient(135deg, #0f172a 0%, #2563eb 48%, #0891b2 100%);
             border: 1px solid rgba(255, 255, 255, 0.42);
-            box-shadow: 0 28px 80px rgba(16, 185, 129, 0.18);
+            box-shadow: 0 28px 80px rgba(37, 99, 235, 0.18);
         }
 
         .back-btn {
@@ -667,7 +667,7 @@ if ($receita_mes_anterior > 0) {
             position: absolute;
             inset: 0 0 auto 0;
             height: 6px;
-            background: linear-gradient(90deg, #10b981, #059669, #2563eb);
+            background: linear-gradient(90deg, #2563eb, #0891b2, #10b981);
         }
 
         .stat-card {
@@ -684,8 +684,8 @@ if ($receita_mes_anterior > 0) {
             margin-bottom: 18px;
             color: #ffffff;
             border-radius: 18px;
-            background: linear-gradient(135deg, #10b981, #2563eb);
-            box-shadow: 0 16px 34px rgba(16, 185, 129, 0.22);
+            background: linear-gradient(135deg, #2563eb, #0891b2);
+            box-shadow: 0 16px 34px rgba(37, 99, 235, 0.22);
             font-size: 1.18rem;
         }
 
@@ -900,3 +900,5 @@ if ($receita_mes_anterior > 0) {
     <script src="dark-mode.js"></script>
 </body>
 </html>
+
+

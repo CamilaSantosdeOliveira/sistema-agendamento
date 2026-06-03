@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 
 // Verificar se o usuário está logado e é professor
@@ -1410,7 +1410,7 @@ $aulas_concluidas = (int)($stmt->get_result()->fetch_assoc()['total'] ?? 0);
         })();
     </script>
     </style>
-    <link rel="stylesheet" href="dark-mode.css">
+    <link rel="stylesheet" href="dark-mode.css?v=3">
     <style>
         /* ===== ADMIN DASHBOARD STYLE OVERRIDES ===== */
         body.admin-dashboard { background: linear-gradient(135deg,#f0f4ff 0%,#e8f0fe 25%,#f0f4ff 50%,#e8effe 75%,#f0f4ff 100%) !important; }
@@ -1463,6 +1463,8 @@ $aulas_concluidas = (int)($stmt->get_result()->fetch_assoc()['total'] ?? 0);
         .dark-mode .stat-card { background:rgba(30,41,59,.92) !important; border-color:rgba(255,255,255,.1) !important; }
         .dark-mode .stat-value { color:#f8fafc !important; }
         .dark-mode .stat-change { color:rgba(248,250,252,.72) !important; }
+        body.dark-mode .progress-bar { background:transparent !important; height:auto !important; padding-top:14px !important; overflow:visible !important; }
+        body.dark-mode .progress-bar::before { display:block !important; background:rgba(255,255,255,0.18) !important; }
     </style>
 </head>
 <body class="admin-dashboard">
@@ -1647,5 +1649,7 @@ $aulas_concluidas = (int)($stmt->get_result()->fetch_assoc()['total'] ?? 0);
     <script src="dark-mode.js"></script>
 </body>
 </html>
+
+
 
 

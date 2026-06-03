@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 
 // Verificar se o usuário está logado e é professor
@@ -1101,12 +1101,11 @@ $total_alunos_cursos = (int)($stmt->get_result()->fetch_assoc()['total'] ?? 0);
 
         .professor-course-card {
             position: relative;
-            display: grid;
-            grid-template-columns: minmax(260px, 1.35fr) minmax(300px, 1fr) auto;
-            align-items: center;
-            gap: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
             min-height: 0;
-            padding: 20px;
+            padding: 24px;
             border-radius: 22px;
             background:
                 radial-gradient(circle at 92% 10%, rgba(37, 99, 235, 0.13), transparent 30%),
@@ -1125,9 +1124,14 @@ $total_alunos_cursos = (int)($stmt->get_result()->fetch_assoc()['total'] ?? 0);
 
         .professor-course-head {
             display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 14px;
+            align-items: flex-start;
+            gap: 16px;
+            padding-bottom: 18px;
+        }
+
+        .professor-course-info {
+            flex: 1;
+            min-width: 0;
         }
 
         .professor-course-icon {
@@ -1164,7 +1168,10 @@ $total_alunos_cursos = (int)($stmt->get_result()->fetch_assoc()['total'] ?? 0);
         .professor-course-meta {
             display: flex;
             flex-wrap: wrap;
-            gap: 9px;
+            gap: 8px;
+            padding: 16px 0;
+            border-top: 1px solid rgba(226, 232, 240, 0.7);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.7);
         }
 
         .course-chip {
@@ -1183,9 +1190,10 @@ $total_alunos_cursos = (int)($stmt->get_result()->fetch_assoc()['total'] ?? 0);
         .professor-course-footer {
             display: flex;
             align-items: center;
-            justify-content: flex-end;
-            flex-direction: column;
-            gap: 14px;
+            justify-content: space-between;
+            flex-direction: row;
+            gap: 12px;
+            padding-top: 18px;
         }
 
         .professor-course-footer .btn {
@@ -1194,7 +1202,7 @@ $total_alunos_cursos = (int)($stmt->get_result()->fetch_assoc()['total'] ?? 0);
 
         @media (max-width: 1180px) {
             .professor-course-card {
-                grid-template-columns: 1fr;
+                padding: 20px;
             }
 
             .professor-course-footer {
@@ -1653,8 +1661,9 @@ $total_alunos_cursos = (int)($stmt->get_result()->fetch_assoc()['total'] ?? 0);
         }
 
         .professor-course-card {
-            grid-template-columns: minmax(280px, 1.25fr) minmax(320px, 1fr) auto !important;
-            gap: 24px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 0 !important;
             padding: 28px !important;
             border-radius: 24px !important;
             background:
@@ -1668,6 +1677,13 @@ $total_alunos_cursos = (int)($stmt->get_result()->fetch_assoc()['total'] ?? 0);
 
         .professor-course-head {
             gap: 16px !important;
+            padding-bottom: 18px !important;
+            align-items: flex-start !important;
+        }
+
+        .professor-course-info {
+            flex: 1;
+            min-width: 0;
         }
 
         .professor-course-icon {
@@ -1705,6 +1721,23 @@ $total_alunos_cursos = (int)($stmt->get_result()->fetch_assoc()['total'] ?? 0);
             border-radius: 999px !important;
             font-size: var(--font-size-sm) !important;
             font-weight: var(--font-weight-bold) !important;
+        }
+
+        .professor-course-meta {
+            padding: 16px 0 !important;
+            border-top: 1px solid rgba(226, 232, 240, 0.7) !important;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.7) !important;
+        }
+
+        .professor-course-footer {
+            flex-direction: row !important;
+            justify-content: space-between !important;
+            padding-top: 18px !important;
+        }
+
+        .status-badge {
+            flex-shrink: 0;
+            white-space: nowrap;
         }
 
         .chart-title {
@@ -1847,7 +1880,7 @@ $total_alunos_cursos = (int)($stmt->get_result()->fetch_assoc()['total'] ?? 0);
         })();
     </script>
 
-    <link rel="stylesheet" href="dark-mode.css">
+    <link rel="stylesheet" href="dark-mode.css?v=3">
     <style>
         .header-actions {
             display: flex !important;
@@ -2113,6 +2146,29 @@ $total_alunos_cursos = (int)($stmt->get_result()->fetch_assoc()['total'] ?? 0);
         .dark-mode .stat-card { background: rgba(30,41,59,0.92) !important; border-color: rgba(255,255,255,0.1) !important; }
         .dark-mode .stat-value { color: #f8fafc !important; }
         .dark-mode .stat-change { color: rgba(248,250,252,0.72) !important; }
+        .dark-mode .professor-course-meta {
+            border-color: rgba(255,255,255,0.1) !important;
+        }
+        .dark-mode .professor-course-card {
+            background: linear-gradient(135deg, rgba(30,41,59,0.98) 0%, rgba(15,23,42,0.95) 100%) !important;
+            border-color: rgba(99,141,255,0.15) !important;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06) !important;
+        }
+        .dark-mode .professor-course-card:hover {
+            border-color: rgba(99,141,255,0.35) !important;
+            box-shadow: 0 12px 40px rgba(37,99,235,0.18), inset 0 1px 0 rgba(255,255,255,0.08) !important;
+        }
+        .dark-mode .professor-course-title { color: #f1f5f9 !important; }
+        .dark-mode .professor-course-description { color: #94a3b8 !important; }
+        .dark-mode .course-field-label { color: #94a3b8 !important; }
+        .dark-mode .course-chip { background: rgba(255,255,255,0.07) !important; border-color: rgba(255,255,255,0.1) !important; color: #cbd5e1 !important; }
+        .dark-mode .chip-category { background: rgba(37,99,235,0.18) !important; border-color: rgba(37,99,235,0.3) !important; color: #93c5fd !important; }
+        .dark-mode .chip-level    { background: rgba(124,58,237,0.18) !important; border-color: rgba(124,58,237,0.3) !important; color: #c4b5fd !important; }
+        .dark-mode .chip-hours    { background: rgba(8,145,178,0.18) !important;  border-color: rgba(8,145,178,0.3) !important;  color: #67e8f9 !important; }
+        .dark-mode .chip-students { background: rgba(5,150,105,0.18) !important;  border-color: rgba(5,150,105,0.3) !important;  color: #6ee7b7 !important; }
+        .dark-mode .chip-price    { background: rgba(217,119,6,0.18) !important;   border-color: rgba(217,119,6,0.3) !important;   color: #fcd34d !important; }
+        body.dark-mode .progress-bar { background:transparent !important; height:auto !important; padding-top:14px !important; overflow:visible !important; }
+        body.dark-mode .progress-bar::before { display:block !important; background:rgba(255,255,255,0.18) !important; }
     </style>
 </head>
 <body class="admin-dashboard">
@@ -2199,7 +2255,9 @@ $total_alunos_cursos = (int)($stmt->get_result()->fetch_assoc()['total'] ?? 0);
                     <h1><i class="fas fa-book"></i> Meus Cursos</h1>
                 </div>
                 <div class="page-actions">
-                    <button id="darkModeToggle" title="Alternar tema" style="background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.2);color:#475569;width:40px;height:40px;border-radius:12px;cursor:pointer;font-size:1rem;">
+                    <button id="darkModeToggle" class="theme-toggle-pill-active" title="Alternar tema">
+                        <div class="theme-slider"></div>
+                        <i class="fas fa-sun"></i>
                         <i class="fas fa-moon"></i>
                     </button>
                 </div>
@@ -2256,23 +2314,22 @@ $total_alunos_cursos = (int)($stmt->get_result()->fetch_assoc()['total'] ?? 0);
                                     <div class="professor-course-icon">
                                         <i class="fas fa-book-open"></i>
                                     </div>
+                                    <div class="professor-course-info">
+                                        <div class="professor-course-title"><?php echo htmlspecialchars($curso['nome']); ?></div>
+                                        <div class="professor-course-description"><?php echo htmlspecialchars($curso['descricao']); ?></div>
+                                    </div>
                                     <span class="status-badge status-active">Ativo</span>
                                 </div>
 
-                                <div>
-                                    <div class="professor-course-title"><?php echo htmlspecialchars($curso['nome']); ?></div>
-                                    <div class="professor-course-description"><?php echo htmlspecialchars($curso['descricao']); ?></div>
-                                </div>
-
                                 <div class="professor-course-meta">
-                                    <span class="course-chip"><i class="fas fa-tag"></i> <?php echo htmlspecialchars($curso['categoria']); ?></span>
-                                    <span class="course-chip"><i class="fas fa-signal"></i> <?php echo htmlspecialchars($curso['nivel']); ?></span>
-                                    <span class="course-chip"><i class="fas fa-clock"></i> <?php echo (int)$curso['duracao_horas']; ?>h</span>
-                                    <span class="course-chip"><i class="fas fa-users"></i> <?php echo (int)$alunos_curso; ?> aluno<?php echo ((int)$alunos_curso === 1) ? '' : 's'; ?></span>
+                                    <span class="course-chip chip-category"><i class="fas fa-tag"></i> <?php echo htmlspecialchars($curso['categoria']); ?></span>
+                                    <span class="course-chip chip-level"><i class="fas fa-signal"></i> <?php echo htmlspecialchars($curso['nivel']); ?></span>
+                                    <span class="course-chip chip-hours"><i class="fas fa-clock"></i> <?php echo (int)$curso['duracao_horas']; ?>h</span>
+                                    <span class="course-chip chip-students"><i class="fas fa-users"></i> <?php echo (int)$alunos_curso; ?> aluno<?php echo ((int)$alunos_curso === 1) ? '' : 's'; ?></span>
                                 </div>
 
                                 <div class="professor-course-footer">
-                                    <span class="course-chip"><i class="fas fa-dollar-sign"></i> R$ <?php echo number_format($curso['preco'], 2, ',', '.'); ?></span>
+                                    <span class="course-chip chip-price"><i class="fas fa-dollar-sign"></i> R$ <?php echo number_format($curso['preco'], 2, ',', '.'); ?></span>
                                     <a href="detalhes_curso_professor.php?id=<?php echo $curso['id']; ?>" class="btn">Ver Detalhes</a>
                                 </div>
                             </article>
@@ -2370,6 +2427,19 @@ $total_alunos_cursos = (int)($stmt->get_result()->fetch_assoc()['total'] ?? 0);
 
         // ===== MELHORIAS DE ACESSIBILIDADE E INTERATIVIDADE =====
         document.addEventListener('DOMContentLoaded', function() {
+            // Dark mode toggle
+            const darkBtn = document.getElementById('darkModeToggle');
+            if (darkBtn) {
+                const isDark = localStorage.getItem('darkMode') === 'true';
+                document.body.classList.toggle('dark-mode', isDark);
+                document.documentElement.classList.toggle('dark-mode', isDark);
+                darkBtn.onclick = function() {
+                    const nowDark = document.body.classList.toggle('dark-mode');
+                    document.documentElement.classList.toggle('dark-mode', nowDark);
+                    localStorage.setItem('darkMode', nowDark);
+                };
+            }
+
             // Observar elementos que entram na viewport
             document.querySelectorAll('.content-card, .table tbody tr').forEach(card => {
                 observer.observe(card);
@@ -2410,3 +2480,5 @@ $total_alunos_cursos = (int)($stmt->get_result()->fetch_assoc()['total'] ?? 0);
     <script src="dark-mode.js"></script>
 </body>
 </html>
+
+

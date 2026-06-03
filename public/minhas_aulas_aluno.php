@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 
 // Verificar se o usuário está logado e é aluno
@@ -925,6 +925,7 @@ $aulas_passadas = $stmt->get_result();
             border-color: #334155;
             color: #f1f5f9;
         }
+        body.dark-mode .progress-bar { background:transparent !important; }
 
         /* Mobile Menu Toggle */
         .mobile-menu-toggle {
@@ -1603,7 +1604,7 @@ input[type="number"], select, textarea {
 /* ALUNO_THEME_OVERRIDES_END */
 
 </style>
-    <link rel="stylesheet" href="dark-mode.css">
+    <link rel="stylesheet" href="dark-mode.css?v=3">
     <style>
         .header-actions {
             display: flex !important;
@@ -1616,6 +1617,7 @@ input[type="number"], select, textarea {
             right: auto !important;
             flex-shrink: 0;
         }
+        body.dark-mode .progress-bar { background:transparent !important; }
     </style>
 </head>
 <body>
@@ -2048,3 +2050,5 @@ input[type="number"], select, textarea {
     <script src="dark-mode.js"></script>
 </body>
 </html>
+
+
