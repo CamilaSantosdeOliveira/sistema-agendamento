@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
@@ -139,6 +139,8 @@ $results['summary'] = [
 
 echo json_encode($results, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 ?>
+
+
 
 
 

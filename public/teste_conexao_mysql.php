@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🔍 Teste Detalhado de Conexão MySQL</h1>";
 
 $host = 'localhost';
@@ -81,6 +81,8 @@ echo "<p><a href='criar_tabelas_essenciais.php' target='_blank'>💾 Criar Tabel
 echo "<p><a href='http://localhost:8080/phpmyadmin' target='_blank'>🗄️ phpMyAdmin</a></p>";
 echo "<p><a href='login.php' target='_blank'>🔐 Testar Login</a></p>";
 ?>
+
+
 
 
 

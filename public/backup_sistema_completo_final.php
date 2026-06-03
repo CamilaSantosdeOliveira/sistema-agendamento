@@ -102,3 +102,5 @@ echo "<a href='public/' style='background: #28a745; color: white; padding: 10px 
 echo "<a href='public/login.php' style='background: #17a2b8; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>🔐 Ir para Login</a>";
 echo "</div>";
 ?>
+
+

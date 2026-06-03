@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🔍 VERIFICANDO CURSOS NO BANCO DE DADOS</h1>";
 include 'db.php';
 
@@ -38,6 +38,8 @@ echo "<br><h3>🔗 Páginas do sistema:</h3>";
 echo "<p><a href='dashboard_final.php'>📊 Dashboard Principal</a></p>";
 echo "<p><a href='cursos_completo.php'>📚 Página de Cursos</a></p>";
 ?>
+
+
 
 
 

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 include 'db.php';
 
@@ -50,6 +50,8 @@ echo "<p>User ID: " . $_SESSION['user_id'] . "</p>";
 echo "<p>Tipo Usuário: " . $_SESSION['tipo_usuario'] . "</p>";
 echo "<p>Nome: " . $_SESSION['nome'] . "</p>";
 ?>
+
+
 
 
 

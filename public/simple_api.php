@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // API Ultra Simples - GARANTIDO QUE FUNCIONA
 require_once 'email_service.php';
 header('Content-Type: application/json');
@@ -74,3 +74,5 @@ try {
     ]);
 }
 ?>
+
+

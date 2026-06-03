@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Verificar integração completa do dashboard
 include 'db.php';
 
@@ -106,5 +106,7 @@ if ($cursos_reais == $dashboard_cursos && $professores_reais == $dashboard_profe
     echo "SISTEMA PARCIALMENTE INTEGRADO - Alguns dados não estão sincronizados.";
 }
 ?>
+
+
 
 

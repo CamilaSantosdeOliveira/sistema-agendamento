@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🎯 Teste Final Simples</h2>";
 
 // Testar conexão com banco
@@ -33,5 +33,7 @@ echo "<br><h3>🎉 Resultado:</h3>";
 echo "<p>Se todas as consultas funcionaram, o sistema está pronto!</p>";
 echo "<p><a href='dashboard_corrigido.php' style='background: #3b82f6; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>🚀 IR PARA O DASHBOARD</a></p>";
 ?>
+
+
 
 

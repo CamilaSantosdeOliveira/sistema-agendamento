@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🔧 Setup do Banco de Dados</h2>";
 
 // Conectar ao banco
@@ -70,3 +70,5 @@ echo "<p>1. <a href='verificar_banco.php'>Verificar estrutura do banco</a></p>";
 echo "<p>2. <a href='cursos_completo.php'>Testar página de cursos</a></p>";
 echo "<p>3. <a href='dashboard_corrigido.php'>Testar dashboard</a></p>";
 ?>
+
+

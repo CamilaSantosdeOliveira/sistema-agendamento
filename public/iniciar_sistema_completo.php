@@ -193,3 +193,5 @@ echo "<code>taskkill /f /im httpd.exe</code> - Parar Apache<br>";
 echo "<hr>";
 echo "<p><strong>🎯 Inicialização concluída!</strong> Verifique os resultados acima.</p>";
 ?>
+
+

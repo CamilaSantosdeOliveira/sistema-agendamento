@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Script para verificar todos os dados do banco de dados
 include 'db.php';
 
@@ -193,4 +193,6 @@ try {
     echo "</div>";
 }
 ?>
+
+
 

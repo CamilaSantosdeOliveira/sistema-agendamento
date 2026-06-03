@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $host = 'localhost';
 $user = 'root';
 $pass = '';
@@ -57,4 +57,6 @@ if ($result) {
 
 $conn->close();
 ?>
+
+
 

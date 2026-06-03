@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Teste do Botão Desativar
 echo "<h1>🧪 Teste do Botão Desativar</h1>";
 
@@ -106,6 +106,8 @@ table { margin: 10px 0; }
 th, td { padding: 8px; text-align: left; }
 button { padding: 5px 10px; margin: 2px; cursor: pointer; }
 </style>
+
+
 
 
 

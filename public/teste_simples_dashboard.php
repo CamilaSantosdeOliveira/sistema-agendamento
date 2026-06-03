@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -38,6 +38,8 @@ echo "<hr>";
 echo "<p><a href='dashboard_final.php'>Tentar abrir Dashboard Final</a></p>";
 echo "<p><a href='index.php'>Tentar abrir Index</a></p>";
 ?>
+
+
 
 
 

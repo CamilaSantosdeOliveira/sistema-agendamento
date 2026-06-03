@@ -280,3 +280,5 @@ function removerAgendamento($pdo, $agendamentoId) {
     ];
 }
 ?>
+
+

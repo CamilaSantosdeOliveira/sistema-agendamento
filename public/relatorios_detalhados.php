@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Conectar ao banco de dados
 include 'db.php';
 
@@ -42,8 +42,28 @@ try {
     }
 
     // Buscar dados para gráficos
-    $cursos_por_categoria = $conn->query("SELECT categoria, COUNT(*) as total FROM cursos GROUP BY categoria");
+    $cursos_por_categoria = $conn->query("SELECT categoria, COUNT(*) as total FROM cursos GROUP BY categoria ORDER BY total DESC");
     $cursos_por_nivel = $conn->query("SELECT nivel, COUNT(*) as total FROM cursos GROUP BY nivel");
+
+    // Processar categorias para o gráfico
+    $cat_labels = [];
+    $cat_data = [];
+    if ($cursos_por_categoria) {
+        while ($row = $cursos_por_categoria->fetch_assoc()) {
+            $cat_labels[] = $row['categoria'];
+            $cat_data[] = (int)$row['total'];
+        }
+    }
+
+    // Processar níveis para o gráfico
+    $nivel_labels = [];
+    $nivel_data = [];
+    if ($cursos_por_nivel) {
+        while ($row = $cursos_por_nivel->fetch_assoc()) {
+            $nivel_labels[] = $row['nivel'];
+            $nivel_data[] = (int)$row['total'];
+        }
+    }
 
 } catch (Exception $e) {
     // Em caso de erro, usar valores padrão
@@ -52,6 +72,10 @@ try {
     $alunos_count = 0;
     $agendamentos_count = 0;
     $receita_total = 0;
+    $cat_labels = [];
+    $cat_data = [];
+    $nivel_labels = [];
+    $nivel_data = [];
 }
 ?>
 <!DOCTYPE html>
@@ -65,7 +89,7 @@ try {
             document.write('<style>.dark-mode-init body { visibility: hidden; background: #0f172a !important; }</style>');
         }
     </script>
-    <link rel="stylesheet" href="dark-mode.css">
+    <link rel="stylesheet" href="dark-mode.css?v=3">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduConnect - Relatórios Detalhados</title>
@@ -985,19 +1009,21 @@ body { background: #f1f5f9 !important; padding: 0 !important; }
         // Gráfico de Cursos por Categoria
         const categoriaCtx = document.getElementById('categoriaChart');
         if (categoriaCtx) {
+            <?php
+                $r_cat = $conn->query("SELECT categoria, COUNT(*) as total FROM cursos GROUP BY categoria ORDER BY total DESC");
+                $js_cat_labels = []; $js_cat_data = [];
+                if ($r_cat) { while ($row = $r_cat->fetch_assoc()) { $js_cat_labels[] = $row['categoria']; $js_cat_data[] = (int)$row['total']; } }
+            ?>
+            const catLabels = <?php echo json_encode($js_cat_labels); ?>;
+            const catData   = <?php echo json_encode($js_cat_data); ?>;
+            const catColors = ['#3b82f6','#10b981','#f59e0b','#ef4444','#8b5cf6','#06b6d4','#f43f5e','#a855f7'];
             categoriaChartObj = new Chart(categoriaCtx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Programação', 'Design', 'Marketing', 'Negócios', 'Tecnologia'],
+                    labels: catLabels,
                     datasets: [{
-                        data: [3, 2, 1, 1, 2],
-                        backgroundColor: [
-                            '#3b82f6',
-                            '#10b981',
-                            '#f59e0b',
-                            '#ef4444',
-                            '#8b5cf6'
-                        ]
+                        data: catData,
+                        backgroundColor: catColors.slice(0, catLabels.length)
                     }]
                 },
                 options: {
@@ -1018,13 +1044,20 @@ body { background: #f1f5f9 !important; padding: 0 !important; }
         // Gráfico de Cursos por Nível
         const nivelCtx = document.getElementById('nivelChart');
         if (nivelCtx) {
+            <?php
+                $r_nivel = $conn->query("SELECT nivel, COUNT(*) as total FROM cursos GROUP BY nivel ORDER BY total DESC");
+                $js_nivel_labels = []; $js_nivel_data = [];
+                if ($r_nivel) { while ($row = $r_nivel->fetch_assoc()) { $js_nivel_labels[] = $row['nivel']; $js_nivel_data[] = (int)$row['total']; } }
+            ?>
+            const nivelLabels = <?php echo json_encode($js_nivel_labels); ?>;
+            const nivelData   = <?php echo json_encode($js_nivel_data); ?>;
             nivelChartObj = new Chart(nivelCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Iniciante', 'Intermediário', 'Avançado'],
+                    labels: nivelLabels,
                     datasets: [{
                         label: 'Quantidade de Cursos',
-                        data: [2, 4, 1],
+                        data: nivelData,
                         backgroundColor: '#3b82f6',
                         borderRadius: 4
                     }]
@@ -1117,6 +1150,8 @@ body { background: #f1f5f9 !important; padding: 0 !important; }
     <script src="dark-mode.js"></script>
 </body>
 </html>
+
+
 
 
 

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🎯 VERIFICAÇÃO FINAL DOS DADOS</h1>";
 
 include 'db.php';
@@ -52,6 +52,8 @@ echo "<p>• Dados: " . ($tem_dados ? "✅ Recuperados" : "❌ Perdidos") . "</p
 
 $conn->close();
 ?>
+
+
 
 
 

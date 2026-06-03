@@ -178,3 +178,5 @@ try {
     die('Erro ao gerar certificado: ' . $e->getMessage());
 }
 ?>
+
+

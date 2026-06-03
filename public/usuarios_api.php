@@ -312,3 +312,5 @@ function listarProfessores($conn, $materia = '') {
     jsonResponse(true, 'Professores obtidos com sucesso', ['professores' => $professores]);
 }
 ?>
+
+

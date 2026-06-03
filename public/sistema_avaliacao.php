@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Conectar ao banco de dados
 include 'db.php';
 
@@ -507,6 +507,8 @@ try {
     </script>
 </body>
 </html>
+
+
 
 
 

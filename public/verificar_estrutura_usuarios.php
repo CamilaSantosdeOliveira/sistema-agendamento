@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🔍 Verificação da Estrutura da Tabela Usuários</h2>";
 
 // Conectar ao banco
@@ -87,3 +87,5 @@ try {
 
 echo "<br><a href='professores.php'>Voltar para Professores</a>";
 ?>
+
+

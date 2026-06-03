@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Script final para verificar se o sistema está funcionando
 include 'db.php';
 
@@ -146,6 +146,8 @@ try {
     echo "</div>";
 }
 ?>
+
+
 
 
 

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Ver Backup Direto - Sem redirecionamento
 echo "<h1>📁 Backup Direto - Visualizar</h1>";
 
@@ -71,6 +71,8 @@ echo "<div style='margin-top: 20px;'>";
 echo "<a href='./' style='background: #6c757d; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>🏠 Voltar</a>";
 echo "</div>";
 ?>
+
+
 
 
 

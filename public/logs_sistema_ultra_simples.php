@@ -59,3 +59,5 @@ try {
 
 echo "<p><a href='configuracoes.php'>← Voltar</a></p>";
 ?>
+
+

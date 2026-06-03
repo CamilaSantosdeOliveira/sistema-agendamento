@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Ativar exibição de erros
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -52,5 +52,7 @@ echo "<h3>🎯 Resultado:</h3>";
 echo "<p>Se todos os arquivos estão OK, o problema pode estar no JavaScript do dashboard.</p>";
 echo "<p><a href='dashboard_corrigido.php'>🚀 TESTAR DASHBOARD</a></p>";
 ?>
+
+
 
 

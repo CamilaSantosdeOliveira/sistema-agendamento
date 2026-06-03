@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Teste da API de usuários
 echo "<h2>🧪 Teste da API de Usuários</h2>";
 
@@ -91,6 +91,8 @@ pre {
     overflow-x: auto;
 }
 </style>
+
+
 
 
 

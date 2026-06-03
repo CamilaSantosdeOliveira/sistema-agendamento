@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🧪 Teste da API de Cursos</h2>";
 
 // Testar conexão com banco
@@ -46,3 +46,5 @@ try {
 
 echo "<br><a href='cursos_completo.php'>Voltar para Cursos</a>";
 ?>
+
+

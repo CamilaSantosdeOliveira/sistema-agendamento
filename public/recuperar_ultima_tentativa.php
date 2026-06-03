@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🚨 ÚLTIMA TENTATIVA DE RECUPERAÇÃO</h1>";
 
 echo "<h3>1️⃣ Verificando se MySQL está parado...</h3>";
@@ -121,6 +121,8 @@ echo "<p>1. Recriar as tabelas</p>";
 echo "<p>2. Inserir dados de demonstração</p>";
 echo "<p>3. Continuar com o sistema funcionando</p>";
 ?>
+
+
 
 
 

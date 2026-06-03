@@ -60,3 +60,5 @@ echo "3. Erro na função loadAgendamentos()<br>";
 
 echo "<br><strong>💡 Solução:</strong> Recarregue a página do dashboard e verifique o console do navegador (F12) para ver se há erros JavaScript.";
 ?>
+
+

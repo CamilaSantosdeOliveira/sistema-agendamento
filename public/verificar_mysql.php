@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🔍 VERIFICANDO STATUS DO MYSQL</h2>";
 
 // Verificar se conseguimos conectar
@@ -114,4 +114,6 @@ echo "# Verificar serviços\n";
 echo "sc query mysql\n";
 echo "</pre>";
 ?>
+
+
 

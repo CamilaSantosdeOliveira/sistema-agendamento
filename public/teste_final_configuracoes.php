@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Teste Final - Configurações e Logs
 echo "<h1>🎯 Teste Final - Configurações e Logs</h1>";
 
@@ -26,3 +26,5 @@ echo "<p style='color: blue; font-size: 16px;'>✅ Logs do Sistema: Funcionando 
 
 echo "<p><a href='configuracoes.php'>← Voltar às Configurações</a></p>";
 ?>
+
+

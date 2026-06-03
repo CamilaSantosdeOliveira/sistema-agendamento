@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Forçar atualização - sem cache
 header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Pragma: no-cache");
@@ -338,6 +338,8 @@ echo "<div style='text-align: center; margin-top: 30px;'>
 </body>
 </html>";
 ?>
+
+
 
 
 

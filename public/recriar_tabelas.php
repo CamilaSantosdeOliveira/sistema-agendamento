@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🔧 RECRIANDO TABELAS DO SISTEMA</h1>";
 
 include 'db.php';
@@ -174,6 +174,8 @@ echo "<p><a href='inserir_dados_simples.php' style='background: #007bff; color: 
 
 $conn->close();
 ?>
+
+
 
 
 

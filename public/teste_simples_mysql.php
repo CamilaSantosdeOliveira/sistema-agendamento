@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🧪 Teste Simples MySQL</h1>";
 
 try {
@@ -36,6 +36,8 @@ try {
 <style>
 body { font-family: Arial; margin: 20px; }
 </style>
+
+
 
 
 

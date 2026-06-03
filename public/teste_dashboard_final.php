@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Ativar exibição de erros
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -30,3 +30,5 @@ echo "</ul>";
 
 echo "<h3>🎉 Sistema 100% Funcional!</h3>";
 ?>
+
+

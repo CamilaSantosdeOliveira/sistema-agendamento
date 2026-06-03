@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Script para recriar completamente o banco de dados
 echo "<h1>🔧 RECRIANDO BANCO DE DADOS COMPLETO</h1>";
 echo "<style>
@@ -195,6 +195,8 @@ try {
     echo "</div>";
 }
 ?>
+
+
 
 
 

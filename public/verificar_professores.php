@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🔍 VERIFICANDO PROFESSORES NO BANCO DE DADOS</h1>";
 include 'db.php';
 
@@ -51,6 +51,8 @@ if ($result) {
     echo "</table>";
 }
 ?>
+
+
 
 
 

@@ -316,3 +316,5 @@ if (php_sapi_name() === 'cli') {
     echo "Lembretes enviados: $enviados\n";
 }
 ?>
+
+

@@ -192,3 +192,5 @@ echo "<li>Ou use a correção avançada: <a href='corrigir_mysql_automatico.php'
 echo "</ol>";
 echo "</div>";
 ?>
+
+

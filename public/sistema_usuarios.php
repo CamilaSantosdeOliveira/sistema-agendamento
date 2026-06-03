@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Conectar ao banco de dados
 include 'db.php';
 
@@ -90,7 +90,7 @@ try {
             document.write('<style>.dark-mode-init body { visibility: hidden; background: #0f172a !important; }</style>');
         }
     </script>
-    <link rel="stylesheet" href="dark-mode.css">
+    <link rel="stylesheet" href="dark-mode.css?v=3">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestão de Usuários - Sistema de Agendamento</title>
@@ -1967,6 +1967,8 @@ body { background: #f1f5f9 !important; padding: 0 !important; }
     <script src="dark-mode.js"></script>
 </body>
 </html>
+
+
 
 
 

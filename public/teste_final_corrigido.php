@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Ativar exibição de erros
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -56,5 +56,7 @@ echo "<br><h3>🎉 Resultado Final:</h3>";
 echo "<p>Se ambos os testes passaram, o sistema está 100% funcional!</p>";
 echo "<p><a href='dashboard_corrigido.php' style='background: #3b82f6; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>🚀 IR PARA O DASHBOARD</a></p>";
 ?>
+
+
 
 

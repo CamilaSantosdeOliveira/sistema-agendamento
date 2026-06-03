@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🧪 Teste dos Botões - Professores</h2>";
 
 echo "<h3>1. Verificando se a página carrega:</h3>";
@@ -64,3 +64,5 @@ echo "<p><a href='professores.php'>Página de Professores</a></p>";
 echo "<p><a href='dashboard_corrigido.php'>Dashboard Principal</a></p>";
 echo "<p><a href='teste_professores_final.php'>Teste da API</a></p>";
 ?>
+
+

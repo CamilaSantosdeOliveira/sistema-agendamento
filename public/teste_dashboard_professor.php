@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🔍 Teste Dashboard Professor</h1>";
 echo "<p><strong>Data:</strong> " . date('d/m/Y H:i:s') . "</p>";
 
@@ -174,6 +174,8 @@ echo "<p style='margin-top: 30px; padding: 20px; background: #fef3c7; border-rad
 echo "<strong>💡 Dica:</strong> Execute este teste para identificar exatamente onde está o erro!";
 echo "</p>";
 ?>
+
+
 
 
 

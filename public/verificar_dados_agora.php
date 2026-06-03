@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Script para verificar dados AGORA no banco
 include 'db.php';
 
@@ -191,6 +191,8 @@ try {
     echo "</div>";
 }
 ?>
+
+
 
 
 

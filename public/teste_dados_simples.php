@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include 'db.php';
 
 echo "=== VERIFICAÇÃO DOS DADOS DO DASHBOARD ===\n\n";
@@ -39,5 +39,7 @@ if ($result && $result->num_rows > 0) {
     echo "Nenhum agendamento encontrado.\n";
 }
 ?>
+
+
 
 

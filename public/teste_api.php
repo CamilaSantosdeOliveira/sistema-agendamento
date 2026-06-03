@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🧪 Teste da API de Agendamentos</h2>";
 
 // Testar se conseguimos acessar a API
@@ -61,5 +61,7 @@ if ($conn->ping()) {
 echo "<br><h3>🎯 Próximo passo:</h3>";
 echo "<p>Se a API não estiver funcionando, vou criar uma versão simplificada</p>";
 ?>
+
+
 
 

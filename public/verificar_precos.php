@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include 'db.php';
 
 echo "🔍 VERIFICANDO PREÇOS DOS CURSOS\n\n";
@@ -25,6 +25,8 @@ if ($result) {
 
 echo "\n🎯 PRÓXIMO PASSO: Execute corrigir_precos_cursos.php para corrigir os preços!";
 ?>
+
+
 
 
 

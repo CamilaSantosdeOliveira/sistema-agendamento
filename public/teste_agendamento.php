@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include 'db.php';
 
 // Verificar se a tabela agendamentos existe
@@ -165,3 +165,5 @@ echo "<p><a href='agendamentos-eventos.html'>📅 Ir para Agendamentos</a></p>";
 
 $conn->close();
 ?>
+
+

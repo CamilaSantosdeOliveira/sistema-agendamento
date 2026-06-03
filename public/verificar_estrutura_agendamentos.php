@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🔍 VERIFICANDO ESTRUTURA DA TABELA AGENDAMENTOS</h1>";
 include 'db.php';
 
@@ -55,6 +55,8 @@ if ($result && $result->num_rows > 0) {
 echo "<br><h3>🔧 SOLUÇÃO:</h3>";
 echo "<p>Vou corrigir o arquivo api/agendamentos.php para usar as colunas corretas!</p>";
 ?>
+
+
 
 
 

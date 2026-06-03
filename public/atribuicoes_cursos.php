@@ -63,7 +63,7 @@ try {
             document.write('<style>.dark-mode-init body { visibility: hidden; background: #0f172a !important; }</style>');
         }
     </script>
-    <link rel="stylesheet" href="dark-mode.css">
+    <link rel="stylesheet" href="dark-mode.css?v=3">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1012,6 +1012,79 @@ try {
         }
         .header-content { display: block !important; text-align: center !important; padding: 0 !important; position: relative !important; z-index: 1 !important; }
 
+        /* ===== DARK MODE ===== */
+        body.dark-mode .card,
+        body.dark-mode .content-section {
+            background: #1e293b !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4) !important;
+        }
+
+        body.dark-mode .section-header {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+        }
+
+        body.dark-mode .section-header h3,
+        body.dark-mode .card-title {
+            color: #f8fafc !important;
+        }
+
+        body.dark-mode .card-subtitle {
+            color: #94a3b8 !important;
+        }
+
+        body.dark-mode .badge-success {
+            background: rgba(16, 185, 129, 0.2) !important;
+            color: #34d399 !important;
+        }
+
+        body.dark-mode .badge-warning {
+            background: rgba(245, 158, 11, 0.2) !important;
+            color: #fbbf24 !important;
+        }
+
+        body.dark-mode .badge-danger {
+            background: rgba(239, 68, 68, 0.2) !important;
+            color: #f87171 !important;
+        }
+
+        body.dark-mode .btn-outline {
+            background: transparent !important;
+            border-color: rgba(255, 255, 255, 0.3) !important;
+            color: #f8fafc !important;
+        }
+
+        body.dark-mode .section-content,
+        body.dark-mode .table td {
+            background: transparent !important;
+            color: #e2e8f0 !important;
+        }
+
+        body.dark-mode .table th {
+            background: rgba(255, 255, 255, 0.05) !important;
+            color: #cbd5e1 !important;
+            border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+        }
+
+        body.dark-mode .table tr:hover td {
+            background: rgba(255, 255, 255, 0.04) !important;
+        }
+
+        body.dark-mode .modal-content {
+            background: #1e293b !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+        }
+
+        body.dark-mode .modal-header {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+        }
+
+        body.dark-mode .form-label {
+            color: #e2e8f0 !important;
+        }
+
 </style>
 </head>
 <body>
@@ -1457,6 +1530,8 @@ try {
     <script src="dark-mode.js"></script>
 </body>
 </html>
+
+
 
 
 

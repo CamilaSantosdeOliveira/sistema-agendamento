@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 
 echo "<h1>🔍 Teste de Sessão e Redirecionamento</h1>";
@@ -45,6 +45,8 @@ echo "<p><a href='index.php'>🏠 Testar index.php</a></p>";
 echo "<p><a href='login.php'>🔐 Testar login.php</a></p>";
 echo "<p><a href='dashboard_final.php'>📊 Testar dashboard_final.php</a></p>";
 ?>
+
+
 
 
 

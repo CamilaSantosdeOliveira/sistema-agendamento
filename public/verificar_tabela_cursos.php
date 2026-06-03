@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Conectar ao banco de dados
 include 'db.php';
 
@@ -198,6 +198,8 @@ try {
     echo "❌ Erro: " . $e->getMessage();
 }
 ?>
+
+
 
 
 

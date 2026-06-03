@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🧪 Teste Rápido do Login</h1>";
 
 // Testar conexão com banco
@@ -65,6 +65,8 @@ echo "<h2>📋 Contas de Teste:</h2>";
 echo "<p><strong>Professor:</strong> maria.santos@educonnect.com / 123456</p>";
 echo "<p><strong>Aluno:</strong> joao.silva@email.com / 123456</p>";
 ?>
+
+
 
 
 

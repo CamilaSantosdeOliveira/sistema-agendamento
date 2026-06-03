@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🔧 Teste da API Corrigida</h2>";
 
 // Testar se a API está funcionando
@@ -54,5 +54,7 @@ echo "<br><h3>🎯 Próximo passo:</h3>";
 echo "<p>Se a API está funcionando, o dashboard deve carregar sem erros!</p>";
 echo "<p><a href='dashboard_corrigido.php' style='background: #3b82f6; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>🚀 TESTAR DASHBOARD</a></p>";
 ?>
+
+
 
 

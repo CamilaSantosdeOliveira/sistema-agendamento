@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🔍 VERIFICANDO PORTA DO APACHE</h1>";
 
 // Teste 1: Verificar porta 80 (padrão)
@@ -50,6 +50,8 @@ echo "<br><h3>🔗 Links atuais (porta 8080):</h3>";
 echo "<p><a href='dashboard_final.php'>📊 Dashboard</a></p>";
 echo "<p><a href='alunos.php'>👨‍🎓 Alunos</a></p>";
 ?>
+
+
 
 
 

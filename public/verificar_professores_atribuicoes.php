@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Verificar Professores e Atribuições - Detalhado
 session_start();
 include 'db.php';
@@ -102,6 +102,8 @@ echo "</ul>";
 
 echo "<p><a href='configuracoes.php'>← Voltar às Configurações</a></p>";
 ?>
+
+
 
 
 

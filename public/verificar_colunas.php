@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Ativar exibição de erros
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -47,5 +47,7 @@ try {
 echo "<br><h3>🎯 Próximo passo:</h3>";
 echo "<p>Com essas informações, posso corrigir as consultas SQL!</p>";
 ?>
+
+
 
 

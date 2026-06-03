@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Verificar dados específicos das aulas
 include 'db.php';
 
@@ -44,3 +44,5 @@ echo "<br><h3>🔧 Solução:</h3>";
 echo "Se os campos 'nome' e 'professor' estão vazios, precisamos atualizar os dados no banco.<br>";
 echo "Vou criar um script para corrigir isso automaticamente.";
 ?>
+
+

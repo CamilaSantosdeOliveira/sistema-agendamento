@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🔍 VERIFICANDO DADOS REAIS DO BANCO</h1>";
 include 'db.php';
 
@@ -50,3 +50,5 @@ echo "<br><h3>🔧 SOLUÇÃO:</h3>";
 echo "<p>Se categoria e nível estão NULL, precisamos executar o script de atualização novamente.</p>";
 echo "<p><a href='adicionar_categoria_nivel.php' style='color: blue;'>🔄 Executar Atualização de Categoria e Nível</a></p>";
 ?>
+
+

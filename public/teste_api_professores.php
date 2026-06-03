@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🧪 TESTE API PROFESSORES</h1>";
 echo "<style>body{font-family:Arial;margin:20px;background:#f0f8ff;} .success{color:green;font-weight:bold;} .error{color:red;font-weight:bold;} .info{color:blue;font-weight:bold;} pre{background:#f5f5f5;padding:10px;border-radius:5px;overflow-x:auto;}</style>";
 
@@ -70,6 +70,8 @@ echo "<a href='professores.php' style='background:green;color:white;padding:10px
 echo "<a href='api/professores_simples.php' style='background:blue;color:white;padding:10px;text-decoration:none;border-radius:5px;margin:5px;'>🔗 Ver API Direto</a>";
 echo "</div>";
 ?>
+
+
 
 
 

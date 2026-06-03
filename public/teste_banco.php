@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🧪 Teste do Banco de Dados</h2>";
 
 // Teste 1: Verificar se o MySQL está rodando
@@ -42,6 +42,8 @@ try {
     echo "❌ Exceção: " . $e->getMessage() . "<br>";
 }
 ?>
+
+
 
 
 

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🔐 Testando Senhas do MySQL</h2>";
 
 // Testar diferentes senhas
@@ -70,4 +70,6 @@ echo "<li>Usar o phpMyAdmin para redefinir</li>";
 echo "<li>Reinstalar o XAMPP se necessário</li>";
 echo "</ul>";
 ?>
+
+
 

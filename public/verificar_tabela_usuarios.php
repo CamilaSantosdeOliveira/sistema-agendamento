@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include 'db.php';
 
 echo "=== VERIFICAÇÃO DA TABELA DE USUÁRIOS ===\n\n";
@@ -65,5 +65,7 @@ foreach ($arquivos_login as $arquivo) {
     }
 }
 ?>
+
+
 
 

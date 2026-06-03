@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Verificar Tabelas Reais no Banco
 session_start();
 include 'db.php';
@@ -61,6 +61,8 @@ echo "</ul>";
 
 echo "<p><a href='configuracoes.php'>← Voltar às Configurações</a></p>";
 ?>
+
+
 
 
 

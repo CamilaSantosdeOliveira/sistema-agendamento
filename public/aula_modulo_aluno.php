@@ -728,3 +728,5 @@ $tipoInfo = $tipo_icons[$aula['tipo']] ?? $tipo_icons['video'];
     </script>
 </body>
 </html>
+
+

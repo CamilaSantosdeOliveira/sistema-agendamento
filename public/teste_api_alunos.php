@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🔍 TESTE DA API DE ALUNOS</h1>";
 
 // Teste 1: Verificar se a API responde
@@ -81,6 +81,8 @@ echo "<br><h3>🔗 Links para testar:</h3>";
 echo "<p><a href='alunos.php'>👨‍🎓 Ver Página de Alunos</a></p>";
 echo "<p><a href='dashboard_final.php'>📊 Dashboard Principal</a></p>";
 ?>
+
+
 
 
 

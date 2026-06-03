@@ -64,3 +64,5 @@ echo "🚀 Deve funcionar agora!\n";
 
 
 
+
+

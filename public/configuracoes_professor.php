@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 
 // Verificar se o usuário está logado e é professor
@@ -1504,7 +1504,7 @@ $professor = $stmt->get_result()->fetch_assoc();
             if (isDark) document.documentElement.classList.add('dark-mode');
         })();
     </script>
-    <link rel="stylesheet" href="dark-mode.css">
+    <link rel="stylesheet" href="dark-mode.css?v=3">
     <style>
         /* ===== ADMIN DASHBOARD STYLE OVERRIDES ===== */
         body.admin-dashboard { background: linear-gradient(135deg,#f0f4ff 0%,#e8f0fe 25%,#f0f4ff 50%,#e8effe 75%,#f0f4ff 100%) !important; }
@@ -2169,4 +2169,6 @@ $professor = $stmt->get_result()->fetch_assoc();
     <script src="sidebar.js"></script>
     <script src="dark-mode.js"></script>
 </body>
+
+
 

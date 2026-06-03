@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🔍 VERIFICAÇÃO DOS ARQUIVOS DE DADOS</h1>";
 
 $data_dir = "C:/xampp/mysql/data";
@@ -87,6 +87,8 @@ echo "</ol>";
 
 echo "<p><a href='teste_simples_dashboard.php' style='background: #007bff; color: white; padding: 10px; text-decoration: none; border-radius: 5px;'>🧪 Testar Novamente</a></p>";
 ?>
+
+
 
 
 

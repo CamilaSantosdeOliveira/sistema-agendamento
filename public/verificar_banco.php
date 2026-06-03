@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🔍 Verificação do Banco de Dados</h1>";
 
 $host = 'localhost';
@@ -71,3 +71,5 @@ echo "<h2>📋 Links Úteis:</h2>";
 echo "<p><a href='backups/backup_completo_corrigido_2025-08-29_07-35-39.sql' target='_blank'>💾 Backup Completo</a></p>";
 echo "<p><a href='http://localhost:8080/phpmyadmin' target='_blank'>🗄️ phpMyAdmin</a></p>";
 ?>
+
+

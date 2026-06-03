@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🧪 Teste de Remoção Automática de Aulas</h2>";
 
 // Conectar ao banco
@@ -81,3 +81,5 @@ async function testarRemocao(id) {
     }
 }
 </script>
+
+

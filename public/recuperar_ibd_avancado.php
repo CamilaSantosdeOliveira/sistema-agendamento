@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🔧 RECUPERAÇÃO AVANÇADA DE DADOS .IBD</h1>";
 
 include 'db.php';
@@ -121,6 +121,8 @@ echo "<p><a href='verificar_dados_completos.php' style='background: #007bff; col
 
 if ($conn) $conn->close();
 ?>
+
+
 
 
 

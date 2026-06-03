@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🎯 Teste Final - Agendamento Funcionando</h2>";
 
 // Simular dados do formulário
@@ -67,5 +67,7 @@ echo "<br><h3>🎉 Sistema Pronto!</h3>";
 echo "<p>O agendamento está funcionando perfeitamente!</p>";
 echo "<p><a href='dashboard_corrigido.php' style='background: #3b82f6; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>🚀 IR PARA O DASHBOARD</a></p>";
 ?>
+
+
 
 

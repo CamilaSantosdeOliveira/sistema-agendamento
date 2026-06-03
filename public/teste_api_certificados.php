@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Teste simples da API de certificados
 header('Content-Type: application/json');
 
@@ -23,6 +23,8 @@ $output = ob_get_clean();
 
 echo $output;
 ?>
+
+
 
 
 

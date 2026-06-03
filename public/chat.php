@@ -81,3 +81,4 @@ function sendMessage($pdo, $user_id, $data) {
     }
 }
 ?>
+

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🔍 VERIFICADOR DE PORTA MYSQL</h1>";
 echo "<style>
     body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
@@ -155,6 +155,8 @@ sc query mysql</div>";
 
 echo "</div>";
 ?>
+
+
 
 
 

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Script para verificar dados dos professores no banco
 include 'db.php';
 
@@ -151,6 +151,8 @@ hr {
     margin: 20px 0;
 }
 </style>
+
+
 
 
 

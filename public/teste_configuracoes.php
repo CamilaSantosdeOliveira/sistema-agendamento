@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Teste dos Botões de Configurações
 echo "<h1>🧪 Teste dos Botões de Configurações</h1>";
 
@@ -218,3 +218,5 @@ button { padding: 5px 10px; margin: 2px; cursor: pointer; }
 a { color: #007bff; text-decoration: none; }
 a:hover { text-decoration: underline; }
 </style>
+
+

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Setup Completo do Sistema EduConnect
 header('Content-Type: text/html; charset=utf-8');
 ?>
@@ -439,3 +439,5 @@ header('Content-Type: text/html; charset=utf-8');
     </div>
 </body>
 </html>
+
+

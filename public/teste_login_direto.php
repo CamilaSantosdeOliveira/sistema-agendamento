@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🧪 Teste Direto do Login</h1>";
 
 // Simular o processo de login
@@ -93,6 +93,8 @@ echo "<p><a href='login.php' target='_blank'>🔐 Tela de Login</a></p>";
 echo "<p><a href='teste_conexao_mysql.php' target='_blank'>🗄️ Teste MySQL</a></p>";
 echo "<p><a href='verificar_conta_admin.php' target='_blank'>👤 Verificar Conta</a></p>";
 ?>
+
+
 
 
 

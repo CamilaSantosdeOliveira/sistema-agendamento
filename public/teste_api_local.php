@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🧪 Teste Local da API</h2>";
 
 // Simular uma requisição POST com JSON
@@ -37,6 +37,8 @@ try {
     echo "<pre>" . $e->getMessage() . "</pre>";
 }
 ?>
+
+
 
 
 

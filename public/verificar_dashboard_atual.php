@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🔍 Verificação do Dashboard Atual</h2>";
 
 // Conectar ao banco
@@ -71,3 +71,5 @@ if ($exemplo_restantes > 0) {
 
 echo "<br><a href='dashboard_corrigido.php'>Ver Dashboard</a>";
 ?>
+
+

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🔍 VERIFICANDO DATAS DOS USUÁRIOS NO BANCO</h1>";
 
 include 'db.php';
@@ -87,6 +87,8 @@ echo "<br><h3>🔗 Links para testar:</h3>";
 echo "<p><a href='dashboard_final.php'>📊 Dashboard</a></p>";
 echo "<p><a href='alunos.php'>👨‍🎓 Alunos</a></p>";
 ?>
+
+
 
 
 

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🔍 Verificando Conta de Administrador</h1>";
 
 try {
@@ -76,6 +76,8 @@ try {
 echo "<h2>🎯 Teste o Login:</h2>";
 echo "<p><a href='login.php' style='background: #3b82f6; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>🔐 Testar Login</a></p>";
 ?>
+
+
 
 
 

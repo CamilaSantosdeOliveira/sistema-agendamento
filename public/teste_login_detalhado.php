@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🔍 Teste Detalhado do Login</h1>";
 
 // Teste 1: Verificar se a API de login existe
@@ -118,6 +118,8 @@ echo "<li>Verifique se há erros JavaScript</li>";
 echo "<li>Teste em uma aba anônima</li>";
 echo "</ol>";
 ?>
+
+
 
 
 

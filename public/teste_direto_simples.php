@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🔍 TESTE DIRETO SIMPLES</h1>";
 
 // Teste 1: Verificar se conseguimos acessar a API diretamente
@@ -45,6 +45,8 @@ echo "<br><h3>🔗 Links para testar:</h3>";
 echo "<p><a href='alunos.php'>👨‍🎓 Página de Alunos</a></p>";
 echo "<p><a href='dashboard_final.php'>📊 Dashboard</a></p>";
 ?>
+
+
 
 
 

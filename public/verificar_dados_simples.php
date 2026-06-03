@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include 'db.php';
 
 echo "<h1>🔍 Verificação Rápida dos Dados</h1>";
@@ -65,6 +65,8 @@ if ($total_cursos > 0) {
 echo "<hr>";
 echo "<p><a href='dashboard_final.php' style='background: #007bff; color: white; padding: 10px; text-decoration: none; border-radius: 5px;'>🚀 Acessar Dashboard</a></p>";
 ?>
+
+
 
 
 

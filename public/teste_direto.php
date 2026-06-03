@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🧪 Teste Direto da API</h2>";
 
 // Teste 1: Verificar se há erros de sintaxe
@@ -47,6 +47,8 @@ try {
     echo "❌ Erro na API: " . $e->getMessage() . "<br>";
 }
 ?>
+
+
 
 
 

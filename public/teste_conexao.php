@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🔍 Testando Conexão com Banco de Dados</h2>";
 
 // Testar diferentes configurações
@@ -48,3 +48,5 @@ echo "<li>Verifique se o MySQL está 'Started' no XAMPP Control Panel</li>";
 echo "<li>Teste a conexão no phpMyAdmin: <a href='http://localhost/phpmyadmin' target='_blank'>http://localhost/phpmyadmin</a></li>";
 echo "</ol>";
 ?>
+
+

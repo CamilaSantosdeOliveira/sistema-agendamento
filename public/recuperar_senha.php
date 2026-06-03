@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 $mensagem = '';
 $tipo = '';
@@ -190,3 +190,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </script>
 </body>
 </html>
+
+

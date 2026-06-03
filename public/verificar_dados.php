@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🔍 Verificando Dados nos Bancos</h2>";
 
 $conn = new mysqli('localhost', 'root', '', 3306);
@@ -53,4 +53,6 @@ echo "<p>Me diga qual banco você quer usar e vou configurar o sistema!</p>";
 
 $conn->close();
 ?>
+
+
 

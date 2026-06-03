@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "=== TESTE DE CONEXÃO COM BANCO DE DADOS ===\n\n";
 
 $host = 'localhost';
@@ -60,5 +60,7 @@ try {
     echo "❌ Erro: " . $e->getMessage() . "\n";
 }
 ?>
+
+
 
 

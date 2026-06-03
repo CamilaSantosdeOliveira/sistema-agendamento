@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🧪 Teste Final API Professores</h2>";
 
 // Testar se a API retorna JSON válido
@@ -41,3 +41,5 @@ echo "<br><h3>🎯 Próximos passos:</h3>";
 echo "<p><a href='professores.php'>Testar página de professores</a></p>";
 echo "<p><a href='dashboard_corrigido.php'>Voltar ao Dashboard</a></p>";
 ?>
+
+

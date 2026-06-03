@@ -192,3 +192,5 @@ echo "</ul>";
 
 echo "<p><strong>Dica:</strong> Execute este script sempre que fizer mudanças importantes no sistema!</p>";
 ?>
+
+

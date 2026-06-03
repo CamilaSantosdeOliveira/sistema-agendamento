@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Setup do Sistema EduConnect - Aulas Particulares
 header('Content-Type: text/html; charset=utf-8');
 ?>
@@ -176,3 +176,5 @@ header('Content-Type: text/html; charset=utf-8');
     </div>
 </body>
 </html>
+
+

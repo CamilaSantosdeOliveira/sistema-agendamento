@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🧪 Teste do Dashboard - Consultas Corrigidas</h2>";
 
 include 'db.php';
@@ -78,5 +78,7 @@ try {
     echo "❌ <strong>ERRO:</strong> " . $e->getMessage();
 }
 ?>
+
+
 
 

@@ -70,3 +70,5 @@ $configs = $conn->query("SELECT * FROM configuracoes_sistema LIMIT 10");
 
 
 
+
+

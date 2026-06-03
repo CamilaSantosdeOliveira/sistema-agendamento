@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Teste simples de conexão com banco de dados
 header('Content-Type: text/html; charset=utf-8');
 
@@ -56,6 +56,8 @@ try {
 echo "<hr>";
 echo "<p><a href='dashboard.html'>← Voltar ao Dashboard</a></p>";
 ?>
+
+
 
 
 

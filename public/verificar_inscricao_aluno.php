@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 include 'db.php';
 
@@ -101,6 +101,8 @@ echo "<p><a href='minhas_aulas_aluno.php' style='background: #3b82f6; color: whi
 echo "<p><a href='meus_cursos_aluno.php' style='background: #8b5cf6; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>📚 Ver Meus Cursos</a></p>";
 echo "<p><a href='dashboard_aluno.php' style='background: #f59e0b; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>🏠 Voltar ao Dashboard</a></p>";
 ?>
+
+
 
 
 

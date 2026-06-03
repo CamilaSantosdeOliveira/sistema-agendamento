@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "=== TESTE DE INTEGRAÇÃO DO DASHBOARD ===\n\n";
 
 // Testar conexão com o banco atual
@@ -83,5 +83,7 @@ if ($tem_dados_reais) {
 
 $conn->close();
 ?>
+
+
 
 

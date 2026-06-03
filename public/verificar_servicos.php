@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🔍 VERIFICAÇÃO COMPLETA - SERVIÇOS XAMPP</h2>";
 echo "<p><strong>Problema:</strong> Não é possível acessar localhost (ERR_CONNECTION_REFUSED)</p>";
 
@@ -137,3 +137,5 @@ echo "<p>1. Execute este script para verificar o status</p>";
 echo "<p>2. Se MySQL não funcionar, execute: <a href='corrigir_replicacao_rapido.php' target='_blank'>Correção Rápida MySQL</a></p>";
 echo "<p>3. Teste acessando: <a href='http://localhost' target='_blank'>http://localhost</a></p>";
 ?>
+
+

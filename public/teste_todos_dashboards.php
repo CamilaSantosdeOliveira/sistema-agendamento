@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🧪 Teste Completo - Todos os Dashboards</h1>";
 echo "<p><strong>Data:</strong> " . date('d/m/Y H:i:s') . "</p>";
 
@@ -145,6 +145,8 @@ echo "<p style='margin-top: 30px; padding: 20px; background: #3b82f6; border-rad
 echo "🎉 PARABÉNS! Seu sistema está COMPLETO e PROFISSIONAL!";
 echo "</p>";
 ?>
+
+
 
 
 

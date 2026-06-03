@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🎯 TESTE FINAL - PÁGINA DE ALUNOS</h1>";
 
 // Teste 1: Verificar se a API responde corretamente
@@ -43,6 +43,8 @@ echo "<br><h3>🔗 Links para testar:</h3>";
 echo "<p><a href='alunos.php' style='background: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>👨‍🎓 Testar Página de Alunos</a></p>";
 echo "<p><a href='dashboard_final.php'>📊 Dashboard Principal</a></p>";
 ?>
+
+
 
 
 

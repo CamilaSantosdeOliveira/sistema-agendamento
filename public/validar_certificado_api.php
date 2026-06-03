@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
@@ -60,6 +60,8 @@ try {
     echo json_encode(['success' => false, 'message' => 'Erro ao validar certificado: ' . $e->getMessage()]);
 }
 ?>
+
+
 
 
 

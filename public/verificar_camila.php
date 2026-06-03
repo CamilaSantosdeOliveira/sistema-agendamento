@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 include 'db.php';
 
@@ -53,6 +53,8 @@ echo "<h3>🔗 Links:</h3>";
 echo "<p><a href='login.php' target='_blank'>Tela de Login</a></p>";
 echo "<p><a href='dashboard_aluno.php' target='_blank'>Dashboard Aluno</a></p>";
 ?>
+
+
 
 
 

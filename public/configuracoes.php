@@ -19,7 +19,7 @@ $agendamentos = $conn->query("SELECT COUNT(*) as total FROM agendamentos")->fetc
             document.write('<style>.dark-mode-init body { visibility: hidden; background: #0f172a !important; }</style>');
         }
     </script>
-    <link rel="stylesheet" href="dark-mode.css">
+    <link rel="stylesheet" href="dark-mode.css?v=3">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configurações do Sistema - EduConnect</title>
@@ -968,6 +968,8 @@ body { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
     <script src="dark-mode.js"></script>
 </body>
 </html>
+
+
 
 
 

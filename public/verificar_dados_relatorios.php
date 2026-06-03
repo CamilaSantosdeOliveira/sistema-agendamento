@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Conectar ao banco de dados
 include 'db.php';
 
@@ -309,6 +309,8 @@ echo "<div style='text-align: center; margin-top: 30px;'>
 </body>
 </html>";
 ?>
+
+
 
 
 

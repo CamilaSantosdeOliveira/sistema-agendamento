@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include 'db.php';
 
 echo "=== VERIFICAÇÃO COMPLETA DO BANCO DE DADOS ===\n\n";
@@ -172,5 +172,7 @@ if ($agendamentos_result) {
     echo "❌ Erro na consulta: " . $conn->error . "\n";
 }
 ?>
+
+
 
 

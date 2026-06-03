@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 
 echo "<h1>🔗 Teste de Link do Curso</h1>";
@@ -27,6 +27,8 @@ echo "<h2>🔗 Teste com JavaScript:</h2>";
 echo "<button onclick=\"window.open('detalhes_curso_aluno.php?id=3', '_blank')\">Abrir Curso ID 3</button>";
 echo "<button onclick=\"window.location.href='detalhes_curso_aluno.php?id=3'\">Ir para Curso ID 3</button>";
 ?>
+
+
 
 
 

@@ -60,3 +60,5 @@ try {
 echo "<hr>";
 echo "<p><strong>🎯 Pronto!</strong> Se ainda não funcionar, use a solução manual acima.</p>";
 ?>
+
+

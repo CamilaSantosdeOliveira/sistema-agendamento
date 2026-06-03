@@ -136,3 +136,4 @@ if ($conn === null && !isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
     // Isso evita quebrar páginas que não precisam do banco
 }
 ?>
+

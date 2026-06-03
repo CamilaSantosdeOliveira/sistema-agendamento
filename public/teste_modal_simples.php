@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <title>Teste Modal Simples</title>
@@ -75,5 +75,7 @@
     </script>
 </body>
 </html>
+
+
 
 

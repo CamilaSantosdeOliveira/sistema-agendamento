@@ -83,3 +83,5 @@ echo "<p><a href='configuracoes.php'>← Voltar às Configurações</a></p>";
 
 
 
+
+

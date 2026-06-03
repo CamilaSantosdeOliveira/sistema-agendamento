@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include 'db.php';
 
 echo "=== ANÁLISE DETALHADA DOS AGENDAMENTOS ===\n\n";
@@ -66,5 +66,7 @@ if ($result && $result->num_rows > 0) {
     echo "Nenhum agendamento encontrado.\n";
 }
 ?>
+
+
 
 

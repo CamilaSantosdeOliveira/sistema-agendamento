@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🔍 TENTANDO RECUPERAR DADOS ORIGINAIS</h1>";
 
 include 'db.php';
@@ -90,6 +90,8 @@ echo "<p><a href='verificar_dados_completos.php' style='background: #007bff; col
 
 $conn->close();
 ?>
+
+
 
 
 

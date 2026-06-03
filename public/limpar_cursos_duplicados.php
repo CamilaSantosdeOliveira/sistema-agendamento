@@ -99,3 +99,5 @@ if (isset($_GET['acao']) && $_GET['acao'] === 'limpar') {
 
 echo "<br><a href='dashboard_corrigido.php'>Voltar ao Dashboard</a>";
 ?>
+
+

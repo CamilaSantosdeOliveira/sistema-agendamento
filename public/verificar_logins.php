@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 include 'db.php';
 
@@ -82,6 +82,8 @@ echo "<p><a href='dashboard_final.php' target='_blank'>Dashboard Admin</a></p>";
 echo "<p><a href='dashboard_professor.php' target='_blank'>Dashboard Professor</a></p>";
 echo "<p><a href='dashboard_aluno.php' target='_blank'>Dashboard Aluno</a></p>";
 ?>
+
+
 
 
 

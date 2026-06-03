@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Teste de envio de email do EduCerto
 header('Content-Type: text/html; charset=UTF-8');
 
@@ -163,3 +163,5 @@ code {
     font-family: 'Courier New', monospace;
 }
 </style>
+
+

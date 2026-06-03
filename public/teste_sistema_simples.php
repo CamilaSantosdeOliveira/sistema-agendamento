@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🎯 TESTE SISTEMA SIMPLES</h1>";
 
 // Teste 1: Verificar conexão com banco
@@ -63,6 +63,8 @@ echo "<p><a href='alunos.php' style='background: #2196F3; color: white; padding:
 echo "<p><a href='professores.php' style='background: #FF9800; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>👨‍🏫 Professores</a></p>";
 echo "<p><a href='cursos_completo.php' style='background: #9C27B0; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>📚 Cursos</a></p>";
 ?>
+
+
 
 
 

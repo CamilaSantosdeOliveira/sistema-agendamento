@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 header('Content-Type: application/json');
 
@@ -65,6 +65,8 @@ try {
     echo json_encode(['success' => false, 'message' => 'Erro interno do servidor']);
 }
 ?>
+
+
 
 
 

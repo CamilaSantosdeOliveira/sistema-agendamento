@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Teste Completo de Todos os Botões das Configurações
 echo "<h1>🧪 Teste Completo de Todos os Botões</h1>";
 
@@ -288,3 +288,5 @@ a:hover {
         🚀 Testar Todos Automaticamente
     </button>
 </div>
+
+

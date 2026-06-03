@@ -62,3 +62,5 @@ echo "</ol>";
 
 echo "<p><a href='teste_simples_dashboard.php' style='background: #007bff; color: white; padding: 10px; text-decoration: none; border-radius: 5px;'>🧪 Testar Conexão</a></p>";
 ?>
+
+

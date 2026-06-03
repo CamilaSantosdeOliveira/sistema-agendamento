@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🔍 Testando Portas do MySQL</h2>";
 
 // Testar diferentes portas
@@ -42,5 +42,7 @@ foreach ($portas as $porta) {
 echo "<h3>🎯 Próximo passo:</h3>";
 echo "<p>Me informe qual porta funcionou para eu configurar o db.php corretamente!</p>";
 ?>
+
+
 
 

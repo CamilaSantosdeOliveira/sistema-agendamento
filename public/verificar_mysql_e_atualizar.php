@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Script para verificar MySQL e forçar atualização
 echo "<h1>🔍 Verificando MySQL e Forçando Atualização</h1>";
 
@@ -155,6 +155,8 @@ hr {
     margin: 20px 0;
 }
 </style>
+
+
 
 
 

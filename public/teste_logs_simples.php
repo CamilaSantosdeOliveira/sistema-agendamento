@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Teste Simples dos Logs
 echo "<h1>🧪 Teste Simples dos Logs</h1>";
 
@@ -101,6 +101,8 @@ try {
 echo "<h2>✅ Teste Concluído!</h2>";
 echo "<p><a href='logs_sistema.php'>🔗 Tentar acessar Logs do Sistema</a></p>";
 ?>
+
+
 
 
 

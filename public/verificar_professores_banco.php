@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Script para verificar se os professores estão no banco de dados
 include 'db.php';
 
@@ -127,6 +127,8 @@ hr {
     margin: 20px 0;
 }
 </style>
+
+
 
 
 

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🔍 VERIFICANDO CURSOS COM CATEGORIA E NÍVEL</h1>";
 include 'db.php';
 
@@ -32,6 +32,8 @@ echo "<br><h3>🔗 Links:</h3>";
 echo "<p><a href='cursos.php' style='color: blue;'>📚 Ver Página de Cursos</a></p>";
 echo "<p><a href='dashboard_final.php' style='color: blue;'>📊 Ver Dashboard</a></p>";
 ?>
+
+
 
 
 

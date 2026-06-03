@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include 'db.php';
 
 echo "<h2>Verificação dos Dados do Dashboard</h2>";
@@ -67,5 +67,7 @@ foreach ($tabelas as $tabela) {
     }
 }
 ?>
+
+
 
 

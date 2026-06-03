@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 require_once 'db.php';
 
@@ -128,5 +128,7 @@ echo "<p><a href='login.php'>🔐 Tela de Login</a></p>";
 echo "<p><a href='dashboard_aluno.php'>👨‍🎓 Dashboard Aluno</a></p>";
 echo "<p><a href='logout.php'>🚪 Logout</a></p>";
 ?>
+
+
 
 

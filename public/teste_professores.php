@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🧪 Teste API Professores</h2>";
 
 // Testar se o arquivo da API existe
@@ -74,3 +74,5 @@ try {
 
 echo "<br><a href='professores.php'>Voltar para Professores</a>";
 ?>
+
+

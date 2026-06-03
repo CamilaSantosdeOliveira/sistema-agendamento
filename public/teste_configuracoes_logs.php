@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Teste Simples das Configurações e Logs
 echo "<h1>🧪 Teste das Configurações e Logs</h1>";
 
@@ -112,6 +112,8 @@ try {
 echo "<h2>✅ Teste Concluído!</h2>";
 echo "<p><a href='configuracoes.php'>🔗 Voltar às Configurações</a></p>";
 ?>
+
+
 
 
 

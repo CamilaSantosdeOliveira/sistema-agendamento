@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Sistema de Segurança
 session_start();
 include 'db.php';
@@ -443,6 +443,8 @@ try {
     </div>
 </body>
 </html>
+
+
 
 
 

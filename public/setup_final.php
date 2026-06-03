@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🔧 Configuração Final do Sistema</h1>";
 
 try {
@@ -41,3 +41,5 @@ try {
     echo "<p>Certifique-se que o MySQL está rodando no XAMPP!</p>";
 }
 ?>
+
+

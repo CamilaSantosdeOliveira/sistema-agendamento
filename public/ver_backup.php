@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Script para visualizar o conteúdo da pasta de backup
 echo "<h1>📁 Visualizar Conteúdo do Backup</h1>";
 
@@ -96,6 +96,8 @@ echo "<a href='login.php' style='background: #17a2b8; color: white; padding: 10p
 echo "<a href='backup_sistema_rapido.php' style='background: #ffc107; color: #212529; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>🔄 Criar Novo Backup</a>";
 echo "</div>";
 ?>
+
+
 
 
 

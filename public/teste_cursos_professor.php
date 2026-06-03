@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 include 'db.php';
 
@@ -114,3 +114,5 @@ echo "<li><a href='cursos_professor_todos.php' style='color: blue; font-weight: 
 echo "<li><a href='cursos_professor.php' style='color: blue;'>🔙 Voltar para Meus Cursos</a></li>";
 echo "</ul>";
 ?>
+
+

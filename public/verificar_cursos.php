@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🔍 Verificação de Cursos</h1>";
 
 try {
@@ -73,6 +73,8 @@ echo "<li>Depois acesse o dashboard novamente</li>";
 echo "<li>Limpe o cache do navegador (Ctrl+F5)</li>";
 echo "</ol>";
 ?>
+
+
 
 
 

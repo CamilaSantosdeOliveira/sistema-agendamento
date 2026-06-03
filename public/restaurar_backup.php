@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🔄 RESTAURAR BACKUP</h1>";
 echo "<style>body{font-family:Arial;margin:20px;background:#f0f8ff;} .success{color:green;font-weight:bold;} .error{color:red;font-weight:bold;} .info{color:blue;font-weight:bold;} .warning{color:orange;font-weight:bold;} .danger{color:darkred;font-weight:bold;}</style>";
 
@@ -90,6 +90,8 @@ echo "<a href='cursos_completo.php' style='background:blue;color:white;padding:1
 echo "<a href='backup_automatico.php' style='background:orange;color:white;padding:10px;text-decoration:none;border-radius:5px;margin:5px;'>💾 Sistema de Backup</a>";
 echo "</div>";
 ?>
+
+
 
 
 

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 require_once 'db.php';
 
@@ -136,3 +136,4 @@ if ($total_agendamentos > 0) {
     echo "<p>✅ Sistema pronto para demonstração</p>";
 } else {
     echo "<p style='color: orange; font-size: 18px;'>⚠️ Ainda não há agendamentos. Clique em 'Criar Mais Agendamento
+

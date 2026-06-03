@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Verificar e corrigir tabelas
 include 'db.php';
 
@@ -155,6 +155,8 @@ echo "<p><a href='certificados.php' target='_blank'>🎓 Clique aqui para ver os
 
 $conn->close();
 ?>
+
+
 
 
 

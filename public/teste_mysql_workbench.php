@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🔍 Testando Conexão MySQL Workbench</h2>";
 
 echo "<h3>📋 Configurações comuns do MySQL Workbench:</h3>";
@@ -103,4 +103,6 @@ if (!$sucesso) {
     echo "</ul>";
 }
 ?>
+
+
 

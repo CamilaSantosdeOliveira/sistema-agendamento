@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Script para inserir dados manualmente
 include 'db.php';
 
@@ -207,6 +207,8 @@ echo "<a href='dashboard_final.php' class='btn btn-success'>📊 Acessar Dashboa
 echo "<a href='carregar_dados_agora.php' class='btn'>🔄 Carregar Dados Padrão</a>";
 echo "</div>";
 ?>
+
+
 
 
 

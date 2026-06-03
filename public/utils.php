@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * EduConnect - Funções Utilitárias
  * Versão: 3.0
@@ -237,5 +237,7 @@ function logAction($action, $user_id = null, $details = '') {
     file_put_contents($log_file, $log_entry, FILE_APPEND | LOCK_EX);
 }
 ?>
+
+
 
 

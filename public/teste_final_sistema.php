@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🎯 Teste Final - Sistema Completo</h1>";
 echo "<p><strong>Data:</strong> " . date('d/m/Y H:i:s') . "</p>";
 
@@ -123,6 +123,8 @@ echo "<p style='margin-top: 20px; padding: 15px; background: #10b981; border-rad
 echo "🏆 IDEAL PARA PORTFÓLIO DE ESTÁGIO/JÚNIOR!";
 echo "</p>";
 ?>
+
+
 
 
 

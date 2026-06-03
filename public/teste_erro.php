@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Ativar exibição de erros
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -33,5 +33,7 @@ echo "<h3>🎯 Próximo passo:</h3>";
 echo "<p>Se chegou até aqui, o sistema está funcionando!</p>";
 echo "<p><a href='dashboard_corrigido.php'>🚀 IR PARA O DASHBOARD</a></p>";
 ?>
+
+
 
 

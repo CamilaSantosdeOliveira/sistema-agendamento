@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 
 echo "<h1>Teste de Redirecionamento</h1>";
@@ -12,5 +12,7 @@ if (!isset($_SESSION['user_logged_in']) || $_SESSION['user_logged_in'] !== true)
     echo "<p>Usuário: " . (isset($_SESSION['username']) ? $_SESSION['username'] : 'N/A') . "</p>";
 }
 ?>
+
+
 
 

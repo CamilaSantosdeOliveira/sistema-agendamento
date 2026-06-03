@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // Teste simples da API
 echo "<h2>🧪 Teste da API de Usuários</h2>";
 
@@ -46,5 +46,7 @@ try {
     echo "❌ Erro na API: " . $e->getMessage() . "<br>";
 }
 ?>
+
+
 
 

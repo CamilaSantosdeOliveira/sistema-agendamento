@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 
 if (!isset($_SESSION['user_id']) || $_SESSION['tipo_usuario'] !== 'admin') {
@@ -365,3 +365,5 @@ $curso = $result->fetch_assoc();
     </div>
 </body>
 </html>
+
+

@@ -145,3 +145,5 @@ echo "<code>\"C:\\xampp\\mysql\\bin\\mysqld.exe\" --defaults-file=\"C:\\xampp\\m
 echo "<hr>";
 echo "<p><strong>🎯 Resumo:</strong> O problema era causado por arquivos de replicação corrompidos ou mal configurados. Esta correção remove esses arquivos e permite que o MariaDB inicie normalmente.</p>";
 ?>
+
+

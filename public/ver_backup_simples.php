@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>📁 Verificar Backup</h1>";
 
 // Listar pastas de backup
@@ -50,3 +50,5 @@ if (empty($backupFolders)) {
 
 echo "<a href='./'>🏠 Voltar</a>";
 ?>
+
+

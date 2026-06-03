@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
@@ -58,6 +58,8 @@ if (file_exists($db_file)) {
 
 echo json_encode($info, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 ?>
+
+
 
 
 

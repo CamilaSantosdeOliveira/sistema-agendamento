@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include 'db.php';
 
 echo "=== VERIFICAÇÃO COMPLETA DOS DADOS ===\n\n";
@@ -89,5 +89,7 @@ foreach ($tabelas as $tabela) {
     }
 }
 ?>
+
+
 
 

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🔍 VERIFICANDO STATUS DO XAMPP</h2>";
 
 // Verificar se conseguimos acessar localhost
@@ -113,3 +113,5 @@ echo "<li>Reinicie o Apache</li>";
 echo "<li>Acesse: <strong>http://localhost:8080</strong></li>";
 echo "</ol>";
 ?>
+
+

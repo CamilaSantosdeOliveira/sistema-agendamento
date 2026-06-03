@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🧪 Teste de Agendamento Simples</h2>";
 
 include 'db.php';
@@ -48,5 +48,7 @@ echo "<br><h3>🎯 Próximo passo:</h3>";
 echo "<p>Se o teste passou, o agendamento no dashboard deve funcionar!</p>";
 echo "<p><a href='dashboard_corrigido.php' style='background: #3b82f6; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>🚀 TESTAR DASHBOARD</a></p>";
 ?>
+
+
 
 

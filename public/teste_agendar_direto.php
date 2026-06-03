@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🧪 Teste do agendar_direto.php</h2>";
 
 // Simular dados de teste
@@ -68,5 +68,7 @@ echo "<br><h3>🎯 Próximo passo:</h3>";
 echo "<p>Se o teste passou, o problema está no JavaScript do dashboard</p>";
 echo "<p><a href='dashboard_corrigido.php' style='background: #3b82f6; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>🚀 TESTAR DASHBOARD</a></p>";
 ?>
+
+
 
 

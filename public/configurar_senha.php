@@ -104,3 +104,5 @@ echo "<p>Se você não lembra a senha do root, a <strong>Opção 2</strong> (cri
 
 
 
+
+

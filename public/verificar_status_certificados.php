@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once 'db.php';
 
 echo "<h2>🔍 Verificação de Status dos Certificados</h2>";
@@ -92,6 +92,8 @@ try {
     echo "<p>❌ Erro: " . $e->getMessage() . "</p>";
 }
 ?>
+
+
 
 
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <title>Teste JavaScript Formulário</title>
@@ -139,5 +139,7 @@
     </script>
 </body>
 </html>
+
+
 
 

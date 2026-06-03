@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h2>🔍 Verificação de Aulas Agendadas</h2>";
 
 // Conectar ao banco
@@ -93,3 +93,5 @@ try {
 
 echo "<br><a href='dashboard_corrigido.php'>Voltar ao Dashboard</a>";
 ?>
+
+

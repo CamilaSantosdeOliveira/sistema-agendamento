@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 echo "<h1>🔍 TESTE DE CONEXÃO DIRETA</h1>";
 
 // Teste 1: Verificar se o MySQL está rodando
@@ -51,6 +51,8 @@ echo "<br><h3>🔗 Links para testar:</h3>";
 echo "<p><a href='alunos.php'>👨‍🎓 Ver Página de Alunos</a></p>";
 echo "<p><a href='dashboard_final.php'>📊 Dashboard Principal</a></p>";
 ?>
+
+
 
 
 
