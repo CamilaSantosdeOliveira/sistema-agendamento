@@ -85,6 +85,15 @@ $dashboard_sem_dados = ((int)$cursos_count + (int)$alunos_count + (int)$aulas_co
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduConnect - Dashboard Professor</title>
+    <meta name="description" content="Painel do professor EduConnect Tech - Gerencie seus cursos, aulas e alunos de forma simples e eficiente.">
+    <meta name="author" content="EduConnect Tech">
+    <meta name="robots" content="noindex, nofollow">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="EduConnect - Dashboard Professor">
+    <meta property="og:description" content="Painel do professor EduConnect Tech - Gerencie seus cursos, aulas e alunos.">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="EduConnect Tech">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <script>
         (function() {
             const isDark = localStorage.getItem('darkMode') === 'true';
@@ -1422,7 +1431,7 @@ $dashboard_sem_dados = ((int)$cursos_count + (int)$alunos_count + (int)$aulas_co
         }
 
         .course-action-link {
-            background: var(--gradient-primary);
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
             color: white;
             border: none;
             padding: 6px 14px;
@@ -1649,7 +1658,7 @@ $dashboard_sem_dados = ((int)$cursos_count + (int)$alunos_count + (int)$aulas_co
 
         .filter-btn {
             padding: 12px 20px;
-            background: var(--gradient-primary);
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
             color: white;
             border: none;
             border-radius: var(--border-radius-sm);

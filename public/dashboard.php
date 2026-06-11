@@ -93,6 +93,15 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduConnect - Dashboard de Cursos de Tecnologia</title>
+    <meta name="description" content="Painel administrativo EduConnect Tech - Gerencie cursos, professores, alunos e agendamentos da plataforma.">
+    <meta name="author" content="EduConnect Tech">
+    <meta name="robots" content="noindex, nofollow">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="EduConnect - Dashboard Admin">
+    <meta property="og:description" content="Painel administrativo EduConnect Tech - Gerencie toda a plataforma educacional.">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="EduConnect Tech">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <script>
         (function() {
             const isDark = localStorage.getItem('darkMode') === 'true';

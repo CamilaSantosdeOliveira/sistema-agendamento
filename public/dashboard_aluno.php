@@ -79,6 +79,15 @@ $cursos_disponiveis = $stmt->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduConnect - Dashboard Aluno</title>
+    <meta name="description" content="Painel do aluno EduConnect Tech - Acompanhe seus cursos, aulas agendadas e certificados.">
+    <meta name="author" content="EduConnect Tech">
+    <meta name="robots" content="noindex, nofollow">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="EduConnect - Dashboard Aluno">
+    <meta property="og:description" content="Painel do aluno EduConnect Tech - Acompanhe seus cursos, aulas agendadas e certificados.">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="EduConnect Tech">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <script>
         (function() {
             const isDark = localStorage.getItem('darkMode') === 'true';

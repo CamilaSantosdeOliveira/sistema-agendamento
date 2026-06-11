@@ -36,7 +36,7 @@ session_start();
     <link rel="canonical" href="https://www.educonnecttech.com.br/login.php">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

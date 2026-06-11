@@ -44,7 +44,7 @@ try {
     $alunos_count = $safeCount("SELECT COUNT(*) as count FROM usuarios WHERE tipo_usuario = 'aluno' AND ativo = 1");
 
     // Contar agendamentos futuros
-    $agendamentos_count = $safeCount("SELECT COUNT(*) as count FROM agendamentos WHERE data >= CURDATE()");
+    $agendamentos_count = $safeCount("SELECT COUNT(*) as count FROM agendamentos WHERE data_agendamento >= CURDATE()");
 
     // Retornar dados
     echo json_encode([
