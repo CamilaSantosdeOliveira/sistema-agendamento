@@ -2532,7 +2532,7 @@ $dashboard_sem_dados = ((int)$cursos_count + (int)$alunos_count + (int)$aulas_co
                         <span class="quick-action-desc">Acompanhar desempenho</span>
                     </span>
                 </a>
-                <a href="exportar_pdf_professor.php" class="quick-action-card" download>
+                <a href="exportar_pdf_professor.php" class="quick-action-card" target="_blank">
                     <span class="quick-action-icon"><i class="fas fa-file-pdf"></i></span>
                     <span>
                         <span class="quick-action-title">Exportar PDF</span>
